@@ -1,15 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
 
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:utils/logging.dart';
 
 // import '../firebase_options.dart';
@@ -196,22 +193,22 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     return completer.future;
   }
 
-  Future<UserAuthResult> appleSignIn() async {
-    log.d('appleSignIn');
-    final completer = Completer<UserAuthResult>();
-
-    _createAppleCredentials().then((oAuthCredential) {
-      _waitForCredentials(firebaseAuth.signInWithCredential(oAuthCredential)).then((userAuthResults) {
-        completer.complete(userAuthResults);
-      }).catchError((error) {
-        completer.completeError("Could not get the UserAuthResults: ${error.toString()}");
-      });
-    }).catchError((error) {
-      completer.completeError("Could not get the Apple credentials: ${error.toString()}");
-    });
-
-    return completer.future;
-  }
+  // Future<UserAuthResult> appleSignIn() async {
+  //   log.d('appleSignIn');
+  //   final completer = Completer<UserAuthResult>();
+  //
+  //   _createAppleCredentials().then((oAuthCredential) {
+  //     _waitForCredentials(firebaseAuth.signInWithCredential(oAuthCredential)).then((userAuthResults) {
+  //       completer.complete(userAuthResults);
+  //     }).catchError((error) {
+  //       completer.completeError("Could not get the UserAuthResults: ${error.toString()}");
+  //     });
+  //   }).catchError((error) {
+  //     completer.completeError("Could not get the Apple credentials: ${error.toString()}");
+  //   });
+  //
+  //   return completer.future;
+  // }
 
   Future<UserAuthResult> phoneSignIn(mobileNumber) async {
     final completer = Completer<UserAuthResult>();
@@ -230,34 +227,34 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
     return _waitForCredentials(confirmationResult.confirm(verificationCode));
   }
 
-  Future<OAuthCredential> _createAppleCredentials() {
-    final completer = Completer<OAuthCredential>();
-
-    log.d('_createAppleCredentials');
-    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
-    final random = Random.secure();
-    final rawNonce = List.generate(32, (_) => charset[random.nextInt(charset.length)]).join();
-    final bytes = utf8.encode(rawNonce);
-    final digest = sha256.convert(bytes);
-    final nonce = digest.toString();
-    SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-      nonce: nonce,
-    ).then((appleCredential) {
-      final oAuthCredential = OAuthProvider("apple.com").credential(
-        idToken: appleCredential.identityToken,
-        rawNonce: rawNonce,
-      );
-      completer.complete(oAuthCredential);
-    }).catchError((error) {
-      completer.completeError('Could mot get Apple ID credentials.');
-    });
-
-    return completer.future;
-  }
+  // Future<OAuthCredential> _createAppleCredentials() {
+  //   final completer = Completer<OAuthCredential>();
+  //
+  //   log.d('_createAppleCredentials');
+  //   const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+  //   final random = Random.secure();
+  //   final rawNonce = List.generate(32, (_) => charset[random.nextInt(charset.length)]).join();
+  //   final bytes = utf8.encode(rawNonce);
+  //   final digest = sha256.convert(bytes);
+  //   final nonce = digest.toString();
+  //   SignInWithApple.getAppleIDCredential(
+  //     scopes: [
+  //       AppleIDAuthorizationScopes.email,
+  //       AppleIDAuthorizationScopes.fullName,
+  //     ],
+  //     nonce: nonce,
+  //   ).then((appleCredential) {
+  //     final oAuthCredential = OAuthProvider("apple.com").credential(
+  //       idToken: appleCredential.identityToken,
+  //       rawNonce: rawNonce,
+  //     );
+  //     completer.complete(oAuthCredential);
+  //   }).catchError((error) {
+  //     completer.completeError('Could mot get Apple ID credentials.');
+  //   });
+  //
+  //   return completer.future;
+  // }
 
   Future<OAuthCredential> _createGoogleCredentials() {
     final completer = Completer<OAuthCredential>();

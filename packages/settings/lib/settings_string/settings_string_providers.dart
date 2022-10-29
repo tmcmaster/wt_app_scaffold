@@ -24,7 +24,7 @@ class SettingsStringProviders {
     );
   }
 
-  AlwaysAliveProviderBase<SettingsStringNotifier> get notifier => value.notifier;
+  AlwaysAliveRefreshable<SettingsStringNotifier> get notifier => value.notifier;
 
   Widget get component => SettingsStringComponent(
         providers: this,

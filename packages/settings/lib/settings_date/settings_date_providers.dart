@@ -24,7 +24,7 @@ class SettingsDateProviders {
     );
   }
 
-  AlwaysAliveProviderBase<SettingsDateNotifier> get notifier => value.notifier;
+  AlwaysAliveRefreshable<SettingsDateNotifier> get notifier => value.notifier;
 
   Widget get component => SettingsDateComponent(
         providers: this,

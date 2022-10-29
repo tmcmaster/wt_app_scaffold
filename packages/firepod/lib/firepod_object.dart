@@ -21,5 +21,5 @@ class FirepodObject<T> {
     );
   }
 
-  AlwaysAliveProviderBase<StateNotifier<T>> get notifier => value.notifier;
+  AlwaysAliveRefreshable<StateNotifier<T>> get notifier => value.notifier;
 }

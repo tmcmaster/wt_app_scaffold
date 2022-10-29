@@ -1,3 +1,12 @@
+export 'package:firebase_ui_auth/firebase_ui_auth.dart';
+export 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
+export 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
+export 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
+export 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+export 'package:firebase_ui_oauth_twitter/firebase_ui_oauth_twitter.dart';
+export 'package:flutter/material.dart';
+export 'package:flutter_localizations/flutter_localizations.dart';
+
 export 'firebase_init.dart';
 export 'firepod_init.dart';
 export 'firepod_map.dart';
@@ -9,3 +18,4 @@ export 'firepod_providers.dart';
 export 'firepod_settings.dart';
 export 'generic_lookup_map.dart';
 export 'generic_lookup_map_notifier.dart';
+export 'login/firebase_auth_ui_example.dart';

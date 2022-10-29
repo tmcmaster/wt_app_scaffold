@@ -8,7 +8,7 @@ class SettingsObjectNotifier<T> extends LocalStorageStateNotifier<T?> {
 
   List<T> _values = const [];
   final String Function(T object) getId;
-  late RemoveListener _removeListener;
+  late ProviderSubscription _removeListener;
   SettingsObjectNotifier({
     required super.key,
     required super.initialValue,
@@ -71,7 +71,7 @@ class SettingsObjectNotifier<T> extends LocalStorageStateNotifier<T?> {
 
   @override
   void dispose() {
-    _removeListener();
+    _removeListener.close();
     super.dispose();
   }
 

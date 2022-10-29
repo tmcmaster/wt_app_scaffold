@@ -1,4 +1,4 @@
-export "package:firebase_auth/firebase_auth.dart";
+export "package:firebase_auth/firebase_auth.dart" hide EmailAuthProvider, PhoneAuthProvider;
 
 export "flutterfire_auth.dart";
 export "landing_page.dart";

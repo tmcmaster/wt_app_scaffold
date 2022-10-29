@@ -24,5 +24,5 @@ abstract class FirepodMap<T> {
     );
   }
 
-  AlwaysAliveProviderBase<StateNotifier<GenericLookupMap>> get notifier => value.notifier;
+  AlwaysAliveRefreshable<StateNotifier<GenericLookupMap>> get notifier => value.notifier;
 }

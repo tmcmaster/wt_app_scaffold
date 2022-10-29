@@ -9,6 +9,7 @@ dependencies:
     sdk: flutter
   utils:
     path: ../utils
+  riverpod: ^2.0.2
   hooks_riverpod:
   shared_preferences:
   date_time_picker: ^2.1.0

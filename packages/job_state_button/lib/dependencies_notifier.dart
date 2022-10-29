@@ -7,7 +7,7 @@ class DependenciesNotifier extends StateNotifier<bool> {
   static final log = logger(DependenciesNotifier);
   final List<DependencyChecker> dependencies;
   final Map<String, bool> available = {};
-  final List<RemoveListener> removeListeners = [];
+  final List<ProviderSubscription> removeListeners = [];
   DependenciesNotifier({
     required Ref ref,
     required this.dependencies,
@@ -37,7 +37,7 @@ class DependenciesNotifier extends StateNotifier<bool> {
   @override
   void dispose() {
     for (var removeListener in removeListeners) {
-      removeListener();
+      removeListener.close();
     }
     super.dispose();
   }

@@ -11,5 +11,5 @@ abstract class BaseSettingsProviders<N extends StateNotifier<T>, T> {
     required this.hint,
   });
 
-  AlwaysAliveProviderBase<N> get notifier => value.notifier;
+  AlwaysAliveRefreshable<N> get notifier => value.notifier;
 }

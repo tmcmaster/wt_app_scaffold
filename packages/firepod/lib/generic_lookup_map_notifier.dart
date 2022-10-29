@@ -8,7 +8,7 @@ import 'firebase_setup.dart';
 class GenericSiteDataNotifier<T> extends StateNotifier<T> {
   static final log = logger(GenericSiteDataNotifier);
 
-  late RemoveListener _removeListener;
+  late ProviderSubscription _removeListener;
 
   final String prefixPath;
   final String? suffixPath;
@@ -59,7 +59,7 @@ class GenericSiteDataNotifier<T> extends StateNotifier<T> {
 
   @override
   void dispose() {
-    _removeListener();
+    _removeListener.close();
     super.dispose();
   }
 }

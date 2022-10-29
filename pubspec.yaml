@@ -20,6 +20,7 @@ dependencies:
   hooks_riverpod:
   draggable_bottom_sheet:
   curved_navigation_bar:
+  firebase_ui_auth:
   job_state_button:
     path: ./packages/job_state_button
   settings:

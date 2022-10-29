@@ -5,37 +5,43 @@ import '../models/app_details.dart';
 import '../providers/app_scaffolds_providers.dart';
 import 'provider_monitor.dart';
 
-Future<ProviderScope> Function(
-  dynamic child, {
+Future<ProviderScope> Function() Function(
+  Future<dynamic> Function() childBuilder, {
   required Provider<AppDetails> appDetailsProvider,
 }) withAppScaffold = andAppScaffold;
 
-Future<ProviderScope> andAppScaffold(
-  dynamic child, {
+Future<ProviderScope> Function() andAppScaffold(
+  Future<dynamic> Function() childBuilder, {
   required Provider<AppDetails> appDetailsProvider,
-}) async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final widget = await child2widget(child);
-
-  return ProviderScope(
-    overrides: [
-      AppScaffoldProviders.appDetails.overrideWithProvider(appDetailsProvider),
-      if (widget is ProviderScope) ...widget.overrides,
-    ],
-    observers: [
-      ProviderMonitor.instance,
-      if (widget is ProviderScope) ...widget.observers ?? [],
-    ],
-    child: widget is ProviderScope ? widget.child : child,
-  );
+}) {
+  return () async {
+    print('AppScaffold Initialising');
+    WidgetsFlutterBinding.ensureInitialized();
+    print('AppScaffold Building Child');
+    final widget = await child2widget(childBuilder());
+    print('AppScaffold Returning Scope');
+    return ProviderScope(
+      overrides: [
+        AppScaffoldProviders.appDetails.overrideWithProvider(appDetailsProvider),
+        if (widget is ProviderScope) ...widget.overrides,
+      ],
+      observers: [
+        ProviderMonitor.instance,
+        if (widget is ProviderScope) ...widget.observers ?? [],
+      ],
+      child: widget is ProviderScope ? widget.child : widget,
+    );
+  };
 }
 
 void runMyApp(
-  dynamic child,
+  Future<dynamic> Function() childBuilder,
 ) async {
+  print('MyApp Initialising');
   WidgetsFlutterBinding.ensureInitialized();
-
-  final widget = await child2widget(child);
+  print('MyApp Building Child');
+  final widget = await child2widget(childBuilder());
+  print('MyApp Returning Scope');
   runApp(
     ProviderScope(
       observers: widget is ProviderScope ? widget.observers : null,

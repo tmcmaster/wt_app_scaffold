@@ -1,4 +1,5 @@
-import 'package:sample_app/counter_app_page.dart';
+import 'package:firepod/login/firebase_auth_ui_example.dart';
+import 'package:sample_app/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/scaffolds/page/bottom_drawer_page/settings_page.dart';
 
@@ -30,9 +31,9 @@ class DemoApp extends ConsumerWidget {
         appTitle: 'Demo Application',
         appName: 'demoApp',
         appDetails: AppDetails(
-          title: 'App Title',
-          subTitle: 'SubTitle',
-          iconPath: 'avocado.png',
+          title: 'Demo App',
+          subTitle: 'site one',
+          iconPath: 'assets/avocado.png',
         ),
         swipeEnabled: true,
         debugMode: debugMode,
@@ -84,6 +85,11 @@ class DemoApp extends ConsumerWidget {
             icon: Icons.settings,
             builder: (context) => const CounterAppPage(title: 'Counter App'),
           ),
+          // PageDefinition(
+          //   title: 'Firebase Login',
+          //   icon: Icons.login,
+          //   builder: (context) => const FirebaseAuthUIExample(),
+          // ),
           PageDefinition(
             title: 'Settings',
             icon: Icons.settings,
