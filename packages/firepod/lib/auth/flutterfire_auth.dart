@@ -29,7 +29,7 @@ import 'user_auth_result.dart';
 // );
 
 class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
-  static final log = logger(FlutterfireAuthNotifier);
+  static final log = logger(FlutterfireAuthNotifier, level: Level.debug);
 
   static final LINK_EMAIL_SIGN_IN_ENABLED = true;
 
@@ -77,6 +77,7 @@ class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   }
 
   Future<void> logout() {
+    log.d('signOut');
     return firebaseAuth.signOut();
   }
 

@@ -38,9 +38,9 @@ void runMyApp(
   final widget = await child2widget(child);
   runApp(
     ProviderScope(
-      child: widget is ProviderScope ? widget.child : widget,
       observers: widget is ProviderScope ? widget.observers : null,
       overrides: widget is ProviderScope ? widget.overrides : [],
+      child: widget is ProviderScope ? widget.child : widget,
     ),
   );
 }

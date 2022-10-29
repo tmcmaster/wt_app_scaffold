@@ -10,6 +10,7 @@ firebase_database=/Users/tim/.pub-cache/hosted/pub.dartlang.org/firebase_databas
 firebase_database_web=/Users/tim/.pub-cache/hosted/pub.dartlang.org/firebase_database_web-0.2.1+13/
 firebase_remote_config=/Users/tim/.pub-cache/hosted/pub.dartlang.org/firebase_remote_config-3.0.3/
 firebase_remote_config_web=/Users/tim/.pub-cache/hosted/pub.dartlang.org/firebase_remote_config_web-1.1.12/
+flutter_native_splash=/Users/tim/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.2.12/
 google_sign_in=/Users/tim/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.4.2/
 google_sign_in_android=/Users/tim/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-6.1.1/
 google_sign_in_ios=/Users/tim/.pub-cache/hosted/pub.dartlang.org/google_sign_in_ios-5.5.0/

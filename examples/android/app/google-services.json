@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "626479055094",
+    "firebase_url": "https://wt-app-scaffold-default-rtdb.firebaseio.com",
     "project_id": "wt-app-scaffold",
     "storage_bucket": "wt-app-scaffold.appspot.com"
   },
@@ -10,42 +11,6 @@
         "mobilesdk_app_id": "1:626479055094:android:46c6065b7539f573952cd7",
         "android_client_info": {
           "package_name": "net.wonkytech.sample_app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "626479055094-jojhqr8uupd2o6e6s2t0l1m089sklkkg.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDG7YnuO6iMR810zgE9hHy5-ozkO6_PINY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "626479055094-jojhqr8uupd2o6e6s2t0l1m089sklkkg.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "626479055094-bkss08faf5b9vh6rde1ohru2eql6jdbg.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "net.wonkytech.wtAppScaffold"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:626479055094:android:de98f0f5923d24a1952cd7",
-        "android_client_info": {
-          "package_name": "net.wonkytech.wtAppScaffold"
         }
       },
       "oauth_client": [

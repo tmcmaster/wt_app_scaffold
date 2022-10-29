@@ -24,5 +24,15 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets
+    - assets/
 
+flutter_icons:
+  image_path: assets/avocado.png
+  android: true
+  ios: true
+
+flutter_native_splash:
+  color: "#9E9E9E"
+  image: assets/avocado.png
+  android_12:
+  web_image_mode: center
