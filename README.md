@@ -3,6 +3,11 @@ A bunch of tools to rapidly start building an app.
 
 ## Setup Launch Icon
 
+Install package: 
+```shell
+flutter pub add flutter_launcher_icons
+```
+
 Add the following the pubspec.yaml file.
 
 ```yaml
@@ -17,6 +22,12 @@ To configure project, run:
 flutter pub run flutter_launcher_icons:main
 ```
 ## Setup Splash Screen
+
+Install package:
+
+```shell
+flutter pub add flutter_native_splash
+```
 
 Add the following the pubspec.yaml file.
 
