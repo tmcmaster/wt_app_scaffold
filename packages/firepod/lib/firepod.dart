@@ -1,3 +1,4 @@
+export 'firebase_init.dart';
 export 'firepod_init.dart';
 export 'firepod_map.dart';
 export 'firepod_map_int.dart';

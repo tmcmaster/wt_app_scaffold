@@ -1,14 +1,28 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firepod/firebase_init.dart';
 import 'package:flutter/material.dart';
+import 'package:sample_app/demo/demo_app_definition.dart';
+import 'package:sample_app/demo/demo_app_providers.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/init/app_scaffold_init.dart';
 
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  runMyApp(
+    withFirebase(
+      andAppScaffold(
+        DemoApp(),
+        appDetailsProvider: DemoAppProviders.appDetails,
+      ),
+      appName: 'wix-admin',
+      firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+    ),
   );
-  runApp(const MyApp());
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
