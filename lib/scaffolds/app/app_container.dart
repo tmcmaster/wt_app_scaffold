@@ -1,13 +1,8 @@
 import 'package:firepod/auth/auth.dart';
 import 'package:firepod/auth/link_email_sign_in_view.dart';
-import 'package:firepod/firebase_setup.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:utils/logging.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
-import 'package:wt_app_scaffold/scaffolds/app/app_builder.dart';
 
 class AppContainer extends ConsumerWidget {
   static final log = logger(AppContainer);

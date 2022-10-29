@@ -1,10 +1,9 @@
-import 'package:firepod/login/firebase_auth_ui_example.dart';
 import 'package:sample_app/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/scaffolds/page/bottom_drawer_page/settings_page.dart';
 
-class DemoApp extends ConsumerWidget {
-  static final log = logger(DemoApp);
+class SampleApp extends ConsumerWidget {
+  static final log = logger(SampleApp);
 
   static final appDetails = Provider<AppDetails>(
     name: 'DemoAppProviders.appDetails',
@@ -17,7 +16,7 @@ class DemoApp extends ConsumerWidget {
     },
   );
 
-  const DemoApp({
+  const SampleApp({
     super.key,
   });
 
@@ -26,7 +25,7 @@ class DemoApp extends ConsumerWidget {
     final auth = ref.read(FirebaseSetup.instance.login.notifier);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
 
-    return AppContainer(
+    return LoginAppContainer(
       appDefinition: AppDefinition.from(
         appTitle: 'Demo Application',
         appName: 'demoApp',

@@ -1,43 +1,32 @@
-import 'package:firebase_auth/firebase_auth.dart' hide PhoneAuthProvider, EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
+import 'package:firepod/auth/auth.dart';
 import 'package:firepod/firebase_providers.dart';
-import 'package:firepod/login/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
 
-class FirebaseAuthUIExample extends ConsumerWidget {
-  FirebaseAuthUIExample({
+import 'config.dart';
+
+class LoginAppContainer extends ConsumerWidget {
+  final AppDefinition appDefinition;
+
+  LoginAppContainer({
     super.key,
-  }) {
-    print('Creating FirebaseAuthUIExample');
-  }
-
-  // String get initialRoute {
-  //   final auth = FirebaseAuth.instance;
-  //
-  //   if (auth.currentUser == null) {
-  //     return '/';
-  //   }
-  //
-  //   if (!auth.currentUser!.emailVerified && auth.currentUser!.email != null) {
-  //     return '/verify-email';
-  //   }
-  //
-  //   return '/profile';
-  // }
+    required this.appDefinition,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(FirebaseProviders.auth);
     final User? currentUser = auth.currentUser;
-    print('FirebaseAuthUIExample: user(${currentUser?.email})');
+    print('LoginAppContainer: user(${currentUser?.email})');
     final initialRoute = currentUser == null
         ? '/'
-        : !currentUser.emailVerified && currentUser.email != null
+        : !currentUser.emailVerified && currentUser.email != null && false // TODO: need to remove debug false
             ? '/verify-email'
-            : '/profile';
+            : '/welcome';
 
     final buttonStyle = ButtonStyle(
       padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
@@ -88,6 +77,8 @@ class FirebaseAuthUIExample extends ConsumerWidget {
               }),
               AuthStateChangeAction<SignedIn>((context, state) {
                 if (!state.user!.emailVerified) {
+                  print('Sending verification email.');
+                  auth.currentUser!.sendEmailVerification();
                   Navigator.pushNamed(context, '/verify-email');
                 } else {
                   Navigator.pushReplacementNamed(context, '/profile');
@@ -108,8 +99,8 @@ class FirebaseAuthUIExample extends ConsumerWidget {
             styles: const {
               EmailFormStyle(signInButtonVariant: ButtonVariant.filled),
             },
-            headerBuilder: _headerImage('assets/images/flutterfire_logo.png'),
-            sideBuilder: _sideImage('assets/images/flutterfire_logo.png'),
+            headerBuilder: _headerImage('assets/avocado.png'),
+            sideBuilder: _sideImage('assets/avocado.png'),
             subtitleBuilder: (context, action) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8),
@@ -143,6 +134,8 @@ class FirebaseAuthUIExample extends ConsumerWidget {
             actionCodeSettings: actionCodeSettings,
             actions: [
               EmailVerifiedAction(() {
+                print('Sending verification email.');
+                auth.currentUser!.sendEmailVerification();
                 Navigator.pushReplacementNamed(context, '/profile');
               }),
               AuthCancelledAction((context) {
@@ -206,7 +199,9 @@ class FirebaseAuthUIExample extends ConsumerWidget {
                 Navigator.pushReplacementNamed(context, '/');
               }),
             ],
-            provider: emailLinkProviderConfig,
+            provider: EmailLinkAuthProvider(
+              actionCodeSettings: actionCodeSettings,
+            ),
             headerMaxExtent: 200,
             headerBuilder: _headerIcon(Icons.link),
             sideBuilder: _sideIcon(Icons.link),
@@ -225,6 +220,9 @@ class FirebaseAuthUIExample extends ConsumerWidget {
             showMFATile: true,
           );
         },
+        '/welcome': (context) => AppBuilder(
+              appDefinition: appDefinition,
+            ),
       },
       title: 'Firebase UI demo',
       debugShowCheckedModeBanner: false,

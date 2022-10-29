@@ -22,4 +22,5 @@ export 'scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_app.dart';
 export 'scaffolds/app/curved_nav_bar_app/curved_nav_bar_app.dart';
 export 'scaffolds/app/hidden_drawer_app/hidden_drawer_app.dart';
 export 'scaffolds/app/hidden_drawer_app/hidden_drawer_opener.dart';
+export 'scaffolds/login/login_app_container.dart';
 export 'scaffolds/page/bottom_drawer_page/bottom_drawer_page.dart';

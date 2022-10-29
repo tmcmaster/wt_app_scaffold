@@ -18,4 +18,3 @@ export 'firepod_providers.dart';
 export 'firepod_settings.dart';
 export 'generic_lookup_map.dart';
 export 'generic_lookup_map_notifier.dart';
-export 'login/firebase_auth_ui_example.dart';

@@ -5,25 +5,24 @@ import 'package:firepod/firebase_providers.dart';
 import 'package:firepod/firepod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../login/config.dart';
-
 Future<ProviderScope> Function() Function(
-  Future<dynamic> Function() childBuilder, {
+  Future<dynamic> Function(
+    FirebaseApp app,
+    FirebaseOptions firebaseOptions,
+  )
+      childBuilder, {
   required String appName,
   required FirebaseOptions firebaseOptions,
 }) withFirebase = andFirebase;
 
 Future<ProviderScope> Function() andFirebase(
-  Future<dynamic> Function() childBuilder, {
+  Future<dynamic> Function(
+    FirebaseApp app,
+    FirebaseOptions firebaseOptions,
+  )
+      childBuilder, {
   required String appName,
   required FirebaseOptions firebaseOptions,
-  googleEnabled = false,
-  emailEnabled = true,
-  twitterEnabled = false,
-  facebookEnabled = false,
-  appleEnabled = false,
-  phoneEnabled = false,
-  emailLinkEnabled = false,
 }) {
   return () async {
     print('Firebase Initialising');
@@ -40,27 +39,8 @@ Future<ProviderScope> Function() andFirebase(
     print('FirebaseDatabase.instanceFor: name($appName)');
     final database = FirebaseDatabase.instanceFor(app: app);
 
-    print('FirebaseUIAuth.configureProviders: name($appName)');
-    FirebaseUIAuth.configureProviders(
-      [
-        if (emailEnabled) EmailAuthProvider(),
-        if (emailLinkEnabled) emailLinkProviderConfig,
-        if (phoneEnabled) PhoneAuthProvider(),
-        if (googleEnabled) GoogleProvider(clientId: GOOGLE_CLIENT_ID),
-        if (appleEnabled) AppleProvider(),
-        if (twitterEnabled) FacebookProvider(clientId: FACEBOOK_CLIENT_ID),
-        if (twitterEnabled)
-          TwitterProvider(
-            apiKey: TWITTER_API_KEY,
-            apiSecretKey: TWITTER_API_SECRET_KEY,
-            redirectUri: TWITTER_REDIRECT_URI,
-          ),
-      ],
-      app: app,
-    );
-
     print('Firebase Building Child');
-    final widget = await child2widget(childBuilder());
+    final widget = await child2widget(childBuilder(app, firebaseOptions));
     print('Firebase Returning Scope');
     return ProviderScope(
       overrides: [
