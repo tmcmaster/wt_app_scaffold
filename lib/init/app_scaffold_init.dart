@@ -9,34 +9,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 
-import '../models/app_details.dart';
-import '../providers/app_scaffolds_providers.dart';
 import '../scaffolds/login/config.dart';
-import 'provider_monitor.dart';
 
 Future<ProviderScope> Function(
   FirebaseApp app,
   FirebaseOptions firebaseOptions,
 )
     Function(
-  Future<dynamic> Function() childBuilder, {
-  required Provider<AppDetails> appDetailsProvider,
-}) withAppScaffold = andAppScaffold;
+  AppDefinition appDefinition,
+) withAppScaffold = andAppScaffold;
 
 Future<ProviderScope> Function(
   FirebaseApp app,
   FirebaseOptions firebaseOptions,
 ) andAppScaffold(
-  Future<dynamic> Function() childBuilder, {
-  required Provider<AppDetails> appDetailsProvider,
-  googleEnabled = true,
-  emailEnabled = true,
-  twitterEnabled = false,
-  facebookEnabled = false,
-  appleEnabled = false,
-  phoneEnabled = false,
-  emailLinkEnabled = false,
-}) {
+  AppDefinition appDefinition,
+) {
   return (app, firebaseOptions) async {
     final appName = app.name;
     print('AppScaffold Initialising');
@@ -53,18 +41,20 @@ Future<ProviderScope> Function(
       throw Exception('GOOGLE_CLIENT_ID has not been set.');
     }
 
+    final login = appDefinition.loginSupport;
+
     FirebaseUIAuth.configureProviders(
       [
-        if (emailEnabled) EmailAuthProvider(),
-        if (emailLinkEnabled)
+        if (login.emailEnabled) EmailAuthProvider(),
+        if (login.emailLinkEnabled)
           EmailLinkAuthProvider(
             actionCodeSettings: actionCodeSettings,
           ),
-        if (phoneEnabled) PhoneAuthProvider(),
-        if (googleEnabled) GoogleProvider(clientId: googleClientId),
-        if (appleEnabled) AppleProvider(),
-        if (twitterEnabled) FacebookProvider(clientId: FACEBOOK_CLIENT_ID),
-        if (twitterEnabled)
+        if (login.phoneEnabled) PhoneAuthProvider(),
+        if (login.googleEnabled) GoogleProvider(clientId: googleClientId),
+        if (login.appleEnabled) AppleProvider(),
+        if (login.twitterEnabled) FacebookProvider(clientId: FACEBOOK_CLIENT_ID),
+        if (login.twitterEnabled)
           TwitterProvider(
             apiKey: TWITTER_API_KEY,
             apiSecretKey: TWITTER_API_SECRET_KEY,
@@ -73,19 +63,14 @@ Future<ProviderScope> Function(
       ],
       app: app,
     );
-    print('AppScaffold Building Child');
-    final widget = await child2widget(childBuilder());
+
     print('AppScaffold Returning Scope');
     return ProviderScope(
-      overrides: [
-        AppScaffoldProviders.appDetails.overrideWithProvider(appDetailsProvider),
-        if (widget is ProviderScope) ...widget.overrides,
-      ],
-      observers: [
-        ProviderMonitor.instance,
-        if (widget is ProviderScope) ...widget.observers ?? [],
-      ],
-      child: widget is ProviderScope ? widget.child : widget,
+      overrides: const [],
+      observers: const [],
+      child: LoginAppContainer(
+        appDefinition: appDefinition,
+      ),
     );
   };
 }

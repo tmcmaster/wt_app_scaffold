@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
 
 import 'config.dart';
 
@@ -19,6 +20,7 @@ class LoginAppContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final auth = ref.watch(FirebaseProviders.auth);
     final User? currentUser = auth.currentUser;
     print('LoginAppContainer: user(${currentUser?.email})');
@@ -225,7 +227,7 @@ class LoginAppContainer extends ConsumerWidget {
             ),
       },
       title: 'Firebase UI demo',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: debugMode,
       locale: const Locale('en'),
       localizationsDelegates: [
         FirebaseUILocalizations.withDefaultOverrides(const _LabelOverrides()),

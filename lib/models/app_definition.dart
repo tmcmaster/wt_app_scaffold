@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 import '../widgets/placeholder_page.dart';
 import 'action_definition.dart';
 import 'app_details.dart';
 import 'page_definition.dart';
+
+class LoginSupport {
+  static const LoginSupport none = LoginSupport();
+
+  final bool googleEnabled;
+  final bool emailEnabled;
+  final bool twitterEnabled;
+  final bool facebookEnabled;
+  final bool appleEnabled;
+  final bool phoneEnabled;
+  final bool emailLinkEnabled;
+
+  const LoginSupport({
+    this.googleEnabled = false,
+    this.emailEnabled = false,
+    this.twitterEnabled = false,
+    this.facebookEnabled = false,
+    this.appleEnabled = false,
+    this.phoneEnabled = false,
+    this.emailLinkEnabled = false,
+  });
+}
 
 class AppDefinition {
   final String appTitle;
@@ -23,6 +46,8 @@ class AppDefinition {
   final void Function(BuildContext context)? menuAction;
   final List<LocalizationsDelegate>? localizationDelegates;
 
+  final LoginSupport loginSupport;
+
   const AppDefinition._({
     required this.appTitle,
     required this.appName,
@@ -37,6 +62,7 @@ class AppDefinition {
     required this.dismissAction,
     required this.menuAction,
     required this.localizationDelegates,
+    required this.loginSupport,
   });
 
   factory AppDefinition.from({
@@ -53,6 +79,7 @@ class AppDefinition {
     void Function(BuildContext context)? dismissAction,
     void Function(BuildContext context)? menuAction,
     List<LocalizationsDelegate>? localizationDelegates,
+    LoginSupport loginProviders = LoginSupport.none,
   }) {
     return AppDefinition._(
       appTitle: appTitle,
@@ -73,6 +100,7 @@ class AppDefinition {
       dismissAction: dismissAction,
       menuAction: menuAction,
       localizationDelegates: localizationDelegates,
+      loginSupport: loginProviders,
     );
   }
 }
