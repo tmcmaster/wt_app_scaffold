@@ -421,13 +421,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  firepod:
-    dependency: transitive
-    description:
-      path: "../packages/firepod"
-      relative: true
-    source: path
-    version: "0.0.0"
   fixnum:
     dependency: transitive
     description:
@@ -826,13 +819,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  settings:
-    dependency: transitive
-    description:
-      path: "../packages/settings"
-      relative: true
-    source: path
-    version: "0.0.0"
   shared_preferences:
     dependency: transitive
     description:
@@ -1042,14 +1028,32 @@ packages:
       path: ".."
       relative: true
     source: path
+    version: "0.0.5"
+  wt_firepod:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "980cd416c88c670240c5c6750bf66275a4c3f37d"
+      url: "git@github.com:tmcmaster/wt_firepod.git"
+    source: git
     version: "0.0.1"
   wt_models:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "."
       ref: HEAD
       resolved-ref: "66a9165e46c5b87f1d042dd25c8652ab32670a99"
       url: "git@github.com:tmcmaster/wt_models.git"
+    source: git
+    version: "0.0.1"
+  wt_settings:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "4a22c61eb0c7ee19cb4d51dd5d52e925ce896df6"
+      url: "git@github.com:tmcmaster/wt_settings.git"
     source: git
     version: "0.0.1"
   xdg_directories:

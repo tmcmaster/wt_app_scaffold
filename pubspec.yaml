@@ -32,12 +32,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_models.git
   wt_settings:
     git: git@github.com:tmcmaster/wt_settings.git
-
-  # TODO: need to move these packages into their own projects
-  firepod:
-    path: ./packages/firepod
-#  utils:
-#    path: ./packages/utils
+  wt_firepod:
+    git: git@github.com:tmcmaster/wt_firepod.git
 
 dev_dependencies:
   flutter_test:

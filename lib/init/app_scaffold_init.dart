@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firepod/firepod.dart';
 import 'package:flutter/foundation.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 
@@ -79,6 +78,6 @@ void runMyApp(
   );
 }
 
-Future<Widget> child2widget(dynamic child) async {
-  return child is Future<Widget> ? await child : child;
-}
+// Future<Widget> child2widget(dynamic child) async {
+//   return child is Future<Widget> ? await child : child;
+// }

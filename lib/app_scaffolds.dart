@@ -1,10 +1,9 @@
-export 'package:firepod/auth/login_view.dart';
-export 'package:firepod/firebase_setup.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'package:wt_action_button/wt_action_button.dart';
 export 'package:wt_app_scaffold/widgets/placeholder_page.dart';
+export 'package:wt_firepod/wt_firepod.dart';
 
 export 'init/app_scaffold_init.dart';
 export 'logging/user_log.dart';

@@ -1,7 +1,5 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
-import 'package:firepod/auth/auth.dart';
-import 'package:firepod/firebase_providers.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';

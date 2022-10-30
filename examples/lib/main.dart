@@ -1,4 +1,3 @@
-import 'package:firepod/firebase_init.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 
