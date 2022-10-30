@@ -1,4 +1,4 @@
-import 'package:utils/models/id_support.dart';
+import 'package:wt_models/wt_models.dart';
 
 // TODO: investigate moving back to not needing Site too be in this package.
 class Site with IdSupport {

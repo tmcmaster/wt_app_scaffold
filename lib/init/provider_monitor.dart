@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:utils/logging.dart';
+import 'package:wt_action_button/utils/logging.dart';
 
 class ProviderMonitor with ChangeNotifier implements ProviderObserver {
   static final instance = ProviderMonitor._();

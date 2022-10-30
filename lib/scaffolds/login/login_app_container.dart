@@ -3,6 +3,7 @@ import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firepod/auth/auth.dart';
 import 'package:firepod/firebase_providers.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 import 'config.dart';
@@ -18,8 +19,10 @@ class LoginAppContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final auth = ref.watch(FirebaseProviders.auth);
+    final color = ref.watch(ApplicationSettings.colorScheme.value);
     final User? currentUser = auth.currentUser;
     log.d('LoginAppContainer: user(${currentUser?.email})');
     final initialRoute = currentUser == null
@@ -50,6 +53,7 @@ class LoginAppContainer extends ConsumerWidget {
 
     return MaterialApp(
       theme: ThemeData(
+        primarySwatch: color,
         brightness: Brightness.light,
         visualDensity: VisualDensity.standard,
         inputDecorationTheme: const InputDecorationTheme(
@@ -59,6 +63,8 @@ class LoginAppContainer extends ConsumerWidget {
         textButtonTheme: TextButtonThemeData(style: buttonStyle),
         outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
       ),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeMode,
       initialRoute: initialRoute,
       routes: {
         '/': (context) {

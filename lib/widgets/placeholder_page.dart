@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:utils/logging.dart';
+import 'package:wt_action_button/utils/logging.dart';
 
 class PlaceholderPage extends StatelessWidget {
   static final log = logger(PlaceholderPage);

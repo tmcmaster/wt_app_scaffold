@@ -7,12 +7,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  utils:
-    path: ../utils
+  wt_models:
+    git: git@github.com:tmcmaster/wt_models.git
   settings:
     path: ../settings
   shared_preferences:
   crypto:
+  logger:
   riverpod: ^2.0.2
   freezed_annotation:
   font_awesome_flutter:

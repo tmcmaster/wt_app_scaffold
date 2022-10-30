@@ -1,6 +1,6 @@
+import 'package:firepod/utils/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:utils/logging.dart';
 
 import 'auth.dart';
 import 'link_email_sign_in_form.dart';

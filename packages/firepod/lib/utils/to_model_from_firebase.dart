@@ -1,5 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:utils/models/to_model_from.dart';
+import 'package:wt_models/wt_models.dart';
 
 class ToModelFromFirebase<T> extends ToModelFrom<T> {
   ToModelFromFirebase({

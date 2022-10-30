@@ -1,3 +1,5 @@
+import 'package:wt_action_button/utils/logging.dart';
+
 import '../app_scaffolds.dart';
 
 class UserLog extends ChangeNotifier {

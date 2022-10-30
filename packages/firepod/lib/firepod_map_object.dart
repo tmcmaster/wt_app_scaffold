@@ -1,6 +1,6 @@
 import 'package:firepod/firepod_map.dart';
 import 'package:firepod/generic_lookup_map.dart';
-import 'package:utils/logging.dart';
+import 'package:firepod/utils/logging.dart';
 
 class FirepodMapObject<T> extends FirepodMap<T> {
   static final log = logger(FirepodMapObject);

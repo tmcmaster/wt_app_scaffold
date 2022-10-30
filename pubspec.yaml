@@ -27,14 +27,16 @@ dependencies:
   firebase_ui_oauth_twitter: ^1.0.3
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
+  wt_models:
+    git: git@github.com:tmcmaster/wt_models.git
 
   # TODO: need to move these packages into their own projects
   settings:
     path: ./packages/settings
   firepod:
     path: ./packages/firepod
-  utils:
-    path: ./packages/utils
+#  utils:
+#    path: ./packages/utils
 
 dev_dependencies:
   flutter_test:

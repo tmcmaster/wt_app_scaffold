@@ -2,7 +2,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:utils/logging.dart';
+import 'package:settings/utils/logging.dart';
 
 import 'settings_date_providers.dart';
 

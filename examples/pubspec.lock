@@ -999,13 +999,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
-  utils:
-    dependency: transitive
-    description:
-      path: "../packages/utils"
-      relative: true
-    source: path
-    version: "0.0.0"
   vector_math:
     dependency: transitive
     description:
@@ -1049,6 +1042,15 @@ packages:
       path: ".."
       relative: true
     source: path
+    version: "0.0.1"
+  wt_models:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "66a9165e46c5b87f1d042dd25c8652ab32670a99"
+      url: "git@github.com:tmcmaster/wt_models.git"
+    source: git
     version: "0.0.1"
   xdg_directories:
     dependency: transitive

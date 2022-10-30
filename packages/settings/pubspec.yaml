@@ -7,9 +7,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  utils:
-    path: ../utils
+  wt_models:
+    git: git@github.com:tmcmaster/wt_models.git
   riverpod: ^2.0.2
+  logger:
   hooks_riverpod:
   shared_preferences:
   date_time_picker: ^2.1.0

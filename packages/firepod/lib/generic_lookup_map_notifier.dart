@@ -1,6 +1,6 @@
 import 'package:firepod/firepod.dart';
-import 'package:utils/logging.dart';
-import 'package:utils/models/id_support.dart';
+import 'package:firepod/utils/logging.dart';
+import 'package:wt_models/wt_models.dart';
 
 import 'firebase_setup.dart';
 

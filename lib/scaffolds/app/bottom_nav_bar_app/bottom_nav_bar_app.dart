@@ -1,5 +1,6 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 class BottomNavBarApp extends StatefulWidget {

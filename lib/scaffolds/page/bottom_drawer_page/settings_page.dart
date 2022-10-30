@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:utils/logging.dart';
+import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
 
 class SettingsPage extends HookConsumerWidget {

@@ -3,27 +3,13 @@ import 'dart:async';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firepod/utils/logging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:utils/logging.dart';
 
-// import '../firebase_options.dart';
 import 'user_auth.dart';
 import 'user_auth_result.dart';
-
-// // TODO: Might need to move these into a class that gets instantiated by the application.
-// //   this would enable application specific data to be passed at creation time.
-// final firebaseAuthProvider = Provider<FirebaseAuth>(
-//   name: 'firebaseAuthProvider',
-//   (ref) => FirebaseAuth.instanceFor(app: Firebase.app('wix-admin')),
-// );
-//
-// final userAuthProvider = StateNotifierProvider<FlutterfireAuthNotifier, UserAuth>(
-//   name: 'userAuthProvider',
-//   (ref) => FlutterfireAuthNotifier(ref),
-// );
 
 class FlutterfireAuthNotifier extends StateNotifier<UserAuth> {
   static final log = logger(FlutterfireAuthNotifier, level: Level.debug);

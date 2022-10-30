@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:utils/logging.dart';
+import 'package:settings/utils/logging.dart';
 
 import '../local_storage_state_notifier.dart';
 
