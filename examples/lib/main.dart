@@ -43,6 +43,7 @@ void main() async {
             PageDefinition(
               title: 'Orders',
               icon: FontAwesomeIcons.clipboard,
+              debug: false,
               builder: (context) => const PlaceholderPage(
                 title: 'Orders',
               ),
@@ -50,31 +51,37 @@ void main() async {
             PageDefinition(
               title: 'Products',
               icon: FontAwesomeIcons.bagShopping,
+              debug: false,
               builder: (context) => const PlaceholderPage(title: 'Products'),
             ),
             PageDefinition(
               title: 'Packing Sheets',
               icon: FontAwesomeIcons.boxesPacking,
+              debug: true,
               builder: (context) => const PlaceholderPage(title: 'Packing Sheets'),
             ),
             PageDefinition(
               title: 'Harvest List',
               icon: FontAwesomeIcons.tractor,
+              debug: true,
               builder: (context) => const PlaceholderPage(title: 'Harvest List'),
             ),
             PageDefinition(
               title: 'Delivery Routes',
               icon: FontAwesomeIcons.car,
+              debug: true,
               builder: (context) => const PlaceholderPage(title: 'Delivery Routes'),
             ),
             PageDefinition(
               title: 'Counter',
               icon: Icons.settings,
+              primary: true,
               builder: (context) => const CounterAppPage(title: 'Counter App'),
             ),
             PageDefinition(
               title: 'Settings',
               icon: Icons.settings,
+              primary: true,
               builder: (context) => SettingsPage(
                 children: [
                   ElevatedButton(

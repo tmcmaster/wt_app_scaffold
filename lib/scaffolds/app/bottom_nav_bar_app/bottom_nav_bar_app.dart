@@ -32,8 +32,13 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
 
   @override
   void initState() {
+    final initialIndex =
+        widget.appDefinition.pages.indexOf(widget.appDefinition.pages.firstWhere((page) => page.primary));
+
+    print('Initial Page: $initialIndex');
+
     _selectedPageProvider =
-        StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>((ref) => _SelectedPageNotifier());
+        StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>((ref) => _SelectedPageNotifier(initialIndex));
 
     super.initState();
   }
@@ -47,7 +52,8 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
     return Scaffold(
       body: _PageView(
         items: items,
-        swipEnabled: widget.appDefinition.swipeEnabled,
+        debugMode: widget.debugMode,
+        swipeEnabled: widget.appDefinition.swipeEnabled,
         provider: _selectedPageProvider,
       ),
       bottomNavigationBar: _BottomNavigationBar(
@@ -59,10 +65,10 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
 }
 
 class _SelectedPageNotifier extends StateNotifier<PageChangeEvent> {
-  _SelectedPageNotifier()
+  _SelectedPageNotifier(int initialPage)
       : super(PageChangeEvent(
           source: PageChangeSource.initial,
-          page: 0,
+          page: initialPage < 0 ? 0 : initialPage,
         ));
 
   void setPage(PageChangeSource source, int page) {
@@ -93,17 +99,20 @@ class PageChangeEvent {
 
 class _PageView extends HookConsumerWidget {
   final List<PageDefinition> items;
-  final bool swipEnabled;
+  final bool swipeEnabled;
+  final bool debugMode;
   final StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent> provider;
   _PageView({
     required this.items,
     required this.provider,
-    this.swipEnabled = true,
+    required this.debugMode,
+    this.swipeEnabled = true,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageController = usePageController();
+    final initialPageEvent = ref.read(provider);
+    final pageController = usePageController(initialPage: initialPageEvent.page);
     ref.listen(provider, (_, PageChangeEvent next) {
       if (next.source != PageChangeSource.pageView) {
         pageController.animateToPage(
@@ -114,10 +123,11 @@ class _PageView extends HookConsumerWidget {
       }
     });
 
+    final filterItems = debugMode ? items : items.where((item) => !item.debug).toList();
     return PageView.builder(
-      itemCount: items.length,
-      physics: swipEnabled ? null : NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) => items[index].builder(context),
+      itemCount: filterItems.length,
+      physics: swipeEnabled ? null : const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) => filterItems[index].builder(context),
       onPageChanged: (page) {
         final pageNav = ref.read(provider.notifier);
         pageNav.setPage(PageChangeSource.pageView, page);
@@ -127,7 +137,12 @@ class _PageView extends HookConsumerWidget {
   }
 }
 
+// This is the type used by the popup menu below.
+enum Menu { itemOne, itemTwo, itemThree, itemFour }
+
 class _BottomNavigationBar extends ConsumerWidget {
+  static final log = logger(_BottomNavigationBar);
+
   final List<PageDefinition> items;
   final StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent> provider;
 
@@ -140,19 +155,70 @@ class _BottomNavigationBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pageChangeEvent = ref.watch(provider);
     final pageNav = ref.read(provider.notifier);
-    return BottomNavigationBar(
-      iconSize: 20,
-      type: BottomNavigationBarType.fixed,
-      items: items
-          .map((item) => BottomNavigationBarItem(
-                icon: Icon(item.icon),
-                label: item.title,
-              ))
-          .toList(),
-      onTap: (selection) {
-        pageNav.setPage(PageChangeSource.buttonBar, selection);
-      },
-      currentIndex: pageChangeEvent.page,
+
+    final primaryItems = items.where((item) => item.primary).toList();
+    final otherItems = items.where((item) => !item.primary).toList();
+    log.d('Total Items: ${items.length}');
+    log.d('Primary Items: ${primaryItems.length}');
+    log.d('Other Items: ${otherItems.length}');
+
+    final currentSelected =
+        pageChangeEvent.page < items.length ? primaryItems.indexOf(items[pageChangeEvent.page]) : -1;
+    log.d('Selected Primary: $currentSelected');
+
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Flexible(
+          flex: 1,
+          child: BottomNavigationBar(
+            iconSize: 20,
+            selectedItemColor: currentSelected < 0 ? Colors.black54 : null,
+            items: primaryItems
+                .where((item) => !item.debug)
+                .map((item) => BottomNavigationBarItem(
+                      icon: Icon(item.icon),
+                      label: item.title,
+                    ))
+                .toList(),
+            onTap: (selection) {
+              log.d('Selected Item: $selection');
+              final index = items.indexOf(primaryItems[selection]);
+              log.d('Calculated Index: $index');
+              pageNav.setPage(PageChangeSource.buttonBar, index);
+            },
+            currentIndex: currentSelected < 0 ? 0 : currentSelected,
+          ),
+        ),
+        if (otherItems.isNotEmpty)
+          PopupMenuButton<PageDefinition>(
+            // Callback that sets the selected popup menu item.
+            onSelected: (PageDefinition page) {},
+            itemBuilder: (BuildContext context) => otherItems
+                .map((item) => PopupMenuItem<PageDefinition>(
+                      value: item,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: TextButton.icon(
+                          style: const ButtonStyle(
+                            alignment: Alignment.centerLeft,
+                          ),
+                          icon: Icon(item.icon),
+                          label: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(item.title),
+                          ),
+                          onPressed: () {
+                            pageNav.setPage(PageChangeSource.buttonBar, items.indexOf(item));
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ))
+                .toList(),
+          ),
+      ],
     );
   }
 }

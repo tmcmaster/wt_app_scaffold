@@ -8,6 +8,7 @@ class PageDefinition extends ItemDefinition {
   PageDefinition({
     required super.title,
     required super.icon,
+    super.primary,
     super.debug,
     required this.builder,
   });
