@@ -9,15 +9,15 @@ import 'auth.dart';
 import 'email_sign_in_form.dart';
 import 'google_sign_in_form.dart';
 
-class LoginView extends ConsumerWidget {
-  static final log = logger(LoginView);
+class LoginPage extends ConsumerWidget {
+  static final log = logger(LoginPage);
 
   static const routeName = '/login';
 
   final FlutterfireAuthNotifier firebaseLogin;
   final String landingRoute;
 
-  LoginView({
+  LoginPage({
     required this.firebaseLogin,
     this.landingRoute = '/',
   });

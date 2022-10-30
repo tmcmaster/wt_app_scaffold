@@ -1,5 +1,4 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/material.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 class CurvedNavBarApp extends StatefulWidget {

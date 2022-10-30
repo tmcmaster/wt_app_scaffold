@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:utils/logging.dart';
 
 class PlaceholderPage extends StatelessWidget {
+  static final log = logger(PlaceholderPage);
+
   static const routeName = 'settings';
 
   final String title;
@@ -61,7 +64,7 @@ class PlaceholderPage extends StatelessWidget {
             color: Colors.white,
             onPressed: () {
               menuAction?.call(context);
-              print('${menuAction == null}');
+              log.d('${menuAction == null}');
               //menuAction ?? dismissAction,
             });
   }

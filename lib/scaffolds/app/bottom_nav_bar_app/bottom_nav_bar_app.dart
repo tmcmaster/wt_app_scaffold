@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
@@ -8,7 +7,6 @@ class BottomNavBarApp extends StatefulWidget {
   final bool debugMode;
 
   const BottomNavBarApp._({
-    super.key,
     required this.appDefinition,
     required this.debugMode,
   });
@@ -34,8 +32,6 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
   void initState() {
     final initialIndex =
         widget.appDefinition.pages.indexOf(widget.appDefinition.pages.firstWhere((page) => page.primary));
-
-    print('Initial Page: $initialIndex');
 
     _selectedPageProvider =
         StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>((ref) => _SelectedPageNotifier(initialIndex));
@@ -102,7 +98,7 @@ class _PageView extends HookConsumerWidget {
   final bool swipeEnabled;
   final bool debugMode;
   final StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent> provider;
-  _PageView({
+  const _PageView({
     required this.items,
     required this.provider,
     required this.debugMode,

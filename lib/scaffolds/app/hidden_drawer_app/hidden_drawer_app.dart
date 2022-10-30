@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_page_builder.dart';
 
@@ -9,7 +8,6 @@ class HiddenDrawerApp extends StatefulWidget {
   final bool debugMode;
 
   const HiddenDrawerApp._({
-    super.key,
     required this.appDefinition,
     this.debugMode = false,
   });

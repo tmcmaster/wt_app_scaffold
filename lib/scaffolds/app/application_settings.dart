@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:settings/settings_bool/settings_bool_providers.dart';
-import 'package:settings/settings_color/settings_color_providers.dart';
-import 'package:settings/settings_enum/settings_enum_providers.dart';
+import 'package:settings/settings.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 abstract class ApplicationSettings {

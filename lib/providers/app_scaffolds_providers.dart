@@ -8,7 +8,6 @@ abstract class AppScaffoldProviders {
   static final appDetails = Provider(
     name: 'AppScaffoldProviders.appDetails',
     (ref) {
-      print('Rebuilding the HiddenDrawerProviders.appDetails provider');
       return AppDetails(
         title: 'Application Name',
         subTitle: 'Site Name',

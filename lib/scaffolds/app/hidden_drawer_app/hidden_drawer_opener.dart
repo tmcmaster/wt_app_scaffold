@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class HiddenDrawerOpener extends InheritedWidget {
   final VoidCallback open;
 
-  HiddenDrawerOpener({
+  const HiddenDrawerOpener({
+    super.key,
     required super.child,
     required this.open,
   });

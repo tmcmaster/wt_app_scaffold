@@ -2,18 +2,16 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firepod/auth/auth.dart';
 import 'package:firepod/firebase_providers.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
 
 import 'config.dart';
 
 class LoginAppContainer extends ConsumerWidget {
+  static final log = logger(LoginAppContainer);
   final AppDefinition appDefinition;
 
-  LoginAppContainer({
+  const LoginAppContainer({
     super.key,
     required this.appDefinition,
   });
@@ -23,7 +21,7 @@ class LoginAppContainer extends ConsumerWidget {
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final auth = ref.watch(FirebaseProviders.auth);
     final User? currentUser = auth.currentUser;
-    print('LoginAppContainer: user(${currentUser?.email})');
+    log.d('LoginAppContainer: user(${currentUser?.email})');
     final initialRoute = currentUser == null
         ? '/'
         : !currentUser.emailVerified && currentUser.email != null && false // TODO: need to remove debug false
@@ -79,7 +77,7 @@ class LoginAppContainer extends ConsumerWidget {
               }),
               AuthStateChangeAction<SignedIn>((context, state) {
                 if (!state.user!.emailVerified) {
-                  print('Sending verification email.');
+                  log.d('Sending verification email.');
                   auth.currentUser!.sendEmailVerification();
                   Navigator.pushNamed(context, '/verify-email');
                 } else {
@@ -133,10 +131,10 @@ class LoginAppContainer extends ConsumerWidget {
             auth: auth,
             headerBuilder: _headerIcon(Icons.verified),
             sideBuilder: _sideIcon(Icons.verified),
-            actionCodeSettings: actionCodeSettings,
+            actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
             actions: [
               EmailVerifiedAction(() {
-                print('Sending verification email.');
+                log.d('Sending verification email.');
                 auth.currentUser!.sendEmailVerification();
                 Navigator.pushReplacementNamed(context, '/profile');
               }),
@@ -202,7 +200,7 @@ class LoginAppContainer extends ConsumerWidget {
               }),
             ],
             provider: EmailLinkAuthProvider(
-              actionCodeSettings: actionCodeSettings,
+              actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
             ),
             headerMaxExtent: 200,
             headerBuilder: _headerIcon(Icons.link),
@@ -218,7 +216,7 @@ class LoginAppContainer extends ConsumerWidget {
               }),
               mfaAction,
             ],
-            actionCodeSettings: actionCodeSettings,
+            actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
             showMFATile: true,
           );
         },

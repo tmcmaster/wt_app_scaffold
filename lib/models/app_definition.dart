@@ -1,33 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 import '../widgets/placeholder_page.dart';
 import 'action_definition.dart';
 import 'app_details.dart';
+import 'login_support.dart';
 import 'page_definition.dart';
-
-class LoginSupport {
-  static const LoginSupport none = LoginSupport();
-
-  final bool googleEnabled;
-  final bool emailEnabled;
-  final bool twitterEnabled;
-  final bool facebookEnabled;
-  final bool appleEnabled;
-  final bool phoneEnabled;
-  final bool emailLinkEnabled;
-
-  const LoginSupport({
-    this.googleEnabled = false,
-    this.emailEnabled = false,
-    this.twitterEnabled = false,
-    this.facebookEnabled = false,
-    this.appleEnabled = false,
-    this.phoneEnabled = false,
-    this.emailLinkEnabled = false,
-  });
-}
 
 class AppDefinition {
   final String appTitle;
@@ -79,19 +57,24 @@ class AppDefinition {
     void Function(BuildContext context)? dismissAction,
     void Function(BuildContext context)? menuAction,
     List<LocalizationsDelegate>? localizationDelegates,
-    LoginSupport loginProviders = LoginSupport.none,
+    LoginSupport loginSupport = LoginSupport.none,
   }) {
     return AppDefinition._(
       appTitle: appTitle,
       appName: appName,
       appDetailsProvider: appDetailsProvider,
       appDetails: appDetails,
-      logoutAction: logoutAction ?? ActionDefinition(title: 'Logout', icon: Icons.logout, onTap: (_) {}),
+      logoutAction: logoutAction ??
+          ActionDefinition(
+            title: 'Logout',
+            icon: Icons.logout,
+            onTap: (_) {},
+          ),
       profilePage: profilePage ??
           PageDefinition(
             title: 'Profile',
             icon: Icons.person,
-            builder: (_) => PlaceholderPage(title: 'Profile'),
+            builder: (_) => const PlaceholderPage(title: 'Profile'),
           ),
       pages: pages,
       swipeEnabled: swipeEnabled,
@@ -100,7 +83,7 @@ class AppDefinition {
       dismissAction: dismissAction,
       menuAction: menuAction,
       localizationDelegates: localizationDelegates,
-      loginSupport: loginProviders,
+      loginSupport: loginSupport,
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:sample_app/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/scaffolds/page/bottom_drawer_page/settings_page.dart';
 
 class SampleApp extends ConsumerWidget {
   static final log = logger(SampleApp);
@@ -40,7 +39,7 @@ class SampleApp extends ConsumerWidget {
           title: 'Logout',
           icon: Icons.logout,
           onTap: (_) {
-            print('Logging out user');
+            log.d('Logging out user');
             auth.logout();
           },
         ),

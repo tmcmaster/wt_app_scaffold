@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firepod/auth/auth.dart';
-import 'package:firepod/firebase_providers.dart';
-import 'package:firepod/firepod.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'firebase_providers.dart';
 
 Future<ProviderScope> Function() Function(
   Future<dynamic> Function(

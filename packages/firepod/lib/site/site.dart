@@ -14,11 +14,11 @@ class Site with IdSupport {
   @override
   String getId() => id;
 
-  @override
-  Map<String, dynamic> toJson() {
-    return {
-      id: id,
-      name: name,
-    };
-  }
+  // @override
+  // Map<String, dynamic> toJson() {
+  //   return {
+  //     id: id,
+  //     name: name,
+  //   };
+  // }
 }

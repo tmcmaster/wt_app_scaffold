@@ -53,7 +53,7 @@ class BottomDrawerPage extends StatelessWidget {
                             ),
                           ))
                       .toList(),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   )
                 ],
@@ -104,7 +104,7 @@ class BottomDrawerPage extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(child: mainWidget),
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
               ],

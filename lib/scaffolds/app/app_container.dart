@@ -23,7 +23,7 @@ class AppContainer extends ConsumerWidget {
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
 
     final user = ref.watch(FirebaseSetup.instance.login);
-    final initialRoute = user == UserAuth.none ? LoginView.routeName : AppBuilder.routeName;
+    final initialRoute = user == UserAuth.none ? LoginPage.routeName : AppBuilder.routeName;
 
     ref.read(AppScaffoldProviders.providerManager);
 
@@ -49,7 +49,7 @@ class AppContainer extends ConsumerWidget {
       themeMode: themeMode,
       initialRoute: initialRoute,
       routes: {
-        LoginView.routeName: (context) => LoginView(
+        LoginPage.routeName: (context) => LoginPage(
               firebaseLogin: ref.read(FirebaseSetup.instance.login.notifier),
               landingRoute: AppBuilder.routeName,
             ),
