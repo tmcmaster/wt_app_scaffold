@@ -1,7 +1,8 @@
 name: wt_app_scaffold
 description: A new Flutter package project.
-version: 0.0.1
-homepage:
+version: 0.0.5
+publish_to: 'none'
+homepage: https://github.com/tmcmaster/et-app-scaffold
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
@@ -29,10 +30,10 @@ dependencies:
     git: git@github.com:tmcmaster/wt_action_button.git
   wt_models:
     git: git@github.com:tmcmaster/wt_models.git
+  wt_settings:
+    git: git@github.com:tmcmaster/wt_settings.git
 
   # TODO: need to move these packages into their own projects
-  settings:
-    path: ./packages/settings
   firepod:
     path: ./packages/firepod
 #  utils:

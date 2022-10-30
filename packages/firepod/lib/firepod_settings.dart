@@ -1,6 +1,6 @@
 import 'package:firepod/firepod_providers.dart';
 import 'package:firepod/site/site.dart';
-import 'package:settings/settings_object/settings_object_providers.dart';
+import 'package:wt_settings/wt_settings.dart';
 
 abstract class FirepodSettings {
   static final site = SettingsObjectProviders<Site?>(

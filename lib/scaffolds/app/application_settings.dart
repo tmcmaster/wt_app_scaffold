@@ -1,5 +1,5 @@
-import 'package:settings/settings.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_settings/wt_settings.dart';
 
 abstract class ApplicationSettings {
   static void init(Ref ref) {

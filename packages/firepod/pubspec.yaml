@@ -9,8 +9,9 @@ dependencies:
     sdk: flutter
   wt_models:
     git: git@github.com:tmcmaster/wt_models.git
-  settings:
-    path: ../settings
+  wt_settings:
+    git: git@github.com:tmcmaster/wt_settings.git
+
   shared_preferences:
   crypto:
   logger:
