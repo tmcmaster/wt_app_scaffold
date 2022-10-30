@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_action_button/action_button_definition.dart';
 
 import '../widgets/placeholder_page.dart';
-import 'action_definition.dart';
 import 'app_details.dart';
 import 'login_support.dart';
 import 'page_definition.dart';
@@ -13,7 +13,6 @@ class AppDefinition {
   final AlwaysAliveProviderBase<AppDetails>? appDetailsProvider;
   final AppDetails? appDetails;
 
-  final ActionDefinition logoutAction;
   final PageDefinition profilePage;
   final bool swipeEnabled;
   final List<PageDefinition> pages;
@@ -31,7 +30,6 @@ class AppDefinition {
     required this.appName,
     required this.appDetailsProvider,
     required this.appDetails,
-    required this.logoutAction,
     required this.profilePage,
     required this.pages,
     required this.swipeEnabled,
@@ -48,7 +46,7 @@ class AppDefinition {
     required String appName,
     AlwaysAliveProviderBase<AppDetails>? appDetailsProvider,
     AppDetails? appDetails,
-    ActionDefinition? logoutAction,
+    ActionButtonDefinition? logoutAction,
     PageDefinition? profilePage,
     required List<PageDefinition> pages,
     bool swipeEnabled = true,
@@ -64,12 +62,6 @@ class AppDefinition {
       appName: appName,
       appDetailsProvider: appDetailsProvider,
       appDetails: appDetails,
-      logoutAction: logoutAction ??
-          ActionDefinition(
-            title: 'Logout',
-            icon: Icons.logout,
-            onTap: (_) {},
-          ),
       profilePage: profilePage ??
           PageDefinition(
             title: 'Profile',

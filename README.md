@@ -43,3 +43,7 @@ To configure project, run:
 ```shell
 flutter pub run flutter_native_splash:create
 ```
+
+## TODO
+
+- Need to rename this project to wt_app_scaffold

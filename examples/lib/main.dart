@@ -1,6 +1,6 @@
 import 'package:firepod/firebase_init.dart';
-import 'package:sample_app/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 
 import 'firebase_options.dart';
 
@@ -20,13 +20,6 @@ void main() async {
       googleEnabled: true,
     ),
     appDetailsProvider: null,
-    logoutAction: ActionDefinition(
-      title: 'Logout',
-      icon: Icons.logout,
-      onTap: (context) {
-        // TODO: Should remove this action, and let the app template manage it.
-      },
-    ),
     profilePage: PageDefinition(
       icon: Icons.person,
       title: 'Profile',

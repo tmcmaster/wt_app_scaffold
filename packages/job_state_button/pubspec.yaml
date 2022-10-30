@@ -1,3 +1,5 @@
+## TODO: deprecated and needs to be removed. Replaced by wt_action_button
+
 name: job_state_button
 description: Button that is aware of the action that is being done.
 

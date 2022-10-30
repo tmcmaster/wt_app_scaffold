@@ -651,13 +651,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  job_state_button:
-    dependency: transitive
-    description:
-      path: "../packages/job_state_button"
-      relative: true
-    source: path
-    version: "0.0.0"
   js:
     dependency: transitive
     description:
@@ -1041,6 +1034,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  wt_action_button:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "8d6756cd8e9b205db1dd872dad66889e5658b1cf"
+      url: "git@github.com:tmcmaster/wt_action_button.git"
+    source: git
+    version: "0.0.2"
   wt_app_scaffold:
     dependency: "direct main"
     description:

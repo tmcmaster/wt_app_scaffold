@@ -4,6 +4,7 @@ export 'package:flutter/material.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'package:utils/logging.dart';
+export 'package:wt_action_button/wt_action_button.dart';
 export 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 
 export 'init/app_scaffold_init.dart';

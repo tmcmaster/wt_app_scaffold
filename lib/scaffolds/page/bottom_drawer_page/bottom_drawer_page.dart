@@ -1,14 +1,12 @@
 import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:job_state_button/job_state_button.dart';
-
-import '../../../models/action_definition.dart';
+import 'package:wt_action_button/action_button_definition.dart';
 
 class BottomDrawerPage extends StatelessWidget {
   final Widget mainWidget;
   final Widget drawWidget;
-  final ActionDefinition action;
-  final List<ActionDefinition> actions;
+  final ActionButtonDefinition action;
+  final List<ActionButtonDefinition> actions;
   final bool includeAppBar;
 
   const BottomDrawerPage({
@@ -35,24 +33,12 @@ class BottomDrawerPage extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: _buildActionButton(Colors.white, context),
+                      child: action.component(),
                     ),
                   ],
                 ),
                 actions: [
-                  ...actions
-                      .map((action) => IconButton(
-                            onPressed: () => action.onTap(context),
-                            icon: Padding(
-                              padding: const EdgeInsets.all(0.0),
-                              child: Icon(
-                                action.icon,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ))
-                      .toList(),
+                  ...actions.map((action) => action.component()).toList(),
                   const SizedBox(
                     width: 10,
                   )
@@ -114,7 +100,7 @@ class BottomDrawerPage extends StatelessWidget {
           maxExtent: MediaQuery.of(context).size.height * 0.8,
           onDragging: (_) {},
         ),
-        floatingActionButton: includeAppBar ? null : _buildFloatingActionButton(colorScheme.primary, context),
+        floatingActionButton: includeAppBar ? null : action.component(),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         bottomNavigationBar: includeAppBar
             ? null
@@ -128,19 +114,7 @@ class BottomDrawerPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      ...actions
-                          .map((action) => IconButton(
-                                onPressed: () => action.onTap(context),
-                                icon: Padding(
-                                  padding: const EdgeInsets.all(0.0),
-                                  child: Icon(
-                                    action.icon,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                ),
-                              ))
-                          .toList(),
+                      ...actions.map((action) => action.component()).toList(),
                       const SizedBox(
                         width: 50,
                       ),
@@ -152,39 +126,39 @@ class BottomDrawerPage extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButton(Color primary, BuildContext context) {
-    return action.jobState != null
-        ? JobStateButton(
-            icon: Icon(action.icon),
-            color: Colors.white,
-            startStop: true,
-            floating: false,
-            jobState: action.jobState!,
-            onPressed: () => action.onTap(context),
-          )
-        : IconButton(
-            onPressed: () => action.onTap(context),
-            icon: Icon(action.icon),
-          );
-  }
+  // Widget _buildActionButton(Color primary, BuildContext context) {
+  //   return action.jobState != null
+  //       ? JobStateButton(
+  //           icon: Icon(action.icon),
+  //           color: Colors.white,
+  //           startStop: true,
+  //           floating: false,
+  //           jobState: action.jobState!,
+  //           onPressed: () => action.onTap(context),
+  //         )
+  //       : IconButton(
+  //           onPressed: () => action.onTap(context),
+  //           icon: Icon(action.icon),
+  //         );
+  // }
 
-  Widget _buildFloatingActionButton(Color primary, BuildContext context) {
-    return action.jobState != null
-        ? JobStateButton(
-            icon: Icon(action.icon),
-            color: primary,
-            startStop: true,
-            floating: true,
-            jobState: action.jobState!,
-            onPressed: () => action.onTap(context),
-          )
-        : FloatingActionButton(
-            onPressed: () => action.onTap(context),
-            backgroundColor: primary,
-            enableFeedback: true,
-            child: Icon(action.icon),
-          );
-  }
+  // Widget _buildFloatingActionButton(Color primary, BuildContext context) {
+  //   return action.jobState != null
+  //       ? JobStateButton(
+  //           icon: Icon(action.icon),
+  //           color: primary,
+  //           startStop: true,
+  //           floating: true,
+  //           jobState: action.jobState!,
+  //           onPressed: () => action.onTap(context),
+  //         )
+  //       : FloatingActionButton(
+  //           onPressed: () => action.onTap(context),
+  //           backgroundColor: primary,
+  //           enableFeedback: true,
+  //           child: Icon(action.icon),
+  //         );
+  // }
 }
 
 class _DrawerHandleWidget extends StatelessWidget {

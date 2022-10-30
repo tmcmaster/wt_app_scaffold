@@ -1,9 +1,10 @@
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/logout_action.dart';
 
 import '../../../models/item_definition.dart';
 import 'hidden_drawer_header.dart';
 
-class HiddenDrawerWidget extends StatelessWidget {
+class HiddenDrawerWidget extends ConsumerWidget {
   static const double menuPaddingX = 16;
 
   final AppDefinition appDefinition;
@@ -22,7 +23,9 @@ class HiddenDrawerWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final logoutAction = ref.read(LogoutAction.provider);
+
     return Container(
       padding: const EdgeInsets.fromLTRB(menuPaddingX, 32, menuPaddingX, 0),
       child: Column(
@@ -46,7 +49,7 @@ class HiddenDrawerWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  buildDrawerActions(context),
+                  buildDrawerActions(logoutAction),
                 ],
               ),
             ),
@@ -56,7 +59,7 @@ class HiddenDrawerWidget extends StatelessWidget {
     );
   }
 
-  Widget buildDrawerActions(BuildContext context) => Container(
+  Widget buildDrawerActions(ActionButtonDefinition logoutAction) => Container(
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.2),
           borderRadius: const BorderRadius.only(
@@ -75,13 +78,23 @@ class HiddenDrawerWidget extends StatelessWidget {
               ),
               onTap: () => onSelectedItem(appDefinition.profilePage),
             ),
-            _PageMenuItemButton(
-              item: appDefinition.logoutAction,
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(25),
+            ListTile(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(25),
+                ),
               ),
-              onTap: () => appDefinition.logoutAction.onTap.call(context),
-            ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 0,
+              ),
+              leading: const Icon(Icons.logout, color: Colors.white),
+              title: const Text(
+                'Logout',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              onTap: () {},
+            )
           ].map((w) => SizedBox(width: 170, height: 50, child: w)).toList(),
         ),
       );
