@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 class CounterAppPage extends StatefulWidget {
   final String title;

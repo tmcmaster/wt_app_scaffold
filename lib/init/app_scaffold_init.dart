@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_firepod/wt_firepod.dart';
 
 import '../scaffolds/login/config.dart';
 
@@ -9,16 +10,18 @@ Future<ProviderScope> Function(
   FirebaseApp app,
   FirebaseOptions firebaseOptions,
 )
-    Function(
-  AppDefinition appDefinition,
-) withAppScaffold = andAppScaffold;
+    Function({
+  required AlwaysAliveProviderBase<AppDefinition> appDefinition,
+  required LoginSupport loginSupport,
+}) withAppScaffold = andAppScaffold;
 
 Future<ProviderScope> Function(
   FirebaseApp app,
   FirebaseOptions firebaseOptions,
-) andAppScaffold(
-  AppDefinition appDefinition,
-) {
+) andAppScaffold({
+  required AlwaysAliveProviderBase<AppDefinition> appDefinition,
+  required LoginSupport loginSupport,
+}) {
   return (app, firebaseOptions) async {
     WidgetsFlutterBinding.ensureInitialized();
     final googleClientId = kIsWeb
@@ -31,20 +34,18 @@ Future<ProviderScope> Function(
       throw Exception('GOOGLE_CLIENT_ID has not been set.');
     }
 
-    final login = appDefinition.loginSupport;
-
     FirebaseUIAuth.configureProviders(
       [
-        if (login.emailEnabled) EmailAuthProvider(),
-        if (login.emailLinkEnabled)
+        if (loginSupport.emailEnabled) EmailAuthProvider(),
+        if (loginSupport.emailLinkEnabled)
           EmailLinkAuthProvider(
             actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
           ),
-        if (login.phoneEnabled) PhoneAuthProvider(),
-        if (login.googleEnabled) GoogleProvider(clientId: googleClientId),
-        if (login.appleEnabled) AppleProvider(),
-        if (login.twitterEnabled) FacebookProvider(clientId: FirebaseAuthKeys.facebookClientId),
-        if (login.twitterEnabled)
+        if (loginSupport.phoneEnabled) PhoneAuthProvider(),
+        if (loginSupport.googleEnabled) GoogleProvider(clientId: googleClientId),
+        if (loginSupport.appleEnabled) AppleProvider(),
+        if (loginSupport.twitterEnabled) FacebookProvider(clientId: FirebaseAuthKeys.facebookClientId),
+        if (loginSupport.twitterEnabled)
           TwitterProvider(
             apiKey: FirebaseAuthKeys.twitterApiKey,
             apiSecretKey: FirebaseAuthKeys.twitterApiSecretKey,

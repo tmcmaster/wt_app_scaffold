@@ -1,14 +1,20 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wt_action_button/utils/logging.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_definition.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/scaffolds/app/app_builder.dart';
+import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
+import 'package:wt_firepod/wt_firepod.dart';
 
 import 'config.dart';
 
 class LoginAppContainer extends ConsumerWidget {
+  static final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
+
   static final log = logger(LoginAppContainer);
-  final AppDefinition appDefinition;
+  final AlwaysAliveProviderBase<AppDefinition> appDefinition;
 
   const LoginAppContainer({
     super.key,
@@ -63,6 +69,8 @@ class LoginAppContainer extends ConsumerWidget {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: themeMode,
+      scaffoldMessengerKey: snackBarKey,
+      navigatorKey: ref.read(AppScaffoldProviders.navigatorKey),
       initialRoute: initialRoute,
       routes: {
         '/': (context) {
@@ -225,7 +233,7 @@ class LoginAppContainer extends ConsumerWidget {
           );
         },
         '/welcome': (context) => AppBuilder(
-              appDefinition: appDefinition,
+              appDefinition: ref.read(appDefinition),
             ),
       },
       title: 'Firebase UI demo',

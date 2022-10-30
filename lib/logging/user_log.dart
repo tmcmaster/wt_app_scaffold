@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_action_button/utils/logging.dart';
 
 import '../app_scaffolds.dart';
@@ -36,7 +38,7 @@ class UserLog extends ChangeNotifier {
 
   void _log(String message, {Level level = Level.info, String? error, bool snackBar = false}) {
     _userLog.add(LogMessage(message: message, level: level));
-    AppContainer.snackBarKey.currentState?.showSnackBar(
+    LoginAppContainer.snackBarKey.currentState?.showSnackBar(
       SnackBar(
         content: Text(message),
         backgroundColor: levelColors[level],

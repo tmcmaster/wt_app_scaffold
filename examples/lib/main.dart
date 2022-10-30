@@ -1,10 +1,16 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
+import 'package:wt_app_scaffold_examples/actions/action_one.dart';
+import 'package:wt_app_scaffold_examples/actions/action_two.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
+import 'package:wt_firepod/wt_firepod.dart';
 
 import 'firebase_options.dart';
 
-void main() async {
-  final appDefinition = AppDefinition.from(
+final appDefinition = Provider<AppDefinition>(
+  name: 'Application Definition',
+  (ref) => AppDefinition.from(
     appTitle: 'Demo Application',
     appName: 'demoApp',
     appDetails: AppDetails(
@@ -14,10 +20,6 @@ void main() async {
     ),
     swipeEnabled: true,
     debugMode: true,
-    loginSupport: const LoginSupport(
-      emailEnabled: true,
-      googleEnabled: true,
-    ),
     appDetailsProvider: null,
     profilePage: PageDefinition(
       icon: Icons.person,
@@ -28,36 +30,44 @@ void main() async {
     ),
     pages: [
       PageDefinition(
-        title: 'Orders',
+        title: 'Page One',
         icon: FontAwesomeIcons.clipboard,
         debug: false,
-        builder: (context) => const PlaceholderPage(
-          title: 'Orders',
+        builder: (context) => BottomDrawerPage(
+          mainWidget: const Center(
+            child: Text('Page One'),
+          ),
+          drawWidget: const Center(
+            child: Text('Page One Controls'),
+          ),
+          includeAppBar: true,
+          action: ref.read(ActionOne.provider),
+          actions: [ref.read(ActionTwo.provider)],
         ),
       ),
       PageDefinition(
-        title: 'Products',
+        title: 'Page Two',
         icon: FontAwesomeIcons.bagShopping,
         debug: false,
-        builder: (context) => const PlaceholderPage(title: 'Products'),
+        builder: (context) => const PlaceholderPage(title: 'Page Two'),
       ),
       PageDefinition(
-        title: 'Packing Sheets',
+        title: 'Page Three',
         icon: FontAwesomeIcons.boxesPacking,
         debug: true,
-        builder: (context) => const PlaceholderPage(title: 'Packing Sheets'),
+        builder: (context) => const PlaceholderPage(title: 'PAge Three'),
       ),
       PageDefinition(
-        title: 'Harvest List',
+        title: 'Page Fouur',
         icon: FontAwesomeIcons.tractor,
         debug: true,
-        builder: (context) => const PlaceholderPage(title: 'Harvest List'),
+        builder: (context) => const PlaceholderPage(title: 'Page Four'),
       ),
       PageDefinition(
-        title: 'Delivery Routes',
+        title: 'Page Five',
         icon: FontAwesomeIcons.car,
         debug: true,
-        builder: (context) => const PlaceholderPage(title: 'Delivery Routes'),
+        builder: (context) => const PlaceholderPage(title: 'Page Five'),
       ),
       PageDefinition(
         title: 'Counter',
@@ -80,13 +90,18 @@ void main() async {
         ),
       ),
     ],
-  );
+  ),
+);
 
+void main() async {
   runMyApp(
     withFirebase(
       andAppScaffold(
-        appDefinition,
-      ),
+          appDefinition: appDefinition,
+          loginSupport: const LoginSupport(
+            emailEnabled: true,
+            googleEnabled: true,
+          )),
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
     ),

@@ -18,9 +18,13 @@ dependencies:
   grouped_list:
   font_awesome_flutter:
   flutter_riverpod:
+  flutter_hooks:
   hooks_riverpod:
   draggable_bottom_sheet:
   curved_navigation_bar:
+  firebase_core:
+  firebase_auth:
+  firebase_ui_localizations:
   firebase_ui_auth: ^1.0.3
   firebase_ui_oauth_google: ^1.0.3
   firebase_ui_oauth_apple: ^1.0.3

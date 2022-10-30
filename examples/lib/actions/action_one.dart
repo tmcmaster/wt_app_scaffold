@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:wt_action_button/utils/logging.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-
-export 'package:wt_action_button/wt_action_button.dart';
+import 'package:wt_action_button/wt_action_button.dart';
 
 class ActionOne extends ActionButtonDefinition {
   static final log = logger(ActionOne, level: Level.debug);
