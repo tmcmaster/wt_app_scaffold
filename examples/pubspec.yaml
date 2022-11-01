@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   cupertino_icons:
   font_awesome_flutter:
+  freezed:
+  freezed_annotation: 
   riverpod: ^2.0.2
   firebase_core: ^2.1.1
   firebase_auth: ^4.1.0
@@ -22,6 +24,7 @@ dependencies:
   firebase_ui_oauth_apple: ^1.0.3
   firebase_ui_oauth_facebook: ^1.0.3
   firebase_ui_oauth_twitter: ^1.0.3
+  firebase_ui_database: ^1.0.3
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
   wt_models:
@@ -38,6 +41,8 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   build_runner:
+  freezed:
+  json_serializable:
   flutter_launcher_icons: ^0.9.3
   flutter_native_splash: ^2.2.4
 

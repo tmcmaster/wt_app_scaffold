@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wt_action_button/action_button_definition.dart';
 
 class BottomDrawerPage extends StatelessWidget {
+  final String title;
   final Widget mainWidget;
   final Widget drawWidget;
   final ActionButtonDefinition action;
@@ -11,6 +12,7 @@ class BottomDrawerPage extends StatelessWidget {
 
   const BottomDrawerPage({
     super.key,
+    required this.title,
     required this.mainWidget,
     required this.drawWidget,
     required this.action,
@@ -26,19 +28,20 @@ class BottomDrawerPage extends StatelessWidget {
       child: Scaffold(
         appBar: includeAppBar
             ? AppBar(
-                title: const Text('Query Orders'),
+                title: Text(title),
                 centerTitle: true,
                 backgroundColor: colorScheme.primary,
                 leading: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: action.component(),
+                      padding: const EdgeInsets.only(left: 8),
+                      child: action.component(noLabel: true),
                     ),
                   ],
                 ),
                 actions: [
-                  ...actions.map((action) => action.component()).toList(),
+                  ...actions.map((action) => action.component(noLabel: true)).toList(),
                   const SizedBox(
                     width: 10,
                   )
