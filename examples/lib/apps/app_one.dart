@@ -3,6 +3,7 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
 import 'package:wt_app_scaffold_examples/actions/action_two.dart';
+import 'package:wt_app_scaffold_examples/pages/async_example_page.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
 import 'package:wt_firepod/wt_firepod.dart';
@@ -80,6 +81,12 @@ final appOne = Provider<AppDefinition>(
         icon: FontAwesomeIcons.database,
         primary: true,
         builder: (_) => const DatabaseExamplePage(),
+      ),
+      PageDefinition(
+        title: 'Async',
+        icon: FontAwesomeIcons.arrowsRotate,
+        primary: true,
+        builder: (_) => const AsyncExamplePage(),
       ),
       PageDefinition(
         title: 'Settings',

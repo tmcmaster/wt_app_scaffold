@@ -3,10 +3,12 @@ import 'package:wt_app_scaffold_examples/models/product.dart';
 
 class ProductListTile extends StatelessWidget {
   final Product product;
+  final GestureTapCallback? onTap;
 
   const ProductListTile({
     super.key,
     required this.product,
+    this.onTap,
   });
 
   @override
@@ -21,6 +23,7 @@ class ProductListTile extends StatelessWidget {
           Text('${product.weight} kg'),
         ],
       ),
+      onTap: onTap,
     );
   }
 }

@@ -31,15 +31,28 @@ class DatabaseExamplePage extends ConsumerWidget {
                 child: databaseAction.indicator(type: IndicatorType.linear),
               ),
               const SizedBox(height: 50),
+              FirepodModelView(
+                query: database.ref('v1/product/003'),
+                snapshotToModel: Product.from.snapshot,
+                itemBuilder: (product) => SizedBox(
+                  width: 200,
+                  child: ProductListTile(product: product),
+                ),
+              ),
+              const SizedBox(height: 50),
+              const SizedBox(height: 50),
+              FirepodDoubleView(
+                query: database.ref('v1/product/002/price'),
+                itemBuilder: (value) => Text('\$${value.toStringAsFixed(2)}'),
+              ),
+              const SizedBox(height: 50),
               SizedBox(
                 height: 150,
                 width: double.infinity,
                 child: FirepodListView(
                   query: database.ref('v1/product').orderByChild('id'),
                   snapshotToModel: Product.from.snapshot,
-                  itemBuilder: (product, _, __) => ProductListTile(
-                    product: product,
-                  ),
+                  itemBuilder: (product, _, __) => ProductListTile(product: product),
                 ),
               ),
             ],

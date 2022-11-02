@@ -24,6 +24,8 @@ class DatabaseAction extends ActionButtonDefinition {
       log.d('Doing Database Action......');
       final hello = await ref.read(FirebaseProviders.database).ref('v1').child('hello').get();
       log.d('Database Action Completed: ${hello.value}');
+      final person = await ref.read(FirebaseProviders.database).ref('v1').child('product').get();
+      print('Person(${person.value})');
     });
   }
 }
