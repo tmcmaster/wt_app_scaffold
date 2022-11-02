@@ -40,4 +40,10 @@ abstract class ApplicationSettings {
     values: ApplicationType.values,
     none: ApplicationType.hiddenDrawer,
   );
+
+  static final verifyEmail = SettingsBoolProviders(
+    key: '__VERIFY_EMAIL__',
+    label: 'Verify Email',
+    hint: 'Should emails be required to be verified.',
+  );
 }

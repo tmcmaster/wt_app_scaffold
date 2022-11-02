@@ -25,6 +25,7 @@ class LoginAppContainer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
+    final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
     final auth = ref.watch(FirebaseProviders.auth);
     final color = ref.watch(ApplicationSettings.colorScheme.value);
     final User? currentUser = auth.currentUser;
@@ -88,19 +89,27 @@ class LoginAppContainer extends ConsumerWidget {
                 Navigator.pushNamed(context, '/phone');
               }),
               AuthStateChangeAction<SignedIn>((context, state) {
-                if (!state.user!.emailVerified) {
-                  log.d('Sending verification email.');
-                  auth.currentUser!.sendEmailVerification();
-                  Navigator.pushNamed(context, '/verify-email');
+                if (!verifyEmail) {
+                  Navigator.pushNamed(context, '/welcome');
                 } else {
-                  Navigator.pushReplacementNamed(context, '/profile');
+                  if (!state.user!.emailVerified) {
+                    log.d('Sending verification email.');
+                    auth.currentUser!.sendEmailVerification();
+                    Navigator.pushNamed(context, '/verify-email');
+                  } else {
+                    Navigator.pushReplacementNamed(context, '/profile');
+                  }
                 }
               }),
               AuthStateChangeAction<UserCreated>((context, state) {
-                if (!state.credential.user!.emailVerified) {
-                  Navigator.pushNamed(context, '/verify-email');
+                if (!verifyEmail) {
+                  Navigator.pushNamed(context, '/welcome');
                 } else {
-                  Navigator.pushReplacementNamed(context, '/profile');
+                  if (!state.credential.user!.emailVerified) {
+                    Navigator.pushNamed(context, '/verify-email');
+                  } else {
+                    Navigator.pushReplacementNamed(context, '/profile');
+                  }
                 }
               }),
               mfaAction,

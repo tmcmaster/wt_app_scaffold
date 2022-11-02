@@ -11,7 +11,7 @@ class FirebaseAuthKeys {
   static const facebookClientId = '128693022464535';
 
   static final actionCodeSettings = ActionCodeSettings(
-    url: 'wt-app-scaffold.web.app',
+    url: 'https://wt-app-scaffold.web.app',
     handleCodeInApp: true,
     androidMinimumVersion: '1',
     androidPackageName: 'net.wonkytech.sample_app',

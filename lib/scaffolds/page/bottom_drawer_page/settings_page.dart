@@ -26,7 +26,13 @@ class SettingsPage extends HookConsumerWidget {
       ),
       ApplicationSettings.theme.component,
       ApplicationSettings.colorScheme.component,
-      ApplicationSettings.debugMode.component,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ApplicationSettings.debugMode.component,
+          ApplicationSettings.verifyEmail.component,
+        ],
+      ),
       ApplicationSettings.applicationType.component,
       if (!childrenBefore) ...children,
     ];

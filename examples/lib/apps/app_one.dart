@@ -98,7 +98,7 @@ final appOne = Provider<AppDefinition>(
                 onPressed: () {
                   Navigator.of(context).pushNamed("/");
                 },
-                child: const Text('Login'))
+                child: const Text('Login')),
           ],
         ),
       ),
