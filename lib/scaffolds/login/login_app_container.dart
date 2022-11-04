@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/models/app_definition.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
@@ -253,6 +254,7 @@ class LoginAppContainer extends ConsumerWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         FirebaseUILocalizations.delegate,
+        FormBuilderLocalizations.delegate,
       ],
     );
   }
