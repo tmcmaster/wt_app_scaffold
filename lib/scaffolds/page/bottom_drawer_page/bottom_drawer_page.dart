@@ -103,7 +103,12 @@ class BottomDrawerPage extends StatelessWidget {
           maxExtent: MediaQuery.of(context).size.height * 0.8,
           onDragging: (_) {},
         ),
-        floatingActionButton: includeAppBar ? null : action.component(),
+        floatingActionButton: includeAppBar
+            ? null
+            : action.component(
+                floating: true,
+                noLabel: true,
+              ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         bottomNavigationBar: includeAppBar
             ? null
@@ -117,7 +122,7 @@ class BottomDrawerPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      ...actions.map((action) => action.component()).toList(),
+                      ...actions.map((action) => action.component(noLabel: true)).toList(),
                       const SizedBox(
                         width: 50,
                       ),

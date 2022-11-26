@@ -42,9 +42,12 @@ final appOne = Provider<AppDefinition>(
           drawWidget: const Center(
             child: Text('Page One Controls'),
           ),
-          includeAppBar: true,
+          includeAppBar: false,
           action: ref.read(ActionOne.provider),
-          actions: [ref.read(ActionTwo.provider)],
+          actions: [
+            ref.read(ActionOne.provider),
+            ref.read(ActionTwo.provider),
+          ],
         ),
       ),
       PageDefinition(
