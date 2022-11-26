@@ -27,6 +27,7 @@ class LoginAppContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final iconPath = ref.read(appDefinition).appDetails?.iconPath ?? 'assets/images/avocado.png';
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
@@ -124,8 +125,8 @@ class LoginAppContainer extends ConsumerWidget {
             styles: const {
               EmailFormStyle(signInButtonVariant: ButtonVariant.filled),
             },
-            headerBuilder: _headerImage('assets/avocado.png'),
-            sideBuilder: _sideImage('assets/avocado.png'),
+            headerBuilder: _headerImage(iconPath),
+            sideBuilder: _sideImage(iconPath),
             subtitleBuilder: (context, action) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8),
