@@ -1,6 +1,5 @@
 export 'init/app_scaffold_init.dart';
-export 'logging/user_log.dart';
-export 'logging/user_log_view.dart';
+export 'models/app_definition.dart';
 export 'models/app_definition.dart';
 export 'models/app_details.dart';
 export 'models/application_builder.dart';
@@ -8,6 +7,7 @@ export 'models/application_type.dart';
 export 'models/login_support.dart';
 export 'models/page_definition.dart';
 export 'scaffolds/app/app_builder.dart';
+export 'scaffolds/app/app_container.dart';
 export 'scaffolds/app/application_builders.dart';
 export 'scaffolds/app/application_settings.dart';
 export 'scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_app.dart';

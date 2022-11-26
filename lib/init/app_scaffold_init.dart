@@ -1,8 +1,16 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
+import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:firebase_ui_oauth_twitter/firebase_ui_oauth_twitter.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 import '../scaffolds/login/config.dart';
 
@@ -27,7 +35,7 @@ Future<ProviderScope> Function(
     final googleClientId = kIsWeb
         ? firebaseOptions.appId
         : Platform.isAndroid
-            ? firebaseOptions.androidClientId
+            ? firebaseOptions.appId
             : firebaseOptions.iosClientId;
 
     if (googleClientId == null) {
@@ -56,7 +64,9 @@ Future<ProviderScope> Function(
     );
 
     return ProviderScope(
-      overrides: const [],
+      overrides: [
+        UserLog.snackBarKey.overrideWithValue(AppContainer.snackBarKey),
+      ],
       observers: const [],
       child: LoginAppContainer(
         appDefinition: appDefinition,
@@ -79,6 +89,6 @@ void runMyApp(
   );
 }
 
-// Future<Widget> child2widget(dynamic child) async {
-//   return child is Future<Widget> ? await child : child;
-// }
+Future<Widget> child2widget(dynamic child) async {
+  return child is Future<Widget> ? await child : child;
+}

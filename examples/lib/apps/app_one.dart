@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
@@ -6,7 +8,6 @@ import 'package:wt_app_scaffold_examples/actions/action_two.dart';
 import 'package:wt_app_scaffold_examples/pages/async_example_page.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
-import 'package:wt_firepod/wt_firepod.dart';
 
 final appOne = Provider<AppDefinition>(
   name: 'AppOne Definition',

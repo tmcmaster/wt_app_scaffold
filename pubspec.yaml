@@ -39,6 +39,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_settings.git
   wt_firepod:
     git: git@github.com:tmcmaster/wt_firepod.git
+  wt_logging:
+    git: git@github.com:tmcmaster/wt_logging.git
 
 dev_dependencies:
   flutter_test:
@@ -48,5 +50,16 @@ dev_dependencies:
   flutter_launcher_icons: ^0.9.3
   flutter_native_splash: ^2.2.4
 
+#dependency_overrides:
+#  wt_action_button:
+#    path: ../wt_action_button
+#  wt_models:
+#    path: ../wt_models
+#  wt_settings:
+#    path: ../wt_settings
+#  wt_firepod:
+#    path: ../wt_firepod
+#  wt_logging:
+#    path: ../wt_logging
 
 flutter:

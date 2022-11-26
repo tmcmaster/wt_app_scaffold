@@ -13,20 +13,24 @@ dependencies:
   font_awesome_flutter:
   freezed:
   freezed_annotation: 
-  riverpod: ^2.0.2
-  firebase_core: ^2.1.1
-  firebase_auth: ^4.1.0
-  firebase_database: ^10.0.3
-  firebase_remote_config: ^3.0.3
-  cloud_functions: ^4.0.3
-  firebase_ui_auth: ^1.0.3
-  firebase_ui_oauth_google: ^1.0.3
-  firebase_ui_oauth_apple: ^1.0.3
-  firebase_ui_oauth_facebook: ^1.0.3
-  firebase_ui_oauth_twitter: ^1.0.3
-  firebase_ui_database: ^1.0.3
+  hooks_riverpod:
+  riverpod:
+  firebase_core:
+  firebase_auth:
+  firebase_database:
+  firebase_remote_config:
+  cloud_functions:
+  firebase_ui_auth:
+  firebase_ui_oauth_google:
+  firebase_ui_oauth_apple:
+  firebase_ui_oauth_facebook:
+  firebase_ui_oauth_twitter:
+  firebase_ui_database:
+  form_builder_validators:
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
+  wt_logging:
+    git: git@github.com:tmcmaster/wt_logging.git
   wt_models:
     git: git@github.com:tmcmaster/wt_models.git
   wt_settings:
