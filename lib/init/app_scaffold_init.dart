@@ -50,9 +50,11 @@ Future<ProviderScope> Function(
             actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
           ),
         if (loginSupport.phoneEnabled) PhoneAuthProvider(),
-        if (loginSupport.googleEnabled) GoogleProvider(clientId: googleClientId),
+        if (loginSupport.googleEnabled && !Platform.isMacOS)
+          GoogleProvider(clientId: googleClientId),
         if (loginSupport.appleEnabled) AppleProvider(),
-        if (loginSupport.twitterEnabled) FacebookProvider(clientId: FirebaseAuthKeys.facebookClientId),
+        if (loginSupport.twitterEnabled)
+          FacebookProvider(clientId: FirebaseAuthKeys.facebookClientId),
         if (loginSupport.twitterEnabled)
           TwitterProvider(
             apiKey: FirebaseAuthKeys.twitterApiKey,
