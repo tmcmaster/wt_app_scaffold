@@ -25,6 +25,7 @@ final appOne = Provider<AppDefinition>(
     ),
     swipeEnabled: true,
     debugMode: true,
+    includeAppBar: true,
     appDetailsProvider: appDetailsProvider,
     profilePage: PageDefinition(
       icon: Icons.person,

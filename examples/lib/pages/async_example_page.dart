@@ -10,9 +10,6 @@ class AsyncExamplePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Async Example Page'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(

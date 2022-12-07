@@ -23,9 +23,10 @@ class HiddenPageBuilder extends StatelessWidget {
     return includeAppBar
         ? Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               title: Text(pageDefinition.title),
               backgroundColor: colorScheme.primary,
-              leading: dismissAction == null && menuAction == null ? null : _createIconButton(context),
+              leading: _createIconButton(context),
             ),
             body: pageDefinition.builder(context),
           )
@@ -33,13 +34,16 @@ class HiddenPageBuilder extends StatelessWidget {
   }
 
   IconButton? _createIconButton(BuildContext context) {
-    return menuAction == null && dismissAction == null
-        ? null
-        : IconButton(
-            icon: Icon(menuAction != null ? Icons.menu : Icons.arrow_back),
-            color: Colors.white,
-            onPressed: () {
-              menuAction?.call(context);
-            });
+    return IconButton(
+      icon: const Icon(Icons.menu),
+      color: Colors.white,
+      onPressed: () {
+        if (menuAction != null) {
+          menuAction?.call(context);
+        } else {
+          HiddenDrawerOpener.of(context)?.open();
+        }
+      },
+    );
   }
 }

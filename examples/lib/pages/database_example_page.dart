@@ -18,9 +18,6 @@ class DatabaseExamplePage extends ConsumerWidget {
     final database = ref.read(FirebaseProviders.database);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Database Example Page'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -58,7 +55,8 @@ class DatabaseExamplePage extends ConsumerWidget {
                   table: (database) => database.ref('v1/product'),
                   query: (table) => table.orderByChild('id'),
                   snapshotToModel: Product.from.snapshot,
-                  itemBuilder: (product, _) => ProductListTile(product: product),
+                  itemBuilder: (product, _) =>
+                      ProductListTile(product: product),
                   mapToItem: Product.from.json,
                   itemToMap: Product.to.firebaseMap,
                   formItemDefinitions: productDefinition.formItemDefinitions,
@@ -73,7 +71,9 @@ class DatabaseExamplePage extends ConsumerWidget {
         ),
       ),
       floatingActionButton: databaseAction.component(
-          floating: true, noLabel: true), // This trailing comma makes auto-formatting nicer for build methods.
+          floating: true,
+          noLabel:
+              true), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
