@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold_examples/apps/app_one.dart';
 import 'package:wt_firepod/wt_firepod.dart';
@@ -10,9 +12,9 @@ void main() async {
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       andAppScaffold(
-        loginSupport: const LoginSupport(
+        loginSupport: LoginSupport(
           emailEnabled: true,
-          googleEnabled: true,
+          googleEnabled: !Platform.isMacOS,
         ),
         appDefinition: appOne,
       ),

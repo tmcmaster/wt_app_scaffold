@@ -63,3 +63,6 @@ dev_dependencies:
 #    path: ../wt_logging
 
 flutter:
+  uses-material-design: true
+  assets:
+    - assets/

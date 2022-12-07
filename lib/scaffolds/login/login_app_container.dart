@@ -15,19 +15,24 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'config.dart';
 
 class LoginAppContainer extends ConsumerWidget {
-  static final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
-
+  static final GlobalKey<ScaffoldMessengerState> snackBarKey =
+      GlobalKey<ScaffoldMessengerState>();
   static final log = logger(LoginAppContainer);
+
+  final bool emailVerificationRequired;
+
   final AlwaysAliveProviderBase<AppDefinition> appDefinition;
 
   const LoginAppContainer({
     super.key,
     required this.appDefinition,
+    this.emailVerificationRequired = false,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final iconPath = ref.read(appDefinition).appDetails?.iconPath ?? 'assets/images/avocado.png';
+    final iconPath = ref.read(appDefinition).appDetails?.iconPath ??
+        'assets/images/avocado.png';
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
@@ -37,7 +42,7 @@ class LoginAppContainer extends ConsumerWidget {
     log.d('LoginAppContainer: user(${currentUser?.email})');
     final initialRoute = currentUser == null
         ? '/'
-        : !currentUser.emailVerified && currentUser.email != null && false // TODO: need to remove debug false
+        : emailVerificationRequired && !currentUser.emailVerified
             ? '/verify-email'
             : '/welcome';
 
@@ -94,7 +99,7 @@ class LoginAppContainer extends ConsumerWidget {
                 Navigator.pushNamed(context, '/phone');
               }),
               AuthStateChangeAction<SignedIn>((context, state) {
-                if (!verifyEmail) {
+                if (!emailVerificationRequired) {
                   Navigator.pushNamed(context, '/welcome');
                 } else {
                   if (!state.user!.emailVerified) {
@@ -123,7 +128,9 @@ class LoginAppContainer extends ConsumerWidget {
               }),
             ],
             styles: const {
-              EmailFormStyle(signInButtonVariant: ButtonVariant.filled),
+              EmailFormStyle(
+                signInButtonVariant: ButtonVariant.filled,
+              ),
             },
             headerBuilder: _headerImage(iconPath),
             sideBuilder: _sideImage(iconPath),
@@ -141,11 +148,8 @@ class LoginAppContainer extends ConsumerWidget {
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16),
-                  child: Text(
-                    action == AuthAction.signIn
-                        ? 'By signing in, you agree to our terms and conditions.'
-                        : 'By registering, you agree to our terms and conditions.',
-                    style: const TextStyle(color: Colors.grey),
+                  child: Column(
+                    children: [],
                   ),
                 ),
               );
@@ -191,7 +195,8 @@ class LoginAppContainer extends ConsumerWidget {
           );
         },
         '/sms': (context) {
-          final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+          final arguments = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>?;
 
           return SMSCodeInputScreen(
             auth: auth,
@@ -207,7 +212,8 @@ class LoginAppContainer extends ConsumerWidget {
           );
         },
         '/forgot-password': (context) {
-          final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+          final arguments = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>?;
 
           return ForgotPasswordScreen(
             auth: auth,

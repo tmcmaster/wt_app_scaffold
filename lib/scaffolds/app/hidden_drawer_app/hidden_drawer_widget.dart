@@ -97,7 +97,9 @@ class HiddenDrawerWidget extends ConsumerWidget {
                 'Logout',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),
-              onTap: () {},
+              onTap: () {
+                logoutAction.execute();
+              },
             )
           ].map((w) => SizedBox(width: 170, height: 50, child: w)).toList(),
         ),

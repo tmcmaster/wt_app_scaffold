@@ -11,7 +11,7 @@ abstract class AppScaffoldProviders {
       return AppDetails(
         title: 'Application Name',
         subTitle: 'Site Name',
-        iconPath: 'assets/images/avocado.png',
+        iconPath: 'assets/avocado.png',
       );
     },
   );

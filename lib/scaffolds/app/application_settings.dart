@@ -45,5 +45,6 @@ abstract class ApplicationSettings {
     key: '__VERIFY_EMAIL__',
     label: 'Verify Email',
     hint: 'Should emails be required to be verified.',
+    initialValue: false,
   );
 }
