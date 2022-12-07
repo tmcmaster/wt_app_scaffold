@@ -1,13 +1,17 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
 import 'package:wt_app_scaffold_examples/actions/action_two.dart';
 import 'package:wt_app_scaffold_examples/pages/async_example_page.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
+import 'package:wt_app_scaffold_examples/providers/app_details.dart';
+import 'package:wt_firepod/wt_firepod.dart';
 
 final appOne = Provider<AppDefinition>(
   name: 'AppOne Definition',
@@ -21,12 +25,19 @@ final appOne = Provider<AppDefinition>(
     ),
     swipeEnabled: true,
     debugMode: true,
-    appDetailsProvider: null,
+    appDetailsProvider: appDetailsProvider,
     profilePage: PageDefinition(
       icon: Icons.person,
       title: 'Profile',
-      builder: (context) => const PlaceholderPage(
-        title: 'Profile',
+      builder: (context) => ProfileScreen(
+        auth: ref.read(FirebaseProviders.auth),
+        actions: [
+          SignedOutAction((context) {
+            Navigator.pushReplacementNamed(context, '/');
+          }),
+        ],
+        actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
+        showMFATile: false,
       ),
     ),
     pages: [

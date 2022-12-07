@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/init/provider_manager.dart';
 import '../models/app_details.dart';
 
 abstract class AppScaffoldProviders {
-  static final appDetails = Provider(
+  static final appDetails = Provider<AppDetails>(
     name: 'AppScaffoldProviders.appDetails',
     (ref) {
       return AppDetails(

@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/models/app_definition.dart';
+import 'package:wt_app_scaffold/models/app_details.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/app_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
@@ -31,14 +32,18 @@ class LoginAppContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final iconPath = ref.read(appDefinition).appDetails?.iconPath ??
-        'assets/images/avocado.png';
+    final iconPath =
+        ref.read(appDefinition).appDetails?.iconPath ?? 'assets/avocado.png';
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
     final auth = ref.watch(FirebaseProviders.auth);
     final color = ref.watch(ApplicationSettings.colorScheme.value);
     final User? currentUser = auth.currentUser;
+    final AppDetails appDetails = ref.read(appDefinition).appDetails ??
+        ref.read(AppScaffoldProviders.appDetails);
+    final welcomeString = _createWelcomeString(appDetails);
+
     log.d('LoginAppContainer: user(${currentUser?.email})');
     final initialRoute = currentUser == null
         ? '/'
@@ -139,8 +144,8 @@ class LoginAppContainer extends ConsumerWidget {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Text(
                   action == AuthAction.signIn
-                      ? 'Welcome to Firebase UI! Please sign in to continue.'
-                      : 'Welcome to Firebase UI! Please create an account to continue',
+                      ? '$welcomeString Please sign in to continue.'
+                      : '$welcomeString Please create an account to continue',
                 ),
               );
             },
@@ -267,6 +272,13 @@ class LoginAppContainer extends ConsumerWidget {
         FormBuilderLocalizations.delegate,
       ],
     );
+  }
+
+  _createWelcomeString(AppDetails appDetails) {
+    final name =
+        appDetails.subTitle.isNotEmpty ? appDetails.subTitle : appDetails.title;
+
+    return name.isEmpty ? 'Welcome!' : 'Welcome to $name!';
   }
 }
 
