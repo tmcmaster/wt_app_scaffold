@@ -32,16 +32,23 @@ class LoginAppContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final iconPath =
-        ref.read(appDefinition).appDetails?.iconPath ?? 'assets/avocado.png';
+    final appDef = ref.read(appDefinition);
+    final appDetails = appDef.appDetailsProvider != null
+        ? ref.watch(appDef.appDetailsProvider!)
+        : appDef.appDetails ??
+            AppDetails(
+              title: '',
+              subTitle: '',
+              iconPath: 'assets/avocado.png',
+            );
+    final iconPath = appDef.appDetails?.iconPath ?? 'assets/avocado.png';
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
     final auth = ref.watch(FirebaseProviders.auth);
     final color = ref.watch(ApplicationSettings.colorScheme.value);
     final User? currentUser = auth.currentUser;
-    final AppDetails appDetails = ref.read(appDefinition).appDetails ??
-        ref.read(AppScaffoldProviders.appDetails);
+
     final welcomeString = _createWelcomeString(appDetails);
 
     log.d('LoginAppContainer: user(${currentUser?.email})');

@@ -3,8 +3,8 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 final appDetailsProvider = Provider<AppDetails>(
   (ref) => AppDetails(
-    title: '',
-    subTitle: 'Really long name, to test how the UI will react',
+    title: 'My App',
+    subTitle: '',
     iconPath: 'avocado.png',
   ),
 );
