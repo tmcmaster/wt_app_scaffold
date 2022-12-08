@@ -5,19 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/models/app_definition.dart';
 import 'package:wt_app_scaffold/models/app_details.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/app_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
 import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 import 'config.dart';
 
 class LoginAppContainer extends ConsumerWidget {
-  static final GlobalKey<ScaffoldMessengerState> snackBarKey =
-      GlobalKey<ScaffoldMessengerState>();
   static final log = logger(LoginAppContainer);
 
   final bool emailVerificationRequired;
@@ -77,6 +75,8 @@ class LoginAppContainer extends ConsumerWidget {
         nav.pushReplacementNamed('/profile');
       },
     );
+
+    final snackBarKey = ref.read(UserLog.snackBarKey);
 
     return MaterialApp(
       theme: ThemeData(
@@ -207,8 +207,7 @@ class LoginAppContainer extends ConsumerWidget {
           );
         },
         '/sms': (context) {
-          final arguments = ModalRoute.of(context)?.settings.arguments
-              as Map<String, dynamic>?;
+          final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
           return SMSCodeInputScreen(
             auth: auth,
@@ -224,8 +223,7 @@ class LoginAppContainer extends ConsumerWidget {
           );
         },
         '/forgot-password': (context) {
-          final arguments = ModalRoute.of(context)?.settings.arguments
-              as Map<String, dynamic>?;
+          final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
           return ForgotPasswordScreen(
             auth: auth,
@@ -282,8 +280,7 @@ class LoginAppContainer extends ConsumerWidget {
   }
 
   _createWelcomeString(AppDetails appDetails) {
-    final name =
-        appDetails.subTitle.isNotEmpty ? appDetails.subTitle : appDetails.title;
+    final name = appDetails.subTitle.isNotEmpty ? appDetails.subTitle : appDetails.title;
 
     return name.isEmpty ? 'Welcome!' : 'Welcome to $name!';
   }
