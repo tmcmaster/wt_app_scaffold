@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:wt_app_scaffold/models/app_definition.dart';
 import 'package:wt_app_scaffold/models/app_details.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/app_builder.dart';
@@ -20,31 +18,21 @@ class LoginAppContainer extends ConsumerWidget {
 
   final bool emailVerificationRequired;
 
-  final AlwaysAliveProviderBase<AppDefinition> appDefinition;
-
   const LoginAppContainer({
     super.key,
-    required this.appDefinition,
     this.emailVerificationRequired = false,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDef = ref.read(appDefinition);
-    final appDetails = appDef.appDetailsProvider != null
-        ? ref.watch(appDef.appDetailsProvider!)
-        : appDef.appDetails ??
-            AppDetails(
-              title: '',
-              subTitle: '',
-              iconPath: 'assets/avocado.png',
-            );
-    final iconPath = appDef.appDetails?.iconPath ?? 'assets/avocado.png';
+    final appDetails = ref.read(AppScaffoldProviders.appDetails);
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
     final auth = ref.watch(FirebaseProviders.auth);
     final color = ref.watch(ApplicationSettings.colorScheme.value);
+
+    final iconPath = appDetails.iconPath;
     final User? currentUser = auth.currentUser;
 
     final welcomeString = _createWelcomeString(appDetails);
@@ -263,7 +251,7 @@ class LoginAppContainer extends ConsumerWidget {
           );
         },
         '/welcome': (context) => AppBuilder(
-              appDefinition: ref.read(appDefinition),
+              appDefinition: ref.read(AppScaffoldProviders.appDefinition),
             ),
       },
       title: 'Firebase UI demo',

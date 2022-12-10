@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 import '../scaffolds/login/config.dart';
@@ -20,6 +21,7 @@ Future<ProviderScope> Function(
 )
     Function({
   required AlwaysAliveProviderBase<AppDefinition> appDefinition,
+  required AlwaysAliveProviderBase<AppDetails> appDetails,
   required LoginSupport loginSupport,
 }) withAppScaffold = andAppScaffold;
 
@@ -28,6 +30,7 @@ Future<ProviderScope> Function(
   FirebaseOptions firebaseOptions,
 ) andAppScaffold({
   required AlwaysAliveProviderBase<AppDefinition> appDefinition,
+  required AlwaysAliveProviderBase<AppDetails> appDetails,
   required LoginSupport loginSupport,
 }) {
   return (app, firebaseOptions) async {
@@ -68,11 +71,11 @@ Future<ProviderScope> Function(
     return ProviderScope(
       overrides: [
         UserLog.snackBarKey.overrideWithValue(AppContainer.snackBarKey),
+        AppScaffoldProviders.appDefinition.overrideWith(((ref) => ref.read(appDefinition))),
+        AppScaffoldProviders.appDetails.overrideWith((ref) => ref.read(appDetails)),
       ],
       observers: const [],
-      child: LoginAppContainer(
-        appDefinition: appDefinition,
-      ),
+      child: const LoginAppContainer(),
     );
   };
 }

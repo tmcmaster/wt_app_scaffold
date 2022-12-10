@@ -10,11 +10,12 @@ void main() async {
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       andAppScaffold(
+        appDetails: appDetailsProvider,
+        appDefinition: appOne,
         loginSupport: const LoginSupport(
           emailEnabled: true,
           googleEnabled: true,
         ),
-        appDefinition: appOne,
       ),
     ),
   );

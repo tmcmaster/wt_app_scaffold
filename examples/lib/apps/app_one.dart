@@ -10,19 +10,22 @@ import 'package:wt_app_scaffold_examples/actions/action_two.dart';
 import 'package:wt_app_scaffold_examples/pages/async_example_page.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
-import 'package:wt_app_scaffold_examples/providers/app_details.dart';
 import 'package:wt_firepod/wt_firepod.dart';
+
+final appDetailsProvider = Provider<AppDetails>(
+  name: 'AppOne Details',
+  (ref) => AppDetails(
+    title: 'Application One',
+    subTitle: 'First application',
+    iconPath: 'assets/avocado.png',
+  ),
+);
 
 final appOne = Provider<AppDefinition>(
   name: 'AppOne Definition',
   (ref) => AppDefinition.from(
     appTitle: 'Application One',
     appName: 'appOne',
-    appDetails: AppDetails(
-      title: 'Application One',
-      subTitle: 'First application',
-      iconPath: 'assets/avocado.png',
-    ),
     swipeEnabled: true,
     debugMode: true,
     includeAppBar: true,

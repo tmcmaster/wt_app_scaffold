@@ -11,13 +11,11 @@ class AppDefinition {
   final String appTitle;
   final String appName;
   final AlwaysAliveProviderBase<AppDetails>? appDetailsProvider;
-  final AppDetails? appDetails;
 
   final PageDefinition profilePage;
   final bool swipeEnabled;
   final List<PageDefinition> pages;
 
-  // final bool debugMode;
   final bool includeAppBar;
   final void Function(BuildContext context)? dismissAction;
   final void Function(BuildContext context)? menuAction;
@@ -29,12 +27,10 @@ class AppDefinition {
     required this.appTitle,
     required this.appName,
     required this.appDetailsProvider,
-    required this.appDetails,
     required this.profilePage,
     required this.pages,
     required this.swipeEnabled,
     required this.includeAppBar,
-    // required this.debugMode,
     required this.dismissAction,
     required this.menuAction,
     required this.localizationDelegates,
@@ -45,7 +41,6 @@ class AppDefinition {
     required String appTitle,
     required String appName,
     AlwaysAliveProviderBase<AppDetails>? appDetailsProvider,
-    AppDetails? appDetails,
     ActionButtonDefinition? logoutAction,
     PageDefinition? profilePage,
     required List<PageDefinition> pages,
@@ -61,7 +56,6 @@ class AppDefinition {
       appTitle: appTitle,
       appName: appName,
       appDetailsProvider: appDetailsProvider,
-      appDetails: appDetails,
       profilePage: profilePage ??
           PageDefinition(
             title: 'Profile',
@@ -70,7 +64,6 @@ class AppDefinition {
           ),
       pages: pages,
       swipeEnabled: swipeEnabled,
-      // debugMode: debugMode,
       includeAppBar: includeAppBar,
       dismissAction: dismissAction,
       menuAction: menuAction,
