@@ -268,7 +268,7 @@ class LoginAppContainer extends ConsumerWidget {
   }
 
   _createWelcomeString(AppDetails appDetails) {
-    final name = appDetails.subTitle.isNotEmpty ? appDetails.subTitle : appDetails.title;
+    final name = appDetails.title.isNotEmpty ? appDetails.title : appDetails.subTitle;
 
     return name.isEmpty ? 'Welcome!' : 'Welcome to $name!';
   }

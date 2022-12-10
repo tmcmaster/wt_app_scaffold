@@ -31,7 +31,20 @@ class HiddenDrawerHeader extends ConsumerWidget {
             ),
           ),
           const SizedBox(width: 4),
-          CircleAvatar(backgroundImage: AssetImage(appDetails.iconPath)),
+          Container(
+            height: 32,
+            width: 32,
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: Image.asset(appDetails.iconPath),
+          ),
+          // CircleAvatar(
+          //   backgroundImage: AssetImage(appDetails.iconPath),
+          //   backgroundColor: Colors.white,
+          // ),
           const SizedBox(width: 12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
