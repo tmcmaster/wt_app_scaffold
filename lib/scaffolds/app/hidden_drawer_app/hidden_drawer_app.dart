@@ -101,18 +101,21 @@ class _HiddenDrawerAppState extends State<HiddenDrawerApp> {
         }
       },
       child: GestureDetector(
-        onTap: closeDrawer,
-        onHorizontalDragStart: (details) => isDragging = true,
-        onHorizontalDragUpdate: (details) {
-          if (!isDragging) return;
-          const delta = 1;
-          if (details.delta.dx > delta) {
-            openDrawer();
-          } else if (details.delta.dx < -delta) {
-            closeDrawer();
-          }
-          isDragging = false;
-        },
+        onTap: isDrawerOpen ? closeDrawer : null,
+        onHorizontalDragStart:
+            widget.appDefinition.swipeEnabled ? (details) => isDragging = true : null,
+        onHorizontalDragUpdate: widget.appDefinition.swipeEnabled
+            ? (details) {
+                if (!isDragging) return;
+                const delta = 1;
+                if (details.delta.dx > delta) {
+                  openDrawer();
+                } else if (details.delta.dx < -delta) {
+                  closeDrawer();
+                }
+                isDragging = false;
+              }
+            : null,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           transform: Matrix4.translationValues(xOffset, yOffset, 0)..scale(scaleFactor),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_action_button/utils/logging.dart';
-import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 class SettingsPage extends HookConsumerWidget {
   static final log = logger(SettingsPage);
@@ -18,6 +18,9 @@ class SettingsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isHiddenDraw =
+        ref.read(ApplicationSettings.applicationType.value) == ApplicationType.hiddenDrawer;
+
     final List<Widget> settingsComponents = [
       if (childrenBefore) ...children,
       const Text(
@@ -37,7 +40,23 @@ class SettingsPage extends HookConsumerWidget {
       if (!childrenBefore) ...children,
     ];
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+        leading: isHiddenDraw
+            ? IconButton(
+                onPressed: () {
+                  HiddenDrawerOpener.of(context)?.open();
+                },
+                focusColor: Colors.transparent,
+                icon: Icon(
+                  Icons.menu,
+                  color: colorScheme.onPrimary,
+                ),
+              )
+            : null,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.separated(
