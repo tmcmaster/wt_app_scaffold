@@ -5,6 +5,7 @@ import 'package:wt_app_scaffold_examples/actions/database_action.dart';
 import 'package:wt_app_scaffold_examples/models/definitions/product_definition.dart';
 import 'package:wt_app_scaffold_examples/models/product.dart';
 import 'package:wt_app_scaffold_examples/widgets/product_list_tile.dart';
+import 'package:wt_firebase_listview/wt_firebase_listview.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
 class DatabaseExamplePage extends ConsumerWidget {
@@ -55,8 +56,7 @@ class DatabaseExamplePage extends ConsumerWidget {
                   table: (database) => database.ref('v1/product'),
                   query: (table) => table.orderByChild('id'),
                   snapshotToModel: Product.from.snapshot,
-                  itemBuilder: (product, _) =>
-                      ProductListTile(product: product),
+                  itemBuilder: (product, _) => ProductListTile(product: product),
                   mapToItem: Product.from.json,
                   itemToMap: Product.to.firebaseMap,
                   formItemDefinitions: productDefinition.formItemDefinitions,
@@ -72,8 +72,7 @@ class DatabaseExamplePage extends ConsumerWidget {
       ),
       floatingActionButton: databaseAction.component(
           floating: true,
-          noLabel:
-              true), // This trailing comma makes auto-formatting nicer for build methods.
+          noLabel: true), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

@@ -18,14 +18,6 @@ dependencies:
   firebase_core:
   firebase_auth:
   firebase_database:
-  firebase_remote_config:
-  cloud_functions:
-  firebase_ui_auth:
-  firebase_ui_oauth_google:
-  firebase_ui_oauth_apple:
-  firebase_ui_oauth_facebook:
-  firebase_ui_oauth_twitter:
-  firebase_ui_database:
   form_builder_validators:
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
@@ -37,6 +29,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_settings.git
   wt_firepod:
     git: git@github.com:tmcmaster/wt_firepod.git
+  wt_firebase_listview:
+    git: git@github.com:tmcmaster/wt_firebase_listview.git
   wt_app_scaffold:
     path: ..
 
