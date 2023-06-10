@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class BottomNavBarApp extends StatefulWidget {
   final AppDefinition appDefinition;
@@ -32,11 +32,11 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
 
   @override
   void initState() {
-    final initialIndex =
-        widget.appDefinition.pages.indexOf(widget.appDefinition.pages.firstWhere((page) => page.primary));
+    final initialIndex = widget.appDefinition.pages
+        .indexOf(widget.appDefinition.pages.firstWhere((page) => page.primary));
 
-    _selectedPageProvider =
-        StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>((ref) => _SelectedPageNotifier(initialIndex));
+    _selectedPageProvider = StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>(
+        (ref) => _SelectedPageNotifier(initialIndex));
 
     super.initState();
   }
@@ -160,8 +160,9 @@ class _BottomNavigationBar extends ConsumerWidget {
     log.d('Primary Items: ${primaryItems.length}');
     log.d('Other Items: ${otherItems.length}');
 
-    final currentSelected =
-        pageChangeEvent.page < items.length ? primaryItems.indexOf(items[pageChangeEvent.page]) : -1;
+    final currentSelected = pageChangeEvent.page < items.length
+        ? primaryItems.indexOf(items[pageChangeEvent.page])
+        : -1;
     log.d('Selected Primary: $currentSelected');
 
     return Row(

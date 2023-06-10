@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class SettingsPage extends HookConsumerWidget {
   static final log = logger(SettingsPage);

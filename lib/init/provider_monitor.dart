@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:wt_action_button/utils/logging.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class ProviderMonitor with ChangeNotifier implements ProviderObserver {
   static final instance = ProviderMonitor._();
@@ -17,14 +17,16 @@ class ProviderMonitor with ChangeNotifier implements ProviderObserver {
 
   @override
   void didAddProvider(ProviderBase provider, Object? value, ProviderContainer container) {
-    log.d('ProviderDebugger : didAddProvider : ${provider.name ?? provider.runtimeType.toString()}');
+    log.d(
+        'ProviderDebugger : didAddProvider : ${provider.name ?? provider.runtimeType.toString()}');
     if (provider.name != null) {
       log.d('Provider type: ${provider.runtimeType}');
       if (provider.name!.endsWith('family')) {
         families[provider.name!] = (families[provider.name!] ?? 0) + 1;
       } else {
         if (values.containsKey(provider.name)) {
-          log.w('There was already a provider with name when it was added: ${provider.name}, Value($value))');
+          log.w(
+              'There was already a provider with name when it was added: ${provider.name}, Value($value))');
         } else {
           values[provider.name!] = value;
           notifyListeners();
@@ -37,7 +39,8 @@ class ProviderMonitor with ChangeNotifier implements ProviderObserver {
 
   @override
   void didDisposeProvider(ProviderBase provider, ProviderContainer containers) {
-    log.d('ProviderDebugger : didDisposeProvider : ${provider.name ?? provider.runtimeType.toString()}');
+    log.d(
+        'ProviderDebugger : didDisposeProvider : ${provider.name ?? provider.runtimeType.toString()}');
     if (provider.name != null) {
       if (provider.name!.endsWith('family')) {
         families[provider.name!] = (families[provider.name!] ?? 0) - 1;
@@ -55,7 +58,8 @@ class ProviderMonitor with ChangeNotifier implements ProviderObserver {
   }
 
   @override
-  void didUpdateProvider(ProviderBase provider, Object? previousValue, Object? newValue, ProviderContainer container) {
+  void didUpdateProvider(
+      ProviderBase provider, Object? previousValue, Object? newValue, ProviderContainer container) {
     log.v('ProviderDebugger : didUpdateProvider : ${provider.name}');
     if (provider.name != null) {
       updates[provider.name!] = (updates[provider.name!] ?? 0) + 1;
@@ -67,7 +71,8 @@ class ProviderMonitor with ChangeNotifier implements ProviderObserver {
   }
 
   @override
-  void providerDidFail(ProviderBase provider, Object error, StackTrace stackTrace, ProviderContainer container) {
+  void providerDidFail(
+      ProviderBase provider, Object error, StackTrace stackTrace, ProviderContainer container) {
     log.w('ProviderDebugger : providerDidFail : ${provider.name}: ${error.toString()}');
     if (provider.name != null) {
       errors[provider.name!] = (errors[provider.name!] ?? 0) + 1;

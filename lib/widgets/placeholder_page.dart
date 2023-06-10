@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wt_action_button/utils/logging.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class PlaceholderPage extends StatelessWidget {
   static final log = logger(PlaceholderPage);
@@ -26,7 +26,8 @@ class PlaceholderPage extends StatelessWidget {
           ? AppBar(
               backgroundColor: Theme.of(context).primaryColor,
               elevation: 0,
-              leading: dismissAction == null && menuAction == null ? null : _createIconButton(context),
+              leading:
+                  dismissAction == null && menuAction == null ? null : _createIconButton(context),
               title: Text(title),
             )
           : null,
