@@ -1,49 +1,123 @@
-# wt-app-scaffold
-A bunch of tools to rapidly start building an app.
+# wt_app_scaffold
 
-## Setup Launch Icon
+An extension to the idea of scaffolds, making it easier to start a new project and just
+focus on the functionality.
 
-Install package: 
-```shell
-flutter pub add flutter_launcher_icons
+## Example of defining application details
+
+```dart
+final appDetailsProvider = Provider(
+  name: 'App Details',
+  (ref) => AppDetails(
+    title: 'Wix Admin',
+    subTitle: '',
+    iconPath: 'assets/avocado.png',
+  ),
+);
 ```
 
-Add the following the pubspec.yaml file.
+## Example of defining the application.
 
-```yaml
-flutter_icons:
-  image_path: assets/avocado.png
-  android: true
-  ios: true
+```dart
+final appDefinitionProvider = Provider<AppDefinition>((ref) {
+  final debugMode = ref.watch(ApplicationSettings.debugMode.value);
+
+  return AppDefinition.from(
+    appTitle: 'Wix Admin',
+    appName: 'wixApp',
+    appDetailsProvider: appDetailsProvider,
+    includeAppBar: true,
+    menuAction: (context) => HiddenDrawerOpener.of(context)?.open(),
+    debugMode: debugMode,
+    profilePage: PageDefinition(
+      title: 'Profile',
+      icon: Icons.person,
+      builder: (context) => const PlaceholderPage(title: 'Profile Page'),
+    ),
+    logoutAction: LogoutAction(ref),
+    pages: [
+      PageDefinition(
+        title: 'Query Orders',
+        icon: FontAwesomeIcons.clipboard,
+        builder: (context) => const OrderQueryView(),
+        primary: true,
+      ),
+      PageDefinition(
+        title: 'Harvest List',
+        icon: FontAwesomeIcons.tractor,
+        builder: (context) => PlaceholderPage(
+          title: 'Harvest List',
+          includeAppBar: false,
+          menuAction: (context) => HiddenDrawerOpener.of(context)?.open(),
+        ),
+        debug: true,
+      ),
+      PageDefinition(
+        title: 'Packing Sheets',
+        icon: FontAwesomeIcons.boxesPacking,
+        builder: (context) => PlaceholderPage(
+          title: 'Packing Sheets',
+          includeAppBar: false,
+          menuAction: (context) => HiddenDrawerOpener.of(context)?.open(),
+        ),
+        debug: true,
+      ),
+      PageDefinition(
+        title: 'Packing Stickers',
+        icon: FontAwesomeIcons.noteSticky,
+        builder: (context) => const StickersView(),
+        primary: true,
+      ),
+      PageDefinition(
+        title: 'Delivery Routes',
+        icon: FontAwesomeIcons.car,
+        builder: (context) => const DeliveryView(),
+        primary: true,
+      ),
+      PageDefinition(
+        title: 'Settings',
+        icon: Icons.settings,
+        builder: (context) => const SettingsView(),
+        primary: true,
+      ),
+      PageDefinition(
+        title: 'User Log',
+        icon: FontAwesomeIcons.bug,
+        builder: (context) => const UserLogView(),
+      ),
+    ],
+    localizationDelegates: [
+      //AppLocalizations.delegate,
+      FormBuilderLocalizations.delegate,
+    ],
+  );
+});
+
 ```
 
-To configure project, run:
-```shell
-flutter pub run flutter_launcher_icons:main
+## Example of running the application.
+
+```dart
+import 'package:wix_admin/firebase_options.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_firepod/wt_firepod.dart';
+
+import 'app/wix_admin.dart';
+
+void main() async {
+  runMyApp(
+    withFirebase(
+      andAppScaffold(
+          appDetails: appDetailsProvider,
+          appDefinition: appDefinitionProvider,
+          loginSupport: const LoginSupport(
+            googleEnabled: true,
+            emailEnabled: true,
+          )),
+      appName: 'wix-admin',
+      firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+    ),
+  );
+}
+
 ```
-## Setup Splash Screen
-
-Install package:
-
-```shell
-flutter pub add flutter_native_splash
-```
-
-Add the following the pubspec.yaml file.
-
-```yaml
-flutter_native_splash:
-  color: "#9E9E9E"
-  image: assets/avocado.png
-  android_12:
-  web_image_mode: center
-```
-
-To configure project, run: 
-```shell
-flutter pub run flutter_native_splash:create
-```
-
-## TODO
-
-- Need to rename this project to wt_app_scaffold
