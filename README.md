@@ -132,4 +132,6 @@ void main() async {
 This is a screenshot of the menu screen, where the current page slides to the side
 and becomes smaller, to reveal the menu that is below it.
 
-<img src="examples/screenshots/wix-app-screenshot.png"  width="200">
+<p align="center">
+    <img src="examples/screenshots/wix-app-screenshot.png"  width="400">
+</p>
