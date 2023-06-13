@@ -75,6 +75,12 @@ final appDefinitionProvider = Provider<AppDefinition>((ref) {
         primary: true,
       ),
       PageDefinition(
+        title: 'Product Info',
+        icon: FontAwesomeIcons.weightScale,
+        builder: (_) => const ProductInfoView(),
+        primary: true,
+      ),
+      PageDefinition(
         title: 'Settings',
         icon: Icons.settings,
         builder: (context) => const SettingsView(),
@@ -119,5 +125,11 @@ void main() async {
     ),
   );
 }
-
 ```
+
+## Screenshot of an example app
+
+This is a screenshot of the menu screen, where the current page slides to the side
+and becomes smaller, to reveal the menu that is below it.
+
+![Example App Screenshot](examples/screenshots/wix-app-screenshot.png)
