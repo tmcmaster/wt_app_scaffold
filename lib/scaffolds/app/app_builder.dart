@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 class AppBuilder extends ConsumerWidget {
-  static const routeName = '/';
+  static const routeName = '/sign-in';
 
   final AppDefinition appDefinition;
 

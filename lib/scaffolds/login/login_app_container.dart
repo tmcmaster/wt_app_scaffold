@@ -39,10 +39,10 @@ class LoginAppContainer extends ConsumerWidget {
 
     log.d('LoginAppContainer: user(${currentUser?.email})');
     final initialRoute = currentUser == null
-        ? '/'
+        ? '/sign-in'
         : emailVerificationRequired && !currentUser.emailVerified
             ? '/verify-email'
-            : '/welcome';
+            : '/';
 
     final buttonStyle = ButtonStyle(
       padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
@@ -84,7 +84,7 @@ class LoginAppContainer extends ConsumerWidget {
       navigatorKey: ref.read(AppScaffoldProviders.navigatorKey),
       initialRoute: initialRoute,
       routes: {
-        '/': (context) {
+        '/sign-in': (context) {
           return SignInScreen(
             auth: auth,
             actions: [
@@ -100,7 +100,7 @@ class LoginAppContainer extends ConsumerWidget {
               }),
               AuthStateChangeAction<SignedIn>((context, state) {
                 if (!emailVerificationRequired) {
-                  Navigator.pushNamed(context, '/welcome');
+                  Navigator.pushNamed(context, '/');
                 } else {
                   if (!state.user!.emailVerified) {
                     log.d('Sending verification email.');
@@ -113,7 +113,7 @@ class LoginAppContainer extends ConsumerWidget {
               }),
               AuthStateChangeAction<UserCreated>((context, state) {
                 if (!verifyEmail) {
-                  Navigator.pushNamed(context, '/welcome');
+                  Navigator.pushNamed(context, '/');
                 } else {
                   if (!state.credential.user!.emailVerified) {
                     Navigator.pushNamed(context, '/verify-email');
@@ -145,9 +145,9 @@ class LoginAppContainer extends ConsumerWidget {
               );
             },
             footerBuilder: (context, action) {
-              return Center(
+              return const Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 16),
+                  padding: EdgeInsets.only(top: 16),
                   child: Column(
                     children: [],
                   ),
@@ -250,7 +250,7 @@ class LoginAppContainer extends ConsumerWidget {
             showMFATile: true,
           );
         },
-        '/welcome': (context) => AppBuilder(
+        '/': (context) => AppBuilder(
               appDefinition: ref.read(AppScaffoldProviders.appDefinition),
             ),
       },

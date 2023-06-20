@@ -14,7 +14,7 @@ abstract class ApplicationSettings {
   static final theme = SettingsEnumProviders<ThemeMode>(
     key: '__THEME__',
     values: ThemeMode.values,
-    none: ThemeMode.system,
+    none: ThemeMode.light,
     label: "Theme Mode",
     hint: "Define the color theme for the app..",
   );
