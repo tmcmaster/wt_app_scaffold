@@ -43,7 +43,6 @@ class DatabaseExamplePage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 50),
-              const SizedBox(height: 50),
               FirepodDoubleView(
                 query: database.ref('v1/product/002/price'),
                 itemBuilder: (value) => Text('\$${value.toStringAsFixed(2)}'),

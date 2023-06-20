@@ -160,6 +160,8 @@ class _BottomNavigationBar extends ConsumerWidget {
     log.d('Primary Items: ${primaryItems.length}');
     log.d('Other Items: ${otherItems.length}');
 
+    final primaryColor = Theme.of(context).primaryColor;
+
     final currentSelected = pageChangeEvent.page < items.length
         ? primaryItems.indexOf(items[pageChangeEvent.page])
         : -1;
@@ -172,12 +174,16 @@ class _BottomNavigationBar extends ConsumerWidget {
         Flexible(
           flex: 1,
           child: BottomNavigationBar(
+            fixedColor: primaryColor,
             iconSize: 20,
             selectedItemColor: currentSelected < 0 ? Colors.black54 : null,
             items: primaryItems
                 .where((item) => !item.debug)
                 .map((item) => BottomNavigationBarItem(
-                      icon: Icon(item.icon),
+                      icon: Icon(
+                        item.icon,
+                        color: primaryColor,
+                      ),
                       label: item.title,
                     ))
                 .toList(),
