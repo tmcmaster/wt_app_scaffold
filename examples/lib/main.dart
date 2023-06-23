@@ -10,8 +10,8 @@ void main() async {
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       andAppScaffold(
-        appDetails: appDetailsProvider,
-        appDefinition: appOne,
+        appDetails: AppOne.details,
+        appDefinition: AppOne.definition,
         loginSupport: const LoginSupport(
           emailEnabled: true,
           googleEnabled: true,
