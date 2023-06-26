@@ -22,15 +22,15 @@ dependencies:
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
   wt_logging:
-    git: https://github.com/:tmcmaster/wt_logging.git
+    git: https://github.com/tmcmaster/wt_logging.git
   wt_models:
-    git: https://github.com/:tmcmaster/wt_models.git
+    git: https://github.com/tmcmaster/wt_models.git
   wt_settings:
-    git: https://github.com/:tmcmaster/wt_settings.git
+    git: https://github.com/tmcmaster/wt_settings.git
   wt_firepod:
-    git: https://github.com/:tmcmaster/wt_firepod.git
+    git: https://github.com/tmcmaster/wt_firepod.git
   wt_firebase_listview:
-    git: https://github.com/:tmcmaster/wt_firebase_listview.git
+    git: https://github.com/tmcmaster/wt_firebase_listview.git
   wt_app_scaffold:
     path: ..
 

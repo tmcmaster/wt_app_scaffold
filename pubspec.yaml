@@ -32,15 +32,15 @@ dependencies:
   firebase_ui_oauth_twitter: ^1.0.3
   form_builder_validators:
   wt_action_button:
-    git: https://github.com/:tmcmaster/wt_action_button.git
+    git: https://github.com/tmcmaster/wt_action_button.git
   wt_models:
-    git: https://github.com/:tmcmaster/wt_models.git
+    git: https://github.com/tmcmaster/wt_models.git
   wt_settings:
-    git: https://github.com/:tmcmaster/wt_settings.git
+    git: https://github.com/tmcmaster/wt_settings.git
   wt_firepod:
-    git: https://github.com/:tmcmaster/wt_firepod.git
+    git: https://github.com/tmcmaster/wt_firepod.git
   wt_logging:
-    git: https://github.com/:tmcmaster/wt_logging.git
+    git: https://github.com/tmcmaster/wt_logging.git
 
 dev_dependencies:
   flutter_test:
