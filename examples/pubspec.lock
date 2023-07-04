@@ -419,7 +419,7 @@ packages:
     source: hosted
     version: "1.4.2"
   firebase_ui_auth:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_ui_auth
       sha256: "2e8c03f772ca21e05b2fc98cb38fecaf4afa9485186beacc4f973334e4c597f1"
@@ -854,6 +854,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.7.0"
+  lint:
+    dependency: transitive
+    description:
+      name: lint
+      sha256: f4bd4dbaa39f4ae8836f2d1275f2f32bc68b3a8cce0a0735dd1f7a601f06682a
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
   lints:
     dependency: transitive
     description:
@@ -1328,8 +1336,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5c7d6c4d1a349e0f268f44f2423ceb6cf96a8b89"
-      url: "git@github.com:tmcmaster/wt_action_button.git"
+      resolved-ref: "9828197d2ee80b1e9ab09a545677976aa6eb9922"
+      url: "https://github.com/tmcmaster/wt_action_button.git"
     source: git
     version: "0.0.2"
   wt_app_scaffold:
@@ -1344,8 +1352,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: ae357f183ebb18be403a5bc8f4e71406302b610e
-      url: "git@github.com:tmcmaster/wt_firebase_listview.git"
+      resolved-ref: b4bfc28bf7382cf8a54d4e1662672d7738a058a0
+      url: "https://github.com/tmcmaster/wt_firebase_listview.git"
     source: git
     version: "0.0.1"
   wt_firepod:
@@ -1353,8 +1361,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "3e06df25f575bc20fa3033445848d34f260496ac"
-      url: "git@github.com:tmcmaster/wt_firepod.git"
+      resolved-ref: "82f611b2cf3019ec832aef8d18ad577155b47592"
+      url: "https://github.com/tmcmaster/wt_firepod.git"
     source: git
     version: "0.0.1"
   wt_logging:
@@ -1362,8 +1370,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: b71f4fe1c0efbc9a71e7060df2e45101156ec6b6
-      url: "git@github.com:tmcmaster/wt_logging.git"
+      resolved-ref: "208f138323b3a7c2a79ad4053c829982b7ae84d1"
+      url: "https://github.com/tmcmaster/wt_logging.git"
     source: git
     version: "0.0.1"
   wt_models:
@@ -1371,8 +1379,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "61ddc52fee3289f0e9be3971aa379dc6729fdce7"
-      url: "git@github.com:tmcmaster/wt_models.git"
+      resolved-ref: "2d9caf87db178c29c69df8f7071192a55f864d29"
+      url: "https://github.com/tmcmaster/wt_models.git"
     source: git
     version: "0.0.2"
   wt_settings:
@@ -1380,8 +1388,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: d2f8699fc59a6ceea6ef1266fb8641e1f79d375c
-      url: "git@github.com:tmcmaster/wt_settings.git"
+      resolved-ref: "772799fde33d2bcdbd9894cddba8833f775e429a"
+      url: "https://github.com/tmcmaster/wt_settings.git"
     source: git
     version: "0.0.1"
   xdg_directories:
@@ -1409,5 +1417,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.0 <4.0.0"
+  dart: ">=3.0.3 <4.0.0"
   flutter: ">=3.10.0"

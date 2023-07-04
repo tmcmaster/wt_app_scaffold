@@ -1,0 +1,18 @@
+app_definition:
+  app:
+    title: "First App"
+    icon: "Icons.awesome"
+  pages:
+    - id: "home2"
+      title: "Home2"
+      description: "Home2 screen"
+      icon: "Icons.home"
+      debug: false
+      primary: true
+
+    - id: "findDinosaurs"
+      title: "Find Dinosaurs"
+      description: "Find dinosaurs"
+      icon: "FontAwesomeIcons.dinosaur"
+      debug: true
+      primary: false

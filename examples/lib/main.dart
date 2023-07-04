@@ -1,5 +1,5 @@
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold_examples/apps/app_one.dart';
+import 'package:wt_app_scaffold_examples/apps/chat_gpt/first_app/first_app.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
 import 'firebase_options.dart';
@@ -10,8 +10,8 @@ void main() async {
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       andAppScaffold(
-        appDetails: AppOne.details,
-        appDefinition: AppOne.definition,
+        appDetails: FirstApp.details,
+        appDefinition: FirstApp.definition,
         loginSupport: const LoginSupport(
           emailEnabled: true,
           googleEnabled: true,

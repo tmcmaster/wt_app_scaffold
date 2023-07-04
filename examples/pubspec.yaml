@@ -1,10 +1,20 @@
 name: wt_app_scaffold_examples
 description: Show examples of using the wt_app_scaffold package.
-publish_to: 'none'
+publish_to: none
 version: 1.0.0+1
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
+
+# Scripts to be run with rps
+scripts:
+  init: flutter pub get
+  clean: flutter clean
+  refresh: flutter clean; flutter pub get
+  test: flutter test
+  analise: flutter analyze
+  freezed:
+    build: flutter pub run build_runner build --delete-conflicting-outputs
 
 dependencies:
   flutter:
@@ -19,6 +29,7 @@ dependencies:
   firebase_auth:
   firebase_database:
   form_builder_validators:
+  firebase_ui_auth:
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
   wt_logging:

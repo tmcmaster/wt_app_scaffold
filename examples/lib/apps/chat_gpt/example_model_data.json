@@ -1,0 +1,115 @@
+{
+  "experience": {
+    "yearsOfExperience": "25+",
+    "jobFunction": {
+      "name": "Software Engineer",
+      "skills": [
+        {
+          "name": "Backend Development",
+          "proficiency": {
+            "yearsRating": 4,
+            "achievedRating": 3,
+            "statusRating": 4,
+            "potentialRating": 4,
+            "upskillRating": 3
+          }
+        },
+        {
+          "name": "Business Analyst",
+          "proficiency": {
+            "yearsRating": 3,
+            "achievedRating": 4,
+            "statusRating": 3,
+            "potentialRating": 4,
+            "upskillRating": 5
+          }
+        },
+        {
+          "name": "Full Stack Development",
+          "proficiency": {
+            "yearsRating": 5,
+            "achievedRating": 4,
+            "statusRating": 3,
+            "potentialRating": 4,
+            "upskillRating": 4
+          }
+        },
+        {
+          "name": "Mobile Development",
+          "proficiency": {
+            "yearsRating": 2,
+            "achievedRating": 3,
+            "statusRating": 3,
+            "potentialRating": 3,
+            "upskillRating": 4
+          }
+        },
+        {
+          "name": "Quality Assurance",
+          "proficiency": {
+            "yearsRating": 3,
+            "achievedRating": 4,
+            "statusRating": 4,
+            "potentialRating": 3,
+            "upskillRating": 3
+          }
+        }
+      ]
+    },
+    "techFunction": {
+      "name": "Web Development",
+      "skills": [
+        {
+          "name": "CSS",
+          "proficiency": {
+            "yearsRating": 4,
+            "achievedRating": 4,
+            "statusRating": 4,
+            "potentialRating": 3,
+            "upskillRating": 4
+          }
+        },
+        {
+          "name": "Flutter",
+          "proficiency": {
+            "yearsRating": 5,
+            "achievedRating": 4,
+            "statusRating": 3,
+            "potentialRating": 5,
+            "upskillRating": 4
+          }
+        },
+        {
+          "name": "Kotlin",
+          "proficiency": {
+            "yearsRating": 3,
+            "achievedRating": 3,
+            "statusRating": 3,
+            "potentialRating": 4,
+            "upskillRating": 3
+          }
+        },
+        {
+          "name": "Linux",
+          "proficiency": {
+            "yearsRating": 4,
+            "achievedRating": 4,
+            "statusRating": 3,
+            "potentialRating": 4,
+            "upskillRating": 4
+          }
+        },
+        {
+          "name": "Python",
+          "proficiency": {
+            "yearsRating": 5,
+            "achievedRating": 5,
+            "statusRating": 4,
+            "potentialRating": 5,
+            "upskillRating": 4
+          }
+        }
+      ]
+    }
+  }
+}

@@ -13,10 +13,10 @@ class Product extends TitleIdJsonSupport<Product> with _$Product {
   static final _titles = ['id', 'title', 'price', 'weight'];
 
   factory Product({
-    @JsonKey(name: 'id') required String id,
-    @JsonKey(name: 'title') required String title,
-    @JsonKey(name: 'price') required double price,
-    @JsonKey(name: 'weight') required double weight,
+    required String id,
+    required String title,
+    required double price,
+    required double weight,
   }) = _Product;
 
   Product._();
@@ -24,8 +24,8 @@ class Product extends TitleIdJsonSupport<Product> with _$Product {
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 
   @override
-  String getId() => id ?? '';
+  String getId() => id;
 
   @override
-  String getTitle() => title ?? '';
+  String getTitle() => title;
 }

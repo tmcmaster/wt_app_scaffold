@@ -20,7 +20,7 @@ class CurvedNavBarApp extends StatefulWidget {
     );
   }
   @override
-  _CurvedNavBarAppState createState() => _CurvedNavBarAppState();
+  State<CurvedNavBarApp> createState() => _CurvedNavBarAppState();
 }
 
 class _CurvedNavBarAppState extends State<CurvedNavBarApp> {

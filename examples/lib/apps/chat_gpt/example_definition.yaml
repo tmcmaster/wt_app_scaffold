@@ -1,0 +1,32 @@
+app_definition:
+  app:
+    title: "Example App"
+    icon: "Icons.awesome"
+  pages:
+    - id: "home"
+      title: "Home"
+      description: "Home screen"
+      icon: "Icons.home"
+      debug: false
+      primary: true
+
+    - id: "orders"
+      title: "Orders"
+      description: "Query orders"
+      icon: "Icons.order"
+      debug: true
+      primary: false
+
+    - id: "products"
+      title: "Products"
+      description: "Query products"
+      icon: "Icons.product"
+      debug: false
+      primary: false
+
+    - id: "notifications"
+      title: "Notifications"
+      description: "Notification center"
+      icon: "Icons.notifications"
+      debug: true
+      primary: false

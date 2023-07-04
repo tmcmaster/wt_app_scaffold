@@ -30,3 +30,7 @@ migrate_working_dir/
 build/
 junk
 hold
+
+*\.freezed\.dart
+*\.g\.dart
+*\.mocks\.dart

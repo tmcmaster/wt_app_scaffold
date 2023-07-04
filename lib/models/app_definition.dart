@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_action_button/action_button_definition.dart';
 
 import '../widgets/placeholder_page.dart';
 import 'app_details.dart';
@@ -41,7 +40,6 @@ class AppDefinition {
     required String appTitle,
     required String appName,
     AlwaysAliveProviderBase<AppDetails>? appDetailsProvider,
-    ActionButtonDefinition? logoutAction,
     PageDefinition? profilePage,
     required List<PageDefinition> pages,
     bool swipeEnabled = true,

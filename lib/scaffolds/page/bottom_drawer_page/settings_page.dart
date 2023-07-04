@@ -10,10 +10,12 @@ class SettingsPage extends HookConsumerWidget {
 
   final List<Widget> children;
   final bool childrenBefore;
+  final bool hideAppBar;
   const SettingsPage({
     Key? key,
     this.children = const [],
     this.childrenBefore = false,
+    this.hideAppBar = true,
   }) : super(key: key);
 
   @override
@@ -36,27 +38,29 @@ class SettingsPage extends HookConsumerWidget {
           ApplicationSettings.verifyEmail.component,
         ],
       ),
-      ApplicationSettings.applicationType.component,
+      // ApplicationSettings.applicationType.component,
       if (!childrenBefore) ...children,
     ];
 
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-        leading: isHiddenDraw
-            ? IconButton(
-                onPressed: () {
-                  HiddenDrawerOpener.of(context)?.open();
-                },
-                focusColor: Colors.transparent,
-                icon: Icon(
-                  Icons.menu,
-                  color: colorScheme.onPrimary,
-                ),
-              )
-            : null,
-      ),
+      appBar: (hideAppBar)
+          ? null
+          : AppBar(
+              title: const Text('Settings'),
+              leading: isHiddenDraw
+                  ? IconButton(
+                      onPressed: () {
+                        HiddenDrawerOpener.of(context)?.open();
+                      },
+                      focusColor: Colors.transparent,
+                      icon: Icon(
+                        Icons.menu,
+                        color: colorScheme.onPrimary,
+                      ),
+                    )
+                  : null,
+            ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.separated(

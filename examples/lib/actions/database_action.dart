@@ -1,8 +1,8 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:wt_action_button/utils/logging.dart';
 import 'package:wt_action_button/wt_action_button.dart';
 import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class DatabaseAction extends ActionButtonDefinition {
   static final log = logger(DatabaseAction, level: Level.debug);
@@ -26,7 +26,7 @@ class DatabaseAction extends ActionButtonDefinition {
       final hello = await ref.read(FirebaseProviders.database).ref('v1').child('hello').get();
       log.d('Database Action Completed: ${hello.value}');
       final person = await ref.read(FirebaseProviders.database).ref('v1').child('product').get();
-      print('Person(${person.value})');
+      log.d('Person(${person.value})');
     });
   }
 }

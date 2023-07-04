@@ -1,6 +1,5 @@
 export 'init/app_scaffold_init.dart';
 export 'models/app_definition.dart';
-export 'models/app_definition.dart';
 export 'models/app_details.dart';
 export 'models/application_builder.dart';
 export 'models/application_type.dart';

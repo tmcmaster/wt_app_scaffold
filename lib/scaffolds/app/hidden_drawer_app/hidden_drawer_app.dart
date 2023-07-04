@@ -4,6 +4,20 @@ import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_page_buil
 
 import 'hidden_drawer_widget.dart';
 
+// class Testing extends StatefulWidget {
+//   const Testing({super.key});
+//
+//   @override
+//   State<Testing> createState() => _TestingState();
+// }
+//
+// class _TestingState extends State<Testing> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Placeholder();
+//   }
+// }
+//
 class HiddenDrawerApp extends StatefulWidget {
   final AppDefinition appDefinition;
   final bool debugMode;
@@ -24,7 +38,7 @@ class HiddenDrawerApp extends StatefulWidget {
   }
 
   @override
-  _HiddenDrawerAppState createState() => _HiddenDrawerAppState();
+  State<HiddenDrawerApp> createState() => _HiddenDrawerAppState();
 }
 
 class _HiddenDrawerAppState extends State<HiddenDrawerApp> {
