@@ -4,9 +4,9 @@ class HiddenDrawerMenu extends StatelessWidget {
   final VoidCallback onClicked;
 
   const HiddenDrawerMenu({
-    Key? key,
+    super.key,
     required this.onClicked,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => IconButton(

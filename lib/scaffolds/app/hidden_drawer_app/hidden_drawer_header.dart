@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 
 class HiddenDrawerHeader extends ConsumerWidget {
   const HiddenDrawerHeader({
-    Key? key,
+    super.key,
     required this.onCloseDrawer,
-  }) : super(key: key);
+  });
 
   final VoidCallback onCloseDrawer;
 

@@ -36,7 +36,7 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
         .indexOf(widget.appDefinition.pages.firstWhere((page) => page.primary));
 
     _selectedPageProvider = StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>(
-        (ref) => _SelectedPageNotifier(initialIndex));
+        (ref) => _SelectedPageNotifier(initialIndex),);
 
     super.initState();
   }
@@ -67,7 +67,7 @@ class _SelectedPageNotifier extends StateNotifier<PageChangeEvent> {
       : super(PageChangeEvent(
           source: PageChangeSource.initial,
           page: initialPage < 0 ? 0 : initialPage,
-        ));
+        ),);
 
   void setPage(PageChangeSource source, int page) {
     if (state.page != page) {
@@ -185,7 +185,7 @@ class _BottomNavigationBar extends ConsumerWidget {
                         color: primaryColor,
                       ),
                       label: item.title,
-                    ))
+                    ),)
                 .toList(),
             onTap: (selection) {
               log.d('Selected Item: $selection');
@@ -220,7 +220,7 @@ class _BottomNavigationBar extends ConsumerWidget {
                           },
                         ),
                       ),
-                    ))
+                    ),)
                 .toList(),
           ),
       ],

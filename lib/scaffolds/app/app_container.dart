@@ -36,7 +36,7 @@ class AppContainer extends ConsumerWidget {
       scaffoldMessengerKey: snackBarKey,
       navigatorKey: ref.read(AppScaffoldProviders.navigatorKey),
       localizationsDelegates: [
-        ...(appDefinition.localizationDelegates ?? []),
+        ...appDefinition.localizationDelegates ?? [],
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

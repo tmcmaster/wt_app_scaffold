@@ -67,6 +67,6 @@ class PlaceholderPage extends StatelessWidget {
               menuAction?.call(context);
               log.d('${menuAction == null}');
               //menuAction ?? dismissAction,
-            });
+            },);
   }
 }

@@ -41,7 +41,7 @@ class BottomDrawerPage extends StatelessWidget {
                   ],
                 ),
                 actions: [
-                  ...actions.map((action) => action.component(noLabel: true)).toList(),
+                  ...actions.map((action) => action.component(noLabel: true)),
                   const SizedBox(
                     width: 10,
                   )
@@ -122,7 +122,7 @@ class BottomDrawerPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      ...actions.map((action) => action.component(noLabel: true)).toList(),
+                      ...actions.map((action) => action.component(noLabel: true)),
                       const SizedBox(
                         width: 50,
                       ),
@@ -170,9 +170,7 @@ class BottomDrawerPage extends StatelessWidget {
 }
 
 class _DrawerHandleWidget extends StatelessWidget {
-  const _DrawerHandleWidget({
-    Key? key,
-  }) : super(key: key);
+  const _DrawerHandleWidget();
 
   @override
   Widget build(BuildContext context) {

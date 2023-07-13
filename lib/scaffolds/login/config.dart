@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseAuthKeys {
-  static const googleClientId = '626479055094-bq84775vo74g39v2170o2b4ciim1rdqe.apps.googleusercontent.com';
+mixin FirebaseAuthKeys {
+  static const googleClientId =
+      '626479055094-bq84775vo74g39v2170o2b4ciim1rdqe.apps.googleusercontent.com';
   static const googleRedirectURI = 'https://wt-app-scaffold.web.app/__/auth/handler';
 
   static const twitterApiKey = String.fromEnvironment('TWITTER_API_KEY');

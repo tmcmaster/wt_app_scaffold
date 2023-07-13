@@ -28,7 +28,6 @@ mixin AppOne {
       appTitle: 'Application One',
       appName: 'appOne',
       swipeEnabled: true,
-      debugMode: true,
       includeAppBar: true,
       appDetailsProvider: details,
       profilePage: PageDefinition(

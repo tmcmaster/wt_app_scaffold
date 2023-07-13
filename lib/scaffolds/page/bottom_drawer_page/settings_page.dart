@@ -12,11 +12,11 @@ class SettingsPage extends HookConsumerWidget {
   final bool childrenBefore;
   final bool hideAppBar;
   const SettingsPage({
-    Key? key,
+    super.key,
     this.children = const [],
     this.childrenBefore = false,
     this.hideAppBar = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,7 +44,7 @@ class SettingsPage extends HookConsumerWidget {
 
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: (hideAppBar)
+      appBar: hideAppBar
           ? null
           : AppBar(
               title: const Text('Settings'),

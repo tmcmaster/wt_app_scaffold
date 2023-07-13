@@ -11,9 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_logging/wt_logging.dart';
-
-import '../scaffolds/login/config.dart';
 
 Future<ProviderScope> Function(
   FirebaseApp app,
@@ -71,7 +70,7 @@ Future<ProviderScope> Function(
     return ProviderScope(
       overrides: [
         UserLog.snackBarKey.overrideWithValue(AppContainer.snackBarKey),
-        AppScaffoldProviders.appDefinition.overrideWith(((ref) => ref.read(appDefinition))),
+        AppScaffoldProviders.appDefinition.overrideWith((ref) => ref.read(appDefinition)),
         AppScaffoldProviders.appDetails.overrideWith((ref) => ref.read(appDetails)),
       ],
       observers: const [],
@@ -80,7 +79,7 @@ Future<ProviderScope> Function(
   };
 }
 
-void runMyApp(
+Future<void> runMyApp(
   Future<dynamic> Function() childBuilder,
 ) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -95,5 +94,5 @@ void runMyApp(
 }
 
 Future<Widget> child2widget(dynamic child) async {
-  return child is Future<Widget> ? await child : child;
+  return child is Future<Widget> ? await child : child as Widget;
 }

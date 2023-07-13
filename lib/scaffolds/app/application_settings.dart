@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_settings/wt_settings.dart';
 
-abstract class ApplicationSettings {
+mixin ApplicationSettings {
   static void init(Ref ref) {
     ref.read(applicationType.value);
     ref.read(theme.value);
@@ -15,16 +15,16 @@ abstract class ApplicationSettings {
     key: '__THEME__',
     values: ThemeMode.values,
     none: ThemeMode.light,
-    label: "Theme Mode",
-    hint: "Define the color theme for the app..",
+    label: 'Theme Mode',
+    hint: 'Define the color theme for the app..',
   );
   static final colorScheme = SettingsColorProviders(
     key: '__COLOR_SCHEME__',
     values: Colors.primaries,
     initialValue: Colors.blue,
     none: Colors.blue,
-    label: "Color Scheme",
-    hint: "Define the colour scheme for the app..",
+    label: 'Color Scheme',
+    hint: 'Define the colour scheme for the app..',
   );
 
   static final debugMode = SettingsBoolProviders(

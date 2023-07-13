@@ -23,7 +23,6 @@ mixin ExampleApp {
       appTitle: 'Example App',
       appName: 'exampleApp',
       swipeEnabled: true,
-      debugMode: true,
       includeAppBar: true,
       appDetailsProvider: details,
       profilePage: PageDefinition(

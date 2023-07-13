@@ -43,18 +43,20 @@ class _CurvedNavBarAppState extends State<CurvedNavBarApp> {
         .where((page) {
           return widget.debugMode || !page.debug;
         })
-        .map((definition) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                definition.icon,
-                size: 20,
-              ),
-            ))
+        .map(
+          (definition) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              definition.icon,
+              size: 20,
+            ),
+          ),
+        )
         .toList();
 
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
+    return ColoredBox(
       color: colorScheme.primary,
       child: SafeArea(
         top: false,

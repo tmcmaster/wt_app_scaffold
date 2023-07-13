@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/init/provider_manager.dart';
 
-abstract class AppScaffoldProviders {
+mixin AppScaffoldProviders {
   static final appDetails = Provider<AppDetails>(
     name: 'AppScaffoldProviders.appDetails',
     (ref) {
@@ -16,9 +16,11 @@ abstract class AppScaffoldProviders {
   );
 
   static final appDefinition = Provider<AppDefinition>(
-      name: 'AppScaffoldProviders.appAppDefinition',
-      (ref) => throw Exception(
-          'AppScaffoldProviders.appAppDefinition provider needs to be overridden.'));
+    name: 'AppScaffoldProviders.appAppDefinition',
+    (ref) => throw Exception(
+      'AppScaffoldProviders.appAppDefinition provider needs to be overridden.',
+    ),
+  );
 
   static final providerManager = Provider<ProviderManager>(
     name: 'Provider Manager',

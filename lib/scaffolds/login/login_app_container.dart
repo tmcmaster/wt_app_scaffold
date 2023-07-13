@@ -8,10 +8,9 @@ import 'package:wt_app_scaffold/models/app_details.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/app_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
+import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
-
-import 'config.dart';
 
 class LoginAppContainer extends ConsumerWidget {
   static final log = logger(LoginAppContainer);
@@ -204,8 +203,8 @@ class LoginAppContainer extends ConsumerWidget {
                 Navigator.of(context).pushReplacementNamed('/profile');
               })
             ],
-            flowKey: arguments?['flowKey'],
-            action: arguments?['action'],
+            flowKey: arguments?['flowKey'] as Object,
+            action: arguments?['action'] as AuthAction?,
             headerBuilder: _headerIcon(Icons.sms_outlined),
             sideBuilder: _sideIcon(Icons.sms_outlined),
           );
@@ -215,7 +214,7 @@ class LoginAppContainer extends ConsumerWidget {
 
           return ForgotPasswordScreen(
             auth: auth,
-            email: arguments?['email'],
+            email: arguments?['email'] as String?,
             headerMaxExtent: 200,
             headerBuilder: _headerIcon(Icons.lock),
             sideBuilder: _sideIcon(Icons.lock),
@@ -267,7 +266,7 @@ class LoginAppContainer extends ConsumerWidget {
     );
   }
 
-  _createWelcomeString(AppDetails appDetails) {
+  String _createWelcomeString(AppDetails appDetails) {
     final name = appDetails.title.isNotEmpty ? appDetails.title : appDetails.subTitle;
 
     return name.isEmpty ? 'Welcome!' : 'Welcome to $name!';

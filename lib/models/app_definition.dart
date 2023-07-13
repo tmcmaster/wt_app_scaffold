@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../widgets/placeholder_page.dart';
-import 'app_details.dart';
-import 'login_support.dart';
-import 'page_definition.dart';
+import 'package:wt_app_scaffold/models/app_details.dart';
+import 'package:wt_app_scaffold/models/login_support.dart';
+import 'package:wt_app_scaffold/models/page_definition.dart';
+import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 
 class AppDefinition {
   final String appTitle;
@@ -43,7 +42,6 @@ class AppDefinition {
     PageDefinition? profilePage,
     required List<PageDefinition> pages,
     bool swipeEnabled = true,
-    bool debugMode = true,
     bool includeAppBar = false,
     void Function(BuildContext context)? dismissAction,
     void Function(BuildContext context)? menuAction,

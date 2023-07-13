@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/item_definition.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
+import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_header.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/logout_action.dart';
-
-import '../../../models/item_definition.dart';
-import 'hidden_drawer_header.dart';
 
 class HiddenDrawerWidget extends ConsumerWidget {
   static const double menuPaddingX = 16;
@@ -17,13 +16,13 @@ class HiddenDrawerWidget extends ConsumerWidget {
   final double width;
 
   const HiddenDrawerWidget({
-    Key? key,
+    super.key,
     required this.appDefinition,
     this.debugMode = false,
     required this.onSelectedItem,
     required this.onCloseDrawer,
     required this.width,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -109,25 +108,26 @@ class HiddenDrawerWidget extends ConsumerWidget {
 
   Widget buildDrawerItems(BuildContext context) {
     return Column(
-        children: appDefinition.pages
-            .where((page) {
-              return debugMode || !page.debug;
-            })
-            .map(
-              (page) => _PageMenuItemButton(
-                item: page,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  bottomLeft: Radius.circular(25),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 8,
-                ),
-                onTap: () => onSelectedItem(page),
+      children: appDefinition.pages
+          .where((page) {
+            return debugMode || !page.debug;
+          })
+          .map(
+            (page) => _PageMenuItemButton(
+              item: page,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(25),
+                bottomLeft: Radius.circular(25),
               ),
-            )
-            .toList());
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 8,
+              ),
+              onTap: () => onSelectedItem(page),
+            ),
+          )
+          .toList(),
+    );
   }
 }
 
@@ -137,7 +137,6 @@ class _PageMenuItemButton extends StatelessWidget {
   final BorderRadius borderRadius;
   final EdgeInsets padding;
   const _PageMenuItemButton({
-    Key? key,
     required this.item,
     required this.borderRadius,
     this.padding = const EdgeInsets.symmetric(
@@ -145,7 +144,7 @@ class _PageMenuItemButton extends StatelessWidget {
       vertical: 0,
     ),
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
