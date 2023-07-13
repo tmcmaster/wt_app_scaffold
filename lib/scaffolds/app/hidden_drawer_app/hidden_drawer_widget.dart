@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/logout_action.dart';
 
 import '../../../models/item_definition.dart';
@@ -93,7 +94,10 @@ class HiddenDrawerWidget extends ConsumerWidget {
               leading: const Icon(Icons.logout, color: Colors.white),
               title: const Text(
                 'Logout',
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: HiddenDrawerConfig.menuFontSize,
+                ),
               ),
               onTap: () {
                 logoutAction.execute();
@@ -153,7 +157,10 @@ class _PageMenuItemButton extends StatelessWidget {
       leading: Icon(item.icon, color: Colors.white),
       title: Text(
         item.title,
-        style: const TextStyle(color: Colors.white, fontSize: 18),
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: HiddenDrawerConfig.menuFontSize,
+        ),
       ),
       onTap: onTap,
     );

@@ -12,7 +12,7 @@ import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
-abstract class AppOne {
+mixin AppOne {
   static final details = Provider<AppDetails>(
     name: 'AppOne Details',
     (ref) => AppDetails(
@@ -115,10 +115,11 @@ abstract class AppOne {
           builder: (context) => SettingsPage(
             children: [
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/");
-                  },
-                  child: const Text('Login')),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/');
+                },
+                child: const Text('Login'),
+              ),
             ],
           ),
         ),

@@ -1,8 +1,7 @@
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold_examples/apps/chat_gpt/first_app/first_app.dart';
+import 'package:wt_app_scaffold_examples/firebase_options.dart';
 import 'package:wt_firepod/wt_firepod.dart';
-
-import 'firebase_options.dart';
 
 void main() async {
   runMyApp(

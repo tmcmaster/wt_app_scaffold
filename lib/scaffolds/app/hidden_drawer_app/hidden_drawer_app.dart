@@ -1,39 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_page_builder.dart';
 
 import 'hidden_drawer_widget.dart';
 
-// class Testing extends StatefulWidget {
-//   const Testing({super.key});
-//
-//   @override
-//   State<Testing> createState() => _TestingState();
-// }
-//
-// class _TestingState extends State<Testing> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }
-//
 class HiddenDrawerApp extends StatefulWidget {
   final AppDefinition appDefinition;
   final bool debugMode;
+  final double offsetWhenOpenX;
+  final double offsetWhenOpenY;
 
   const HiddenDrawerApp._({
     required this.appDefinition,
     this.debugMode = false,
+    required this.offsetWhenOpenX,
+    required this.offsetWhenOpenY,
   });
 
   factory HiddenDrawerApp.build(
     AppDefinition appDefinition,
     bool debugMode,
   ) {
+    final maxLength = appDefinition.pages
+        .map((p) => p.title.split(' '))
+        .expand((e) => e)
+        .map((e) => e.length)
+        .fold(0, (largest, size) => size > largest ? size : largest);
     return HiddenDrawerApp._(
       appDefinition: appDefinition,
       debugMode: debugMode,
+      offsetWhenOpenX: 140.0 + HiddenDrawerConfig.menuFontSize * 0.55 * maxLength,
+      offsetWhenOpenY: 150.0,
     );
   }
 
@@ -68,8 +66,8 @@ class _HiddenDrawerAppState extends State<HiddenDrawerApp> {
 
   void openDrawer() {
     setState(() {
-      xOffset = 230;
-      yOffset = 150;
+      xOffset = widget.offsetWhenOpenX;
+      yOffset = widget.offsetWhenOpenY;
       scaleFactor = 0.6;
       isDrawerOpen = true;
     });

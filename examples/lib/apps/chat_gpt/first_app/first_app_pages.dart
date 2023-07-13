@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
   static const routeName = 'home';
   static const pageTitle = 'Home';
 
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class OrdersPage extends StatelessWidget {
   static const routeName = 'orders';
   static const pageTitle = 'Orders';
 
-  const OrdersPage({Key? key}) : super(key: key);
+  const OrdersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class ProductsPage extends StatelessWidget {
   static const routeName = 'products';
   static const pageTitle = 'Products';
 
-  const ProductsPage({Key? key}) : super(key: key);
+  const ProductsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class NotificationsPage extends StatelessWidget {
   static const routeName = 'notifications';
   static const pageTitle = 'Notifications';
 
-  const NotificationsPage({Key? key}) : super(key: key);
+  const NotificationsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

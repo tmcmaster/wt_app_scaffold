@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class AsyncExamplePage extends ConsumerWidget {
+  static final log = logger(AsyncExamplePage);
+
   const AsyncExamplePage({super.key});
 
   @override
@@ -16,7 +19,6 @@ class AsyncExamplePage extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Counter(ref),
               const SizedBox(
                 height: 200,
               ),
@@ -47,40 +49,8 @@ class AsyncExamplePage extends ConsumerWidget {
   }
 }
 
-class Counter extends ConsumerWidget {
-  final WidgetRef ref;
-
-  Counter(this.ref, {super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final counter = ref.read(counterProvider.stream);
-    return StreamBuilder(
-      stream: counter,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Text('ERROR: ${snapshot.error}');
-        } else if (snapshot.connectionState == ConnectionState.done) {
-          return const Text('DONE');
-        } else {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              return const Text('NONE');
-            case ConnectionState.waiting:
-              return const Text('WAITING');
-            case ConnectionState.done:
-              return const Text('DONE');
-            case ConnectionState.active:
-              return Text('${snapshot.data}');
-          }
-        }
-      },
-    );
-  }
-}
-
 final futureCombined = FutureProvider<String>((ref) async {
-  print('Future Combined.');
+  AsyncExamplePage.log.d('Future Combined.');
   return WaitFor.threeFutures(
     ref.read(futureOne.future),
     ref.read(futureTwo.future),
@@ -90,23 +60,23 @@ final futureCombined = FutureProvider<String>((ref) async {
 });
 
 final futureOne = FutureProvider<String>((ref) async {
-  print('Future One started.');
+  AsyncExamplePage.log.d('Future One started.');
   await Future.delayed(const Duration(seconds: 10));
-  print('Future One completed.');
+  AsyncExamplePage.log.d('Future One completed.');
   return 'Future One';
 });
 
 final futureTwo = FutureProvider<String>((ref) async {
-  print('Future Two started.');
+  AsyncExamplePage.log.d('Future Two started.');
   await Future.delayed(const Duration(seconds: 14));
-  print('Future Two completed.');
+  AsyncExamplePage.log.d('Future Two completed.');
   return 'Future Two';
 });
 
 final futureThree = FutureProvider<String>((ref) async {
-  print('Future Three started.');
+  AsyncExamplePage.log.d('Future Three started.');
   await Future.delayed(const Duration(seconds: 8));
-  print('Future Three completed.');
+  AsyncExamplePage.log.d('Future Three completed.');
   return 'Future Three';
 });
 

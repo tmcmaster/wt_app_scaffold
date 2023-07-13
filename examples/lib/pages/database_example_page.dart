@@ -71,7 +71,7 @@ class DatabaseExamplePage extends ConsumerWidget {
       ),
       floatingActionButton: databaseAction.component(
           floating: true,
-          noLabel: true), // This trailing comma makes auto-formatting nicer for build methods.
+          noLabel: true,), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

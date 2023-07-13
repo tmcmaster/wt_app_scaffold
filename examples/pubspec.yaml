@@ -12,47 +12,48 @@ scripts:
   clean: flutter clean
   refresh: flutter clean; flutter pub get
   test: flutter test
-  analise: flutter analyze
+  analise: dart analyze
+  fix: dart fix --dry-run
   freezed:
     build: flutter pub run build_runner build --delete-conflicting-outputs
 
 dependencies:
+  cupertino_icons:
+  firebase_auth:
+  firebase_core:
+  firebase_database:
+  firebase_ui_auth:
   flutter:
     sdk: flutter
-  cupertino_icons:
   font_awesome_flutter:
+  form_builder_validators:
   freezed:
   freezed_annotation: 
   hooks_riverpod:
   riverpod:
-  firebase_core:
-  firebase_auth:
-  firebase_database:
-  form_builder_validators:
-  firebase_ui_auth:
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
+  wt_app_scaffold:
+    path: ..
+  wt_firebase_listview:
+    git: https://github.com/tmcmaster/wt_firebase_listview.git
+  wt_firepod:
+    git: https://github.com/tmcmaster/wt_firepod.git
   wt_logging:
     git: https://github.com/tmcmaster/wt_logging.git
   wt_models:
     git: https://github.com/tmcmaster/wt_models.git
   wt_settings:
     git: https://github.com/tmcmaster/wt_settings.git
-  wt_firepod:
-    git: https://github.com/tmcmaster/wt_firepod.git
-  wt_firebase_listview:
-    git: https://github.com/tmcmaster/wt_firebase_listview.git
-  wt_app_scaffold:
-    path: ..
 
 dev_dependencies:
+  build_runner:
+  flutter_launcher_icons: ^0.9.3
+  flutter_lints: ^2.0.0
+  flutter_native_splash: ^2.2.4
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  build_runner:
   json_serializable:
-  flutter_launcher_icons: ^0.9.3
-  flutter_native_splash: ^2.2.4
 
 flutter:
   uses-material-design: true

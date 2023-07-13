@@ -4,11 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/scaffolds/login/config.dart';
+import 'package:wt_app_scaffold_examples/apps/chat_gpt/example_pages.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
-import 'example_pages.dart';
-
-abstract class ExampleApp {
+mixin ExampleApp {
   static final details = Provider<AppDetails>(
     name: 'Example App Details',
     (ref) => AppDetails(
