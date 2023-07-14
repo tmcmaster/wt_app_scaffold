@@ -9,7 +9,7 @@ import 'package:wt_logging/wt_logging.dart';
 export 'package:wt_action_button/wt_action_button.dart';
 
 class LogoutAction extends ActionButtonDefinition {
-  static final log = logger(LogoutAction, level: Level.debug);
+  static final log = logger(LogoutAction);
 
   static final provider = Provider(
     name: 'Logout Action',

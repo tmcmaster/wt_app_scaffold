@@ -3,10 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class ProviderMonitor with ChangeNotifier implements ProviderObserver {
-  static final instance = ProviderMonitor._();
-  // static final provider = ChangeNotifierProvider((ref) => instance);
+  static final log = logger(ProviderMonitor, level: Logger.level);
 
-  static final log = logger(ProviderMonitor);
+  static final instance = ProviderMonitor._();
 
   final families = <String, int>{};
   final values = <String, Object?>{};
@@ -94,9 +93,10 @@ class ProviderMonitor with ChangeNotifier implements ProviderObserver {
   @override
   String toString() {
     return {
-      // 'Provider List': _providerList,
-      'Update Count': updates,
-      // 'Error Count': _errorCount,
+      'Families Count': families,
+      'Values Count': values,
+      'Updates Count': updates,
+      'Errors Count': errors,
     }.toString();
   }
 }

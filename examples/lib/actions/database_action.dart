@@ -5,7 +5,7 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class DatabaseAction extends ActionButtonDefinition {
-  static final log = logger(DatabaseAction, level: Level.debug);
+  static final log = logger(DatabaseAction);
 
   static final provider = Provider(
     name: 'Database Action',

@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/init/provider_monitor.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_logging/wt_logging.dart';
@@ -22,6 +23,7 @@ Future<ProviderScope> Function(
   required AlwaysAliveProviderBase<AppDefinition> appDefinition,
   required AlwaysAliveProviderBase<AppDetails> appDetails,
   required LoginSupport loginSupport,
+  Level? setApplicationLogLevel,
 }) withAppScaffold = andAppScaffold;
 
 Future<ProviderScope> Function(
@@ -31,7 +33,11 @@ Future<ProviderScope> Function(
   required AlwaysAliveProviderBase<AppDefinition> appDefinition,
   required AlwaysAliveProviderBase<AppDetails> appDetails,
   required LoginSupport loginSupport,
+  Level? setApplicationLogLevel,
 }) {
+  if (setApplicationLogLevel != null) {
+    Logger.level = setApplicationLogLevel;
+  }
   return (app, firebaseOptions) async {
     WidgetsFlutterBinding.ensureInitialized();
     final googleClientId = kIsWeb
@@ -80,14 +86,21 @@ Future<ProviderScope> Function(
 }
 
 Future<void> runMyApp(
-  Future<dynamic> Function() childBuilder,
-) async {
+  Future<dynamic> Function() childBuilder, {
+  List<ProviderObserver> includeObservers = const [],
+  List<Override> includeOverrides = const [],
+  bool enableProviderMonitoring = false,
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
   final widget = await child2widget(childBuilder());
   runApp(
     ProviderScope(
-      observers: widget is ProviderScope ? widget.observers : null,
-      overrides: widget is ProviderScope ? widget.overrides : [],
+      observers: [
+        if (enableProviderMonitoring) ProviderMonitor.instance,
+        ...includeObservers,
+        ...widget is ProviderScope ? widget.observers ?? [] : [],
+      ],
+      overrides: [...includeOverrides, ...widget is ProviderScope ? widget.overrides : []],
       child: widget is ProviderScope ? widget.child : widget,
     ),
   );

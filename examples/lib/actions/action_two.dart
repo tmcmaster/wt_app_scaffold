@@ -4,7 +4,7 @@ import 'package:wt_action_button/wt_action_button.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class ActionTwo extends ActionButtonDefinition {
-  static final log = logger(ActionTwo, level: Level.debug);
+  static final log = logger(ActionTwo);
 
   static final provider = Provider(
     name: 'Action Two',
