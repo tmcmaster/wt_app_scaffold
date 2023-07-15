@@ -20,12 +20,12 @@ scripts:
     build: flutter pub run build_runner build --delete-conflicting-outputs
 
 dependencies:
-  curved_navigation_bar:
-  draggable_bottom_sheet:
-  firebase_auth:
-  firebase_core:
+  curved_navigation_bar: ^1.0.3
+  draggable_bottom_sheet: ^1.0.2
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
   firebase_ui_auth: ^1.0.3
-  firebase_ui_localizations:
+  firebase_ui_localizations: ^1.5.0
   firebase_ui_oauth_apple: ^1.0.3
   firebase_ui_oauth_facebook: ^1.0.3
   firebase_ui_oauth_google: ^1.0.3
@@ -35,12 +35,12 @@ dependencies:
   flutter_hooks:
   flutter_localizations:
     sdk: flutter
-  flutter_riverpod:
-  font_awesome_flutter:
-  form_builder_validators:
-  grouped_list:
-  hooks_riverpod:
-  logger:
+  flutter_riverpod: ^2.3.6
+  font_awesome_flutter: ^10.5.0
+  form_builder_validators: ^9.0.0
+  grouped_list: ^5.1.2
+  hooks_riverpod: ^2.3.6
+  logger: ^1.4.0
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
   wt_firepod:
@@ -53,9 +53,9 @@ dependencies:
     git: https://github.com/tmcmaster/wt_settings.git
 
 dev_dependencies:
-  build_runner:
+  build_runner: ^2.4.6
   flutter_launcher_icons: ^0.9.3
-  flutter_lints:
+  flutter_lints: ^2.0.2
   flutter_native_splash: ^2.2.4
   flutter_test:
     sdk: flutter

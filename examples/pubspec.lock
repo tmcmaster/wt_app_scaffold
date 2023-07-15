@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: a742f71d7f3484253a623b30e19256aa4668ecbb3de6ad1beb0bcf8d4777ecd8
+      sha256: "5dce45a06d386358334eb1689108db6455d90ceb0d75848d5f4819283d4ee2b8"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.3"
+    version: "1.3.4"
   analyzer:
     dependency: transitive
     description:
@@ -149,26 +149,26 @@ packages:
     dependency: transitive
     description:
       name: cloud_functions
-      sha256: c21facf70f1d0fe16a170d2fb04a2bc7a47aa516180dafc31266250c983c028f
+      sha256: "61560d62b19f43e1d65b352ae121fc1b7046ceb6efce4e69ecd28fb110c84784"
       url: "https://pub.dev"
     source: hosted
-    version: "4.3.3"
+    version: "4.3.4"
   cloud_functions_platform_interface:
     dependency: transitive
     description:
       name: cloud_functions_platform_interface
-      sha256: "91b400b212697aa3988c0b89dff79ba95ae7b008433b6ad00308b444c978643e"
+      sha256: edfa0a929baec47df698ca28c37d03c27c020545326eeea1ed0f8b3a47b073ca
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.3"
+    version: "5.4.4"
   cloud_functions_web:
     dependency: transitive
     description:
       name: cloud_functions_web
-      sha256: "779538398a658fa002100a7bc291dca3b44e4f16280e23b2ea3bb49612e5deeb"
+      sha256: c2b73ef1bc9b0948bfb701a252e1a4019af4266e204270803ee7fa0f1641c74f
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.3"
+    version: "4.5.4"
   code_builder:
     dependency: transitive
     description:
@@ -302,34 +302,34 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_auth
-      sha256: f693c0aa998b1101453878951b171b69f0db5199003df1c943b33493a1de7917
+      sha256: "87216661b409575ecb1a7849da38604a0abfcb6497146b66d4832cb97a4c9e0f"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.3"
+    version: "4.7.0"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
-      sha256: "689ae048b78ad088ba31acdec45f5badb56201e749ed8b534947a7303ddb32aa"
+      sha256: "4ab0a8997994db2b76bf0652689d7908ca935a99314857c683251bc23d31c287"
       url: "https://pub.dev"
     source: hosted
-    version: "6.15.3"
+    version: "6.16.0"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
-      sha256: f35d637a1707afd51f30090bb5234b381d5071ccbfef09b8c393bc7c65e440cd
+      sha256: c74c5753855896b31536b9e151e34bf7eea143f0d9c209947b5f7ddc8e111989
       url: "https://pub.dev"
     source: hosted
-    version: "5.5.3"
+    version: "5.6.0"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: a4a99204da264a0aa9d54a332ea0315ce7b0768075139c77abefe98093dd98be
+      sha256: "2e9324f719e90200dc7d3c4f5d2abc26052f9f2b995d3b6626c47a0dfe1c8192"
       url: "https://pub.dev"
     source: hosted
-    version: "2.14.0"
+    version: "2.15.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -350,82 +350,82 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_database
-      sha256: "36699bda00feb31433606f034078c690f148c15a4721b351a83c796ba4bba4e7"
+      sha256: "08eff8d3321973f73f94633d807fb1f4589b4e2d2e0c33c7e656f42d2f9eba72"
       url: "https://pub.dev"
     source: hosted
-    version: "10.2.3"
+    version: "10.2.4"
   firebase_database_platform_interface:
     dependency: transitive
     description:
       name: firebase_database_platform_interface
-      sha256: "8bd62f80b51d71a81087a33fe2e2a868fb818a6e33b319a137a7bcb35dec262d"
+      sha256: db95e96b27c6d8ee4e1daf9ee7ff0e7433c5c340f9cfb5d855e65cbdb7430b9c
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.5+3"
+    version: "0.2.5+4"
   firebase_database_web:
     dependency: transitive
     description:
       name: firebase_database_web
-      sha256: "05e6b0c2a192569cd5ce2be4a708756ca9f56e4c7b6fe1916f0f9d96a826f235"
+      sha256: "1ae57beac0a002d0a778bcde569c3fad2457b7ca3d9ef2936287e562d0af6962"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.3+3"
+    version: "0.2.3+4"
   firebase_dynamic_links:
     dependency: transitive
     description:
       name: firebase_dynamic_links
-      sha256: "9b984d0abd227a702451a997abcca763f4dbf67e260dad60e5506d55e3eff244"
+      sha256: "4872f4d7e94736041398bc3490c2ddd87ee159d6b051ba01ca2708e5260a7ebe"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.3"
+    version: "5.3.4"
   firebase_dynamic_links_platform_interface:
     dependency: transitive
     description:
       name: firebase_dynamic_links_platform_interface
-      sha256: "6ef00a0be18f3231e9727f7c4b31db89dbfa16792098beb850603c30854560ff"
+      sha256: "946fccfefb67e26bf63e392f1b3917d79ea031d3071488f0c5e8ab72de8219ab"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.6+3"
+    version: "0.2.6+4"
   firebase_remote_config:
     dependency: transitive
     description:
       name: firebase_remote_config
-      sha256: "180367f364f8a7eb02a9a9d163182122d10eda4ec657c523f7027a1a3ad174d7"
+      sha256: "2883fad38d9536487f649c558c9e902a8ae36676990e9000bc8bd72f914ac9dd"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.3"
+    version: "4.2.4"
   firebase_remote_config_platform_interface:
     dependency: transitive
     description:
       name: firebase_remote_config_platform_interface
-      sha256: "7e4ccca4b597e02dfb468c454301ce9f4ad441a639f3cf5d9d237000cd4ded60"
+      sha256: "250384e15b4a732d9cca97b8b9ed5a29767f5c77d6301fc653d6bbe8b26b9487"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.3"
+    version: "1.4.4"
   firebase_remote_config_web:
     dependency: transitive
     description:
       name: firebase_remote_config_web
-      sha256: "0018ad4f3ae00a07caa8acf0f695863513c4b69a22def1c3e4c7ccd401cf6f5a"
+      sha256: c3e2be7d6e1416e4a1c7cc16d55a060a623e9e84c0ca0b07d9252584f39b7b08
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.3"
+    version: "1.4.4"
   firebase_ui_auth:
     dependency: "direct main"
     description:
       name: firebase_ui_auth
-      sha256: efb4a77c2784158c1b332594499bd7e1b4c59d5d3bc5d694b5aae6ba5b6e249b
+      sha256: "2cbe058cfae5de28ce3544e18118fda9d228644590ead6e36bcef486785c9c63"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   firebase_ui_database:
     dependency: transitive
     description:
       name: firebase_ui_database
-      sha256: "2e689f17173667086a713ef8a0d9bd34ea9997326efb239def3f68596e1ae975"
+      sha256: "484f2189555aae8f998299d7c3945cc20bfc468b2b8ff354ffd5f015ebe59e31"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.3"
+    version: "1.3.4"
   firebase_ui_localizations:
     dependency: transitive
     description:
@@ -438,18 +438,18 @@ packages:
     dependency: transitive
     description:
       name: firebase_ui_oauth
-      sha256: "1dfbb637093419809a1451b2550ac57180c91580ba15cad71332b16282785f17"
+      sha256: "0d2b6ac0c28768c342e85181ce92b2d16767400a95fb26402605c779a7898f26"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.4"
+    version: "1.4.5"
   firebase_ui_oauth_apple:
     dependency: transitive
     description:
       name: firebase_ui_oauth_apple
-      sha256: "47b135f64f5f29e671f213fe6a82b662bb7c6ae89d240ee6446db3d4d49b5dcf"
+      sha256: "513d4d981ce78eb51a4b1043dc200954c53be27654df92c8661152927228ceaf"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.4"
+    version: "1.2.5"
   firebase_ui_oauth_facebook:
     dependency: transitive
     description:
@@ -462,18 +462,18 @@ packages:
     dependency: transitive
     description:
       name: firebase_ui_oauth_google
-      sha256: a622b9dbb658809d82a18575a2aa46166ca35f0c640ced509efe3819ca29cbe1
+      sha256: "1cd619dd82b61af4872e521de75b773f5b8c71beb09963ac584002d03c9c90b3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.4"
+    version: "1.2.5"
   firebase_ui_oauth_twitter:
     dependency: transitive
     description:
       name: firebase_ui_oauth_twitter
-      sha256: "54bb5de44f458559b9b53980441c566b241cbe83dad4127f7671b4af0aeb4d11"
+      sha256: "2d7a89bef6d7a754ba1e05d51d800740caaa2bae4aae7c371019eb651ca8d242"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.4"
+    version: "1.2.5"
   firebase_ui_shared:
     dependency: transitive
     description:
@@ -1306,7 +1306,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5378f83f7b0a98afc6d317ff91c843d3c9b3eb5a"
+      resolved-ref: bade5b694df61fb1680923fb2bd899bc88b0bc0a
       url: "https://github.com/tmcmaster/wt_logging.git"
     source: git
     version: "0.0.1"
