@@ -31,14 +31,13 @@ dependencies:
   firebase_ui_oauth_twitter: ^1.0.3
   flutter:
     sdk: flutter
-  flutter_hooks:
+#  flutter_hooks:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.3.6
   font_awesome_flutter: ^10.5.0
   form_builder_validators: ^9.0.0
   grouped_list: ^5.1.2
-  hooks_riverpod: ^2.3.6
   logger: ^1.4.0
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git

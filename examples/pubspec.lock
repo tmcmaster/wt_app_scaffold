@@ -711,7 +711,7 @@ packages:
     source: hosted
     version: "5.1.2"
   hooks_riverpod:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: hooks_riverpod
       sha256: be68cf7653fcab798500f9047ac58c3f109287a1595012412f4a0d654a9bb9c5
@@ -1272,17 +1272,17 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "9828197d2ee80b1e9ab09a545677976aa6eb9922"
+      resolved-ref: "83a395b064e174c0388fd2a67555e4522b0a7023"
       url: "https://github.com/tmcmaster/wt_action_button.git"
     source: git
-    version: "0.0.2"
+    version: "1.0.0+1"
   wt_app_scaffold:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.0+1"
   wt_firebase_listview:
     dependency: "direct main"
     description:
@@ -1306,28 +1306,28 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: bade5b694df61fb1680923fb2bd899bc88b0bc0a
+      resolved-ref: "1e51811aa409a314d3d560669385733f913873af"
       url: "https://github.com/tmcmaster/wt_logging.git"
     source: git
-    version: "0.0.1"
+    version: "1.0.0+1"
   wt_models:
     dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: d93d356c0fc5669cae00538115c369cadfd78e9e
+      resolved-ref: "8be1fb3e62befaa0ce4cd4ce71fd26bb19dd72f8"
       url: "https://github.com/tmcmaster/wt_models.git"
     source: git
-    version: "0.0.2"
+    version: "1.0.0+1"
   wt_settings:
     dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "04682eccd1653b56e81fdd25277dc3aba774881c"
+      resolved-ref: dc580d8f2d452c5b31cf02a59c08e52469cc03a3
       url: "https://github.com/tmcmaster/wt_settings.git"
     source: git
-    version: "0.0.1"
+    version: "1.0.0+1"
   xdg_directories:
     dependency: transitive
     description:

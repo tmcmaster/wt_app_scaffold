@@ -12,7 +12,7 @@ scripts:
   clean: flutter clean
   refresh: flutter clean; flutter pub get
   test: flutter test
-  analise: dart analyze
+  check: dart analyze
   fix: dart fix --dry-run
   freezed:
     build: flutter pub run build_runner build --delete-conflicting-outputs
@@ -29,7 +29,6 @@ dependencies:
   form_builder_validators: ^9.0.0
   freezed: ^2.4.1
   freezed_annotation: ^2.4.1
-  hooks_riverpod: ^2.3.6
   riverpod: ^2.3.6
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
