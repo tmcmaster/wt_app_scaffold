@@ -18,19 +18,19 @@ scripts:
     build: flutter pub run build_runner build --delete-conflicting-outputs
 
 dependencies:
-  cupertino_icons:
-  firebase_auth:
-  firebase_core:
-  firebase_database:
-  firebase_ui_auth:
+  cupertino_icons: ^1.0.5
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
+  firebase_database: ^10.2.3
+  firebase_ui_auth: ^1.5.0
   flutter:
     sdk: flutter
-  font_awesome_flutter:
-  form_builder_validators:
-  freezed:
-  freezed_annotation: 
-  hooks_riverpod:
-  riverpod:
+  font_awesome_flutter: ^10.5.0
+  form_builder_validators: ^9.0.0
+  freezed: ^2.4.1
+  freezed_annotation: ^2.4.1
+  hooks_riverpod: ^2.3.6
+  riverpod: ^2.3.6
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
   wt_app_scaffold:
@@ -47,13 +47,13 @@ dependencies:
     git: https://github.com/tmcmaster/wt_settings.git
 
 dev_dependencies:
-  build_runner:
+  build_runner: ^2.4.6
   flutter_launcher_icons: ^0.9.3
   flutter_lints: ^2.0.0
   flutter_native_splash: ^2.2.4
   flutter_test:
     sdk: flutter
-  json_serializable:
+  json_serializable: ^6.7.1
 
 flutter:
   uses-material-design: true
