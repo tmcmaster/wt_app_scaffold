@@ -19,10 +19,10 @@ scripts:
 
 dependencies:
   cupertino_icons: ^1.0.5
-  firebase_auth: ^4.6.3
-  firebase_core: ^2.14.0
-  firebase_database: ^10.2.3
-  firebase_ui_auth: ^1.5.0
+  firebase_auth: ^4.7.0
+  firebase_core: ^2.15.0
+  firebase_database: ^10.2.4
+  firebase_ui_auth: ^1.6.0
   flutter:
     sdk: flutter
   font_awesome_flutter: ^10.5.0
