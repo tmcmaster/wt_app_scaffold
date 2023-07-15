@@ -34,3 +34,6 @@ hold
 *\.freezed\.dart
 *\.g\.dart
 *\.mocks\.dart
+firebase_options.dart
+.flutter-plugins
+.flutter-plugins-dependencies
