@@ -1,12 +1,11 @@
 name: wt_app_scaffold
 description: A package to manage the structure and navigation of an app.
-version: 1.0.0
+version: 1.0.0+1
 publish_to: 'none'
 homepage: https://github.com/tmcmaster/et-app-scaffold
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=3.0.3 <4.0.0'
 
 # Scripts to be run with rps
 scripts:
