@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -36,7 +35,8 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
         .indexOf(widget.appDefinition.pages.firstWhere((page) => page.primary));
 
     _selectedPageProvider = StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>(
-        (ref) => _SelectedPageNotifier(initialIndex),);
+      (ref) => _SelectedPageNotifier(initialIndex),
+    );
 
     super.initState();
   }
@@ -64,10 +64,12 @@ class _BottomNavBarAppState extends State<BottomNavBarApp> {
 
 class _SelectedPageNotifier extends StateNotifier<PageChangeEvent> {
   _SelectedPageNotifier(int initialPage)
-      : super(PageChangeEvent(
-          source: PageChangeSource.initial,
-          page: initialPage < 0 ? 0 : initialPage,
-        ),);
+      : super(
+          PageChangeEvent(
+            source: PageChangeSource.initial,
+            page: initialPage < 0 ? 0 : initialPage,
+          ),
+        );
 
   void setPage(PageChangeSource source, int page) {
     if (state.page != page) {
@@ -95,7 +97,7 @@ class PageChangeEvent {
   });
 }
 
-class _PageView extends HookConsumerWidget {
+class _PageView extends ConsumerStatefulWidget {
   final List<PageDefinition> items;
   final bool swipeEnabled;
   final bool debugMode;
@@ -108,10 +110,27 @@ class _PageView extends HookConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final initialPageEvent = ref.read(provider);
-    final pageController = usePageController(initialPage: initialPageEvent.page);
-    ref.listen(provider, (_, PageChangeEvent next) {
+  ConsumerState<_PageView> createState() => _PageViewState();
+}
+
+class _PageViewState extends ConsumerState<_PageView> {
+  late PageController pageController;
+
+  @override
+  void initState() {
+    pageController = PageController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen(widget.provider, (_, PageChangeEvent next) {
       if (next.source != PageChangeSource.pageView) {
         pageController.animateToPage(
           next.page,
@@ -121,19 +140,61 @@ class _PageView extends HookConsumerWidget {
       }
     });
 
-    final filterItems = debugMode ? items : items.where((item) => !item.debug).toList();
+    final filterItems =
+        widget.debugMode ? widget.items : widget.items.where((item) => !item.debug).toList();
     return PageView.builder(
       itemCount: filterItems.length,
-      physics: swipeEnabled ? null : const NeverScrollableScrollPhysics(),
+      physics: widget.swipeEnabled ? null : const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => filterItems[index].builder(context),
       onPageChanged: (page) {
-        final pageNav = ref.read(provider.notifier);
+        final pageNav = ref.read(widget.provider.notifier);
         pageNav.setPage(PageChangeSource.pageView, page);
       },
       controller: pageController,
     );
   }
 }
+
+// TODO: delete after testing.
+// class _PageView extends HookConsumerWidget {
+//   final List<PageDefinition> items;
+//   final bool swipeEnabled;
+//   final bool debugMode;
+//   final StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent> provider;
+//   const _PageView({
+//     required this.items,
+//     required this.provider,
+//     required this.debugMode,
+//     this.swipeEnabled = true,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final initialPageEvent = ref.read(provider);
+//     final pageController = usePageController(initialPage: initialPageEvent.page);
+//     ref.listen(provider, (_, PageChangeEvent next) {
+//       if (next.source != PageChangeSource.pageView) {
+//         pageController.animateToPage(
+//           next.page,
+//           duration: const Duration(milliseconds: 500),
+//           curve: Curves.easeInOut,
+//         );
+//       }
+//     });
+//
+//     final filterItems = debugMode ? items : items.where((item) => !item.debug).toList();
+//     return PageView.builder(
+//       itemCount: filterItems.length,
+//       physics: swipeEnabled ? null : const NeverScrollableScrollPhysics(),
+//       itemBuilder: (context, index) => filterItems[index].builder(context),
+//       onPageChanged: (page) {
+//         final pageNav = ref.read(provider.notifier);
+//         pageNav.setPage(PageChangeSource.pageView, page);
+//       },
+//       controller: pageController,
+//     );
+//   }
+// }
 
 // This is the type used by the popup menu below.
 enum Menu { itemOne, itemTwo, itemThree, itemFour }
@@ -179,13 +240,15 @@ class _BottomNavigationBar extends ConsumerWidget {
             selectedItemColor: currentSelected < 0 ? Colors.black54 : null,
             items: primaryItems
                 .where((item) => !item.debug)
-                .map((item) => BottomNavigationBarItem(
-                      icon: Icon(
-                        item.icon,
-                        color: primaryColor,
-                      ),
-                      label: item.title,
-                    ),)
+                .map(
+                  (item) => BottomNavigationBarItem(
+                    icon: Icon(
+                      item.icon,
+                      color: primaryColor,
+                    ),
+                    label: item.title,
+                  ),
+                )
                 .toList(),
             onTap: (selection) {
               log.d('Selected Item: $selection');
@@ -201,26 +264,28 @@ class _BottomNavigationBar extends ConsumerWidget {
             // Callback that sets the selected popup menu item.
             onSelected: (PageDefinition page) {},
             itemBuilder: (BuildContext context) => otherItems
-                .map((item) => PopupMenuItem<PageDefinition>(
-                      value: item,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: TextButton.icon(
-                          style: const ButtonStyle(
-                            alignment: Alignment.centerLeft,
-                          ),
-                          icon: Icon(item.icon),
-                          label: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(item.title),
-                          ),
-                          onPressed: () {
-                            pageNav.setPage(PageChangeSource.buttonBar, items.indexOf(item));
-                            Navigator.pop(context);
-                          },
+                .map(
+                  (item) => PopupMenuItem<PageDefinition>(
+                    value: item,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: TextButton.icon(
+                        style: const ButtonStyle(
+                          alignment: Alignment.centerLeft,
                         ),
+                        icon: Icon(item.icon),
+                        label: Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Text(item.title),
+                        ),
+                        onPressed: () {
+                          pageNav.setPage(PageChangeSource.buttonBar, items.indexOf(item));
+                          Navigator.pop(context);
+                        },
                       ),
-                    ),)
+                    ),
+                  ),
+                )
                 .toList(),
           ),
       ],

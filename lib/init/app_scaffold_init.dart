@@ -3,9 +3,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
-import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
-import 'package:firebase_ui_oauth_twitter/firebase_ui_oauth_twitter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,14 +59,6 @@ Future<ProviderScope> Function(
         if (loginSupport.googleEnabled && Platform.isAndroid)
           GoogleProvider(clientId: googleClientId),
         if (loginSupport.appleEnabled) AppleProvider(),
-        if (loginSupport.twitterEnabled)
-          FacebookProvider(clientId: FirebaseAuthKeys.facebookClientId),
-        if (loginSupport.twitterEnabled)
-          TwitterProvider(
-            apiKey: FirebaseAuthKeys.twitterApiKey,
-            apiSecretKey: FirebaseAuthKeys.twitterApiSecretKey,
-            redirectUri: FirebaseAuthKeys.twitterRedirectURi,
-          ),
       ],
       app: app,
     );

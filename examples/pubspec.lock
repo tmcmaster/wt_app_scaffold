@@ -450,27 +450,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.5"
-  firebase_ui_oauth_facebook:
-    dependency: transitive
-    description:
-      name: firebase_ui_oauth_facebook
-      sha256: "146f24e9e4c273488513248907e7f4a15ba3f13409b0e26db2d455056b1f283b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.1"
   firebase_ui_oauth_google:
     dependency: transitive
     description:
       name: firebase_ui_oauth_google
       sha256: "1cd619dd82b61af4872e521de75b773f5b8c71beb09963ac584002d03c9c90b3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.5"
-  firebase_ui_oauth_twitter:
-    dependency: transitive
-    description:
-      name: firebase_ui_oauth_twitter
-      sha256: "2d7a89bef6d7a754ba1e05d51d800740caaa2bae4aae7c371019eb651ca8d242"
       url: "https://pub.dev"
     source: hosted
     version: "1.2.5"
@@ -503,30 +487,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
-  flutter_facebook_auth:
-    dependency: transitive
-    description:
-      name: flutter_facebook_auth
-      sha256: "50dc3eef562acbe1e4cfad478053c9c16f9eaac49ad14ec48f00ed9dae1ba0cd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.4.1+1"
-  flutter_facebook_auth_platform_interface:
-    dependency: transitive
-    description:
-      name: flutter_facebook_auth_platform_interface
-      sha256: "7950f5f8a6f2270c5d29af2a514733987db1191f70838fa777b282e47365f8c8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.0"
-  flutter_facebook_auth_web:
-    dependency: transitive
-    description:
-      name: flutter_facebook_auth_web
-      sha256: "0f732e968c929a3c11a215ded802557576230ff0a0794c88941a8e92ff07b2eb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.0"
   flutter_form_builder:
     dependency: transitive
     description:
@@ -551,14 +511,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3"
-  flutter_lints:
-    dependency: "direct dev"
-    description:
-      name: flutter_lints
-      sha256: "2118df84ef0c3ca93f96123a616ae8540879991b8b57af2f81b76a7ada49b2a4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -573,7 +525,7 @@ packages:
     source: hosted
     version: "2.2.16"
   flutter_riverpod:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_riverpod
       sha256: b83ac5827baadefd331ea1d85110f34645827ea234ccabf53a655f41901a9bf4
@@ -806,14 +758,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
-  lints:
-    dependency: transitive
-    description:
-      name: lints
-      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   logger:
     dependency: transitive
     description:
@@ -975,7 +919,7 @@ packages:
     source: hosted
     version: "3.2.1"
   riverpod:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: riverpod
       sha256: "80e48bebc83010d5e67a11c9514af6b44bbac1ec77b4333c8ea65dbc79e2d8ef"
@@ -1179,14 +1123,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
-  twitter_login:
-    dependency: transitive
-    description:
-      name: twitter_login
-      sha256: b817207feee154e25c10c328901b4b873ab0e343f63e5fa32115c25ceb4ca8a4
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.4.1"
   typed_data:
     dependency: transitive
     description:

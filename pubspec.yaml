@@ -26,12 +26,9 @@ dependencies:
   firebase_ui_auth: ^1.6.0
   firebase_ui_localizations: ^1.5.0
   firebase_ui_oauth_apple: ^1.0.3
-  firebase_ui_oauth_facebook: ^1.0.3
   firebase_ui_oauth_google: ^1.0.3
-  firebase_ui_oauth_twitter: ^1.0.3
   flutter:
     sdk: flutter
-#  flutter_hooks:
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.3.6
@@ -52,9 +49,8 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.6
-  flutter_launcher_icons: ^0.9.3
-  flutter_lints: ^2.0.2
-  flutter_native_splash: ^2.2.4
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.1
   flutter_test:
     sdk: flutter
 
