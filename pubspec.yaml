@@ -54,18 +54,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-#  wt_action_button:
-#    path: ../wt_action_button
-  wt_firepod:
-    path: ../wt_firepod
-#  wt_logging:
-#    path: ../wt_logging
-#  wt_models:
-#    path: ../wt_models
-#  wt_settings:
-#    path: ../wt_settings
-
 flutter:
   uses-material-design: true
   assets:

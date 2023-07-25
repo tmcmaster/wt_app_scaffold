@@ -53,9 +53,6 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.7.1
 
-dependency_overrides:
-  wt_firepod:
-    path: ../../wt_firepod
 
 flutter:
   uses-material-design: true

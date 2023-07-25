@@ -318,10 +318,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_auth
-      sha256: "87216661b409575ecb1a7849da38604a0abfcb6497146b66d4832cb97a4c9e0f"
+      sha256: acfbe55bc23e94ccc7228b7fc7b9abc0005597c1de226f6e3a0103ac29728fbe
       url: "https://pub.dev"
     source: hosted
-    version: "4.7.0"
+    version: "4.7.1"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
@@ -334,10 +334,10 @@ packages:
     dependency: transitive
     description:
       name: firebase_auth_web
-      sha256: c74c5753855896b31536b9e151e34bf7eea143f0d9c209947b5f7ddc8e111989
+      sha256: "2e694a612a0739c0cf5f426d515dda37ee5827bab211d16e76bcad6a082925eb"
       url: "https://pub.dev"
     source: hosted
-    version: "5.6.0"
+    version: "5.6.1"
   firebase_core:
     dependency: "direct main"
     description:
@@ -430,10 +430,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_ui_auth
-      sha256: "2cbe058cfae5de28ce3544e18118fda9d228644590ead6e36bcef486785c9c63"
+      sha256: "307f2a9f4ba33a8fd5b73ac7403982027c302789c7cbf336432e1235f242e3a1"
       url: "https://pub.dev"
     source: hosted
-    version: "1.6.0"
+    version: "1.6.1"
   firebase_ui_localizations:
     dependency: "direct main"
     description:
@@ -446,26 +446,26 @@ packages:
     dependency: transitive
     description:
       name: firebase_ui_oauth
-      sha256: "0d2b6ac0c28768c342e85181ce92b2d16767400a95fb26402605c779a7898f26"
+      sha256: "666a6831e93c3dc30e8a69acfdd665d9c630d34cdc0d797f86f5c0fc4c32c4f9"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.5"
+    version: "1.4.6"
   firebase_ui_oauth_apple:
     dependency: "direct main"
     description:
       name: firebase_ui_oauth_apple
-      sha256: "513d4d981ce78eb51a4b1043dc200954c53be27654df92c8661152927228ceaf"
+      sha256: "3f4eb30373282d0af5ebe3c60670cd83bb725122bd31a44a7ec56fcd7a7fbdf9"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.5"
+    version: "1.2.6"
   firebase_ui_oauth_google:
     dependency: "direct main"
     description:
       name: firebase_ui_oauth_google
-      sha256: "1cd619dd82b61af4872e521de75b773f5b8c71beb09963ac584002d03c9c90b3"
+      sha256: "4f4019a25b3ac19da5b955cd7951ae3b79002094929d01f4366f01e092267b8e"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.5"
+    version: "1.2.6"
   firebase_ui_shared:
     dependency: transitive
     description:
@@ -499,10 +499,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_form_builder
-      sha256: "9b098f6a5f8a6381016a5fe9cdccc900683917d1fb930e1c6c6c051ca0f01f08"
+      sha256: e828c11156d75fc668da1d8e7ddc2311ea8368f023fd28a7c7c126c8b903c5d6
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.0"
+    version: "9.1.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -850,10 +850,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: "6a2128648c854906c53fa8e33986fc0247a1116122f9534dd20e3ab9e16a32bc"
+      sha256: "43798d895c929056255600343db8f049921cbec94d31ec87f1dc5c16c01935dd"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   pointycastle:
     dependency: transitive
     description:
@@ -1159,10 +1159,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: dfdf0136e0aa7a1b474ea133e67cb0154a0acd2599c4f3ada3b49d38d38793ee
+      sha256: f2add6fa510d3ae152903412227bda57d0d5a8da61d2c39c1fb022c9429a41c0
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.5"
+    version: "5.0.6"
   wt_action_button:
     dependency: "direct main"
     description:
@@ -1175,16 +1175,18 @@ packages:
   wt_firepod:
     dependency: "direct main"
     description:
-      path: "../wt_firepod"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "3f56c9d2009f4e3d05ae53b18e91676708128f57"
+      url: "https://github.com/tmcmaster/wt_firepod.git"
+    source: git
     version: "1.0.0+1"
   wt_logging:
     dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "1e51811aa409a314d3d560669385733f913873af"
+      resolved-ref: "96128b063fd6ba11c132ba3adf7f876d7de8c4d9"
       url: "https://github.com/tmcmaster/wt_logging.git"
     source: git
     version: "1.0.0+1"
@@ -1231,5 +1233,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.3 <3.2.0"
+  dart: ">=3.0.5 <3.2.0"
   flutter: ">=3.10.0"
