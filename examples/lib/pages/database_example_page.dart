@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_action_button/action_process_indicator.dart';
 import 'package:wt_app_scaffold_examples/actions/database_action.dart';
 import 'package:wt_app_scaffold_examples/models/definitions/product_definition.dart';
@@ -70,8 +70,9 @@ class DatabaseExamplePage extends ConsumerWidget {
         ),
       ),
       floatingActionButton: databaseAction.component(
-          floating: true,
-          noLabel: true,), // This trailing comma makes auto-formatting nicer for build methods.
+        floating: true,
+        noLabel: true,
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

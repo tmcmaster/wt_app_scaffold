@@ -106,8 +106,6 @@ PODS:
     - FlutterMacOS
   - sign_in_with_apple (0.0.1):
     - FlutterMacOS
-  - twitter_login (0.0.1):
-    - FlutterMacOS
 
 DEPENDENCIES:
   - cloud_functions (from `Flutter/ephemeral/.symlinks/plugins/cloud_functions/macos`)
@@ -119,7 +117,6 @@ DEPENDENCIES:
   - FlutterMacOS (from `Flutter/ephemeral`)
   - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `Flutter/ephemeral/.symlinks/plugins/sign_in_with_apple/macos`)
-  - twitter_login (from `Flutter/ephemeral/.symlinks/plugins/twitter_login/macos`)
 
 SPEC REPOS:
   trunk:
@@ -161,8 +158,6 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin
   sign_in_with_apple:
     :path: Flutter/ephemeral/.symlinks/plugins/sign_in_with_apple/macos
-  twitter_login:
-    :path: Flutter/ephemeral/.symlinks/plugins/twitter_login/macos
 
 SPEC CHECKSUMS:
   cloud_functions: e1953328aad60c8c9210b396b7b24e8e22a9afda
@@ -192,7 +187,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   sign_in_with_apple: a9e97e744e8edc36aefc2723111f652102a7a727
-  twitter_login: 84e97378ac41500101e023284e22233c5e1002f4
 
 PODFILE CHECKSUM: 353c8bcc5d5b0994e508d035b5431cfe18c1dea7
 

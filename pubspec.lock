@@ -1175,11 +1175,9 @@ packages:
   wt_firepod:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "6ce217cc0226ffdc5b6f0785b5dcb28444a50ccc"
-      url: "https://github.com/tmcmaster/wt_firepod.git"
-    source: git
+      path: "../wt_firepod"
+      relative: true
+    source: path
     version: "1.0.0+1"
   wt_logging:
     dependency: "direct main"
@@ -1233,5 +1231,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.5 <3.2.0"
+  dart: ">=3.0.3 <3.2.0"
   flutter: ">=3.10.0"

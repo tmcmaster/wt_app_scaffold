@@ -1,12 +1,13 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:riverpod/riverpod.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/app_platform.dart';
 import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
 import 'package:wt_app_scaffold_examples/actions/action_two.dart';
+import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
 import 'package:wt_app_scaffold_examples/pages/async_example_page.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
@@ -45,6 +46,12 @@ mixin AppOne {
         ),
       ),
       pages: [
+        PageDefinition(
+          title: 'Landing Page',
+          icon: FontAwesomeIcons.clipboard,
+          debug: false,
+          builder: (context) => const FirebasePage(),
+        ),
         PageDefinition(
           title: 'Page One',
           icon: FontAwesomeIcons.clipboard,

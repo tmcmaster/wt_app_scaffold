@@ -11,6 +11,7 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/init/provider_monitor.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/login/config.dart';
+import 'package:wt_app_scaffold/widgets/virtual_size_fitted_box.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 Future<ProviderScope> Function(
@@ -22,6 +23,7 @@ Future<ProviderScope> Function(
   required AlwaysAliveProviderBase<AppDetails> appDetails,
   required LoginSupport loginSupport,
   Level? setApplicationLogLevel,
+  double? virtualSize,
 }) withAppScaffold = andAppScaffold;
 
 Future<ProviderScope> Function(
@@ -32,6 +34,7 @@ Future<ProviderScope> Function(
   required AlwaysAliveProviderBase<AppDetails> appDetails,
   required LoginSupport loginSupport,
   Level? setApplicationLogLevel,
+  double? virtualSize,
 }) {
   if (setApplicationLogLevel != null) {
     Logger.level = setApplicationLogLevel;
@@ -70,7 +73,12 @@ Future<ProviderScope> Function(
         AppScaffoldProviders.appDetails.overrideWith((ref) => ref.read(appDetails)),
       ],
       observers: const [],
-      child: const LoginAppContainer(),
+      child: virtualSize != null
+          ? VirtualSizeFittedBox(
+              virtualSize: virtualSize,
+              child: const LoginAppContainer(),
+            )
+          : const LoginAppContainer(),
     );
   };
 }
