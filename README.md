@@ -134,16 +134,24 @@ import 'app/wix_admin.dart';
 void main() async {
   runMyApp(
     withFirebase(
-      andAppScaffold(
+      andLogin(
+        andAppScaffold(
           appDetails: AppOne.details,
           appDefinition: AppOne.definition,
-          loginSupport: const LoginSupport(
-            googleEnabled: true,
-            emailEnabled: true,
-          )),
-      appName: 'wix-admin',
+        ),
+        loginSupport: const LoginSupport(
+          emailEnabled: true,
+          googleEnabled: true,
+        ),
+      ),
+      appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
     ),
+    virtualSize: 1200,
+    includeObservers: [],
+    includeOverrides: [],
+    enableProviderMonitoring: false,
+    setApplicationLogLevel: Level.warning,
   );
 }
 ```
