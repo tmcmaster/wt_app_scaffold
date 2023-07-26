@@ -23,10 +23,9 @@ class VirtualSizeFittedBox extends StatelessWidget {
           width: constraints.maxWidth,
           height: constraints.maxHeight,
           child: FittedBox(
-            child: Container(
+            child: SizedBox(
               width: constraints.maxWidth * ratio,
               height: constraints.maxHeight * ratio,
-              color: Colors.amber,
               child: child,
             ),
           ),
