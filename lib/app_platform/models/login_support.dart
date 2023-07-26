@@ -8,6 +8,7 @@ class LoginSupport {
   final bool appleEnabled;
   final bool phoneEnabled;
   final bool emailLinkEnabled;
+  final bool anonymousEnabled;
 
   const LoginSupport({
     this.googleEnabled = false,
@@ -17,5 +18,6 @@ class LoginSupport {
     this.appleEnabled = false,
     this.phoneEnabled = false,
     this.emailLinkEnabled = false,
+    this.anonymousEnabled = false,
   });
 }

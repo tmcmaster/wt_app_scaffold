@@ -10,7 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/builders/label_overrides.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/builders/theme_styles.dart';
 import 'package:wt_app_scaffold/app_platform/features/login_screen_support/config.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/pages/email_link_sign_in_page.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/pages/email_verification_page.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/pages/forgot_password_page.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/pages/phone_input_page.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/pages/profile_page.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/pages/sign_in_page.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/pages/sms_code_input_page.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
 import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
@@ -73,44 +82,20 @@ class LoginScreenSupport extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDetails = ref.read(AppPlatformProviders.appDetails);
     final themeMode = ref.watch(ApplicationSettings.theme.value);
-    final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
+    final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final auth = ref.watch(FirebaseProviders.auth);
     final color = ref.watch(ApplicationSettings.colorScheme.value);
-    final iconPath = appDetails.iconPath;
-    final User? currentUser = auth.currentUser;
-    final welcomeString = _createWelcomeString(appDetails);
 
-    final initialRoute = currentUser == null
+    log.d('LoginAppContainer: user(${auth.currentUser?.email})');
+
+    final initialRoute = auth.currentUser == null
         ? '/sign-in'
-        : emailVerificationRequired && !currentUser.emailVerified
+        : emailVerificationRequired && !auth.currentUser!.emailVerified
             ? '/verify-email'
             : '/';
 
-    final buttonStyle = ButtonStyle(
-      padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
-      shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-    );
-
     final snackBarKey = ref.read(UserLog.snackBarKey);
-    final navigatorKey = ref.read(AppPlatformProviders.navigatorKey);
-    final title = ref.read(AppPlatformProviders.appDetails).title;
-
-    final mfaAction = AuthStateChangeAction<MFARequired>(
-      (context, state) async {
-        final nav = Navigator.of(context);
-
-        await startMFAVerification(
-          resolver: state.resolver,
-          context: context,
-        );
-
-        nav.pushReplacementNamed('/profile');
-      },
-    );
 
     return MaterialApp(
       theme: ThemeData(
@@ -120,95 +105,30 @@ class LoginScreenSupport extends ConsumerWidget {
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(),
         ),
-        elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
-        textButtonTheme: TextButtonThemeData(style: buttonStyle),
-        outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
+        elevatedButtonTheme: ElevatedButtonThemeData(style: ThemeStyles.buttonStyle),
+        textButtonTheme: TextButtonThemeData(style: ThemeStyles.buttonStyle),
+        outlinedButtonTheme: OutlinedButtonThemeData(style: ThemeStyles.buttonStyle),
       ),
-      debugShowCheckedModeBanner: false,
       darkTheme: ThemeData.dark(),
       themeMode: themeMode,
       scaffoldMessengerKey: snackBarKey,
-      navigatorKey: navigatorKey,
+      navigatorKey: ref.read(AppPlatformProviders.navigatorKey),
       initialRoute: initialRoute,
       routes: {
-        '/sign-in': (context) {
-          return SignInScreen(
-            auth: auth,
-            actions: [
-              ForgotPasswordAction((context, email) {
-                Navigator.pushNamed(
-                  context,
-                  '/forgot-password',
-                  arguments: {'email': email},
-                );
-              }),
-              VerifyPhoneAction((context, _) {
-                Navigator.pushNamed(context, '/phone');
-              }),
-              AuthStateChangeAction<SignedIn>((context, state) {
-                if (!emailVerificationRequired) {
-                  Navigator.pushNamed(context, '/');
-                } else {
-                  if (!state.user!.emailVerified) {
-                    log.d('Sending verification email.');
-                    auth.currentUser!.sendEmailVerification();
-                    Navigator.pushNamed(context, '/verify-email');
-                  } else {
-                    Navigator.pushReplacementNamed(context, '/profile');
-                  }
-                }
-              }),
-              AuthStateChangeAction<UserCreated>((context, state) {
-                if (!verifyEmail) {
-                  Navigator.pushNamed(context, '/');
-                } else {
-                  if (!state.credential.user!.emailVerified) {
-                    Navigator.pushNamed(context, '/verify-email');
-                  } else {
-                    Navigator.pushReplacementNamed(context, '/profile');
-                  }
-                }
-              }),
-              mfaAction,
-              EmailLinkSignInAction((context) {
-                Navigator.pushReplacementNamed(context, '/email-link-sign-in');
-              }),
-            ],
-            styles: const {
-              EmailFormStyle(
-                signInButtonVariant: ButtonVariant.filled,
-              ),
-            },
-            headerBuilder: _headerImage(iconPath),
-            sideBuilder: _sideImage(iconPath),
-            subtitleBuilder: (context, action) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  action == AuthAction.signIn
-                      ? '$welcomeString Please sign in to continue.'
-                      : '$welcomeString Please create an account to continue',
-                ),
-              );
-            },
-            footerBuilder: (context, action) {
-              return const Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 16),
-                  child: Column(
-                    children: [],
-                  ),
-                ),
-              );
-            },
-          );
-        },
-        '/': (_) => Scaffold(body: child),
+        '/sign-in': (context) => SignInPage(emailVerificationRequired: emailVerificationRequired),
+        '/verify-email': (context) => const EmailVerificationPage(),
+        '/phone': (context) => const PhoneInputPage(),
+        '/sms': (context) => const SMSCodeInputPage(),
+        '/forgot-password': (context) => const ForgotPasswordPage(),
+        '/email-link-sign-in': (context) => const EmailLinkSignInPage(),
+        '/profile': (context) => const ProfilePage(),
+        '/': (context) => Scaffold(body: child),
       },
-      title: title,
+      title: 'Firebase UI demo',
+      debugShowCheckedModeBanner: debugMode,
       locale: const Locale('en'),
       localizationsDelegates: [
-        FirebaseUILocalizations.withDefaultOverrides(const _LabelOverrides()),
+        FirebaseUILocalizations.withDefaultOverrides(const LabelOverrides()),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         FirebaseUILocalizations.delegate,
@@ -216,67 +136,4 @@ class LoginScreenSupport extends ConsumerWidget {
       ],
     );
   }
-}
-
-String _createWelcomeString(AppDetails appDetails) {
-  final name = appDetails.title.isNotEmpty ? appDetails.title : appDetails.subTitle;
-
-  return name.isEmpty ? 'Welcome!' : 'Welcome to $name!';
-}
-
-HeaderBuilder _headerImage(String assetName) {
-  return (context, constraints, _) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Image.asset(assetName),
-    );
-  };
-}
-
-// TODO: need to add this back in
-// ignore: unused_element
-HeaderBuilder _headerIcon(IconData icon) {
-  return (context, constraints, shrinkOffset) {
-    return Padding(
-      padding: const EdgeInsets.all(20).copyWith(top: 40),
-      child: Icon(
-        icon,
-        color: Colors.blue,
-        size: constraints.maxWidth / 4 * (1 - shrinkOffset),
-      ),
-    );
-  };
-}
-
-SideBuilder _sideImage(String assetName) {
-  return (context, constraints) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(constraints.maxWidth / 4),
-        child: Image.asset(assetName),
-      ),
-    );
-  };
-}
-
-// TODO: need to add this back in
-// ignore: unused_element
-SideBuilder _sideIcon(IconData icon) {
-  return (context, constraints) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Icon(
-        icon,
-        color: Colors.blue,
-        size: constraints.maxWidth / 3,
-      ),
-    );
-  };
-}
-
-class _LabelOverrides extends DefaultLocalizations {
-  const _LabelOverrides();
-
-  @override
-  String get emailInputLabel => 'Enter your email';
 }

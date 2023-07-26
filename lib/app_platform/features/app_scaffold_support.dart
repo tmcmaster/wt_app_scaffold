@@ -45,7 +45,6 @@ class AppScaffoldSupport extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final color = ref.watch(ApplicationSettings.colorScheme.value);
@@ -80,7 +79,7 @@ class AppScaffoldSupport extends ConsumerWidget {
       debugShowCheckedModeBanner: debugMode,
       scaffoldMessengerKey: snackBarKey,
       navigatorKey: navigatorKey,
-      home: AppBuilder(appDefinition: appDefinition),
+      home: const AppBuilder(),
     );
   }
 }
