@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
-import 'package:wt_app_scaffold/app_platform/widgets/future_provider_scope.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -42,24 +41,6 @@ class AppScaffoldSupport extends ConsumerWidget {
       return newContextMap;
     }
   }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return FutureProviderScope(
-      init: (ref) => init(
-        appDetails: appDetails,
-        appDefinition: appDefinition,
-        contextMap: {}, // TODO: need to fix this
-      ),
-      child: const _ApplicationMaterialApp(),
-    );
-  }
-}
-
-class _ApplicationMaterialApp extends ConsumerWidget {
-  static final log = logger(AppScaffoldSupport);
-
-  const _ApplicationMaterialApp();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -12,7 +12,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
-import 'package:wt_app_scaffold/app_platform/widgets/future_provider_scope.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/login/config.dart';
@@ -71,36 +70,6 @@ class LoginScreenSupport extends ConsumerWidget {
       return contextMap;
     }
   }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final firebaseOptions = ref.read(FirebaseProviders.firebaseOptions);
-    final firebaseApp = ref.read(FirebaseProviders.app);
-    return FutureProviderScope(
-      init: (ref) => init(
-        firebaseOptions: firebaseOptions,
-        firebaseApp: firebaseApp,
-        loginSupport: loginSupport,
-        contextMap: {}, // TODO: fix this
-      ),
-      child: _LoginScreenSupport(
-        emailVerificationRequired: emailVerificationRequired,
-        child: child,
-      ),
-    );
-  }
-}
-
-class _LoginScreenSupport extends ConsumerWidget {
-  static final log = logger(LoginScreenSupport);
-
-  final Widget child;
-  final bool emailVerificationRequired;
-
-  const _LoginScreenSupport({
-    required this.child,
-    this.emailVerificationRequired = false,
-  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
