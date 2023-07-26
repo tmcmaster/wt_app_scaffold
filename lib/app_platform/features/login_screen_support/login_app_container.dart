@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:wt_app_scaffold/models/app_details.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/config.dart';
+import 'package:wt_app_scaffold/app_platform/models/app_details.dart';
+import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/app_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
-import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -24,7 +25,7 @@ class LoginAppContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDetails = ref.read(AppScaffoldProviders.appDetails);
+    final appDetails = ref.read(AppPlatformProviders.appDetails);
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
@@ -80,7 +81,7 @@ class LoginAppContainer extends ConsumerWidget {
       darkTheme: ThemeData.dark(),
       themeMode: themeMode,
       scaffoldMessengerKey: snackBarKey,
-      navigatorKey: ref.read(AppScaffoldProviders.navigatorKey),
+      navigatorKey: ref.read(AppPlatformProviders.navigatorKey),
       initialRoute: initialRoute,
       routes: {
         '/sign-in': (context) {

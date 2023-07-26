@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
 import 'package:wt_app_scaffold_examples/data/firebase_data.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
@@ -20,13 +20,13 @@ class FirebasePage extends ConsumerWidget {
             const Text(':-)'),
             Text('FirebaseAuth : ${ref.read(FirebaseProviders.auth)}'),
             Text('App Name : ${ref.read(FirebaseProviders.appName)}'),
-            Text('Navigator Key : ${ref.read(AppScaffoldProviders.navigatorKey)}'),
+            Text('Navigator Key : ${ref.read(AppPlatformProviders.navigatorKey)}'),
             Text('Firebase Data : ${ref.read(FirebaseData.firebaseDatabase)}'),
             ElevatedButton(
               onPressed: () {
                 ref.read(FirebaseProviders.auth).signOut();
                 ref
-                    .read(AppScaffoldProviders.navigatorKey)
+                    .read(AppPlatformProviders.navigatorKey)
                     .currentState
                     ?.pushReplacementNamed('/sign-in');
               },

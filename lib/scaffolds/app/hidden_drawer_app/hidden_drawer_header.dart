@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
 
 class HiddenDrawerHeader extends ConsumerWidget {
   const HiddenDrawerHeader({
@@ -13,7 +12,7 @@ class HiddenDrawerHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDetails = ref.watch(AppScaffoldProviders.appDetails);
+    final appDetails = ref.watch(AppPlatformProviders.appDetails);
 
     return Container(
       padding: const EdgeInsets.all(8),

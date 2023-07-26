@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
+import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -30,9 +31,9 @@ class AppScaffoldSupport extends ConsumerWidget {
         value: appDefinition,
         override: AppScaffoldProviders.appDefinition.overrideWith((ref) => ref.read(appDefinition)),
       ),
-      AppScaffoldProviders.appDetails: ProviderOverrideDefinition(
+      AppPlatformProviders.appDetails: ProviderOverrideDefinition(
         value: appDetails,
-        override: AppScaffoldProviders.appDetails.overrideWith((ref) => ref.read(appDetails)),
+        override: AppPlatformProviders.appDetails.overrideWith((ref) => ref.read(appDetails)),
       ),
     };
     if (child != null) {
@@ -53,7 +54,7 @@ class AppScaffoldSupport extends ConsumerWidget {
     log.d('LOGIN SUPPORT: $isLoginEnabled');
 
     final snackBarKey = isLoginEnabled ? null : ref.read(UserLog.snackBarKey);
-    final navigatorKey = isLoginEnabled ? null : ref.read(AppScaffoldProviders.navigatorKey);
+    final navigatorKey = isLoginEnabled ? null : ref.read(AppPlatformProviders.navigatorKey);
 
     final buttonStyle = ButtonStyle(
       padding: MaterialStateProperty.all(const EdgeInsets.all(12)),

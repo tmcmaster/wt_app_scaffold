@@ -2,8 +2,8 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/config.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_app_scaffold_examples/apps/chat_gpt/example_pages.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 

@@ -10,11 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:wt_app_scaffold/app_platform/features/login_screen_support/config.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
+import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
-import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_firepod/wt_firepod.dart' hide EmailAuthProvider, PhoneAuthProvider;
 import 'package:wt_logging/wt_logging.dart';
 
@@ -73,7 +73,7 @@ class LoginScreenSupport extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDetails = ref.read(AppScaffoldProviders.appDetails);
+    final appDetails = ref.read(AppPlatformProviders.appDetails);
     final themeMode = ref.watch(ApplicationSettings.theme.value);
     final verifyEmail = ref.watch(ApplicationSettings.verifyEmail.value);
     final auth = ref.watch(FirebaseProviders.auth);
@@ -96,7 +96,8 @@ class LoginScreenSupport extends ConsumerWidget {
     );
 
     final snackBarKey = ref.read(UserLog.snackBarKey);
-    final navigatorKey = ref.read(AppScaffoldProviders.navigatorKey);
+    final navigatorKey = ref.read(AppPlatformProviders.navigatorKey);
+    final title = ref.read(AppPlatformProviders.appDetails).title;
 
     final mfaAction = AuthStateChangeAction<MFARequired>(
       (context, state) async {
@@ -202,19 +203,9 @@ class LoginScreenSupport extends ConsumerWidget {
             },
           );
         },
-        '/': (_) => currentUser == null
-            ? Container(
-                padding: const EdgeInsets.all(20),
-                color: Colors.orangeAccent,
-                child: Scaffold(body: child),
-              )
-            : Container(
-                padding: const EdgeInsets.all(20),
-                color: Colors.green,
-                child: Scaffold(body: child),
-              )
+        '/': (_) => Scaffold(body: child),
       },
-      title: 'Firebase UI demo',
+      title: title,
       locale: const Locale('en'),
       localizationsDelegates: [
         FirebaseUILocalizations.withDefaultOverrides(const _LabelOverrides()),

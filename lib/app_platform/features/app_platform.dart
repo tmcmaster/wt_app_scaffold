@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_platform/components/provider_monitor.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/init/provider_monitor.dart';
 import 'package:wt_app_scaffold/widgets/virtual_size_fitted_box.dart';
 import 'package:wt_logging/wt_logging.dart';
 

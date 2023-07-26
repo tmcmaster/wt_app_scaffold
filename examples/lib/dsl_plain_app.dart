@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wt_app_scaffold/app_platform.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
 
 void main() async {
   await runMyApp(

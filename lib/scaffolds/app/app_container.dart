@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -27,14 +27,14 @@ class AppContainer extends ConsumerWidget {
     final user = ref.watch(FirebaseProviders.auth).currentUser;
     final initialRoute = user == null ? LoginView.routeName : AppBuilder.routeName;
 
-    ref.read(AppScaffoldProviders.providerManager);
+    ref.read(AppPlatformProviders.providerManager);
 
     return MaterialApp(
       title: appDefinition.appTitle,
       debugShowCheckedModeBanner: debugMode,
       restorationScopeId: appDefinition.appName,
       scaffoldMessengerKey: snackBarKey,
-      navigatorKey: ref.read(AppScaffoldProviders.navigatorKey),
+      navigatorKey: ref.read(AppPlatformProviders.navigatorKey),
       localizationsDelegates: [
         ...appDefinition.localizationDelegates ?? [],
         GlobalMaterialLocalizations.delegate,

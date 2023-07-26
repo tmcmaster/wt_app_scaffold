@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/models/app_details.dart';
-import 'package:wt_app_scaffold/models/login_support.dart';
+import 'package:wt_app_scaffold/app_platform/models/app_details.dart';
 import 'package:wt_app_scaffold/models/page_definition.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 
@@ -19,8 +18,6 @@ class AppDefinition {
   final void Function(BuildContext context)? menuAction;
   final List<LocalizationsDelegate>? localizationDelegates;
 
-  final LoginSupport loginSupport;
-
   const AppDefinition._({
     required this.appTitle,
     required this.appName,
@@ -32,7 +29,6 @@ class AppDefinition {
     required this.dismissAction,
     required this.menuAction,
     required this.localizationDelegates,
-    required this.loginSupport,
   });
 
   factory AppDefinition.from({
@@ -46,7 +42,6 @@ class AppDefinition {
     void Function(BuildContext context)? dismissAction,
     void Function(BuildContext context)? menuAction,
     List<LocalizationsDelegate>? localizationDelegates,
-    LoginSupport loginSupport = LoginSupport.none,
   }) {
     return AppDefinition._(
       appTitle: appTitle,
@@ -64,7 +59,6 @@ class AppDefinition {
       dismissAction: dismissAction,
       menuAction: menuAction,
       localizationDelegates: localizationDelegates,
-      loginSupport: loginSupport,
     );
   }
 }
