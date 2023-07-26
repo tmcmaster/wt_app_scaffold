@@ -76,7 +76,7 @@ class _HiddenDrawerAppState extends State<HiddenDrawerApp> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: colorScheme.primary.withOpacity(0.3),
+      backgroundColor: HSLColor.fromColor(colorScheme.primary).withLightness(0.1).toColor(),
       body: Stack(
         children: [
           buildDrawer(context),
