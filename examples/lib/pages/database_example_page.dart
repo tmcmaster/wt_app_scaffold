@@ -26,14 +26,7 @@ class DatabaseExamplePage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               databaseAction.component(label: 'Read from Database'),
-              const SizedBox(
-                height: 50,
-              ),
-              SizedBox(
-                width: 200,
-                child: databaseAction.indicator(type: IndicatorType.linear),
-              ),
-              const SizedBox(height: 50),
+              databaseAction.indicator(type: IndicatorType.linear),
               FirepodModelView(
                 query: database.ref('v1/product/003'),
                 snapshotToModel: Product.from.snapshot,
@@ -42,12 +35,10 @@ class DatabaseExamplePage extends ConsumerWidget {
                   child: ProductListTile(product: product),
                 ),
               ),
-              const SizedBox(height: 50),
               FirepodDoubleView(
                 query: database.ref('v1/product/002/price'),
                 itemBuilder: (value) => Text('\$${value.toStringAsFixed(2)}'),
               ),
-              const SizedBox(height: 50),
               SizedBox(
                 height: 150,
                 width: double.infinity,
@@ -65,7 +56,14 @@ class DatabaseExamplePage extends ConsumerWidget {
                   canSelect: false,
                 ),
               ),
-            ],
+            ]
+                .map(
+                  (widget) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: widget,
+                  ),
+                )
+                .toList(),
           ),
         ),
       ),

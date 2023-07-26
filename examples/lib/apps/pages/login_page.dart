@@ -21,10 +21,10 @@ class LoginPage extends ConsumerWidget {
                 final user = auth.currentUser;
 
                 if (user != null) {
-                  print('User is already logged in: $user');
+                  log.d('User is already logged in: $user');
                 } else {
                   final credentials = await auth.signInAnonymously();
-                  print('User logged in anonymously: $credentials');
+                  log.d('User logged in anonymously: $credentials');
                 }
               },
               child: const Text('Login'),
@@ -35,10 +35,10 @@ class LoginPage extends ConsumerWidget {
                 final auth = ref.read(FirebaseProviders.auth);
                 final user = auth.currentUser;
                 if (user == null) {
-                  print('User is not currently logged in.');
+                  log.d('User is not currently logged in.');
                 } else {
                   await ref.read(FirebaseProviders.auth).signOut();
-                  print('User has been logged out.');
+                  log.d('User has been logged out.');
                 }
               },
               child: const Text('Logout'),

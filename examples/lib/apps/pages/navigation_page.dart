@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class SnackBarPage extends ConsumerWidget {
-  static final log = logger(SnackBarPage);
+class NavigationPage extends ConsumerWidget {
+  static final log = logger(NavigationPage);
 
-  const SnackBarPage({super.key});
+  const NavigationPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,13 +20,9 @@ class SnackBarPage extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                ref.read(UserLog.provider).log(
-                      'Building Test App',
-                      snackBar: true,
-                      log: log.w,
-                    );
+                Navigator.of(context).pushReplacementNamed('/sign-in');
               },
-              child: const Text('Test SnackBar'),
+              child: const Text('Test Navigation'),
             )
           ],
         ),

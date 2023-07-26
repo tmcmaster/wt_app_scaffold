@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
 
 class FutureProviderScope extends ConsumerWidget {
-  final Future<List<Override>> Function(WidgetRef ref) init;
+  final Future<Map<ProviderListenable, ProviderOverrideDefinition>> Function(WidgetRef ref) init;
   final Widget child;
   const FutureProviderScope({
     super.key,
@@ -17,7 +18,11 @@ class FutureProviderScope extends ConsumerWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ProviderScope(
-            overrides: snapshot.data!,
+            overrides: snapshot.data!.values
+                .map(
+                  (definition) => definition.override,
+                )
+                .toList(),
             child: child,
           );
         } else if (snapshot.hasError) {

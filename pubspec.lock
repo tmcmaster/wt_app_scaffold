@@ -363,7 +363,7 @@ packages:
     source: hosted
     version: "2.6.0"
   firebase_database:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_database
       sha256: "08eff8d3321973f73f94633d807fb1f4589b4e2d2e0c33c7e656f42d2f9eba72"
@@ -1177,7 +1177,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "3f56c9d2009f4e3d05ae53b18e91676708128f57"
+      resolved-ref: "1bcd5e90746698101ad5cb972e7c9e40ac27516a"
       url: "https://github.com/tmcmaster/wt_firepod.git"
     source: git
     version: "1.0.0+1"

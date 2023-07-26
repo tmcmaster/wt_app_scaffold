@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/init/provider_monitor.dart';
 import 'package:wt_app_scaffold/widgets/virtual_size_fitted_box.dart';
@@ -27,6 +28,15 @@ class AppPlatform extends ConsumerWidget {
     this.setApplicationLogLevel = Level.warning,
   });
 
+  static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init() async {
+    return {
+      UserLog.snackBarKey: ProviderOverrideDefinition(
+        value: AppContainer.snackBarKey,
+        override: UserLog.snackBarKey.overrideWithValue(AppContainer.snackBarKey),
+      ),
+    };
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Logger.level = setApplicationLogLevel;
@@ -39,7 +49,7 @@ class AppPlatform extends ConsumerWidget {
       };
     }
 
-    return ProviderScope(
+    final providerScope = ProviderScope(
       overrides: [
         ...includeOverrides,
         UserLog.snackBarKey.overrideWithValue(AppContainer.snackBarKey),
@@ -55,5 +65,7 @@ class AppPlatform extends ConsumerWidget {
               child: child,
             ),
     );
+
+    return providerScope;
   }
 }

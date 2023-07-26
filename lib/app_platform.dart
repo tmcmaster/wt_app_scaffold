@@ -1,8 +1,8 @@
-export 'app_platform/app_platform.dart';
-export 'app_platform/app_scaffold_support.dart';
 export 'app_platform/dsl/dsl.dart';
-export 'app_platform/firebase_support.dart';
-export 'app_platform/login_screen_support.dart';
+export 'app_platform/features/app_platform.dart';
+export 'app_platform/features/app_scaffold_support.dart';
+export 'app_platform/features/firebase_support.dart';
+export 'app_platform/features/login_screen_support.dart';
 export 'models/app_definition.dart';
 export 'models/app_details.dart';
 export 'models/application_builder.dart';

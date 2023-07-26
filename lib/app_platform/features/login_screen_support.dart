@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:wt_app_scaffold/app_platform/future_provider_scope.dart';
+import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
+import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
+import 'package:wt_app_scaffold/app_platform/widgets/future_provider_scope.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/login/config.dart';
@@ -30,9 +33,14 @@ class LoginScreenSupport extends ConsumerWidget {
     this.emailVerificationRequired = false,
   });
 
-  Future<List<Override>> init(WidgetRef ref) async {
-    final firebaseOptions = ref.read(FirebaseProviders.firebaseOptions);
-    if (loginSupport != null && loginSupport != LoginSupport.none) {
+  static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init({
+    required FirebaseOptions firebaseOptions,
+    required FirebaseApp firebaseApp,
+    required LoginSupport? loginSupport,
+    required Map<ProviderListenable, ProviderOverrideDefinition> contextMap,
+    FeatureDefinition? child,
+  }) async {
+    if (loginSupport != null) {
       final googleClientId = kIsWeb
           ? firebaseOptions.appId
           : Platform.isAndroid
@@ -44,26 +52,37 @@ class LoginScreenSupport extends ConsumerWidget {
       }
       FirebaseUIAuth.configureProviders(
         [
-          if (loginSupport!.emailEnabled) EmailAuthProvider(),
-          if (loginSupport!.emailLinkEnabled)
+          if (loginSupport.emailEnabled) EmailAuthProvider(),
+          if (loginSupport.emailLinkEnabled)
             EmailLinkAuthProvider(
               actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
             ),
-          if (loginSupport!.phoneEnabled) PhoneAuthProvider(),
-          if (loginSupport!.googleEnabled && Platform.isAndroid)
+          if (loginSupport.phoneEnabled) PhoneAuthProvider(),
+          if (loginSupport.googleEnabled && Platform.isAndroid)
             GoogleProvider(clientId: googleClientId),
-          if (loginSupport!.appleEnabled) AppleProvider(),
+          if (loginSupport.appleEnabled) AppleProvider(),
         ],
-        app: ref.read(FirebaseProviders.app),
+        app: firebaseApp,
       );
     }
-    return [];
+    if (child != null) {
+      return child.initialiser(contextMap);
+    } else {
+      return contextMap;
+    }
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final firebaseOptions = ref.read(FirebaseProviders.firebaseOptions);
+    final firebaseApp = ref.read(FirebaseProviders.app);
     return FutureProviderScope(
-      init: init,
+      init: (ref) => init(
+        firebaseOptions: firebaseOptions,
+        firebaseApp: firebaseApp,
+        loginSupport: loginSupport,
+        contextMap: {}, // TODO: fix this
+      ),
       child: _LoginScreenSupport(
         emailVerificationRequired: emailVerificationRequired,
         child: child,
@@ -254,6 +273,8 @@ HeaderBuilder _headerImage(String assetName) {
   };
 }
 
+// TODO: need to add this back in
+// ignore: unused_element
 HeaderBuilder _headerIcon(IconData icon) {
   return (context, constraints, shrinkOffset) {
     return Padding(
@@ -278,6 +299,8 @@ SideBuilder _sideImage(String assetName) {
   };
 }
 
+// TODO: need to add this back in
+// ignore: unused_element
 SideBuilder _sideIcon(IconData icon) {
   return (context, constraints) {
     return Padding(

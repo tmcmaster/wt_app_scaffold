@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform.dart';
-import 'package:wt_app_scaffold/app_platform/future_provider_scope.dart';
+import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
+import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
+import 'package:wt_app_scaffold/app_platform/widgets/future_provider_scope.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -17,21 +19,46 @@ class AppScaffoldSupport extends ConsumerWidget {
     required this.appDefinition,
   });
 
+  static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init({
+    required ProviderListenable<AppDetails> appDetails,
+    required ProviderListenable<AppDefinition> appDefinition,
+    required Map<ProviderListenable, ProviderOverrideDefinition> contextMap,
+    FeatureDefinition? child,
+  }) async {
+    final newContextMap = {
+      ...contextMap,
+      AppScaffoldProviders.appDefinition: ProviderOverrideDefinition(
+        value: appDefinition,
+        override: AppScaffoldProviders.appDefinition.overrideWith((ref) => ref.read(appDefinition)),
+      ),
+      AppScaffoldProviders.appDetails: ProviderOverrideDefinition(
+        value: appDetails,
+        override: AppScaffoldProviders.appDetails.overrideWith((ref) => ref.read(appDetails)),
+      ),
+    };
+    if (child != null) {
+      return child.initialiser(newContextMap);
+    } else {
+      return newContextMap;
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return FutureProviderScope(
-      init: (ref) async {
-        return [
-          AppScaffoldProviders.appDefinition.overrideWith((ref) => ref.read(appDefinition)),
-          AppScaffoldProviders.appDetails.overrideWith((ref) => ref.read(appDetails)),
-        ];
-      },
+      init: (ref) => init(
+        appDetails: appDetails,
+        appDefinition: appDefinition,
+        contextMap: {}, // TODO: need to fix this
+      ),
       child: const _ApplicationMaterialApp(),
     );
   }
 }
 
 class _ApplicationMaterialApp extends ConsumerWidget {
+  static final log = logger(AppScaffoldSupport);
+
   const _ApplicationMaterialApp();
 
   @override
@@ -42,7 +69,7 @@ class _ApplicationMaterialApp extends ConsumerWidget {
     final color = ref.watch(ApplicationSettings.colorScheme.value);
 
     final isLoginEnabled = context.findAncestorWidgetOfExactType<LoginScreenSupport>() != null;
-    print('LOGIN SUPPORT: $isLoginEnabled');
+    log.d('LOGIN SUPPORT: $isLoginEnabled');
 
     final snackBarKey = isLoginEnabled ? null : ref.read(UserLog.snackBarKey);
     final navigatorKey = isLoginEnabled ? null : ref.read(AppScaffoldProviders.navigatorKey);

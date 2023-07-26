@@ -7,6 +7,7 @@ import 'package:wt_app_scaffold/scaffolds/login/config.dart';
 import 'package:wt_app_scaffold/widgets/virtual_size_fitted_box.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/login_page.dart';
+import 'package:wt_app_scaffold_examples/apps/pages/navigation_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/plain_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/snack_bar_page.dart';
 import 'package:wt_firepod/wt_firepod.dart';
@@ -51,16 +52,22 @@ mixin AppTwo {
           builder: (context) => const PlainPage(),
         ),
         PageDefinition(
+          title: 'Firebase Page',
+          icon: FontAwesomeIcons.clipboard,
+          debug: false,
+          builder: (context) => const FirebasePage(),
+        ),
+        PageDefinition(
           title: 'SnackBar Page',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
           builder: (context) => const SnackBarPage(),
         ),
         PageDefinition(
-          title: 'Firebase Page',
-          icon: FontAwesomeIcons.clipboard,
+          title: 'Navigation Page',
+          icon: FontAwesomeIcons.bars,
           debug: false,
-          builder: (context) => const FirebasePage(),
+          builder: (context) => const NavigationPage(),
         ),
         PageDefinition(
           title: 'Login Page',
