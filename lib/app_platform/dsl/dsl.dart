@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:wt_app_scaffold/app_platform/components/provider_monitor.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_firepod/wt_firepod.dart';
@@ -18,6 +19,9 @@ Future<void> runMyApp(
   runApp(
     ProviderScope(
       overrides: (await child.initialiser(contextMap)).values.map((e) => e.override).toList(),
+      observers: [
+        if (enableProviderMonitoring) ProviderMonitor.instance,
+      ],
       child: Consumer(
         builder: (__, ref, _) {
           return AppPlatform(
