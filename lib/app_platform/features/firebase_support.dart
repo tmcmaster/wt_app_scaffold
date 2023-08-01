@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,6 +26,7 @@ class FirebaseSupport extends ConsumerWidget {
   static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init({
     required String appName,
     required FirebaseOptions firebaseOptions,
+    bool crashlytics = false,
     required Map<ProviderListenable, ProviderOverrideDefinition> contextMap,
     FeatureDefinition? child,
   }) async {
@@ -34,6 +38,19 @@ class FirebaseSupport extends ConsumerWidget {
       name: appName,
       options: firebaseOptions,
     );
+
+    if (crashlytics) {
+      log.i('Setting up Crashlytics');
+
+      FlutterError.onError = (errorDetails) {
+        FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+      };
+      // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+      PlatformDispatcher.instance.onError = (error, stack) {
+        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+        return true;
+      };
+    }
 
     log.d('FirebaseAuth.instanceFor: name($appName)');
     final auth = FirebaseAuth.instanceFor(app: app);

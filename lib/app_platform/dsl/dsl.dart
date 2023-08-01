@@ -12,10 +12,14 @@ Future<void> runMyApp(
   List<ProviderObserver> includeObservers = const [],
   List<Override> includeOverrides = const [],
   bool enableProviderMonitoring = false,
-  Level setApplicationLogLevel = Level.warning,
+  Level setApplicationLogLevel = Level.info,
+  bool enableErrorMonitoring = false,
   double? virtualSize,
 }) async {
-  final contextMap = await AppPlatform.init();
+  final contextMap = await AppPlatform.init(
+    setApplicationLogLevel: setApplicationLogLevel,
+    enableErrorMonitoring: enableErrorMonitoring,
+  );
   runApp(
     ProviderScope(
       overrides: (await child.initialiser(contextMap)).values.map((e) => e.override).toList(),
@@ -28,7 +32,6 @@ Future<void> runMyApp(
             includeOverrides: includeOverrides,
             includeObservers: includeObservers,
             enableProviderMonitoring: enableProviderMonitoring,
-            setApplicationLogLevel: setApplicationLogLevel,
             virtualSize: virtualSize,
             child: child.builder(ref),
           );
@@ -57,6 +60,7 @@ FeatureDefinition withFirebase(
   FeatureDefinition child, {
   required String appName,
   required FirebaseOptions firebaseOptions,
+  bool crashlytics = false,
 }) {
   return FeatureDefinition(
     initialiser: (contextMap) => FirebaseSupport.init(
@@ -64,6 +68,7 @@ FeatureDefinition withFirebase(
       firebaseOptions: firebaseOptions,
       child: child,
       contextMap: contextMap,
+      crashlytics: crashlytics,
     ),
     builder: (ref) => FirebaseSupport(
       appName: appName,

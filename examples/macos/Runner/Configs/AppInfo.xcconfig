@@ -12,3 +12,5 @@ PRODUCT_BUNDLE_IDENTIFIER = net.wonkytech.sampleApp
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 net.wonkytech. All rights reserved.
+
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym

@@ -22,7 +22,8 @@ void main() async {
     virtualSize: 1200,
     includeObservers: [],
     includeOverrides: [],
+    enableErrorMonitoring: true,
     enableProviderMonitoring: false,
-    setApplicationLogLevel: Level.warning,
+    setApplicationLogLevel: Level.info,
   );
 }

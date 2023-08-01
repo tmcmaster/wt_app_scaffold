@@ -7,28 +7,40 @@ import 'package:wt_app_scaffold/widgets/virtual_size_fitted_box.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppPlatform extends ConsumerWidget {
-  static final log = logger(AppPlatform);
+  static final log = logger(AppPlatform, level: Level.info);
 
   final Widget child;
   final double? virtualSize;
   final List<ProviderObserver> includeObservers;
   final List<Override> includeOverrides;
   final bool enableProviderMonitoring;
-  final bool enableErrorMonitoring;
-  final Level setApplicationLogLevel;
 
   const AppPlatform({
     super.key,
     required this.child,
     this.virtualSize,
     this.enableProviderMonitoring = false,
-    this.enableErrorMonitoring = false,
     this.includeObservers = const [],
     this.includeOverrides = const [],
-    this.setApplicationLogLevel = Level.warning,
   });
 
-  static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init() async {
+  static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init({
+    Level setApplicationLogLevel = Level.info,
+    bool enableErrorMonitoring = false,
+  }) async {
+    Logger.level = setApplicationLogLevel;
+
+    log.i('Logging level has been set to $setApplicationLogLevel');
+
+    if (enableErrorMonitoring) {
+      log.i('Enabling error monitoring');
+      FlutterError.onError = (FlutterErrorDetails details) {
+        log.e('=================== CAUGHT FLUTTER ERROR ===================');
+        log.e(details);
+        log.e('============================================================');
+      };
+    }
+
     return {
       UserLog.snackBarKey: ProviderOverrideDefinition(
         value: AppContainer.snackBarKey,
@@ -39,16 +51,6 @@ class AppPlatform extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Logger.level = setApplicationLogLevel;
-
-    if (enableErrorMonitoring) {
-      FlutterError.onError = (FlutterErrorDetails details) {
-        log.e('=================== CAUGHT FLUTTER ERROR ===================');
-        log.e(details);
-        log.e('============================================================');
-      };
-    }
-
     final providerScope = ProviderScope(
       overrides: [
         ...includeOverrides,
