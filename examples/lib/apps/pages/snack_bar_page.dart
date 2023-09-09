@@ -27,7 +27,7 @@ class SnackBarPage extends ConsumerWidget {
                     );
               },
               child: const Text('Test SnackBar'),
-            )
+            ),
           ],
         ),
       ),

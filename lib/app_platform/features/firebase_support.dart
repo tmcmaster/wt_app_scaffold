@@ -1,8 +1,11 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
@@ -26,6 +29,11 @@ class FirebaseSupport extends ConsumerWidget {
   static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init({
     required String appName,
     required FirebaseOptions firebaseOptions,
+    bool auth = true,
+    bool database = true,
+    bool firestore = false,
+    bool storage = false,
+    bool functions = false,
     bool crashlytics = false,
     required Map<ProviderListenable, ProviderOverrideDefinition> contextMap,
     FeatureDefinition? child,
@@ -38,7 +46,6 @@ class FirebaseSupport extends ConsumerWidget {
       name: appName,
       options: firebaseOptions,
     );
-
     if (crashlytics) {
       log.i('Setting up Crashlytics');
 
@@ -52,11 +59,6 @@ class FirebaseSupport extends ConsumerWidget {
       };
     }
 
-    log.d('FirebaseAuth.instanceFor: name($appName)');
-    final auth = FirebaseAuth.instanceFor(app: app);
-    log.d('FirebaseDatabase.instanceFor: name($appName)');
-    final database = FirebaseDatabase.instanceFor(app: app);
-
     final newContextMap = {
       ...contextMap,
       FirebaseProviders.appName: ProviderOverrideDefinition(
@@ -65,20 +67,18 @@ class FirebaseSupport extends ConsumerWidget {
       ),
       FirebaseProviders.firebaseOptions: ProviderOverrideDefinition(
         value: firebaseOptions,
-        override: FirebaseProviders.firebaseOptions.overrideWithValue(firebaseOptions),
-      ),
-      FirebaseProviders.auth: ProviderOverrideDefinition(
-        value: auth,
-        override: FirebaseProviders.auth.overrideWithValue(auth),
+        override: FirebaseProviders.firebaseOptions
+            .overrideWithValue(firebaseOptions),
       ),
       FirebaseProviders.app: ProviderOverrideDefinition(
         value: app,
         override: FirebaseProviders.app.overrideWithValue(app),
       ),
-      FirebaseProviders.database: ProviderOverrideDefinition(
-        value: database,
-        override: FirebaseProviders.database.overrideWithValue(database),
-      ),
+      if (auth) FirebaseProviders.auth: _initialiseAuth(app),
+      if (database) FirebaseProviders.database: _initialiseDatabase(app),
+      if (firestore) FirebaseProviders.firestore: _initialiseFirestore(app),
+      if (storage) FirebaseProviders.storage: _initialiseStorage(app),
+      if (functions) FirebaseProviders.functions: _initialiseFunctions(app),
     };
 
     if (child == null) {
@@ -91,5 +91,57 @@ class FirebaseSupport extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return child;
+  }
+
+  static ProviderOverrideDefinition _initialiseFunctions(
+    FirebaseApp app,
+  ) {
+    final functionsInstance = FirebaseFunctions.instanceFor(app: app);
+    return ProviderOverrideDefinition(
+      value: functionsInstance,
+      override:
+          FirebaseProviders.functions.overrideWithValue(functionsInstance),
+    );
+  }
+
+  static ProviderOverrideDefinition _initialiseStorage(
+    FirebaseApp app,
+  ) {
+    final storageInstance = FirebaseStorage.instanceFor(app: app);
+    return ProviderOverrideDefinition(
+      value: storageInstance,
+      override: FirebaseProviders.storage.overrideWithValue(storageInstance),
+    );
+  }
+
+  static ProviderOverrideDefinition _initialiseAuth(
+    FirebaseApp app,
+  ) {
+    final authInstance = FirebaseAuth.instanceFor(app: app);
+    return ProviderOverrideDefinition(
+      value: authInstance,
+      override: FirebaseProviders.auth.overrideWithValue(authInstance),
+    );
+  }
+
+  static ProviderOverrideDefinition _initialiseDatabase(
+    FirebaseApp app,
+  ) {
+    final databaseInstance = FirebaseDatabase.instanceFor(app: app);
+    return ProviderOverrideDefinition(
+      value: databaseInstance,
+      override: FirebaseProviders.database.overrideWithValue(databaseInstance),
+    );
+  }
+
+  static ProviderOverrideDefinition _initialiseFirestore(
+    FirebaseApp app,
+  ) {
+    final firestoreInstance = FirebaseFirestore.instanceFor(app: app);
+    return ProviderOverrideDefinition(
+      value: firestoreInstance,
+      override:
+          FirebaseProviders.firestore.overrideWithValue(firestoreInstance),
+    );
   }
 }

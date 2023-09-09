@@ -10,7 +10,8 @@ import 'package:wt_logging/wt_logging.dart';
 class AppContainer extends ConsumerWidget {
   static final log = logger(AppContainer);
 
-  static final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
+  static final GlobalKey<ScaffoldMessengerState> snackBarKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   const AppContainer({super.key});
 
@@ -22,7 +23,8 @@ class AppContainer extends ConsumerWidget {
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
 
     final user = ref.watch(FirebaseProviders.auth).currentUser;
-    final initialRoute = user == null ? LoginView.routeName : AppBuilder.routeName;
+    final initialRoute =
+        user == null ? LoginView.routeName : AppBuilder.routeName;
 
     ref.read(AppPlatformProviders.providerManager);
 

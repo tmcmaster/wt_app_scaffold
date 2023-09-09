@@ -65,7 +65,7 @@ class HiddenDrawerHeader extends ConsumerWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

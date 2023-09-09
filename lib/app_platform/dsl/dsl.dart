@@ -14,6 +14,7 @@ Future<void> runMyApp(
   bool enableProviderMonitoring = false,
   Level setApplicationLogLevel = Level.info,
   bool enableErrorMonitoring = false,
+  bool devicePreview = false,
   double? virtualSize,
 }) async {
   final contextMap = await AppPlatform.init(
@@ -22,7 +23,10 @@ Future<void> runMyApp(
   );
   runApp(
     ProviderScope(
-      overrides: (await child.initialiser(contextMap)).values.map((e) => e.override).toList(),
+      overrides: (await child.initialiser(contextMap))
+          .values
+          .map((e) => e.override)
+          .toList(),
       observers: [
         if (enableProviderMonitoring) ProviderMonitor.instance,
       ],
@@ -33,6 +37,7 @@ Future<void> runMyApp(
             includeObservers: includeObservers,
             enableProviderMonitoring: enableProviderMonitoring,
             virtualSize: virtualSize,
+            devicePreview: devicePreview,
             child: child.builder(ref),
           );
         },
@@ -61,6 +66,10 @@ FeatureDefinition withFirebase(
   required String appName,
   required FirebaseOptions firebaseOptions,
   bool crashlytics = false,
+  bool database = false,
+  bool firestore = false,
+  bool storage = false,
+  bool functions = false,
 }) {
   return FeatureDefinition(
     initialiser: (contextMap) => FirebaseSupport.init(
@@ -69,6 +78,10 @@ FeatureDefinition withFirebase(
       child: child,
       contextMap: contextMap,
       crashlytics: crashlytics,
+      database: database,
+      firestore: firestore,
+      storage: storage,
+      functions: functions,
     ),
     builder: (ref) => FirebaseSupport(
       appName: appName,
@@ -88,9 +101,10 @@ FeatureDefinition withLogin(
     initialiser: (contextMap) async {
       if (contextMap.containsKey(FirebaseProviders.firebaseOptions) &&
           contextMap.containsKey(FirebaseProviders.app)) {
-        final firebaseOptions =
-            contextMap[FirebaseProviders.firebaseOptions]!.value as FirebaseOptions;
-        final firebaseApp = contextMap[FirebaseProviders.app]!.value as FirebaseApp;
+        final firebaseOptions = contextMap[FirebaseProviders.firebaseOptions]!
+            .value as FirebaseOptions;
+        final firebaseApp =
+            contextMap[FirebaseProviders.app]!.value as FirebaseApp;
         return LoginScreenSupport.init(
           firebaseOptions: firebaseOptions,
           firebaseApp: firebaseApp,

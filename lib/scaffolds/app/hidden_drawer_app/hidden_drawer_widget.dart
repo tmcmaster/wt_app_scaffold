@@ -55,7 +55,7 @@ class HiddenDrawerWidget extends ConsumerWidget {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -101,7 +101,7 @@ class HiddenDrawerWidget extends ConsumerWidget {
               onTap: () {
                 logoutAction.execute();
               },
-            )
+            ),
           ].map((w) => SizedBox(width: 170, height: 50, child: w)).toList(),
         ),
       );

@@ -42,9 +42,7 @@ class BottomDrawerPage extends StatelessWidget {
                 ),
                 actions: [
                   ...actions.map((action) => action.component(noLabel: true)),
-                  const SizedBox(
-                    width: 10,
-                  )
+                  const SizedBox(width: 10),
                 ],
               )
             : null,
@@ -122,7 +120,8 @@ class BottomDrawerPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      ...actions.map((action) => action.component(noLabel: true)),
+                      ...actions
+                          .map((action) => action.component(noLabel: true)),
                       const SizedBox(
                         width: 50,
                       ),
@@ -185,7 +184,7 @@ class _DrawerHandleWidget extends StatelessWidget {
             width: 50,
             height: 5,
             color: Colors.grey.shade700,
-          )
+          ),
         ],
       ),
     );

@@ -13,13 +13,14 @@ class SMSCodeInputPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(FirebaseProviders.auth);
-    final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final arguments =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     return SMSCodeInputScreen(
       auth: auth,
       actions: [
         AuthStateChangeAction<SignedIn>((context, state) {
           Navigator.of(context).pushReplacementNamed('/profile');
-        })
+        }),
       ],
       flowKey: arguments?['flowKey'] as Object,
       action: arguments?['action'] as AuthAction?,

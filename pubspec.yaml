@@ -19,12 +19,16 @@ scripts:
     build: flutter pub run build_runner build --delete-conflicting-outputs
 
 dependencies:
+  cloud_firestore: ^4.9.1
+  cloud_functions: ^4.3.4
   curved_navigation_bar: ^1.0.3
+  device_preview: ^1.1.0
   draggable_bottom_sheet: ^1.0.2
   firebase_auth: ^4.7.0
   firebase_core: ^2.15.0
   firebase_crashlytics: ^3.3.4
   firebase_database: ^10.2.4
+  firebase_storage: ^11.2.6
   firebase_ui_auth: ^1.6.0
   firebase_ui_localizations: ^1.5.0
   firebase_ui_oauth_apple: ^1.0.3

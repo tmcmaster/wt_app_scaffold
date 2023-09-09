@@ -1,9 +1,9 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/components/provider_monitor.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/widgets/virtual_size_fitted_box.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppPlatform extends ConsumerWidget {
@@ -14,6 +14,7 @@ class AppPlatform extends ConsumerWidget {
   final List<ProviderObserver> includeObservers;
   final List<Override> includeOverrides;
   final bool enableProviderMonitoring;
+  final bool devicePreview;
 
   const AppPlatform({
     super.key,
@@ -22,6 +23,7 @@ class AppPlatform extends ConsumerWidget {
     this.enableProviderMonitoring = false,
     this.includeObservers = const [],
     this.includeOverrides = const [],
+    this.devicePreview = false,
   });
 
   static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init({
@@ -44,7 +46,8 @@ class AppPlatform extends ConsumerWidget {
     return {
       UserLog.snackBarKey: ProviderOverrideDefinition(
         value: AppContainer.snackBarKey,
-        override: UserLog.snackBarKey.overrideWithValue(AppContainer.snackBarKey),
+        override:
+            UserLog.snackBarKey.overrideWithValue(AppContainer.snackBarKey),
       ),
     };
   }
@@ -68,6 +71,13 @@ class AppPlatform extends ConsumerWidget {
             ),
     );
 
-    return providerScope;
+    return devicePreview
+        ? DevicePreview(
+            isToolbarVisible: false,
+            builder: (_) => SafeArea(
+              child: providerScope,
+            ),
+          )
+        : providerScope;
   }
 }

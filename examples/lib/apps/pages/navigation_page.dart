@@ -23,7 +23,7 @@ class NavigationPage extends ConsumerWidget {
                 Navigator.of(context).pushReplacementNamed('/sign-in');
               },
               child: const Text('Test Navigation'),
-            )
+            ),
           ],
         ),
       ),

@@ -31,8 +31,10 @@ class _ContainerWithDrawerState extends State<ContainerWithDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    final dragBarColor = widget.dragBarColor ?? Theme.of(context).colorScheme.onPrimary;
-    final dragBarNotchColor = widget.dragBarNotchColor ?? Theme.of(context).colorScheme.onPrimary;
+    final dragBarColor =
+        widget.dragBarColor ?? Theme.of(context).colorScheme.onPrimary;
+    final dragBarNotchColor =
+        widget.dragBarNotchColor ?? Theme.of(context).colorScheme.onPrimary;
     final minHeight = widget.openGap + widget.handleThickness;
 
     if (_drawerHeight < 0) {
@@ -88,10 +90,10 @@ class _ContainerWithDrawerState extends State<ContainerWithDrawer> {
                               child: SingleChildScrollView(
                                 child: widget.drawerPanel,
                               ),
-                            )
+                            ),
                           ],
                         ),
-                )
+                ),
               ],
             ),
           ),

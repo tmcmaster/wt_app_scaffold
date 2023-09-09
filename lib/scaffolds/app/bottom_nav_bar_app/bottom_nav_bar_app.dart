@@ -27,14 +27,16 @@ class BottomNavBarApp extends StatefulWidget {
 }
 
 class _BottomNavBarAppState extends State<BottomNavBarApp> {
-  late StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent> _selectedPageProvider;
+  late StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>
+      _selectedPageProvider;
 
   @override
   void initState() {
     final initialIndex = widget.appDefinition.pages
         .indexOf(widget.appDefinition.pages.firstWhere((page) => page.primary));
 
-    _selectedPageProvider = StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>(
+    _selectedPageProvider =
+        StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent>(
       (ref) => _SelectedPageNotifier(initialIndex),
     );
 
@@ -140,11 +142,13 @@ class _PageViewState extends ConsumerState<_PageView> {
       }
     });
 
-    final filterItems =
-        widget.debugMode ? widget.items : widget.items.where((item) => !item.debug).toList();
+    final filterItems = widget.debugMode
+        ? widget.items
+        : widget.items.where((item) => !item.debug).toList();
     return PageView.builder(
       itemCount: filterItems.length,
-      physics: widget.swipeEnabled ? null : const NeverScrollableScrollPhysics(),
+      physics:
+          widget.swipeEnabled ? null : const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => filterItems[index].builder(context),
       onPageChanged: (page) {
         final pageNav = ref.read(widget.provider.notifier);
@@ -155,49 +159,8 @@ class _PageViewState extends ConsumerState<_PageView> {
   }
 }
 
-// TODO: delete after testing.
-// class _PageView extends HookConsumerWidget {
-//   final List<PageDefinition> items;
-//   final bool swipeEnabled;
-//   final bool debugMode;
-//   final StateNotifierProvider<_SelectedPageNotifier, PageChangeEvent> provider;
-//   const _PageView({
-//     required this.items,
-//     required this.provider,
-//     required this.debugMode,
-//     this.swipeEnabled = true,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final initialPageEvent = ref.read(provider);
-//     final pageController = usePageController(initialPage: initialPageEvent.page);
-//     ref.listen(provider, (_, PageChangeEvent next) {
-//       if (next.source != PageChangeSource.pageView) {
-//         pageController.animateToPage(
-//           next.page,
-//           duration: const Duration(milliseconds: 500),
-//           curve: Curves.easeInOut,
-//         );
-//       }
-//     });
-//
-//     final filterItems = debugMode ? items : items.where((item) => !item.debug).toList();
-//     return PageView.builder(
-//       itemCount: filterItems.length,
-//       physics: swipeEnabled ? null : const NeverScrollableScrollPhysics(),
-//       itemBuilder: (context, index) => filterItems[index].builder(context),
-//       onPageChanged: (page) {
-//         final pageNav = ref.read(provider.notifier);
-//         pageNav.setPage(PageChangeSource.pageView, page);
-//       },
-//       controller: pageController,
-//     );
-//   }
-// }
-
 // This is the type used by the popup menu below.
-enum Menu { itemOne, itemTwo, itemThree, itemFour }
+// enum Menu { itemOne, itemTwo, itemThree, itemFour }
 
 class _BottomNavigationBar extends ConsumerWidget {
   static final log = logger(_BottomNavigationBar);
@@ -235,16 +198,24 @@ class _BottomNavigationBar extends ConsumerWidget {
         Flexible(
           flex: 1,
           child: BottomNavigationBar(
-            fixedColor: primaryColor,
+            enableFeedback: false,
+            type: BottomNavigationBarType.fixed,
+            showUnselectedLabels: true,
+            unselectedItemColor: Colors.grey.shade500,
+            selectedItemColor: primaryColor,
+            selectedIconTheme: IconThemeData(
+              color: primaryColor,
+            ),
+            unselectedIconTheme: IconThemeData(
+              color: Colors.grey.shade500,
+            ),
             iconSize: 20,
-            selectedItemColor: currentSelected < 0 ? Colors.black54 : null,
             items: primaryItems
                 .where((item) => !item.debug)
                 .map(
                   (item) => BottomNavigationBarItem(
                     icon: Icon(
                       item.icon,
-                      color: primaryColor,
                     ),
                     label: item.title,
                   ),
@@ -279,7 +250,10 @@ class _BottomNavigationBar extends ConsumerWidget {
                           child: Text(item.title),
                         ),
                         onPressed: () {
-                          pageNav.setPage(PageChangeSource.buttonBar, items.indexOf(item));
+                          pageNav.setPage(
+                            PageChangeSource.buttonBar,
+                            items.indexOf(item),
+                          );
                           Navigator.pop(context);
                         },
                       ),
