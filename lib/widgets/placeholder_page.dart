@@ -10,6 +10,7 @@ class PlaceholderPage extends StatelessWidget {
   final bool includeAppBar;
   final void Function(BuildContext context)? dismissAction;
   final void Function(BuildContext context)? menuAction;
+  final Widget? bottomNavigationBar;
 
   const PlaceholderPage({
     super.key,
@@ -17,6 +18,7 @@ class PlaceholderPage extends StatelessWidget {
     this.includeAppBar = false,
     this.dismissAction,
     this.menuAction,
+    this.bottomNavigationBar,
   });
 
   @override
@@ -26,8 +28,9 @@ class PlaceholderPage extends StatelessWidget {
           ? AppBar(
               backgroundColor: Theme.of(context).primaryColor,
               elevation: 0,
-              leading:
-                  dismissAction == null && menuAction == null ? null : _createIconButton(context),
+              leading: dismissAction == null && menuAction == null
+                  ? null
+                  : _createIconButton(context),
               title: Text(title),
             )
           : null,
@@ -54,6 +57,7 @@ class PlaceholderPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: bottomNavigationBar,
     );
   }
 
@@ -67,6 +71,7 @@ class PlaceholderPage extends StatelessWidget {
               menuAction?.call(context);
               log.d('${menuAction == null}');
               //menuAction ?? dismissAction,
-            },);
+            },
+          );
   }
 }

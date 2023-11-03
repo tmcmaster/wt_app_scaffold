@@ -8,4 +8,17 @@ mixin AppScaffoldProviders {
       'AppScaffoldProviders.appAppDefinition provider needs to be overridden.',
     ),
   );
+
+  static final applicationType = Provider(
+    name: 'AppScaffoldProviders.applicationType',
+    (ref) {
+      final applicationDefinition =
+          ref.read(AppScaffoldProviders.appDefinition);
+      final settingsApplicationType =
+          ref.watch(ApplicationSettings.applicationType.value);
+      final staticApplicationType = applicationDefinition.applicationType;
+      final applicationType = staticApplicationType ?? settingsApplicationType;
+      return applicationType;
+    },
+  );
 }

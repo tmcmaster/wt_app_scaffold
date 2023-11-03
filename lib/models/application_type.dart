@@ -1,5 +1,6 @@
 enum ApplicationType {
   hiddenDrawer,
   bottomNavBar,
-  curvedNavBar;
+  curvedNavBar,
+  goRouterMenu;
 }

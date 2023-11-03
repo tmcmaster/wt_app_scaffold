@@ -29,11 +29,13 @@ class AppScaffoldSupport extends ConsumerWidget {
       ...contextMap,
       AppScaffoldProviders.appDefinition: ProviderOverrideDefinition(
         value: appDefinition,
-        override: AppScaffoldProviders.appDefinition.overrideWith((ref) => ref.read(appDefinition)),
+        override: AppScaffoldProviders.appDefinition
+            .overrideWith((ref) => ref.read(appDefinition)),
       ),
       AppPlatformProviders.appDetails: ProviderOverrideDefinition(
         value: appDetails,
-        override: AppPlatformProviders.appDetails.overrideWith((ref) => ref.read(appDetails)),
+        override: AppPlatformProviders.appDetails
+            .overrideWith((ref) => ref.read(appDetails)),
       ),
     };
     if (child != null) {
@@ -49,11 +51,13 @@ class AppScaffoldSupport extends ConsumerWidget {
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final color = ref.watch(ApplicationSettings.colorScheme.value);
 
-    final isLoginEnabled = context.findAncestorWidgetOfExactType<LoginScreenSupport>() != null;
+    final isLoginEnabled =
+        context.findAncestorWidgetOfExactType<LoginScreenSupport>() != null;
     log.d('LOGIN SUPPORT: $isLoginEnabled');
 
     final snackBarKey = isLoginEnabled ? null : ref.read(UserLog.snackBarKey);
-    final navigatorKey = isLoginEnabled ? null : ref.read(AppPlatformProviders.navigatorKey);
+    final navigatorKey =
+        isLoginEnabled ? null : ref.read(AppPlatformProviders.navigatorKey);
 
     final buttonStyle = ButtonStyle(
       padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
@@ -62,24 +66,32 @@ class AppScaffoldSupport extends ConsumerWidget {
       ),
     );
 
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: color,
-        brightness: Brightness.light,
-        visualDensity: VisualDensity.standard,
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
-        textButtonTheme: TextButtonThemeData(style: buttonStyle),
-        outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
-      ),
-      darkTheme: ThemeData.dark(),
-      themeMode: themeMode,
-      debugShowCheckedModeBanner: debugMode,
-      scaffoldMessengerKey: snackBarKey,
-      navigatorKey: navigatorKey,
-      home: const AppBuilder(),
-    );
+    final applicationDefinition = ref.read(AppScaffoldProviders.appDefinition);
+    final applicationType = ref.watch(AppScaffoldProviders.applicationType);
+
+    return applicationType == ApplicationType.goRouterMenu
+        ? appBuilders[ApplicationType.goRouterMenu]!(
+            applicationDefinition,
+            false,
+          )
+        : MaterialApp(
+            theme: ThemeData(
+              primarySwatch: color,
+              brightness: Brightness.light,
+              visualDensity: VisualDensity.standard,
+              inputDecorationTheme: const InputDecorationTheme(
+                border: OutlineInputBorder(),
+              ),
+              elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
+              textButtonTheme: TextButtonThemeData(style: buttonStyle),
+              outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
+            ),
+            darkTheme: ThemeData.dark(),
+            themeMode: themeMode,
+            debugShowCheckedModeBanner: debugMode,
+            scaffoldMessengerKey: snackBarKey,
+            navigatorKey: navigatorKey,
+            home: const AppBuilder(),
+          );
   }
 }

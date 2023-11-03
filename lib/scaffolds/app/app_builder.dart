@@ -14,7 +14,7 @@ class AppBuilder extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
-    final applicationType = ref.watch(ApplicationSettings.applicationType.value);
+    final applicationType = ref.watch(AppScaffoldProviders.applicationType);
 
     final appBuilder = appBuilders[applicationType] ?? HiddenDrawerApp.build;
     return SafeArea(

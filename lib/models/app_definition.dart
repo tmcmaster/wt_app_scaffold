@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/models/app_details.dart';
-import 'package:wt_app_scaffold/models/page_definition.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 
 class AppDefinition {
@@ -17,6 +16,7 @@ class AppDefinition {
   final void Function(BuildContext context)? dismissAction;
   final void Function(BuildContext context)? menuAction;
   final List<LocalizationsDelegate>? localizationDelegates;
+  final ApplicationType? applicationType;
 
   const AppDefinition._({
     required this.appTitle,
@@ -29,6 +29,7 @@ class AppDefinition {
     required this.dismissAction,
     required this.menuAction,
     required this.localizationDelegates,
+    this.applicationType,
   });
 
   factory AppDefinition.from({
@@ -42,6 +43,7 @@ class AppDefinition {
     void Function(BuildContext context)? dismissAction,
     void Function(BuildContext context)? menuAction,
     List<LocalizationsDelegate>? localizationDelegates,
+    ApplicationType? applicationType,
   }) {
     return AppDefinition._(
       appTitle: appTitle,
@@ -59,6 +61,7 @@ class AppDefinition {
       dismissAction: dismissAction,
       menuAction: menuAction,
       localizationDelegates: localizationDelegates,
+      applicationType: applicationType,
     );
   }
 }
