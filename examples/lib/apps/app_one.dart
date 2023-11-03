@@ -34,7 +34,7 @@ mixin AppOne {
       profilePage: PageDefinition(
         icon: Icons.person,
         title: 'Profile',
-        builder: (context) => ProfileScreen(
+        builder: (context, _) => ProfileScreen(
           auth: ref.read(FirebaseProviders.auth),
           actions: [
             SignedOutAction((context) {
@@ -50,13 +50,13 @@ mixin AppOne {
           title: 'Landing Page',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
-          builder: (context) => const FirebasePage(),
+          builder: (context, _) => const FirebasePage(),
         ),
         PageDefinition(
           title: 'Page One',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
-          builder: (context) => BottomDrawerPage(
+          builder: (context, _) => BottomDrawerPage(
             title: 'Page One',
             mainWidget: const Center(
               child: Text('Page One'),
@@ -76,49 +76,49 @@ mixin AppOne {
           title: 'Page Two',
           icon: FontAwesomeIcons.bagShopping,
           debug: false,
-          builder: (_) => const PlaceholderPage(title: 'Page Two'),
+          builder: (_, __) => const PlaceholderPage(title: 'Page Two'),
         ),
         PageDefinition(
           title: 'Page Three',
           icon: FontAwesomeIcons.boxesPacking,
           debug: true,
-          builder: (_) => const PlaceholderPage(title: 'Page Three'),
+          builder: (_, __) => const PlaceholderPage(title: 'Page Three'),
         ),
         PageDefinition(
           title: 'Page Four',
           icon: FontAwesomeIcons.tractor,
           debug: true,
-          builder: (_) => const PlaceholderPage(title: 'Page Four'),
+          builder: (_, __) => const PlaceholderPage(title: 'Page Four'),
         ),
         PageDefinition(
           title: 'Page Five',
           icon: FontAwesomeIcons.car,
           debug: true,
-          builder: (_) => const PlaceholderPage(title: 'Page Five'),
+          builder: (_, __) => const PlaceholderPage(title: 'Page Five'),
         ),
         PageDefinition(
           title: 'Counter',
           icon: Icons.settings,
           primary: true,
-          builder: (_) => const CounterAppPage(title: 'Counter App'),
+          builder: (_, __) => const CounterAppPage(title: 'Counter App'),
         ),
         PageDefinition(
           title: 'Database',
           icon: FontAwesomeIcons.database,
           primary: true,
-          builder: (_) => const DatabaseExamplePage(),
+          builder: (_, __) => const DatabaseExamplePage(),
         ),
         PageDefinition(
           title: 'Async',
           icon: FontAwesomeIcons.arrowsRotate,
           primary: true,
-          builder: (_) => const AsyncExamplePage(),
+          builder: (_, __) => const AsyncExamplePage(),
         ),
         PageDefinition(
           title: 'Settings',
           icon: Icons.settings,
           primary: true,
-          builder: (context) => SettingsPage(
+          builder: (context, __) => SettingsPage(
             children: [
               ElevatedButton(
                 onPressed: () {

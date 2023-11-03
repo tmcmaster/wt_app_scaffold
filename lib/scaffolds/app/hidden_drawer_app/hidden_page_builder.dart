@@ -28,9 +28,9 @@ class HiddenPageBuilder extends StatelessWidget {
               backgroundColor: colorScheme.primary,
               leading: _createIconButton(context),
             ),
-            body: pageDefinition.builder(context),
+            body: pageDefinition.builder(context, pageDefinition),
           )
-        : pageDefinition.builder(context);
+        : pageDefinition.builder(context, pageDefinition);
   }
 
   IconButton? _createIconButton(BuildContext context) {

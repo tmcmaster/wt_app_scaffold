@@ -53,7 +53,9 @@ class BottomMenuBar extends ConsumerWidget {
           .toList(),
       currentIndex: active,
       onTap: (selected) {
-        final routeName = createRouteName(appDefinition.pages[selected]);
+        final pages =
+            appDefinition.pages.where((page) => page.primary).toList();
+        final routeName = createRouteName(pages[selected]);
         beforeTransition?.call(selected);
         context.go(routeName);
       },

@@ -28,7 +28,7 @@ mixin FirstApp {
       profilePage: PageDefinition(
         icon: Icons.person,
         title: 'Profile',
-        builder: (context) => ProfileScreen(
+        builder: (context, _) => ProfileScreen(
           auth: ref.read(FirebaseProviders.auth),
           actions: [
             SignedOutAction((context) {
@@ -45,35 +45,36 @@ mixin FirstApp {
           icon: Icons.home, // Replaced with Icons.home based on the title
           primary: true,
           debug: false,
-          builder: (_) => const HomePage(),
+          builder: (_, __) => const HomePage(),
         ),
         PageDefinition(
           title: 'Orders',
           icon: FontAwesomeIcons.bagShopping,
           primary: false,
           debug: true,
-          builder: (_) => const OrdersPage(),
+          builder: (_, __) => const OrdersPage(),
         ),
         PageDefinition(
           title: 'Products',
           icon: FontAwesomeIcons.cube,
           primary: false,
           debug: true,
-          builder: (_) => const ProductsPage(),
+          builder: (_, __) => const ProductsPage(),
         ),
         PageDefinition(
           title: 'Notifications',
-          icon: FontAwesomeIcons.bell, // Replaced with FontAwesomeIcons.bell based on the title
+          icon: FontAwesomeIcons
+              .bell, // Replaced with FontAwesomeIcons.bell based on the title
           primary: false,
           debug: true,
-          builder: (_) => const NotificationsPage(),
+          builder: (_, __) => const NotificationsPage(),
         ),
         PageDefinition(
           title: 'Settings',
           icon: FontAwesomeIcons.gear,
           primary: false,
           debug: false,
-          builder: (_) => const SettingsPage(),
+          builder: (_, __) => const SettingsPage(),
         ),
       ],
     ),
