@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/models/page_definition.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 
 class BottomMenuBar extends ConsumerWidget {
-  final int active;
+  final String activeRoute;
   final void Function(int selected)? beforeTransition;
 
   static final menuPages = [
@@ -18,14 +18,14 @@ class BottomMenuBar extends ConsumerWidget {
 
   const BottomMenuBar({
     super.key,
-    required this.active,
+    required this.activeRoute,
     this.beforeTransition,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
-
+    final pages = appDefinition.pages.where((page) => page.primary).toList();
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       // backgroundColor: const Color(0xFF0D5257),
@@ -51,15 +51,19 @@ class BottomMenuBar extends ConsumerWidget {
             ),
           )
           .toList(),
-      currentIndex: active,
+      currentIndex: findCurrentIndex(pages, activeRoute),
       onTap: (selected) {
-        final pages =
-            appDefinition.pages.where((page) => page.primary).toList();
         final routeName = createRouteName(pages[selected]);
         beforeTransition?.call(selected);
         context.go(routeName);
       },
     );
+  }
+
+  static int findCurrentIndex(List<PageDefinition> pages, String activeRoute) {
+    final index =
+        pages.map((p) => createRouteName(p)).toList().indexOf(activeRoute);
+    return index < 0 ? 0 : index;
   }
 
   static String createRouteName(PageDefinition page) {

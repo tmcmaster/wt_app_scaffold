@@ -11,6 +11,7 @@ class PlaceholderPage extends StatelessWidget {
   final void Function(BuildContext context)? dismissAction;
   final void Function(BuildContext context)? menuAction;
   final Widget? bottomNavigationBar;
+  final Color? backgroundColor;
 
   const PlaceholderPage({
     super.key,
@@ -19,11 +20,13 @@ class PlaceholderPage extends StatelessWidget {
     this.dismissAction,
     this.menuAction,
     this.bottomNavigationBar,
+    this.backgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: includeAppBar
           ? AppBar(
               backgroundColor: Theme.of(context).primaryColor,

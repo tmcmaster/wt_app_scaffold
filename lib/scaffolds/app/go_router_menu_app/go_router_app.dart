@@ -5,9 +5,26 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/bottom_menu_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/cross_fade_transition_builder.dart';
+import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_definition_scaffold.dart';
 import 'package:wt_logging/wt_logging.dart';
 
+typedef ScaffoldBuilder = Widget Function(BuildContext, PageDefinition);
+
 class GoRouterMenuApp extends ConsumerStatefulWidget {
+  static final scaffoldBuilders = <ScaffoldType, ScaffoldBuilder>{
+    ScaffoldType.plain: (context, page) => page.builder(context, page),
+    ScaffoldType.transparentCard: (context, page) =>
+        PageDefinitionScaffold(pageDefinition: page),
+  };
+
+  static Widget createPage(PageDefinition page, BuildContext context) {
+    if (scaffoldBuilders.containsKey(page.scaffoldType)) {
+      return scaffoldBuilders[page.scaffoldType]!.call(context, page);
+    } else {
+      return page.builder(context, page);
+    }
+  }
+
   static final goRouter = Provider<GoRouter>(
     name: 'GoRouter',
     (ref) {
@@ -18,7 +35,9 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
             .map(
               (page) => GoRoute(
                 path: BottomMenuBar.createRouteName(page),
-                builder: (context, _) => page.builder(context, page),
+                builder: (context, _) => SafeArea(
+                  child: createPage(page, context),
+                ),
               ),
             )
             .toList(),
@@ -70,11 +89,11 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: materialAppScaffoldKey,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
-            TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.android: CrossFadeTransitionBuilder(),
             TargetPlatform.iOS: CrossFadeTransitionBuilder(),
             TargetPlatform.macOS: CrossFadeTransitionBuilder(),
           },

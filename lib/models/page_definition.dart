@@ -6,17 +6,30 @@ typedef PageBuilder = Widget Function(
   PageDefinition pageDefinition,
 );
 
+typedef DrawerBuilder = Widget Function(
+  BuildContext context,
+);
+
+enum ScaffoldType {
+  transparentCard,
+  plain,
+}
+
 class PageDefinition extends ItemDefinition {
   final bool landing;
   final PageBuilder builder;
+  final DrawerBuilder? drawerBuilder;
   final List<PageDefinition> childPages;
+  final ScaffoldType scaffoldType;
   PageDefinition({
     required super.title,
     required super.icon,
     super.primary,
     super.debug,
     required this.builder,
+    this.drawerBuilder,
     this.landing = false,
     this.childPages = const [],
+    this.scaffoldType = ScaffoldType.plain,
   });
 }

@@ -21,6 +21,7 @@ scripts:
 dependencies:
   cloud_firestore: ^4.9.1
   cloud_functions: ^4.3.4
+  collection: ^1.17.2
   curved_navigation_bar: ^1.0.3
   device_preview: ^1.1.0
   draggable_bottom_sheet: ^1.0.2
@@ -43,6 +44,7 @@ dependencies:
   go_router: ^10.1.2
   grouped_list: ^5.1.2
   logger: ^1.4.0
+  package_info_plus: ^4.1.0
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
   wt_firepod:
