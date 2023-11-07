@@ -34,7 +34,7 @@ mixin AppOne {
       profilePage: PageDefinition(
         icon: Icons.person,
         title: 'Profile',
-        builder: (context, _) => ProfileScreen(
+        builder: (context, _, __) => ProfileScreen(
           auth: ref.read(FirebaseProviders.auth),
           actions: [
             SignedOutAction((context) {
@@ -50,13 +50,13 @@ mixin AppOne {
           title: 'Landing Page',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
-          builder: (context, _) => const FirebasePage(),
+          builder: (context, _, __) => const FirebasePage(),
         ),
         PageDefinition(
           title: 'Page One',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
-          builder: (context, _) => BottomDrawerPage(
+          builder: (context, _, __) => BottomDrawerPage(
             title: 'Page One',
             mainWidget: const Center(
               child: Text('Page One'),
@@ -76,49 +76,49 @@ mixin AppOne {
           title: 'Page Two',
           icon: FontAwesomeIcons.bagShopping,
           debug: false,
-          builder: (_, __) => const PlaceholderPage(title: 'Page Two'),
+          builder: (_, __, ___) => const PlaceholderPage(title: 'Page Two'),
         ),
         PageDefinition(
           title: 'Page Three',
           icon: FontAwesomeIcons.boxesPacking,
           debug: true,
-          builder: (_, __) => const PlaceholderPage(title: 'Page Three'),
+          builder: (_, __, ___) => const PlaceholderPage(title: 'Page Three'),
         ),
         PageDefinition(
           title: 'Page Four',
           icon: FontAwesomeIcons.tractor,
           debug: true,
-          builder: (_, __) => const PlaceholderPage(title: 'Page Four'),
+          builder: (_, __, ___) => const PlaceholderPage(title: 'Page Four'),
         ),
         PageDefinition(
           title: 'Page Five',
           icon: FontAwesomeIcons.car,
           debug: true,
-          builder: (_, __) => const PlaceholderPage(title: 'Page Five'),
+          builder: (_, __, ___) => const PlaceholderPage(title: 'Page Five'),
         ),
         PageDefinition(
           title: 'Counter',
           icon: Icons.settings,
           primary: true,
-          builder: (_, __) => const CounterAppPage(title: 'Counter App'),
+          builder: (_, __, ___) => const CounterAppPage(title: 'Counter App'),
         ),
         PageDefinition(
           title: 'Database',
           icon: FontAwesomeIcons.database,
           primary: true,
-          builder: (_, __) => const DatabaseExamplePage(),
+          builder: (_, __, ___) => const DatabaseExamplePage(),
         ),
         PageDefinition(
           title: 'Async',
           icon: FontAwesomeIcons.arrowsRotate,
           primary: true,
-          builder: (_, __) => const AsyncExamplePage(),
+          builder: (_, __, ___) => const AsyncExamplePage(),
         ),
         PageDefinition(
           title: 'Settings',
           icon: Icons.settings,
           primary: true,
-          builder: (context, __) => SettingsPage(
+          builder: (context, _, __) => SettingsPage(
             children: [
               ElevatedButton(
                 onPressed: () {

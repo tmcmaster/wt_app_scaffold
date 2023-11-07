@@ -53,7 +53,7 @@ class AppDefinition {
           PageDefinition(
             title: 'Profile',
             icon: Icons.person,
-            builder: (_, __) => const PlaceholderPage(title: 'Profile'),
+            builder: (_, __, ___) => const PlaceholderPage(title: 'Profile'),
           ),
       pages: pages,
       swipeEnabled: swipeEnabled,

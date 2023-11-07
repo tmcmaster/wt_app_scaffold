@@ -9,6 +9,8 @@ class SliverPageScaffold extends StatelessWidget {
   final bool floatingBanner;
   final bool centerTitle;
   final bool stretchBanner;
+  final double expandedHeight;
+  final double stretchTriggerOffset;
 
   const SliverPageScaffold({
     super.key,
@@ -20,7 +22,11 @@ class SliverPageScaffold extends StatelessWidget {
     this.floatingBanner = false,
     this.centerTitle = true,
     this.stretchBanner = true,
+    this.expandedHeight = 300,
+    this.stretchTriggerOffset = 300.0,
   });
+
+  bool get hasAppBar => banner != null || header != null;
 
   @override
   Widget build(BuildContext context) {
@@ -31,22 +37,23 @@ class SliverPageScaffold extends StatelessWidget {
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: <Widget>[
-            SliverAppBar(
-              backgroundColor: Colors.transparent,
-              stretch: stretchBanner,
-              floating: floatingBanner,
-              pinned: pinnedHeader,
-              stretchTriggerOffset: 300.0,
-              expandedHeight: 200.0,
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: centerTitle,
-                title: header,
-                background: Padding(
-                  padding: const EdgeInsets.only(bottom: 50.0),
-                  child: banner,
+            if (hasAppBar)
+              SliverAppBar(
+                backgroundColor: Colors.transparent,
+                stretch: stretchBanner,
+                floating: floatingBanner,
+                pinned: pinnedHeader,
+                stretchTriggerOffset: stretchTriggerOffset,
+                expandedHeight: banner == null ? 0 : expandedHeight,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: centerTitle,
+                  title: header,
+                  background: Padding(
+                    padding: const EdgeInsets.only(bottom: 50.0),
+                    child: banner,
+                  ),
                 ),
               ),
-            ),
             if (body != null)
               SliverToBoxAdapter(
                 child: Padding(

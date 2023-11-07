@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/bottom_menu_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/irregular_header_painter.dart';
@@ -7,8 +8,10 @@ import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/transpar
 
 class PageDefinitionScaffold extends StatefulWidget {
   final PageDefinition pageDefinition;
+  final GoRouterState? state;
   const PageDefinitionScaffold({
     required this.pageDefinition,
+    this.state,
   });
 
   @override
@@ -138,7 +141,10 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                               physics: const NeverScrollableScrollPhysics(),
                               controller: controller,
                               children: pages
-                                  .map((page) => page.builder(context, page))
+                                  .map(
+                                    (page) => page.builder(
+                                        context, page, widget.state),
+                                  )
                                   .toList(),
                             ),
                           ),

@@ -8,20 +8,23 @@ import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/cross_fade_tran
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_definition_scaffold.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-typedef ScaffoldBuilder = Widget Function(BuildContext, PageDefinition);
+typedef ScaffoldBuilder = Widget Function(
+    BuildContext, PageDefinition, GoRouterState? extras);
 
 class GoRouterMenuApp extends ConsumerStatefulWidget {
   static final scaffoldBuilders = <ScaffoldType, ScaffoldBuilder>{
-    ScaffoldType.plain: (context, page) => page.builder(context, page),
-    ScaffoldType.transparentCard: (context, page) =>
-        PageDefinitionScaffold(pageDefinition: page),
+    ScaffoldType.plain: (context, page, state) =>
+        page.builder(context, page, null),
+    ScaffoldType.transparentCard: (context, page, state) =>
+        PageDefinitionScaffold(pageDefinition: page, state: state),
   };
 
-  static Widget createPage(PageDefinition page, BuildContext context) {
+  static Widget createPage(
+      PageDefinition page, BuildContext context, GoRouterState state) {
     if (scaffoldBuilders.containsKey(page.scaffoldType)) {
-      return scaffoldBuilders[page.scaffoldType]!.call(context, page);
+      return scaffoldBuilders[page.scaffoldType]!.call(context, page, state);
     } else {
-      return page.builder(context, page);
+      return page.builder(context, page, state);
     }
   }
 
@@ -35,8 +38,8 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
             .map(
               (page) => GoRoute(
                 path: BottomMenuBar.createRouteName(page),
-                builder: (context, _) => SafeArea(
-                  child: createPage(page, context),
+                builder: (context, state) => SafeArea(
+                  child: createPage(page, context, state),
                 ),
               ),
             )

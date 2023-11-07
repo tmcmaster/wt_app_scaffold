@@ -35,7 +35,7 @@ class _CurvedNavBarAppState extends State<CurvedNavBarApp> {
           return widget.debugMode || !page.debug;
         })
         .map(
-          (page) => page.builder(context, page),
+          (page) => page.builder(context, page, null),
         )
         .toList();
 

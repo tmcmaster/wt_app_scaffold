@@ -150,7 +150,7 @@ class _PageViewState extends ConsumerState<_PageView> {
       physics:
           widget.swipeEnabled ? null : const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) =>
-          filterItems[index].builder(context, filterItems[index]),
+          filterItems[index].builder(context, filterItems[index], null),
       onPageChanged: (page) {
         final pageNav = ref.read(widget.provider.notifier);
         pageNav.setPage(PageChangeSource.pageView, page);

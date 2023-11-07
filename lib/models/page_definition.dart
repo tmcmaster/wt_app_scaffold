@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/models/item_definition.dart';
 
 typedef PageBuilder = Widget Function(
   BuildContext context,
   PageDefinition pageDefinition,
+  GoRouterState? state,
 );
 
 typedef DrawerBuilder = Widget Function(

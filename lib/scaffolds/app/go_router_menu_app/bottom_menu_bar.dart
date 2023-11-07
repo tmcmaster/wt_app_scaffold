@@ -67,6 +67,6 @@ class BottomMenuBar extends ConsumerWidget {
   }
 
   static String createRouteName(PageDefinition page) {
-    return '/${page.title.toLowerCase()}';
+    return '/${page.title.toLowerCase().replaceAll(' ', '_')}';
   }
 }

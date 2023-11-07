@@ -32,7 +32,7 @@ mixin AppTwo {
       profilePage: PageDefinition(
         icon: Icons.person,
         title: 'Profile',
-        builder: (context, _) => ProfileScreen(
+        builder: (_, __, ___) => ProfileScreen(
           auth: ref.read(FirebaseProviders.auth),
           actions: [
             SignedOutAction((context) {
@@ -48,37 +48,37 @@ mixin AppTwo {
           title: 'Plain Page',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
-          builder: (context, _) => const PlainPage(),
+          builder: (_, __, ___) => const PlainPage(),
         ),
         PageDefinition(
           title: 'Firebase Page',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
-          builder: (context, _) => const FirebasePage(),
+          builder: (_, __, ___) => const FirebasePage(),
         ),
         PageDefinition(
           title: 'SnackBar Page',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
-          builder: (context, _) => const SnackBarPage(),
+          builder: (_, __, ___) => const SnackBarPage(),
         ),
         PageDefinition(
           title: 'Navigation Page',
           icon: FontAwesomeIcons.bars,
           debug: false,
-          builder: (context, _) => const NavigationPage(),
+          builder: (_, __, ___) => const NavigationPage(),
         ),
         PageDefinition(
           title: 'Login Page',
           icon: FontAwesomeIcons.clipboard,
           debug: false,
-          builder: (context, _) => const LoginPage(),
+          builder: (_, __, ___) => const LoginPage(),
         ),
         PageDefinition(
           title: 'Settings',
           icon: Icons.settings,
           primary: true,
-          builder: (context, _) => VirtualSizeFittedBox(
+          builder: (context, __, ___) => VirtualSizeFittedBox(
             virtualSize: 1000,
             child: SettingsPage(
               children: [
