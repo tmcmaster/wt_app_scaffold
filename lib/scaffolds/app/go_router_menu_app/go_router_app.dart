@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/bottom_menu_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/cross_fade_transition_builder.dart';
@@ -9,23 +10,28 @@ import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_def
 import 'package:wt_logging/wt_logging.dart';
 
 typedef ScaffoldBuilder = Widget Function(
-    BuildContext, PageDefinition, GoRouterState? extras);
+  BuildContext,
+  PageDefinition,
+  GoRouterState? extras,
+);
 
 class GoRouterMenuApp extends ConsumerStatefulWidget {
-  static final ThemeData defaultThemeData = ThemeData(
-    // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-    useMaterial3: true,
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: {
-        TargetPlatform.android: CrossFadeTransitionBuilder(),
-        TargetPlatform.iOS: CrossFadeTransitionBuilder(),
-        TargetPlatform.macOS: CrossFadeTransitionBuilder(),
-      },
-    ),
-    tabBarTheme: const TabBarTheme(
-      labelPadding: EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 16.0,
+  static final AppStyles styles = AppStyles(
+    theme: ThemeData(
+      // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+      useMaterial3: true,
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: CrossFadeTransitionBuilder(),
+          TargetPlatform.iOS: CrossFadeTransitionBuilder(),
+          TargetPlatform.macOS: CrossFadeTransitionBuilder(),
+        },
+      ),
+      tabBarTheme: const TabBarTheme(
+        labelPadding: EdgeInsets.symmetric(
+          vertical: 8.0,
+          horizontal: 16.0,
+        ),
       ),
     ),
   );
@@ -38,7 +44,10 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
   };
 
   static Widget createPage(
-      PageDefinition page, BuildContext context, GoRouterState state) {
+    PageDefinition page,
+    BuildContext context,
+    GoRouterState state,
+  ) {
     if (scaffoldBuilders.containsKey(page.scaffoldType)) {
       return scaffoldBuilders[page.scaffoldType]!.call(context, page, state);
     } else {
@@ -95,7 +104,8 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
       return BottomMenuBar.createRouteName(initialRoutePage);
     }
     throw Exception(
-        'Could not determine the initial route for the application');
+      'Could not determine the initial route for the application',
+    );
   }
 }
 
@@ -105,40 +115,21 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
     final materialAppScaffoldKey = ref.read(UserLog.snackBarKey);
     final goRouter = ref.read(GoRouterMenuApp.goRouter);
     final appStyles = ref.read(AppScaffoldProviders.appStyles);
-
+    final seedColor = ref.watch(ApplicationSettings.colorScheme.value);
+    print('SEED COLOR: $seedColor');
     return MaterialApp.router(
       title: 'Ecompod Example Application',
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: materialAppScaffoldKey,
-      theme: _mergeThemes(
-        GoRouterMenuApp.defaultThemeData,
-        appStyles?.theme,
+      theme: appStyles.theme.copyWith(
+        colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
+        extensions: [
+          appStyles.spacing,
+          appStyles.sizing,
+        ],
       ),
+      darkTheme: appStyles.darkTheme,
       routerConfig: goRouter,
     );
-  }
-
-  ThemeData _mergeThemes(ThemeData defaultThemeData, ThemeData? theme) {
-    if (theme == null) {
-      return defaultThemeData;
-    } else {
-      final defaultBuilders = defaultThemeData.pageTransitionsTheme.builders;
-      final themeBuilders = theme.pageTransitionsTheme.builders;
-      return theme.copyWith(
-        useMaterial3: defaultThemeData.useMaterial3,
-        pageTransitionsTheme: PageTransitionsTheme(
-          builders: Map.fromEntries(
-            [
-              ...defaultBuilders.entries,
-              ...themeBuilders.entries,
-            ],
-          ),
-        ),
-        tabBarTheme: theme.tabBarTheme.copyWith(
-          labelPadding: theme.tabBarTheme.labelPadding ??
-              defaultThemeData.tabBarTheme.labelPadding,
-        ),
-      );
-    }
   }
 }

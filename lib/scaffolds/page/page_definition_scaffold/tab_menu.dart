@@ -16,7 +16,7 @@ class TabMenu extends StatefulWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size(double.infinity, 20);
+  Size get preferredSize => const Size(double.infinity, 20);
 }
 
 class _TabMenuState extends State<TabMenu> with TickerProviderStateMixin {

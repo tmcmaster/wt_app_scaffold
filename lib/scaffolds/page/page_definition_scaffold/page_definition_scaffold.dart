@@ -49,9 +49,13 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
       ...widget.pageDefinition.childPages,
     ];
 
-    final topMargin = 0.0;
+    const topMargin = 0.0;
     final hasTabs = pages.length > 1;
     final tabsHeight = hasTabs ? 42.0 : 0.0;
+
+    final colorScheme = Theme.of(context).colorScheme;
+    final primaryColor = colorScheme.primary;
+    final onPrimarycColor = colorScheme.onPrimary;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -59,7 +63,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
         final height = constraints.maxHeight;
         final aspect = width / height;
 
-        final cardTop = topMargin;
+        const cardTop = topMargin;
         final cardHeight = height - topMargin - tabsHeight - 130;
 
         final cardLeft =
@@ -70,9 +74,9 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
           child: Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
-              backgroundColor: Colors.blue,
-              titleTextStyle: const TextStyle(
-                color: Colors.white,
+              backgroundColor: primaryColor,
+              titleTextStyle: TextStyle(
+                color: onPrimarycColor,
                 fontSize: 20,
               ),
               elevation: 0,
@@ -81,7 +85,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                   ? null
                   : DrawerButton(
                       style: ButtonStyle(
-                        iconColor: MaterialStateProperty.all(Colors.white),
+                        iconColor: MaterialStateProperty.all(onPrimarycColor),
                       ),
                       onPressed: () {
                         _scaffoldKey.currentState!.openDrawer();
@@ -98,7 +102,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.7),
+                        color: onPrimarycColor.withOpacity(0.7),
                         borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(20),
@@ -111,7 +115,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
               children: [
                 if (pages.length > 2)
                   ColoredBox(
-                    color: Colors.blue,
+                    color: primaryColor,
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: TabMenu(
@@ -130,7 +134,9 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                           child: SizedBox(
                             width: double.infinity,
                             child: CustomPaint(
-                              painter: const IrregularHeaderPainter(),
+                              painter: IrregularHeaderPainter(
+                                color: primaryColor,
+                              ),
                               child: Container(),
                             ),
                           ),
@@ -149,14 +155,17 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                               children: pages
                                   .map(
                                     (page) => page.builder(
-                                        context, page, widget.state),
+                                      context,
+                                      page,
+                                      widget.state,
+                                    ),
                                   )
                                   .toList(),
                             ),
                           ),
                           backgroundColor: Colors.transparent,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:wt_app_scaffold/app_platform/components/provider_monitor.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/AppStyles.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
 Future<void> runMyApp(
@@ -130,7 +130,7 @@ const andAppScaffold = withAppScaffold;
 FeatureDefinition withAppScaffold({
   required AlwaysAliveProviderBase<AppDefinition> appDefinition,
   required AlwaysAliveProviderBase<AppDetails> appDetails,
-  required AlwaysAliveProviderBase<AppStyles?> appStyles,
+  required AlwaysAliveProviderBase<AppStyles> appStyles,
   double? virtualSize,
 }) {
   return FeatureDefinition(

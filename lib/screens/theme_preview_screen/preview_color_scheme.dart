@@ -114,13 +114,13 @@ class PreviewColorScheme extends StatelessWidget {
                           width: 50,
                           height: 50,
                           color: color.value,
-                        )
+                        ),
                       ].toList(),
                     ),
                   ),
                 )
                 .toList(),
-          )
+          ),
         ],
       ),
     );

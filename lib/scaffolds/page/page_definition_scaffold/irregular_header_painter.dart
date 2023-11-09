@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
 class IrregularHeaderPainter extends CustomPainter {
-  const IrregularHeaderPainter();
+  final Color color;
+  const IrregularHeaderPainter({
+    this.color = Colors.blue,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = Colors.blue
+    final paint = Paint()
+      ..color = color
       ..style = PaintingStyle.fill;
 
-    Path path = Path();
+    final path = Path();
 
     path.moveTo(0, 0);
     path.lineTo(0, size.height * 0.6);

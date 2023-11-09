@@ -4,7 +4,7 @@ import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
 import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/AppStyles.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -23,7 +23,7 @@ class AppScaffoldSupport extends ConsumerWidget {
   static Future<Map<ProviderListenable, ProviderOverrideDefinition>> init({
     required ProviderListenable<AppDetails> appDetails,
     required ProviderListenable<AppDefinition> appDefinition,
-    required ProviderListenable<AppStyles?> appStyles,
+    required ProviderListenable<AppStyles> appStyles,
     required Map<ProviderListenable, ProviderOverrideDefinition> contextMap,
     FeatureDefinition? child,
   }) async {

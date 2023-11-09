@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_platform/features/login_screen_support/config.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/AppStyles.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/go_router_app.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/login_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/navigation_page.dart';
@@ -97,8 +98,8 @@ mixin AppTwo {
     ),
   );
 
-  static final styles = Provider<AppStyles?>(
+  static final styles = Provider<AppStyles>(
     name: 'AppTwo Styles',
-    (ref) => null,
+    (ref) => GoRouterMenuApp.styles,
   );
 }

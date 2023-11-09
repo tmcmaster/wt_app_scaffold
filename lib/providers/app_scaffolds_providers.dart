@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/AppStyles.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
 
 mixin AppScaffoldProviders {
   static final appDefinition = Provider<AppDefinition>(
@@ -23,8 +23,10 @@ mixin AppScaffoldProviders {
     },
   );
 
-  static final appStyles = Provider<AppStyles?>(
+  static final appStyles = Provider<AppStyles>(
     name: 'AppScaffoldProviders.appStyles',
-    (ref) => null,
+    (ref) => throw Exception(
+      'AppScaffoldProviders.appStyles provider needs to be overridden.',
+    ),
   );
 }

@@ -8,14 +8,6 @@ class BottomMenuBar extends ConsumerWidget {
   final String activeRoute;
   final void Function(int selected)? beforeTransition;
 
-  static final menuPages = [
-    '/market',
-    '/account',
-    '/sell',
-    '/messages',
-    '/about',
-  ];
-
   const BottomMenuBar({
     super.key,
     required this.activeRoute,
@@ -26,10 +18,12 @@ class BottomMenuBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
     final pages = appDefinition.pages.where((page) => page.primary).toList();
+    final colorScheme = Theme.of(context).colorScheme;
+    final primaryColor = colorScheme.primary;
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       // backgroundColor: const Color(0xFF0D5257),
-      selectedItemColor: Colors.blue,
+      selectedItemColor: primaryColor,
       unselectedItemColor: Colors.grey.shade400,
       iconSize: 16,
       selectedFontSize: 12,

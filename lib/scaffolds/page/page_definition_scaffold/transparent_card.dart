@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TransparentCard extends StatelessWidget {
+  static const bool outline = false;
+
   final Widget child;
-  final bool outline = false;
 
   const TransparentCard({required this.child});
   @override

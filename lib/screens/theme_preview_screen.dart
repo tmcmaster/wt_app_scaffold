@@ -43,20 +43,23 @@ class _ThemePreviewScreenState extends State<ThemePreviewScreen>
           const SizedBox(height: 16),
           Expanded(
             child: ScrollConfiguration(
-              behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              behavior:
+                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
               child: TabBarView(
                 controller: controller,
                 children: pages.values
-                    .map((builder) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SingleChildScrollView(
-                            child: builder.call(context),
-                          ),
-                        ))
+                    .map(
+                      (builder) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SingleChildScrollView(
+                          child: builder.call(context),
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
