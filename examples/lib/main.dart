@@ -10,6 +10,7 @@ void main() async {
         andAppScaffold(
           appDetails: AppTwo.details,
           appDefinition: AppTwo.definition,
+          appStyles: AppTwo.styles,
         ),
         loginSupport: const LoginSupport(
           emailEnabled: true,

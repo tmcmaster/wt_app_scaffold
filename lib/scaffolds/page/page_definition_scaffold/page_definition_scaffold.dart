@@ -20,6 +20,8 @@ class PageDefinitionScaffold extends StatefulWidget {
 
 class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
     with TickerProviderStateMixin {
+  static const maxWidth = 800.0;
+
   late TabController controller;
   int selected = 0;
 
@@ -59,6 +61,10 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
 
         final cardTop = topMargin;
         final cardHeight = height - topMargin - tabsHeight - 130;
+
+        final cardLeft =
+            width < maxWidth * 1.05 ? width * 0.05 : (width - maxWidth) / 2;
+        final cardWidth = width < maxWidth * 1.05 ? width * 0.9 : maxWidth;
 
         return SafeArea(
           child: Scaffold(
@@ -132,8 +138,8 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                       ),
                       Positioned(
                         top: cardTop,
-                        left: width * 0.05,
-                        width: width * 0.9,
+                        left: cardLeft,
+                        width: cardWidth,
                         height: cardHeight,
                         child: Scaffold(
                           body: TransparentCard(

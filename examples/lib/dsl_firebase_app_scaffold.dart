@@ -9,6 +9,7 @@ void main() async {
       andAppScaffold(
         appDetails: AppTwo.details,
         appDefinition: AppTwo.definition,
+        appStyles: AppTwo.styles,
       ),
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,

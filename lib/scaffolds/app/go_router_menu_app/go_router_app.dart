@@ -12,6 +12,24 @@ typedef ScaffoldBuilder = Widget Function(
     BuildContext, PageDefinition, GoRouterState? extras);
 
 class GoRouterMenuApp extends ConsumerStatefulWidget {
+  static final ThemeData defaultThemeData = ThemeData(
+    // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+    useMaterial3: true,
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: CrossFadeTransitionBuilder(),
+        TargetPlatform.iOS: CrossFadeTransitionBuilder(),
+        TargetPlatform.macOS: CrossFadeTransitionBuilder(),
+      },
+    ),
+    tabBarTheme: const TabBarTheme(
+      labelPadding: EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 16.0,
+      ),
+    ),
+  );
+
   static final scaffoldBuilders = <ScaffoldType, ScaffoldBuilder>{
     ScaffoldType.plain: (context, page, state) =>
         page.builder(context, page, null),
@@ -86,23 +104,41 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
   Widget build(BuildContext context) {
     final materialAppScaffoldKey = ref.read(UserLog.snackBarKey);
     final goRouter = ref.read(GoRouterMenuApp.goRouter);
+    final appStyles = ref.read(AppScaffoldProviders.appStyles);
 
     return MaterialApp.router(
       title: 'Ecompod Example Application',
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: materialAppScaffoldKey,
-      theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-        pageTransitionsTheme: const PageTransitionsTheme(
-          builders: {
-            TargetPlatform.android: CrossFadeTransitionBuilder(),
-            TargetPlatform.iOS: CrossFadeTransitionBuilder(),
-            TargetPlatform.macOS: CrossFadeTransitionBuilder(),
-          },
-        ),
+      theme: _mergeThemes(
+        GoRouterMenuApp.defaultThemeData,
+        appStyles?.theme,
       ),
       routerConfig: goRouter,
     );
+  }
+
+  ThemeData _mergeThemes(ThemeData defaultThemeData, ThemeData? theme) {
+    if (theme == null) {
+      return defaultThemeData;
+    } else {
+      final defaultBuilders = defaultThemeData.pageTransitionsTheme.builders;
+      final themeBuilders = theme.pageTransitionsTheme.builders;
+      return theme.copyWith(
+        useMaterial3: defaultThemeData.useMaterial3,
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: Map.fromEntries(
+            [
+              ...defaultBuilders.entries,
+              ...themeBuilders.entries,
+            ],
+          ),
+        ),
+        tabBarTheme: theme.tabBarTheme.copyWith(
+          labelPadding: theme.tabBarTheme.labelPadding ??
+              defaultThemeData.tabBarTheme.labelPadding,
+        ),
+      );
+    }
   }
 }

@@ -10,6 +10,7 @@ void main() async {
         andAppScaffold(
           appDetails: AppOne.details,
           appDefinition: AppOne.definition,
+          appStyles: AppOne.styles,
         ),
         loginSupport: const LoginSupport(
           emailEnabled: true,

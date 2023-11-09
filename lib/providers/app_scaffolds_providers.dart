@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/AppStyles.dart';
 
 mixin AppScaffoldProviders {
   static final appDefinition = Provider<AppDefinition>(
@@ -9,7 +10,7 @@ mixin AppScaffoldProviders {
     ),
   );
 
-  static final applicationType = Provider(
+  static final applicationType = Provider<ApplicationType>(
     name: 'AppScaffoldProviders.applicationType',
     (ref) {
       final applicationDefinition =
@@ -20,5 +21,10 @@ mixin AppScaffoldProviders {
       final applicationType = staticApplicationType ?? settingsApplicationType;
       return applicationType;
     },
+  );
+
+  static final appStyles = Provider<AppStyles?>(
+    name: 'AppScaffoldProviders.appStyles',
+    (ref) => null,
   );
 }
