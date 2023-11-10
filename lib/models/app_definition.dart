@@ -17,6 +17,8 @@ class AppDefinition {
   final void Function(BuildContext context)? menuAction;
   final List<LocalizationsDelegate>? localizationDelegates;
   final ApplicationType? applicationType;
+  final ThemeMode? themeMode;
+  final Color? colorScheme;
 
   const AppDefinition._({
     required this.appTitle,
@@ -30,6 +32,8 @@ class AppDefinition {
     required this.menuAction,
     required this.localizationDelegates,
     this.applicationType,
+    this.themeMode,
+    this.colorScheme,
   });
 
   factory AppDefinition.from({
@@ -44,6 +48,8 @@ class AppDefinition {
     void Function(BuildContext context)? menuAction,
     List<LocalizationsDelegate>? localizationDelegates,
     ApplicationType? applicationType,
+    ThemeMode? themeMode,
+    Color? colorScheme,
   }) {
     return AppDefinition._(
       appTitle: appTitle,
@@ -62,6 +68,8 @@ class AppDefinition {
       menuAction: menuAction,
       localizationDelegates: localizationDelegates,
       applicationType: applicationType,
+      themeMode: themeMode,
+      colorScheme: colorScheme,
     );
   }
 }

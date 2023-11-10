@@ -115,12 +115,17 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
     final materialAppScaffoldKey = ref.read(UserLog.snackBarKey);
     final goRouter = ref.read(GoRouterMenuApp.goRouter);
     final appStyles = ref.read(AppScaffoldProviders.appStyles);
-    final seedColor = ref.watch(ApplicationSettings.colorScheme.value);
+    final seedColor = widget.appDefinition.colorScheme == null
+        ? ref.watch(ApplicationSettings.colorScheme.value)
+        : widget.appDefinition.colorScheme!;
+    final themeMode = widget.appDefinition.themeMode ??
+        ref.watch(ApplicationSettings.theme.value);
     print('SEED COLOR: $seedColor');
     return MaterialApp.router(
       title: 'Ecompod Example Application',
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: materialAppScaffoldKey,
+      themeMode: themeMode,
       theme: appStyles.theme.copyWith(
         colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
         extensions: [

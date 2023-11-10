@@ -71,13 +71,17 @@ class AppPlatform extends ConsumerWidget {
             ),
     );
 
-    return devicePreview
-        ? DevicePreview(
-            isToolbarVisible: false,
-            builder: (_) => SafeArea(
-              child: providerScope,
-            ),
-          )
-        : providerScope;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return constraints.maxWidth > 500 && devicePreview
+            ? DevicePreview(
+                isToolbarVisible: false,
+                builder: (_) => SafeArea(
+                  child: providerScope,
+                ),
+              )
+            : providerScope;
+      },
+    );
   }
 }
