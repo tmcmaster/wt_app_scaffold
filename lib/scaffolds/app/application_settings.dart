@@ -22,7 +22,13 @@ mixin ApplicationSettings {
   );
   static final colorScheme = SettingsColorProviders(
     key: '__COLOR_SCHEME__',
-    values: Colors.primaries,
+    values: [
+      Colors.green,
+      Colors.orange,
+      Colors.red,
+      Colors.blue,
+      Colors.purple,
+    ],
     initialValue: Colors.blue,
     none: Colors.blue,
     label: 'Color Scheme',

@@ -20,8 +20,8 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isHiddenDraw =
-        ref.read(ApplicationSettings.applicationType.value) == ApplicationType.hiddenDrawer;
+    final isHiddenDraw = ref.read(ApplicationSettings.applicationType.value) ==
+        ApplicationType.hiddenDrawer;
 
     final List<Widget> settingsComponents = [
       if (childrenBefore) ...children,
