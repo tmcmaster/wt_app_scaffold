@@ -1,6 +1,8 @@
+import 'package:color_blindness/color_blindness.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/font_size_factor.dart';
 import 'package:wt_settings/wt_settings.dart';
 
 mixin ApplicationSettings {
@@ -46,5 +48,23 @@ mixin ApplicationSettings {
     label: 'Verify Email',
     hint: 'Should emails be required to be verified.',
     initialValue: false,
+  );
+
+  static final colorBlindness = SettingsEnumProviders(
+    label: 'Colour Blindness',
+    hint: 'Select type of colour blindness',
+    values: ColorBlindnessType.values,
+    initialValue: ColorBlindnessType.none,
+    none: ColorBlindnessType.none,
+    key: '__COLOUR_BLINDNESS__',
+  );
+
+  static final textScaleFactor = SettingsEnumProviders(
+    label: 'Text Scale',
+    hint: 'Select a text scale to apply to the app',
+    values: FontSizeFactor.values,
+    initialValue: FontSizeFactor.medium,
+    none: FontSizeFactor.medium,
+    key: '__FONT_SIZE_FACTOR__',
   );
 }

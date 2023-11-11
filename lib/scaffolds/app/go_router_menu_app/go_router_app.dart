@@ -1,3 +1,5 @@
+import 'package:color_blindness/color_blindness.dart';
+import 'package:color_blindness/color_blindness_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -36,25 +38,6 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
     ),
   );
 
-  static final scaffoldBuilders = <ScaffoldType, ScaffoldBuilder>{
-    ScaffoldType.plain: (context, page, state) =>
-        page.builder(context, page, null),
-    ScaffoldType.transparentCard: (context, page, state) =>
-        PageDefinitionScaffold(pageDefinition: page, state: state),
-  };
-
-  static Widget createPage(
-    PageDefinition page,
-    BuildContext context,
-    GoRouterState state,
-  ) {
-    if (scaffoldBuilders.containsKey(page.scaffoldType)) {
-      return scaffoldBuilders[page.scaffoldType]!.call(context, page, state);
-    } else {
-      return page.builder(context, page, state);
-    }
-  }
-
   static final goRouter = Provider<GoRouter>(
     name: 'GoRouter',
     (ref) {
@@ -65,9 +48,12 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
             .map(
               (page) => GoRoute(
                 path: BottomMenuBar.createRouteName(page),
-                builder: (context, state) => SafeArea(
-                  child: createPage(page, context, state),
-                ),
+                builder: (context, state) {
+                  return _PageWrapper(
+                    page: page,
+                    state: state,
+                  );
+                },
               ),
             )
             .toList(),
@@ -120,14 +106,19 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
         : widget.appDefinition.colorScheme!;
     final themeMode = widget.appDefinition.themeMode ??
         ref.watch(ApplicationSettings.theme.value);
-    print('SEED COLOR: $seedColor');
+    final colorBlindness = ref.watch(ApplicationSettings.colorBlindness.value);
     return MaterialApp.router(
       title: 'Ecompod Example Application',
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: materialAppScaffoldKey,
       themeMode: themeMode,
       theme: appStyles.theme.copyWith(
-        colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
+        colorScheme: colorBlindness == ColorBlindnessType.none
+            ? ColorScheme.fromSeed(seedColor: seedColor)
+            : colorBlindnessColorScheme(
+                ColorScheme.fromSeed(seedColor: seedColor),
+                colorBlindness,
+              ),
         extensions: [
           appStyles.spacing,
           appStyles.sizing,
@@ -135,6 +126,39 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
       ),
       darkTheme: appStyles.darkTheme,
       routerConfig: goRouter,
+    );
+  }
+}
+
+class _PageWrapper extends ConsumerWidget {
+  static final scaffoldBuilders = <ScaffoldType, ScaffoldBuilder>{
+    ScaffoldType.plain: (context, page, state) =>
+        page.builder(context, page, null),
+    ScaffoldType.transparentCard: (context, page, state) =>
+        PageDefinitionScaffold(pageDefinition: page, state: state),
+  };
+
+  final PageDefinition page;
+  final GoRouterState state;
+  const _PageWrapper({
+    required this.page,
+    required this.state,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final MediaQueryData data = MediaQuery.of(context);
+    final scaleFactor =
+        ref.watch(ApplicationSettings.textScaleFactor.value).value;
+    return SafeArea(
+      child: MediaQuery(
+        data: data.copyWith(
+          textScaleFactor: scaleFactor,
+        ),
+        child: (scaffoldBuilders.containsKey(page.scaffoldType))
+            ? scaffoldBuilders[page.scaffoldType]!.call(context, page, state)
+            : page.builder(context, page, state),
+      ),
     );
   }
 }
