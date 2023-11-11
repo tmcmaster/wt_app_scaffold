@@ -19,6 +19,8 @@ class AppDefinition {
   final ApplicationType? applicationType;
   final ThemeMode? themeMode;
   final Color? colorScheme;
+  final List<LocalizationsDelegate>? intlDelegates;
+  final Set<Locale>? inltLocales;
 
   const AppDefinition._({
     required this.appTitle,
@@ -34,6 +36,8 @@ class AppDefinition {
     this.applicationType,
     this.themeMode,
     this.colorScheme,
+    this.inltLocales,
+    this.intlDelegates,
   });
 
   factory AppDefinition.from({
@@ -50,6 +54,8 @@ class AppDefinition {
     ApplicationType? applicationType,
     ThemeMode? themeMode,
     Color? colorScheme,
+    List<LocalizationsDelegate>? intlDelegates,
+    Set<Locale>? inltLocales,
   }) {
     return AppDefinition._(
       appTitle: appTitle,
@@ -70,6 +76,8 @@ class AppDefinition {
       applicationType: applicationType,
       themeMode: themeMode,
       colorScheme: colorScheme,
+      inltLocales: inltLocales,
+      intlDelegates: intlDelegates,
     );
   }
 }

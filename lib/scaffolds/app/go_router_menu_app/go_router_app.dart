@@ -1,6 +1,7 @@
 import 'package:color_blindness/color_blindness.dart';
 import 'package:color_blindness/color_blindness_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
@@ -101,12 +102,16 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
     final materialAppScaffoldKey = ref.read(UserLog.snackBarKey);
     final goRouter = ref.read(GoRouterMenuApp.goRouter);
     final appStyles = ref.read(AppScaffoldProviders.appStyles);
+    final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
     final seedColor = widget.appDefinition.colorScheme == null
         ? ref.watch(ApplicationSettings.colorScheme.value)
         : widget.appDefinition.colorScheme!;
     final themeMode = widget.appDefinition.themeMode ??
         ref.watch(ApplicationSettings.theme.value);
     final colorBlindness = ref.watch(ApplicationSettings.colorBlindness.value);
+    final locale = ref.watch(LocaleStore.provider);
+    final locales =
+        appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
     return MaterialApp.router(
       title: 'Ecompod Example Application',
       debugShowCheckedModeBanner: false,
@@ -126,6 +131,15 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
       ),
       darkTheme: appStyles.darkTheme,
       routerConfig: goRouter,
+      localizationsDelegates: [
+        if (appDefinition.intlDelegates != null)
+          ...appDefinition.intlDelegates!,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: locales,
+      locale: locale ?? locales.first,
     );
   }
 }
