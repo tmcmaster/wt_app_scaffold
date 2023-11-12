@@ -24,15 +24,23 @@ class BottomMenuBar extends ConsumerWidget {
       type: BottomNavigationBarType.fixed,
       // backgroundColor: const Color(0xFF0D5257),
       selectedItemColor: primaryColor,
-      unselectedItemColor: Colors.grey.shade400,
+      unselectedItemColor: Colors.black,
       iconSize: 16,
       selectedFontSize: 12,
+      selectedIconTheme: const IconThemeData(
+        size: 16,
+      ),
+      unselectedIconTheme: const IconThemeData(
+        size: 24,
+      ),
       unselectedFontSize: 12,
       showSelectedLabels: true,
-      showUnselectedLabels: true,
+      showUnselectedLabels: false,
       useLegacyColorScheme: false,
       enableFeedback: false,
-      selectedLabelStyle: const TextStyle(height: 1.5),
+      selectedLabelStyle: const TextStyle(
+        height: 1.5,
+      ),
       items: appDefinition.pages
           .where((page) => page.primary)
           .map(
