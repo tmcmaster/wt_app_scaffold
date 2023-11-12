@@ -13,7 +13,7 @@ class ThemePreviewScreen extends StatefulWidget {
 class _ThemePreviewScreenState extends State<ThemePreviewScreen>
     with TickerProviderStateMixin {
   final pages = <String, WidgetBuilder>{
-    'Topography': (context) => const PreviewTextStyles(),
+    'Typography': (context) => const PreviewTextStyles(),
     'Buttons': (context) => const PreviewButtonStyles(),
     'Colors': (context) => const PreviewColorScheme(),
   };
