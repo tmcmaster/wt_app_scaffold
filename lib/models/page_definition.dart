@@ -18,12 +18,14 @@ enum ScaffoldType {
 }
 
 class PageDefinition extends ItemDefinition {
+  final String? name;
   final bool landing;
   final PageBuilder builder;
   final DrawerBuilder? drawerBuilder;
   final List<PageDefinition> childPages;
   final ScaffoldType scaffoldType;
   PageDefinition({
+    this.name,
     required super.title,
     required super.icon,
     super.primary,
@@ -34,4 +36,6 @@ class PageDefinition extends ItemDefinition {
     this.childPages = const [],
     this.scaffoldType = ScaffoldType.plain,
   });
+
+  String get route => '/${name ?? title.replaceAll(' ', '_').toLowerCase()}';
 }

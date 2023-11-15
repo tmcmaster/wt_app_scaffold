@@ -11,7 +11,8 @@ class SliverPageScaffold extends StatelessWidget {
   final bool stretchBanner;
   final double expandedHeight;
   final double stretchTriggerOffset;
-
+  final Color appBarColor;
+  final bool appBarBackButtonAllowed;
   const SliverPageScaffold({
     super.key,
     this.banner,
@@ -24,6 +25,8 @@ class SliverPageScaffold extends StatelessWidget {
     this.stretchBanner = true,
     this.expandedHeight = 300,
     this.stretchTriggerOffset = 300.0,
+    this.appBarColor = Colors.transparent,
+    this.appBarBackButtonAllowed = true,
   });
 
   bool get hasAppBar => banner != null || header != null;
@@ -39,7 +42,8 @@ class SliverPageScaffold extends StatelessWidget {
           slivers: <Widget>[
             if (hasAppBar)
               SliverAppBar(
-                backgroundColor: Colors.transparent,
+                leading: appBarBackButtonAllowed ? null : Container(),
+                backgroundColor: appBarColor,
                 stretch: stretchBanner,
                 floating: floatingBanner,
                 pinned: pinnedHeader,

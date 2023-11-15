@@ -55,7 +55,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
 
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
-    final onPrimarycColor = colorScheme.onPrimary;
+    final onPrimaryColor = colorScheme.onPrimary;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -75,8 +75,9 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
             key: _scaffoldKey,
             appBar: AppBar(
               backgroundColor: primaryColor,
+              foregroundColor: onPrimaryColor,
               titleTextStyle: TextStyle(
-                color: onPrimarycColor,
+                color: onPrimaryColor,
                 fontSize: 20,
               ),
               elevation: 0,
@@ -85,7 +86,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                   ? null
                   : DrawerButton(
                       style: ButtonStyle(
-                        iconColor: MaterialStateProperty.all(onPrimarycColor),
+                        iconColor: MaterialStateProperty.all(onPrimaryColor),
                       ),
                       onPressed: () {
                         _scaffoldKey.currentState!.openDrawer();
@@ -102,7 +103,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: onPrimarycColor.withOpacity(0.7),
+                        color: onPrimaryColor.withOpacity(0.7),
                         borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(20),
                           bottomRight: Radius.circular(20),

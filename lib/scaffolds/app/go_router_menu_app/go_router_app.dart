@@ -48,7 +48,7 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
         routes: appDefinition.pages
             .map(
               (page) => GoRoute(
-                path: BottomMenuBar.createRouteName(page),
+                path: page.route,
                 builder: (context, state) {
                   return _PageWrapper(
                     page: page,
