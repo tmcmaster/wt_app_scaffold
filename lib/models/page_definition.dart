@@ -24,6 +24,7 @@ class PageDefinition extends ItemDefinition {
   final DrawerBuilder? drawerBuilder;
   final List<PageDefinition> childPages;
   final ScaffoldType scaffoldType;
+  final bool centerTitle;
   PageDefinition({
     this.name,
     required super.title,
@@ -35,6 +36,7 @@ class PageDefinition extends ItemDefinition {
     this.landing = false,
     this.childPages = const [],
     this.scaffoldType = ScaffoldType.plain,
+    this.centerTitle = true,
   });
 
   String get route => '/${name ?? title.replaceAll(' ', '_').toLowerCase()}';

@@ -74,6 +74,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
           child: Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
+              centerTitle: widget.pageDefinition.centerTitle,
               backgroundColor: primaryColor,
               foregroundColor: onPrimaryColor,
               titleTextStyle: TextStyle(
