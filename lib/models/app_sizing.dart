@@ -3,9 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppSizing extends ThemeExtension<AppSizing> {
-  static AppSizing of(BuildContext context) =>
-      Theme.of(context).extension<AppSizing>() ?? const AppSizing();
-
   final double mini;
   final double small;
   final double medium;
@@ -20,9 +17,14 @@ class AppSizing extends ThemeExtension<AppSizing> {
     this.huge = 500,
   });
 
+  factory AppSizing.of(BuildContext context) =>
+      Theme.of(context).extension<AppSizing>() ?? const AppSizing();
+
   @override
   ThemeExtension<AppSizing> lerp(
-      covariant ThemeExtension<AppSizing>? other, double t) {
+    covariant ThemeExtension<AppSizing>? other,
+    double t,
+  ) {
     if (other is! AppSizing) {
       return this;
     }

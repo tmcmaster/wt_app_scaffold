@@ -10,6 +10,7 @@ class SliverPageScaffold extends StatelessWidget {
   final bool centerTitle;
   final bool stretchBanner;
   final double expandedHeight;
+  final double? collapsedHeight;
   final double stretchTriggerOffset;
   final Color appBarColor;
   final bool appBarBackButtonAllowed;
@@ -24,6 +25,7 @@ class SliverPageScaffold extends StatelessWidget {
     this.centerTitle = true,
     this.stretchBanner = true,
     this.expandedHeight = 300,
+    this.collapsedHeight,
     this.stretchTriggerOffset = 300.0,
     this.appBarColor = Colors.transparent,
     this.appBarBackButtonAllowed = true,
@@ -49,6 +51,13 @@ class SliverPageScaffold extends StatelessWidget {
                 pinned: pinnedHeader,
                 stretchTriggerOffset: stretchTriggerOffset,
                 expandedHeight: banner == null ? 0 : expandedHeight,
+                collapsedHeight: collapsedHeight,
+                shape: const ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0),
+                  ),
+                ),
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: centerTitle,
                   title: header,

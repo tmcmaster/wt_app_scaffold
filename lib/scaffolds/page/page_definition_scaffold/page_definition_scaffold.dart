@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_spacing.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/bottom_menu_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/irregular_header_painter.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/tab_menu.dart';
@@ -57,82 +58,68 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
     final primaryColor = colorScheme.primary;
     final onPrimaryColor = colorScheme.onPrimary;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final width = constraints.maxWidth;
-        final height = constraints.maxHeight;
-        final aspect = width / height;
-
-        const cardTop = topMargin;
-        final cardHeight = height - topMargin - tabsHeight - 130;
-
-        final cardLeft =
-            width < maxWidth * 1.05 ? width * 0.05 : (width - maxWidth) / 2;
-        final cardWidth = width < maxWidth * 1.05 ? width * 0.9 : maxWidth;
-
-        return SafeArea(
-          child: Scaffold(
-            key: _scaffoldKey,
-            appBar: AppBar(
-              centerTitle: widget.pageDefinition.centerTitle,
-              backgroundColor: primaryColor,
-              foregroundColor: onPrimaryColor,
-              titleTextStyle: TextStyle(
-                color: onPrimaryColor,
-                fontSize: 20,
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          centerTitle: widget.pageDefinition.centerTitle,
+          backgroundColor: primaryColor,
+          foregroundColor: onPrimaryColor,
+          titleTextStyle: TextStyle(
+            color: onPrimaryColor,
+            fontSize: 20,
+          ),
+          elevation: 0,
+          title: Text(widget.pageDefinition.title),
+          leading: widget.pageDefinition.drawerBuilder == null
+              ? null
+              : DrawerButton(
+                  style: ButtonStyle(
+                    iconColor: MaterialStateProperty.all(onPrimaryColor),
+                  ),
+                  onPressed: () {
+                    _scaffoldKey.currentState!.openDrawer();
+                  },
+                ),
+        ),
+        body: Column(
+          children: [
+            if (pages.length > 2)
+              ColoredBox(
+                color: primaryColor,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: TabMenu(
+                    titles: pages.map((p) => p.title).toList(),
+                    controller: controller,
+                  ),
+                ),
               ),
-              elevation: 0,
-              title: Text(widget.pageDefinition.title),
-              leading: widget.pageDefinition.drawerBuilder == null
-                  ? null
-                  : DrawerButton(
-                      style: ButtonStyle(
-                        iconColor: MaterialStateProperty.all(onPrimaryColor),
-                      ),
-                      onPressed: () {
-                        _scaffoldKey.currentState!.openDrawer();
-                      },
-                    ),
-            ),
-            drawer: widget.pageDefinition.drawerBuilder == null
-                ? null
-                : Drawer(
-                    backgroundColor: Colors.transparent,
-                    surfaceTintColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    width: width * 0.7,
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: onPrimaryColor.withOpacity(0.7),
-                        borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                        ),
-                      ),
-                      child: widget.pageDefinition.drawerBuilder?.call(context),
-                    ),
-                  ),
-            body: Column(
-              children: [
-                if (pages.length > 2)
-                  ColoredBox(
-                    color: primaryColor,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: TabMenu(
-                        titles: pages.map((p) => p.title).toList(),
-                        controller: controller,
-                      ),
-                    ),
-                  ),
-                Expanded(
-                  child: Stack(
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final spacing = AppSpacing.of(context);
+                  final width = constraints.maxWidth;
+                  final height = constraints.maxHeight;
+                  final aspect = width / height;
+
+                  const cardTop = topMargin;
+                  final cardHeight =
+                      height - topMargin - tabsHeight - spacing.medium;
+
+                  final cardLeft = width < maxWidth * 1.05
+                      ? width * 0.05
+                      : (width - maxWidth) / 2;
+                  final cardWidth =
+                      width < maxWidth * 1.05 ? width * 0.9 : maxWidth;
+
+                  return Stack(
+                    clipBehavior: Clip.hardEdge,
                     children: [
                       Align(
                         alignment: Alignment.topCenter,
                         child: AspectRatio(
-                          aspectRatio: aspect * 3,
+                          aspectRatio: _constrainAspectRation(aspect) * 3,
                           child: SizedBox(
                             width: double.infinity,
                             child: CustomPaint(
@@ -169,16 +156,46 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
-            bottomNavigationBar: BottomMenuBar(
+            BottomMenuBar(
               activeRoute: BottomMenuBar.createRouteName(widget.pageDefinition),
             ),
-          ),
-        );
-      },
+          ],
+        ),
+        drawer: widget.pageDefinition.drawerBuilder == null
+            ? null
+            : Drawer(
+                backgroundColor: Colors.transparent,
+                surfaceTintColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: onPrimaryColor.withOpacity(0.7),
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  child: widget.pageDefinition.drawerBuilder?.call(context),
+                ),
+              ),
+      ),
     );
+  }
+
+  double _constrainAspectRation(
+    double aspect, {
+    double min = 0.25,
+    double max = 2.5,
+  }) {
+    return (aspect < min
+        ? min
+        : aspect > max
+            ? max
+            : aspect);
   }
 }

@@ -3,9 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppSpacing extends ThemeExtension<AppSpacing> {
-  static AppSpacing of(BuildContext context) =>
-      Theme.of(context).extension<AppSpacing>() ?? const AppSpacing();
-
   final double mini;
   final double small;
   final double medium;
@@ -20,9 +17,14 @@ class AppSpacing extends ThemeExtension<AppSpacing> {
     this.huge = 64,
   });
 
+  factory AppSpacing.of(BuildContext context) =>
+      Theme.of(context).extension<AppSpacing>() ?? const AppSpacing();
+
   @override
   ThemeExtension<AppSpacing> lerp(
-      covariant ThemeExtension<AppSpacing>? other, double t) {
+    covariant ThemeExtension<AppSpacing>? other,
+    double t,
+  ) {
     if (other is! AppSpacing) {
       return this;
     }

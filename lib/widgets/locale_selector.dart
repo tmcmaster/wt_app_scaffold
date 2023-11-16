@@ -14,12 +14,14 @@ class LocaleSelector extends ConsumerWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: locales
-          .map((locale) => LocaleButton(
-                locale: locale,
-                onPressed: () {
-                  notifier.setLocale(locale);
-                },
-              ))
+          .map(
+            (locale) => LocaleButton(
+              locale: locale,
+              onPressed: () {
+                notifier.setLocale(locale);
+              },
+            ),
+          )
           .toList(),
     );
   }

@@ -22,7 +22,7 @@ class SnackBarPage extends ConsumerWidget {
               onPressed: () {
                 ref.read(UserLog.provider).log(
                       'Building Test App',
-                      snackBar: true,
+                      showSnackBar: true,
                       log: log.w,
                     );
               },

@@ -16,7 +16,9 @@ scripts:
   fix: dart fix --dry-run
   freezed:
     build: flutter pub run build_runner build --delete-conflicting-outputs
-
+  macos:
+    pod:
+      fix: (cd macos; rm Podfile.lock; pod install --repo-update)
 dependencies:
   cupertino_icons: ^1.0.5
   firebase_auth: ^4.7.0
