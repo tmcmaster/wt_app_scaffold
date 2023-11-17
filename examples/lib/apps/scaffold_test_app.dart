@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/go_router_app.dart';
-import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 mixin ScaffoldTestApp {
   static final details = Provider<AppDetails>(
@@ -40,9 +40,7 @@ mixin ScaffoldTestApp {
           icon: FontAwesomeIcons.clipboard,
           primary: true,
           scaffoldType: ScaffoldType.transparentCard,
-          builder: (context, _, __) => const PlaceholderPage(
-            title: 'Another Page',
-          ),
+          builder: (context, _, __) => const TestWebView(),
         ),
       ],
     ),
@@ -52,6 +50,41 @@ mixin ScaffoldTestApp {
     name: 'Scaffold App Test Styles',
     (ref) => GoRouterMenuApp.styles,
   );
+}
+
+class TestWebView extends StatelessWidget {
+  static final log = logger(TestWebView, level: Level.debug);
+
+  const TestWebView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RestrictedWebViewMobile(
+      url: 'https://google.com',
+      backgroundColor: Colors.transparent,
+      navigationPredicate: WebViewPredicates.notContainsPredicate([
+        RegExp('m.youtube'),
+      ]),
+      onPageLoading: (url) {
+        log.d('Loading page: $url');
+      },
+      onPageProgress: (progress) {
+        log.d('Loading progress: $progress');
+      },
+      onPageLoaded: (url) {
+        log.d('Page loaded: $url');
+      },
+      onPageLeave: (url) {
+        log.d('Leaving page: $url');
+      },
+      onPageBlocked: (url) {
+        log.d('Page blocked: $url');
+      },
+      onPageError: (error) {
+        log.d('Loading page error: $error');
+      },
+    );
+  }
 }
 
 class LandingPage extends StatelessWidget {

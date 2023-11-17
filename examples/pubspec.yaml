@@ -27,11 +27,19 @@ dependencies:
   firebase_ui_auth: ^1.6.0
   flutter:
     sdk: flutter
+  flutter_inappwebview: ^5.8.0
   flutter_riverpod: ^2.3.6
   font_awesome_flutter: ^10.5.0
   form_builder_validators: ^9.0.0
   freezed: ^2.4.1
   freezed_annotation: ^2.4.1
+  path_provider: ^2.1.1
+  url_launcher: ^6.2.1
+  webview_flutter: ^4.4.2
+#  webview_flutter_android: ^3.12.1
+#  webview_flutter_platform_interface: ^2.6.0
+#  webview_flutter_web: ^0.2.2+3
+#  webview_flutter_wkwebview: ^3.9.4
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
   wt_app_scaffold:
