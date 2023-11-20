@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/go_router_app.dart';
+import 'package:wt_app_scaffold/widgets/restricted_web_view/restricted_webview_mobile.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 mixin ScaffoldTestApp {
