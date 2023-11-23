@@ -42,10 +42,14 @@ class FirebaseSupport extends ConsumerWidget {
     WidgetsFlutterBinding.ensureInitialized();
 
     log.d('Firebase.initializeApp: name($appName)');
-    final app = await Firebase.initializeApp(
-      name: appName,
-      options: firebaseOptions,
-    );
+    final app = appName == '[DEFAULT]'
+        ? await Firebase.initializeApp(
+            options: firebaseOptions,
+          )
+        : await Firebase.initializeApp(
+            name: appName,
+            options: firebaseOptions,
+          );
     if (crashlytics) {
       log.i('Setting up Crashlytics');
 

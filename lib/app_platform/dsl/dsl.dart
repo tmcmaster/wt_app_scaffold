@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:wt_app_scaffold/app_platform/components/provider_monitor.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 Future<void> runMyApp(
   FeatureDefinition child, {
@@ -17,7 +17,10 @@ Future<void> runMyApp(
   bool enableErrorMonitoring = false,
   bool devicePreview = false,
   double? virtualSize,
+  void Function(BuildContext, WidgetRef)? onReady,
 }) async {
+  final log = logger('RunMy App');
+
   final contextMap = await AppPlatform.init(
     setApplicationLogLevel: setApplicationLogLevel,
     enableErrorMonitoring: enableErrorMonitoring,
@@ -32,7 +35,12 @@ Future<void> runMyApp(
         if (enableProviderMonitoring) ProviderMonitor.instance,
       ],
       child: Consumer(
-        builder: (__, ref, _) {
+        builder: (context, ref, _) {
+          try {
+            onReady?.call(context, ref);
+          } catch (error) {
+            log.e('onReady experienced an error: $error');
+          }
           return AppPlatform(
             includeOverrides: includeOverrides,
             includeObservers: includeObservers,
