@@ -28,7 +28,7 @@ mixin AppThree {
       swipeEnabled: true,
       includeAppBar: true,
       appDetailsProvider: details,
-      applicationType: ApplicationType.bottomNavBar,
+      applicationType: ApplicationType.hiddenDrawer,
       pages: [
         PageDefinition(
           title: 'Plain',
@@ -87,8 +87,39 @@ mixin AppThree {
           icon: FontAwesomeIcons.bug,
           debug: true,
           primary: true,
+          builder: (_, __, ___) => const PlaceholderPage(
+            title: 'Debug Mode Page',
+            backgroundColor: Colors.transparent,
+          ),
+          scaffoldType: ScaffoldType.transparentCard,
+        ),
+        PageDefinition(
+          title: 'Debug 2',
+          icon: FontAwesomeIcons.bug,
+          debug: true,
+          primary: false,
           builder: (_, __, ___) =>
-              const PlaceholderPage(title: 'Debug Mode Page'),
+              const PlaceholderPage(title: 'Debug Mode Page 2'),
+          scaffoldType: ScaffoldType.transparentCard,
+        ),
+        PageDefinition(
+          title: 'Debug 3',
+          icon: FontAwesomeIcons.bug,
+          debug: false,
+          primary: false,
+          builder: (_, __, ___) =>
+              const PlaceholderPage(title: 'Debug Mode Page 3'),
+          scaffoldType: ScaffoldType.transparentCard,
+        ),
+        PageDefinition(
+          title: 'Debug 4',
+          icon: FontAwesomeIcons.bug,
+          debug: false,
+          primary: false,
+          builder: (_, __, ___) => const PlaceholderPage(
+            title: 'Debug Mode Page 4',
+            backgroundColor: Colors.transparent,
+          ),
           scaffoldType: ScaffoldType.transparentCard,
         ),
       ],

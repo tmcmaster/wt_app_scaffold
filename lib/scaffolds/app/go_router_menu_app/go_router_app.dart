@@ -9,14 +9,9 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/cross_fade_transition_builder.dart';
+import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/scaffold_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_definition_scaffold.dart';
 import 'package:wt_logging/wt_logging.dart';
-
-typedef ScaffoldBuilder = Widget Function(
-  BuildContext,
-  PageDefinition,
-  GoRouterState? extras,
-);
 
 class GoRouterMenuApp extends ConsumerStatefulWidget {
   static final log = logger(GoRouterMenuApp, level: Level.debug);
