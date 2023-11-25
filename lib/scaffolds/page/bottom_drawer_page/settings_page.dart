@@ -11,11 +11,13 @@ class SettingsPage extends ConsumerWidget {
   final List<Widget> children;
   final bool childrenBefore;
   final bool hideAppBar;
+  final Color backgroundColor;
   const SettingsPage({
     super.key,
     this.children = const [],
     this.childrenBefore = false,
     this.hideAppBar = true,
+    this.backgroundColor = Colors.white,
   });
 
   @override
@@ -44,6 +46,7 @@ class SettingsPage extends ConsumerWidget {
 
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: hideAppBar
           ? null
           : AppBar(

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_widget.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_page_builder.dart';
+import 'package:wt_app_scaffold/scaffolds/app/shared_app_config.dart';
 
-class HiddenDrawerApp extends StatefulWidget {
+class HiddenDrawerApp extends ConsumerStatefulWidget {
+  static final styles = SharedAppConfig.styles.copyWith(
+    theme: SharedAppConfig.styles.theme.copyWith(),
+  );
+
   final AppDefinition appDefinition;
   final bool debugMode;
   final double offsetWhenOpenX;
@@ -29,16 +35,17 @@ class HiddenDrawerApp extends StatefulWidget {
     return HiddenDrawerApp._(
       appDefinition: appDefinition,
       debugMode: debugMode,
-      offsetWhenOpenX: 140.0 + HiddenDrawerConfig.menuFontSize * 0.55 * maxLength,
+      offsetWhenOpenX:
+          140.0 + HiddenDrawerConfig.menuFontSize * 0.55 * maxLength,
       offsetWhenOpenY: 150.0,
     );
   }
 
   @override
-  State<HiddenDrawerApp> createState() => _HiddenDrawerAppState();
+  ConsumerState<HiddenDrawerApp> createState() => _HiddenDrawerAppState();
 }
 
-class _HiddenDrawerAppState extends State<HiddenDrawerApp> {
+class _HiddenDrawerAppState extends ConsumerState<HiddenDrawerApp> {
   late double xOffset;
   late double yOffset;
   late double scaleFactor;
@@ -76,7 +83,8 @@ class _HiddenDrawerAppState extends State<HiddenDrawerApp> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: HSLColor.fromColor(colorScheme.primary).withLightness(0.1).toColor(),
+      backgroundColor:
+          HSLColor.fromColor(colorScheme.primary).withLightness(0.1).toColor(),
       body: Stack(
         children: [
           buildDrawer(context),
@@ -102,19 +110,18 @@ class _HiddenDrawerAppState extends State<HiddenDrawerApp> {
   }
 
   Widget buildPage() {
-    return WillPopScope(
-      onWillPop: () async {
-        if (isDrawerOpen) {
+    return PopScope(
+      canPop: isDrawerOpen,
+      onPopInvoked: (didPop) {
+        if (didPop) {
           closeDrawer();
-          return false;
-        } else {
-          return true;
         }
       },
       child: GestureDetector(
         onTap: isDrawerOpen ? closeDrawer : null,
-        onHorizontalDragStart:
-            widget.appDefinition.swipeEnabled ? (details) => isDragging = true : null,
+        onHorizontalDragStart: widget.appDefinition.swipeEnabled
+            ? (details) => isDragging = true
+            : null,
         onHorizontalDragUpdate: widget.appDefinition.swipeEnabled
             ? (details) {
                 if (!isDragging) return;
@@ -129,13 +136,16 @@ class _HiddenDrawerAppState extends State<HiddenDrawerApp> {
             : null,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
-          transform: Matrix4.translationValues(xOffset, yOffset, 0)..scale(scaleFactor),
+          transform: Matrix4.translationValues(xOffset, yOffset, 0)
+            ..scale(scaleFactor),
           child: AbsorbPointer(
             absorbing: isDrawerOpen,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(isDrawerOpen ? 20 : 0),
               child: ColoredBox(
-                color: isDrawerOpen ? Colors.white12 : Theme.of(context).primaryColor,
+                color: isDrawerOpen
+                    ? Colors.white12
+                    : Theme.of(context).primaryColor,
                 child: HiddenDrawerOpener(
                   open: openDrawer,
                   child: HiddenPageBuilder(

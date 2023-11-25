@@ -1,5 +1,9 @@
+import 'package:color_blindness/color_blindness.dart';
+import 'package:color_blindness/color_blindness_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_platform/app_scaffold_features.dart';
 import 'package:wt_app_scaffold/app_platform/models/feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/models/provider_override_definition.dart';
 import 'package:wt_app_scaffold/app_platform/providers/app_platform_providers.dart';
@@ -60,11 +64,9 @@ class AppScaffoldSupport extends ConsumerWidget {
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final color = ref.watch(ApplicationSettings.colorScheme.value);
 
-    final isLoginEnabled =
-        context.findAncestorWidgetOfExactType<LoginScreenSupport>() != null;
+    final isLoginEnabled = AppScaffoldFeatures.loginIsAvailable(context);
     log.d('LOGIN SUPPORT: $isLoginEnabled');
 
-    final snackBarKey = isLoginEnabled ? null : ref.read(UserLog.snackBarKey);
     final navigatorKey =
         isLoginEnabled ? null : ref.read(AppPlatformProviders.navigatorKey);
 
@@ -78,14 +80,31 @@ class AppScaffoldSupport extends ConsumerWidget {
     final applicationDefinition = ref.read(AppScaffoldProviders.appDefinition);
     final applicationType = ref.watch(AppScaffoldProviders.applicationType);
 
+    final appStyles = ref.read(AppScaffoldProviders.appStyles);
+    final colorBlindness = ref.watch(ApplicationSettings.colorBlindness.value);
+    final locale = ref.watch(LocaleStore.provider);
+    final locales =
+        applicationDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
+    final colorScheme = ColorScheme.fromSeed(seedColor: color);
+
     return applicationType == ApplicationType.goRouterMenu
         ? appBuilders[ApplicationType.goRouterMenu]!(
             applicationDefinition,
             false,
           )
         : MaterialApp(
-            theme: ThemeData(
-              primarySwatch: color,
+            title: applicationDefinition.appTitle,
+            theme: appStyles.theme.copyWith(
+              colorScheme: colorBlindness == ColorBlindnessType.none
+                  ? colorScheme
+                  : colorBlindnessColorScheme(
+                      colorScheme,
+                      colorBlindness,
+                    ),
+              appBarTheme: AppBarTheme(
+                color: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
+              ),
               brightness: Brightness.light,
               visualDensity: VisualDensity.standard,
               inputDecorationTheme: const InputDecorationTheme(
@@ -94,11 +113,24 @@ class AppScaffoldSupport extends ConsumerWidget {
               elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
               textButtonTheme: TextButtonThemeData(style: buttonStyle),
               outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
+              extensions: [
+                appStyles.spacing,
+                appStyles.sizing,
+              ],
             ),
-            darkTheme: ThemeData.dark(),
+            darkTheme: appStyles.darkTheme,
             themeMode: themeMode,
+            localizationsDelegates: [
+              if (applicationDefinition.intlDelegates != null)
+                ...applicationDefinition.intlDelegates!,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: locales,
+            locale: locale ?? locales.first,
             debugShowCheckedModeBanner: debugMode,
-            scaffoldMessengerKey: snackBarKey,
+            scaffoldMessengerKey: ref.read(UserLog.snackBarKey),
             navigatorKey: navigatorKey,
             home: const AppBuilder(),
           );

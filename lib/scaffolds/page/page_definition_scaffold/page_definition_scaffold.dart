@@ -161,7 +161,8 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
               ),
             ),
             BottomMenuBar(
-              activeRoute: BottomMenuBar.createRouteName(widget.pageDefinition),
+              // activeRoute: BottomMenuBar.createRouteName(widget.pageDefinition),
+              activeRoute: widget.pageDefinition.route,
             ),
           ],
         ),

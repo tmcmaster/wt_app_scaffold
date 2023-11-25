@@ -13,10 +13,8 @@ class AppStyles {
     ThemeData? darkTheme,
     AppSpacing? spacing,
     AppSizing? sizing,
-  })  : theme = theme?.copyWith(useMaterial3: true) ??
-            ThemeData.light(useMaterial3: true),
-        darkTheme = darkTheme?.copyWith(useMaterial3: true) ??
-            ThemeData.dark(useMaterial3: true),
+  })  : theme = theme ?? ThemeData.light(useMaterial3: true),
+        darkTheme = darkTheme ?? ThemeData.dark(useMaterial3: true),
         spacing = spacing ?? const AppSpacing(),
         sizing = sizing ?? const AppSizing();
 

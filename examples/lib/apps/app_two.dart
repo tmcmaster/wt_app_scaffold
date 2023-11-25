@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_platform/features/login_screen_support/config.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/go_router_app.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/login_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/navigation_page.dart';
@@ -31,6 +30,7 @@ mixin AppTwo {
       swipeEnabled: true,
       includeAppBar: true,
       appDetailsProvider: details,
+      applicationType: ApplicationType.hiddenDrawer,
       profilePage: PageDefinition(
         icon: Icons.person,
         title: 'Profile',
@@ -68,7 +68,9 @@ mixin AppTwo {
           title: 'Navigation Page',
           icon: FontAwesomeIcons.bars,
           debug: false,
-          builder: (_, __, ___) => const NavigationPage(),
+          builder: (_, __, ___) => const NavigationPage(
+            routeTo: '/sign-in',
+          ),
         ),
         PageDefinition(
           title: 'Login Page',

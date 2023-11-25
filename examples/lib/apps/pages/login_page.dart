@@ -4,7 +4,7 @@ import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class LoginPage extends ConsumerWidget {
-  static final log = logger(LoginPage);
+  static final log = logger(LoginPage, level: Level.debug);
 
   const LoginPage({super.key});
 

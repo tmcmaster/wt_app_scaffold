@@ -27,9 +27,11 @@ class HiddenDrawerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final logoutAction = ref.read(LogoutAction.provider);
-
+    final colorScheme = Theme.of(context).colorScheme;
+    final backgroundColor = colorScheme.tertiary;
     return Container(
       padding: const EdgeInsets.fromLTRB(menuPaddingX, 32, menuPaddingX, 0),
+      color: backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

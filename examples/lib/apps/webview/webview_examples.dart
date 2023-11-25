@@ -262,46 +262,32 @@ class SampleMenu extends StatelessWidget {
         switch (value) {
           case MenuOptions.showUserAgent:
             _onShowUserAgent();
-            break;
           case MenuOptions.listCookies:
             _onListCookies(context);
-            break;
           case MenuOptions.clearCookies:
             _onClearCookies(context);
-            break;
           case MenuOptions.addToCache:
             _onAddToCache(context);
-            break;
           case MenuOptions.listCache:
             _onListCache();
-            break;
           case MenuOptions.clearCache:
             _onClearCache(context);
-            break;
           case MenuOptions.navigationDelegate:
             _onNavigationDelegateExample();
-            break;
           case MenuOptions.doPostRequest:
             _onDoPostRequest();
-            break;
           case MenuOptions.loadLocalFile:
             _onLoadLocalFileExample();
-            break;
           case MenuOptions.loadFlutterAsset:
             _onLoadFlutterAssetExample();
-            break;
           case MenuOptions.loadHtmlString:
             _onLoadHtmlStringExample();
-            break;
           case MenuOptions.transparentBackground:
             _onTransparentBackground();
-            break;
           case MenuOptions.setCookie:
             _onSetCookie();
-            break;
           case MenuOptions.logExample:
             _onLogExample();
-            break;
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuItem<MenuOptions>>[
@@ -378,16 +364,18 @@ class SampleMenu extends StatelessWidget {
     final String cookies = await webViewController
         .runJavaScriptReturningResult('document.cookie') as String;
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Text('Cookies:'),
-            _getCookieList(cookies),
-          ],
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const Text('Cookies:'),
+              _getCookieList(cookies),
+            ],
+          ),
         ),
-      ));
+      );
     }
   }
 
@@ -396,9 +384,11 @@ class SampleMenu extends StatelessWidget {
       'caches.open("test_caches_entry"); localStorage["test_localStorage"] = "dummy_entry";',
     );
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Added a test entry to cache.'),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Added a test entry to cache.'),
+        ),
+      );
     }
   }
 
@@ -413,9 +403,11 @@ class SampleMenu extends StatelessWidget {
     await webViewController.clearCache();
     await webViewController.clearLocalStorage();
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Cache cleared.'),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Cache cleared.'),
+        ),
+      );
     }
   }
 
@@ -426,9 +418,11 @@ class SampleMenu extends StatelessWidget {
       message = 'There are no cookies.';
     }
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(message),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
     }
   }
 
@@ -450,9 +444,11 @@ class SampleMenu extends StatelessWidget {
         path: '/anything',
       ),
     );
-    await webViewController.loadRequest(Uri.parse(
-      'https://httpbin.org/anything',
-    ));
+    await webViewController.loadRequest(
+      Uri.parse(
+        'https://httpbin.org/anything',
+      ),
+    );
   }
 
   Future<void> _onDoPostRequest() {
@@ -498,7 +494,8 @@ class SampleMenu extends StatelessWidget {
   static Future<String> _prepareLocalFile() async {
     final String tmpDir = (await getTemporaryDirectory()).path;
     final File indexFile = File(
-        <String>{tmpDir, 'www', 'index.html'}.join(Platform.pathSeparator));
+      <String>{tmpDir, 'www', 'index.html'}.join(Platform.pathSeparator),
+    );
 
     await indexFile.create(recursive: true);
     await indexFile.writeAsString(kLocalExamplePage);
@@ -510,7 +507,8 @@ class SampleMenu extends StatelessWidget {
     webViewController
         .setOnConsoleMessage((JavaScriptConsoleMessage consoleMessage) {
       debugPrint(
-          '== JS == ${consoleMessage.level.name}: ${consoleMessage.message}');
+        '== JS == ${consoleMessage.level.name}: ${consoleMessage.message}',
+      );
     });
 
     return webViewController.loadHtmlString(kLogExamplePage);

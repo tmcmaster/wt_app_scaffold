@@ -1,5 +1,5 @@
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold_examples/apps/app_two.dart';
+import 'package:wt_app_scaffold_examples/apps/app_three.dart';
 import 'package:wt_app_scaffold_examples/firebase_options.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -8,9 +8,9 @@ void main() async {
     withFirebase(
       andLogin(
         andAppScaffold(
-          appDetails: AppTwo.details,
-          appDefinition: AppTwo.definition,
-          appStyles: AppTwo.styles,
+          appDetails: AppThree.details,
+          appDefinition: AppThree.definition,
+          appStyles: AppThree.styles,
         ),
         loginSupport: const LoginSupport(
           emailEnabled: true,
@@ -20,7 +20,6 @@ void main() async {
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
     ),
-    virtualSize: 1200,
     includeObservers: [],
     includeOverrides: [],
     enableErrorMonitoring: true,

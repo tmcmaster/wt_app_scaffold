@@ -42,7 +42,7 @@ class SignInPage extends ConsumerWidget {
         AuthStateChangeAction<SignedIn>(
           (context, state) {
             if (!emailVerificationRequired) {
-              Navigator.pushNamed(context, '/');
+              Navigator.pushNamed(context, '/app');
             } else {
               if (!state.user!.emailVerified) {
                 log.d('Sending verification email.');
@@ -90,7 +90,8 @@ class SignInPage extends ConsumerWidget {
   }
 
   String _createWelcomeString(AppDetails appDetails) {
-    final name = appDetails.title.isNotEmpty ? appDetails.title : appDetails.subTitle;
+    final name =
+        appDetails.title.isNotEmpty ? appDetails.title : appDetails.subTitle;
     return name.isEmpty ? 'Welcome!' : 'Welcome to $name!';
   }
 }

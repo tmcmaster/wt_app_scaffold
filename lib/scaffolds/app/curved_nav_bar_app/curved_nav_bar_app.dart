@@ -1,95 +1,104 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/scaffolds/app/curved_nav_bar_app/curved_nav_bar.dart';
+import 'package:wt_app_scaffold/scaffolds/app/curved_nav_bar_app/curved_nav_bar_controller.dart';
+import 'package:wt_app_scaffold/scaffolds/app/curved_nav_bar_app/curved_nav_bar_page.dart';
+import 'package:wt_logging/wt_logging.dart';
 
-class CurvedNavBarApp extends StatefulWidget {
+class CurvedNavBarApp extends ConsumerStatefulWidget {
+  static final log = logger(CurvedNavBarApp);
+
+  static final controller = StateNotifierProvider<CurvedNavBarController,
+      GlobalKey<CurvedNavigationBarState>>(
+    (ref) => CurvedNavBarController(
+      ref,
+      appDefinition: ref.read(
+        AppScaffoldProviders.appDefinition,
+      ),
+    ),
+  );
+
   final AppDefinition appDefinition;
   final bool debugMode;
-  const CurvedNavBarApp._({
+  CurvedNavBarApp._({
     required this.appDefinition,
     required this.debugMode,
-  });
+  }) {
+    log.d(
+      'CurvedNavBarApp() : CurvedNavBarApp constructor',
+    );
+  }
 
   factory CurvedNavBarApp.build(
     AppDefinition appDefinition,
     bool debugMode,
   ) {
+    log.d('CurvedNavBarApp.build - REBUILDING CurvedNavBarApp');
     return CurvedNavBarApp._(
       appDefinition: appDefinition,
       debugMode: debugMode,
     );
   }
   @override
-  State<CurvedNavBarApp> createState() => _CurvedNavBarAppState();
+  ConsumerState<CurvedNavBarApp> createState() => _CurvedNavBarAppState();
 }
 
-class _CurvedNavBarAppState extends State<CurvedNavBarApp> {
-  final navigationKey = GlobalKey<CurvedNavigationBarState>();
+class _CurvedNavBarAppState extends ConsumerState<CurvedNavBarApp> {
+  static final log = logger(CurvedNavBarApp);
 
   int index = 0;
+  String? route;
+
+  @override
+  void initState() {
+    route = ref
+        .read(CurvedNavBarApp.controller.notifier)
+        .getPageByIndex(index)
+        ?.route;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final screens = widget.appDefinition.pages
-        .where((page) {
-          return widget.debugMode || !page.debug;
-        })
-        .map(
-          (page) => page.builder(context, page, null),
-        )
-        .toList();
+    log.d('_CurvedNavBarAppState: rebuilding the Curved Nav Bar app');
+    final controller = ref.read(CurvedNavBarApp.controller.notifier);
 
-    final items = widget.appDefinition.pages
-        .where((page) {
-          return widget.debugMode || !page.debug;
-        })
-        .map(
-          (definition) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              definition.icon,
-              size: 20,
-            ),
+    if (route != null) {
+      final expectedRoute = controller.getPageByIndex(index)?.route;
+      if (expectedRoute != route) {
+        final newIndex = controller.getIndexByRoute(route!);
+        if (newIndex != null) {
+          setState(() {
+            index = newIndex;
+          });
+        }
+      }
+    }
+
+    final navigationKey = ref.read(CurvedNavBarApp.controller);
+
+    return SafeArea(
+      top: false,
+      child: ClipRect(
+        child: Scaffold(
+          extendBody: true,
+          backgroundColor: Colors.transparent,
+          body: CurvedNavBarPage(
+            index: index,
           ),
-        )
-        .toList();
-
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return ColoredBox(
-      color: colorScheme.primary,
-      child: SafeArea(
-        top: false,
-        child: ClipRect(
-          child: Scaffold(
-            extendBody: true,
-            backgroundColor: colorScheme.onPrimary,
-            // appBar: AppBar(
-            //   title: const Text('Curved Navigation Bar'),
-            //   elevation: 0,
-            //   centerTitle: true,
-            //   backgroundColor: colorScheme.primary,
-            // ),
-            body: screens[index],
-            bottomNavigationBar: Theme(
-              data: Theme.of(context).copyWith(
-                iconTheme: IconThemeData(
-                  color: colorScheme.onPrimary,
-                ),
-              ),
-              child: CurvedNavigationBar(
-                key: navigationKey,
-                color: colorScheme.primary,
-                buttonBackgroundColor: colorScheme.primary,
-                backgroundColor: Colors.transparent,
-                height: 50,
-                animationCurve: Curves.easeInOut,
-                animationDuration: const Duration(milliseconds: 500),
-                index: index,
-                items: items,
-                onTap: (index) => setState(() => this.index = index),
-              ),
-            ),
+          bottomNavigationBar: CurvedNavBar(
+            navigationKey: navigationKey,
+            index: index,
+            onChange: (newIndex) {
+              setState(() {
+                index = newIndex;
+                route = controller.getPageByIndex(newIndex)?.route;
+              });
+            },
           ),
         ),
       ),

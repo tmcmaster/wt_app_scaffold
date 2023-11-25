@@ -1,6 +1,6 @@
 name: wt_app_scaffold
 description: A package to manage the structure and navigation of an app.
-version: 1.0.0+1
+version: 1.0.1+2
 publish_to: 'none'
 homepage: https://github.com/tmcmaster/et-app-scaffold
 
@@ -27,15 +27,15 @@ dependencies:
   device_info_plus: ^9.1.1
   device_preview: ^1.1.0
   draggable_bottom_sheet: ^1.0.2
-  firebase_auth: ^4.7.0
-  firebase_core: ^2.15.0
-  firebase_crashlytics: ^3.3.4
-  firebase_database: ^10.2.4
-  firebase_storage: ^11.2.6
-  firebase_ui_auth: ^1.6.0
-  firebase_ui_localizations: ^1.5.0
-  firebase_ui_oauth_apple: ^1.0.3
-  firebase_ui_oauth_google: ^1.0.3
+  firebase_auth: ^4.14.1
+  firebase_core: ^2.23.0
+  firebase_crashlytics: ^3.4.5
+  firebase_database: ^10.3.5
+  firebase_storage: ^11.5.2
+  firebase_ui_auth: ^1.10.0
+  firebase_ui_localizations: ^1.8.0
+  firebase_ui_oauth_apple: ^1.2.14
+  firebase_ui_oauth_google: ^1.2.14
   flutter:
     sdk: flutter
   flutter_localizations:

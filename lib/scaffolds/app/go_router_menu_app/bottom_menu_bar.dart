@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/models/page_definition.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class BottomMenuBar extends ConsumerWidget {
+  static final log = logger(BottomMenuBar, level: Level.debug);
   final String activeRoute;
   final void Function(int selected)? beforeTransition;
 
@@ -55,20 +57,21 @@ class BottomMenuBar extends ConsumerWidget {
           .toList(),
       currentIndex: findCurrentIndex(pages, activeRoute),
       onTap: (selected) {
-        final routeName = createRouteName(pages[selected]);
+        // final routeName = createRouteName(pages[selected]);
+        final routeName = pages[selected].route;
         beforeTransition?.call(selected);
+        log.d('Using GoRouter to change page: $routeName');
         context.go(routeName);
       },
     );
   }
 
   static int findCurrentIndex(List<PageDefinition> pages, String activeRoute) {
-    final index =
-        pages.map((p) => createRouteName(p)).toList().indexOf(activeRoute);
+    final index = pages.map((p) => p.route).toList().indexOf(activeRoute);
     return index < 0 ? 0 : index;
   }
 
-  static String createRouteName(PageDefinition page) {
-    return '/${page.title.toLowerCase().replaceAll(' ', '_')}';
-  }
+  // static String createRouteName(PageDefinition page) {
+  //   return '/${page.title.toLowerCase().replaceAll(' ', '_')}';
+  // }
 }

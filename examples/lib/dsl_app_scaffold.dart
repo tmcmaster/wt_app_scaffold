@@ -1,12 +1,12 @@
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold_examples/apps/app_two.dart';
+import 'package:wt_app_scaffold_examples/apps/app_three.dart';
 
 void main() async {
   runMyApp(
     withAppScaffold(
-      appDetails: AppTwo.details,
-      appDefinition: AppTwo.definition,
-      appStyles: AppTwo.styles,
+      appDetails: AppThree.details,
+      appDefinition: AppThree.definition,
+      appStyles: AppThree.styles,
     ),
   );
 }

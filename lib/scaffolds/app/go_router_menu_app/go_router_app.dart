@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wt_app_scaffold/app_platform/app_scaffold_features.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
-import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/bottom_menu_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/cross_fade_transition_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_definition_scaffold.dart';
 import 'package:wt_logging/wt_logging.dart';
@@ -19,6 +19,8 @@ typedef ScaffoldBuilder = Widget Function(
 );
 
 class GoRouterMenuApp extends ConsumerStatefulWidget {
+  static final log = logger(GoRouterMenuApp, level: Level.debug);
+
   static final AppStyles styles = AppStyles(
     theme: ThemeData(
       // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
@@ -45,19 +47,20 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
       final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
       return GoRouter(
         initialLocation: _createInitialRoute(appDefinition),
-        routes: appDefinition.pages
-            .map(
-              (page) => GoRoute(
-                path: page.route,
-                builder: (context, state) {
-                  return _PageWrapper(
-                    page: page,
-                    state: state,
-                  );
-                },
-              ),
-            )
-            .toList(),
+        routes: appDefinition.pages.map(
+          (page) {
+            log.d('Creating Route(${page.route}) : ${page.title}');
+            return GoRoute(
+              path: page.route,
+              builder: (context, state) {
+                return _PageWrapper(
+                  page: page,
+                  state: state,
+                );
+              },
+            );
+          },
+        ).toList(),
       );
     },
   );
@@ -88,7 +91,8 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
         appDefinition.pages.where((page) => page.landing).firstOrNull ??
             appDefinition.pages.where((page) => page.primary).firstOrNull;
     if (initialRoutePage != null) {
-      return BottomMenuBar.createRouteName(initialRoutePage);
+      // return BottomMenuBar.createRouteName(initialRoutePage);
+      return initialRoutePage.route;
     }
     throw Exception(
       'Could not determine the initial route for the application',
@@ -97,9 +101,12 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
 }
 
 class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
+  static final log = logger(GoRouterMenuApp, level: Level.debug);
+
   @override
   Widget build(BuildContext context) {
-    final materialAppScaffoldKey = ref.read(UserLog.snackBarKey);
+    final isLoginEnabled = AppScaffoldFeatures.loginIsAvailable(context);
+    log.d('LOGIN SUPPORT: $isLoginEnabled');
     final goRouter = ref.read(GoRouterMenuApp.goRouter);
     final appStyles = ref.read(AppScaffoldProviders.appStyles);
     final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
@@ -113,9 +120,9 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
     final locales =
         appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
     return MaterialApp.router(
-      title: 'Ecompod Example Application',
+      title: appDefinition.appTitle,
       debugShowCheckedModeBanner: false,
-      scaffoldMessengerKey: materialAppScaffoldKey,
+      scaffoldMessengerKey: ref.read(UserLog.snackBarKey),
       themeMode: themeMode,
       theme: appStyles.theme.copyWith(
         colorScheme: colorBlindness == ColorBlindnessType.none
@@ -167,7 +174,7 @@ class _PageWrapper extends ConsumerWidget {
     return SafeArea(
       child: MediaQuery(
         data: data.copyWith(
-          textScaleFactor: scaleFactor,
+          textScaler: TextScaler.linear(scaleFactor),
         ),
         child: (scaffoldBuilders.containsKey(page.scaffoldType))
             ? scaffoldBuilders[page.scaffoldType]!.call(context, page, state)

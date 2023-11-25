@@ -1211,6 +1211,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -1295,10 +1303,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
+      sha256: df5a4d8f22ee4ccd77f8839ac7cb274ebc11ef9adcce8b92be14b797fe889921
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.7"
+    version: "4.2.1"
   vector_graphics:
     dependency: transitive
     description:
@@ -1433,7 +1441,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: b887a3dfc87eee27808feb67a7c1ec9fbba5d8ad
+      resolved-ref: b4b98b1693e59b529ab1a424f744b9ca2d7f2989
       url: "https://github.com/tmcmaster/wt_firepod.git"
     source: git
     version: "1.0.0+1"
@@ -1442,7 +1450,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "4c571d7fe00039290ca947caf5ea05ea69f0bfed"
+      resolved-ref: a62a04a61a22226372cac43599706c1a8403e4f1
       url: "https://github.com/tmcmaster/wt_logging.git"
     source: git
     version: "1.0.0+1"
