@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:wt_app_scaffold/app_platform/app_scaffold_features.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class NavigationPage extends ConsumerWidget {
@@ -32,15 +31,7 @@ class NavigationPage extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                if (AppScaffoldFeatures.isGoRouterMenuApp(context)) {
-                  context.go('/plain');
-                } else if (AppScaffoldFeatures.isCurvedNavBarApp(context)) {
-                  ref
-                      .read(CurvedNavBarApp.controller.notifier)
-                      .changePage('/plain');
-                } else {
-                  Navigator.of(context).pushReplacementNamed(routeTo);
-                }
+                ref.read(AppScaffoldProviders.router).go('/settings', context);
               },
               child: const Text('Test Navigation'),
             ),

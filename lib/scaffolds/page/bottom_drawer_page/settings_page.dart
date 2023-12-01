@@ -33,6 +33,7 @@ class SettingsPage extends ConsumerWidget {
       ),
       ApplicationSettings.theme.component,
       ApplicationSettings.colorScheme.component,
+      ApplicationSettings.applicationType.component,
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

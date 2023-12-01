@@ -1,29 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:wt_app_scaffold/models/drawer_builder.dart';
 import 'package:wt_app_scaffold/models/item_definition.dart';
-
-typedef PageBuilder = Widget Function(
-  BuildContext context,
-  PageDefinition pageDefinition,
-  GoRouterState? state,
-);
-
-typedef DrawerBuilder = Widget Function(
-  BuildContext context,
-);
-
-enum ScaffoldType {
-  transparentCard,
-  plain,
-}
+import 'package:wt_app_scaffold/models/page_builder.dart';
+import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 
 class PageDefinition extends ItemDefinition {
   final String? name;
   final bool landing;
-  final PageBuilder builder;
+  final AppScaffoldPageBuilder builder;
   final DrawerBuilder? drawerBuilder;
   final List<PageDefinition> childPages;
-  final ScaffoldType scaffoldType;
+  final ScaffoldPageType scaffoldType;
   final bool centerTitle;
   PageDefinition({
     this.name,
@@ -35,7 +21,7 @@ class PageDefinition extends ItemDefinition {
     this.drawerBuilder,
     this.landing = false,
     this.childPages = const [],
-    this.scaffoldType = ScaffoldType.plain,
+    this.scaffoldType = ScaffoldPageType.plain,
     this.centerTitle = true,
   });
 

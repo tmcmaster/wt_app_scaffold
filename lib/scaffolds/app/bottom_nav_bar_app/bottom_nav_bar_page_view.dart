@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_selected_page_notifier.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_source.dart';
 
 class BottomNavBarPageView extends ConsumerStatefulWidget {
-  final List<PageDefinition> items;
   final bool swipeEnabled;
   final bool debugMode;
   final StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent>
       provider;
   const BottomNavBarPageView({
-    required this.items,
     required this.provider,
     required this.debugMode,
     this.swipeEnabled = true,
@@ -49,23 +47,29 @@ class _PageViewState extends ConsumerState<BottomNavBarPageView> {
       }
     });
 
-    final filterItems = widget.debugMode
-        ? widget.items
-        : widget.items.where((item) => !item.debug).toList();
-    return PageView.builder(
-      itemCount: filterItems.length,
-      physics:
-          widget.swipeEnabled ? null : const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) => filterItems[index].builder(
-        context,
-        filterItems[index],
-        null,
+    final items = ref.watch(AppScaffoldProviders.appPrimaryPages);
+    final filterItems =
+        widget.debugMode ? items : items.where((item) => !item.debug).toList();
+
+    return Container(
+      color: Colors.red,
+      padding: const EdgeInsets.all(20),
+      child: PageView.builder(
+        itemCount: filterItems.length,
+        physics:
+            widget.swipeEnabled ? null : const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) => filterItems[index].builder(
+          context,
+          ref,
+          filterItems[index],
+          null,
+        ),
+        onPageChanged: (page) {
+          final pageNav = ref.read(widget.provider.notifier);
+          pageNav.setPage(PageChangeSource.pageView, page);
+        },
+        controller: pageController,
       ),
-      onPageChanged: (page) {
-        final pageNav = ref.read(widget.provider.notifier);
-        pageNav.setPage(PageChangeSource.pageView, page);
-      },
-      controller: pageController,
     );
   }
 }

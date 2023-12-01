@@ -12,7 +12,7 @@ class PlaceholderPage extends StatelessWidget {
   final void Function(BuildContext context)? menuAction;
   final Widget? bottomNavigationBar;
   final Color? backgroundColor;
-
+  final List<Widget> children;
   const PlaceholderPage({
     super.key,
     required this.title,
@@ -21,6 +21,7 @@ class PlaceholderPage extends StatelessWidget {
     this.menuAction,
     this.bottomNavigationBar,
     this.backgroundColor,
+    this.children = const [],
   });
 
   @override
@@ -57,6 +58,7 @@ class PlaceholderPage extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
             ),
+            ...children,
           ],
         ),
       ),

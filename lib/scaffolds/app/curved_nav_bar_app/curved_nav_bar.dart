@@ -5,15 +5,17 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class CurvedNavBar extends ConsumerWidget {
-  static final log = logger(CurvedNavBar);
+  static final log = logger(CurvedNavBar, level: Level.debug);
 
   final ValueChanged<int> onChange;
   final int index;
+  final List<PageDefinition> pages;
   final GlobalKey<CurvedNavigationBarState> navigationKey;
   const CurvedNavBar({
     super.key,
     required this.navigationKey,
     required this.index,
+    required this.pages,
     required this.onChange,
   });
 
@@ -21,10 +23,7 @@ class CurvedNavBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     log.d('CurvedNavBar: rebuilding the Curved Nav Bar');
 
-    final controller = ref.read(CurvedNavBarApp.controller.notifier);
-
-    final items = controller
-        .getPages()
+    final items = pages
         .map(
           (definition) => Padding(
             padding: const EdgeInsets.all(8.0),
@@ -36,9 +35,11 @@ class CurvedNavBar extends ConsumerWidget {
         )
         .toList();
 
+    log.d('Number of icons: ${items.length}');
     final validatedIndex = index > items.length - 1 ? 0 : index;
 
     final colorScheme = Theme.of(context).colorScheme;
+
     return Theme(
       data: Theme.of(context).copyWith(
         iconTheme: IconThemeData(

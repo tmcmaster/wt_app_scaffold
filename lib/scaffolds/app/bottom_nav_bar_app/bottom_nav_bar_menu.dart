@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_selected_page_notifier.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_source.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomNavBarMenu extends ConsumerWidget {
-  static final log = logger(BottomNavBarMenu);
+  static final log = logger(BottomNavBarMenu, level: Level.debug);
 
-  final List<PageDefinition> items;
+  // final List<PageDefinition> items;
   final StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent>
       provider;
 
   const BottomNavBarMenu({
-    required this.items,
+    // required this.items,
     required this.provider,
   });
 
@@ -22,17 +23,20 @@ class BottomNavBarMenu extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pageChangeEvent = ref.watch(provider);
     final pageNav = ref.read(provider.notifier);
-    final debugMode = ref.read(ApplicationSettings.debugMode.value);
-    final primaryItems = items.where((item) => item.primary).toList();
-    final otherItems = items.where((item) => !item.primary).toList();
-    log.d('Total Items: ${items.length}');
+    // final debugMode = ref.read(ApplicationSettings.debugMode.value);
+    // final primaryItems = items.where((item) => item.primary).toList();
+    // final otherItems = items.where((item) => !item.primary).toList();
+    final allItems = ref.watch(AppScaffoldProviders.appPages);
+    final primaryItems = ref.watch(AppScaffoldProviders.appPrimaryPages);
+    final otherItems = ref.watch(AppScaffoldProviders.appSecondaryPages);
+    log.d('Total Items: ${allItems.length}');
     log.d('Primary Items: ${primaryItems.length}');
     log.d('Other Items: ${otherItems.length}');
 
     final primaryColor = Theme.of(context).primaryColor;
 
-    final currentSelected = pageChangeEvent.page < items.length
-        ? primaryItems.indexOf(items[pageChangeEvent.page])
+    final currentSelected = pageChangeEvent.page < allItems.length
+        ? primaryItems.indexOf(allItems[pageChangeEvent.page])
         : -1;
     log.d('Selected Primary: $currentSelected');
 
@@ -56,7 +60,6 @@ class BottomNavBarMenu extends ConsumerWidget {
             ),
             iconSize: 20,
             items: primaryItems
-                .where((item) => debugMode || !item.debug)
                 .map(
                   (item) => BottomNavigationBarItem(
                     icon: Icon(
@@ -68,7 +71,7 @@ class BottomNavBarMenu extends ConsumerWidget {
                 .toList(),
             onTap: (selection) {
               log.d('Selected Item: $selection');
-              final index = items.indexOf(primaryItems[selection]);
+              final index = allItems.indexOf(primaryItems[selection]);
               log.d('Calculated Index: $index');
               pageNav.setPage(PageChangeSource.buttonBar, index);
             },
@@ -97,7 +100,7 @@ class BottomNavBarMenu extends ConsumerWidget {
                         onPressed: () {
                           pageNav.setPage(
                             PageChangeSource.buttonBar,
-                            items.indexOf(item),
+                            allItems.indexOf(item),
                           );
                           Navigator.pop(context);
                         },

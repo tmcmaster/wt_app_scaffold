@@ -1,6 +1,6 @@
 name: wt_app_scaffold
 description: A package to manage the structure and navigation of an app.
-version: 1.0.1+2
+version: 1.1.0+3
 publish_to: 'none'
 homepage: https://github.com/tmcmaster/et-app-scaffold
 
@@ -18,24 +18,18 @@ scripts:
   freezed:
     build: flutter pub run build_runner build --delete-conflicting-outputs
 
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+
 dependencies:
-  cloud_firestore: ^4.9.1
-  cloud_functions: ^4.3.4
   collection: ^1.17.2
   color_blindness: ^0.1.2
   curved_navigation_bar: ^1.0.3
   device_info_plus: ^9.1.1
   device_preview: ^1.1.0
   draggable_bottom_sheet: ^1.0.2
-  firebase_auth: ^4.14.1
-  firebase_core: ^2.23.0
-  firebase_crashlytics: ^3.4.5
-  firebase_database: ^10.3.5
-  firebase_storage: ^11.5.2
-  firebase_ui_auth: ^1.10.0
-  firebase_ui_localizations: ^1.8.0
-  firebase_ui_oauth_apple: ^1.2.14
-  firebase_ui_oauth_google: ^1.2.14
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -56,8 +50,6 @@ dependencies:
   webview_universal: ^0.0.5
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
-  wt_firepod:
-    git: https://github.com/tmcmaster/wt_firepod.git
   wt_logging:
     git: https://github.com/tmcmaster/wt_logging.git
   wt_models:
@@ -72,7 +64,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter:
-  uses-material-design: true
-  assets:
-    - assets/
+dependency_overrides:
+  wt_logging:
+    path: ../wt_logging

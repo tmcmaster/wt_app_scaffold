@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wt_app_scaffold/app_platform/app_scaffold_features.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/page_builder.dart';
+import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/cross_fade_transition_builder.dart';
-import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/scaffold_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_definition_scaffold.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -36,11 +36,12 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
     ),
   );
 
-  static final goRouter = Provider<GoRouter>(
+  static final router = Provider<GoRouter>(
     name: 'GoRouter',
     (ref) {
       final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
       return GoRouter(
+        navigatorKey: ref.read(UserLog.navigatorKey),
         initialLocation: _createInitialRoute(appDefinition),
         routes: appDefinition.pages.map(
           (page) {
@@ -100,14 +101,14 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoginEnabled = AppScaffoldFeatures.loginIsAvailable(context);
-    log.d('LOGIN SUPPORT: $isLoginEnabled');
-    final goRouter = ref.read(GoRouterMenuApp.goRouter);
+    final goRouter = ref.read(GoRouterMenuApp.router);
     final appStyles = ref.read(AppScaffoldProviders.appStyles);
     final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
+    final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     final seedColor = widget.appDefinition.colorScheme == null
         ? ref.watch(ApplicationSettings.colorScheme.value)
         : widget.appDefinition.colorScheme!;
+    log.d('Seed Color: $seedColor');
     final themeMode = widget.appDefinition.themeMode ??
         ref.watch(ApplicationSettings.theme.value);
     final colorBlindness = ref.watch(ApplicationSettings.colorBlindness.value);
@@ -116,7 +117,7 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
         appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
     return MaterialApp.router(
       title: appDefinition.appTitle,
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: debugMode,
       scaffoldMessengerKey: ref.read(UserLog.snackBarKey),
       themeMode: themeMode,
       theme: appStyles.theme.copyWith(
@@ -134,11 +135,8 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
       darkTheme: appStyles.darkTheme,
       routerConfig: goRouter,
       localizationsDelegates: [
-        if (appDefinition.intlDelegates != null)
-          ...appDefinition.intlDelegates!,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+        ...appDefinition.intlDelegates,
+        ...GlobalMaterialLocalizations.delegates,
       ],
       supportedLocales: locales,
       locale: locale ?? locales.first,
@@ -147,10 +145,10 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
 }
 
 class _PageWrapper extends ConsumerWidget {
-  static final scaffoldBuilders = <ScaffoldType, ScaffoldBuilder>{
-    ScaffoldType.plain: (context, page, state) =>
-        page.builder(context, page, null),
-    ScaffoldType.transparentCard: (context, page, state) =>
+  static final scaffoldBuilders = <ScaffoldPageType, AppScaffoldPageBuilder>{
+    ScaffoldPageType.plain: (context, ref, page, state) =>
+        page.builder(context, ref, page, null),
+    ScaffoldPageType.transparentCard: (context, ref, page, state) =>
         PageDefinitionScaffold(pageDefinition: page, state: state),
   };
 
@@ -172,8 +170,9 @@ class _PageWrapper extends ConsumerWidget {
           textScaler: TextScaler.linear(scaleFactor),
         ),
         child: (scaffoldBuilders.containsKey(page.scaffoldType))
-            ? scaffoldBuilders[page.scaffoldType]!.call(context, page, state)
-            : page.builder(context, page, state),
+            ? scaffoldBuilders[page.scaffoldType]!
+                .call(context, ref, page, state)
+            : page.builder(context, ref, page, state),
       ),
     );
   }

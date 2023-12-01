@@ -18,10 +18,8 @@ class AsyncExamplePage extends ConsumerWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(
-                height: 200,
-              ),
               FutureBuilder(
                 future: ref.watch(futureCombined.future),
                 builder: (_, snapshot) {
@@ -32,7 +30,7 @@ class AsyncExamplePage extends ConsumerWidget {
                       case ConnectionState.none:
                         return const Text('NONE');
                       case ConnectionState.waiting:
-                        return const Text('WAITING');
+                        return const CircularProgressIndicator();
                       case ConnectionState.active:
                         return Text('${snapshot.data}');
                       case ConnectionState.done:

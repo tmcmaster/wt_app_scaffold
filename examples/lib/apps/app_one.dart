@@ -1,10 +1,8 @@
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:wt_app_scaffold/app_platform/features/login_screen_support/config.dart';
+import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
 import 'package:wt_app_scaffold_examples/actions/action_two.dart';
@@ -12,130 +10,137 @@ import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
 import 'package:wt_app_scaffold_examples/pages/async_example_page.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
-import 'package:wt_firepod/wt_firepod.dart';
 
 mixin AppOne {
-  static final details = Provider<AppDetails>(
-    name: 'AppOne Details',
-    (ref) => AppDetails(
-      title: 'Application One',
-      subTitle: 'First application',
-      iconPath: 'assets/avocado.png',
-    ),
+  static final details = AppDetails(
+    title: 'Application One',
+    subTitle: 'First application',
+    iconPath: 'assets/avocado.png',
   );
 
-  static final definition = Provider<AppDefinition>(
-    name: 'AppOne Definition',
-    (ref) => AppDefinition.from(
-      appTitle: 'Application One',
-      appName: 'appOne',
-      swipeEnabled: true,
-      includeAppBar: true,
-      appDetailsProvider: details,
-      profilePage: PageDefinition(
-        icon: Icons.person,
-        title: 'Profile',
-        builder: (context, _, __) => ProfileScreen(
-          auth: ref.read(FirebaseProviders.auth),
+  static final definition = AppDefinition.from(
+    appTitle: 'Application One',
+    appName: 'appOne',
+    swipeEnabled: true,
+    includeAppBar: true,
+    // applicationType: ApplicationType.hiddenDrawer,
+    profilePage: PageDefinition(
+      icon: Icons.person,
+      title: 'Profile',
+      primary: true,
+      builder: (context, _, __, ____) =>
+          const PlaceholderPage(title: 'Profile Screen'),
+    ),
+    pages: [
+      PageDefinition(
+        title: 'Landing Page',
+        icon: FontAwesomeIcons.clipboard,
+        primary: true,
+        landing: true,
+        debug: false,
+        scaffoldType: ScaffoldPageType.transparentCard,
+        builder: (context, _, __, ____) => const FirebasePage(),
+      ),
+      PageDefinition(
+        title: 'Page One',
+        primary: true,
+        icon: FontAwesomeIcons.clipboard,
+        debug: true,
+        builder: (context, ref, __, ____) => BottomDrawerPage(
+          title: 'Page One',
+          mainWidget: const Center(
+            child: Text('Page One'),
+          ),
+          drawWidget: const Center(
+            child: Text('Page One Controls'),
+          ),
+          includeAppBar: false,
+          action: ref.read(ActionOne.provider),
           actions: [
-            SignedOutAction((context) {
-              Navigator.pushReplacementNamed(context, '/');
-            }),
+            ref.read(ActionOne.provider),
+            ref.read(ActionTwo.provider),
           ],
-          actionCodeSettings: FirebaseAuthKeys.actionCodeSettings,
-          showMFATile: false,
         ),
       ),
-      pages: [
-        PageDefinition(
-          title: 'Landing Page',
-          icon: FontAwesomeIcons.clipboard,
-          debug: false,
-          builder: (context, _, __) => const FirebasePage(),
-        ),
-        PageDefinition(
-          title: 'Page One',
-          icon: FontAwesomeIcons.clipboard,
-          debug: false,
-          builder: (context, _, __) => BottomDrawerPage(
-            title: 'Page One',
-            mainWidget: const Center(
-              child: Text('Page One'),
-            ),
-            drawWidget: const Center(
-              child: Text('Page One Controls'),
-            ),
-            includeAppBar: false,
-            action: ref.read(ActionOne.provider),
-            actions: [
-              ref.read(ActionOne.provider),
-              ref.read(ActionTwo.provider),
-            ],
-          ),
-        ),
-        PageDefinition(
-          title: 'Page Two',
-          icon: FontAwesomeIcons.bagShopping,
-          debug: false,
-          builder: (_, __, ___) => const PlaceholderPage(title: 'Page Two'),
-        ),
-        PageDefinition(
-          title: 'Page Three',
-          icon: FontAwesomeIcons.boxesPacking,
-          debug: true,
-          builder: (_, __, ___) => const PlaceholderPage(title: 'Page Three'),
-        ),
-        PageDefinition(
-          title: 'Page Four',
-          icon: FontAwesomeIcons.tractor,
-          debug: true,
-          builder: (_, __, ___) => const PlaceholderPage(title: 'Page Four'),
-        ),
-        PageDefinition(
-          title: 'Page Five',
-          icon: FontAwesomeIcons.car,
-          debug: true,
-          builder: (_, __, ___) => const PlaceholderPage(title: 'Page Five'),
-        ),
-        PageDefinition(
-          title: 'Counter',
-          icon: Icons.settings,
-          primary: true,
-          builder: (_, __, ___) => const CounterAppPage(title: 'Counter App'),
-        ),
-        PageDefinition(
-          title: 'Database',
-          icon: FontAwesomeIcons.database,
-          primary: true,
-          builder: (_, __, ___) => const DatabaseExamplePage(),
-        ),
-        PageDefinition(
-          title: 'Async',
-          icon: FontAwesomeIcons.arrowsRotate,
-          primary: true,
-          builder: (_, __, ___) => const AsyncExamplePage(),
-        ),
-        PageDefinition(
-          title: 'Settings',
-          icon: Icons.settings,
-          primary: true,
-          builder: (context, _, __) => SettingsPage(
+      PageDefinition(
+        title: 'Page Two',
+        icon: FontAwesomeIcons.bagShopping,
+        primary: false,
+        debug: false,
+        builder: (_, ref, ___, ____) {
+          final user = ref.read(AppScaffoldAuthenticationStore.user);
+
+          return PlaceholderPage(
+            title: 'Page Two',
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/');
-                },
-                child: const Text('Login'),
-              ),
+              Text('Id: ${user.id}'),
+              Text('name: ${user.name}'),
+              Text('email: ${user.email}'),
             ],
-          ),
+          );
+        },
+      ),
+      PageDefinition(
+        title: 'Page Three',
+        icon: FontAwesomeIcons.boxesPacking,
+        debug: true,
+        builder: (_, __, ___, ____) =>
+            const PlaceholderPage(title: 'Page Three'),
+      ),
+      PageDefinition(
+        title: 'Page Four',
+        icon: FontAwesomeIcons.tractor,
+        debug: true,
+        builder: (_, __, ___, ____) =>
+            const PlaceholderPage(title: 'Page Four'),
+      ),
+      PageDefinition(
+        title: 'Counter',
+        icon: Icons.settings,
+        scaffoldType: ScaffoldPageType.transparentCard,
+        primary: true,
+        builder: (_, __, ___, ____) =>
+            const CounterAppPage(title: 'Counter App'),
+      ),
+      PageDefinition(
+        title: 'Database',
+        icon: FontAwesomeIcons.database,
+        primary: false,
+        builder: (_, __, ___, ____) => const DatabaseExamplePage(),
+      ),
+      PageDefinition(
+        title: 'Async',
+        icon: FontAwesomeIcons.arrowsRotate,
+        primary: false,
+        builder: (_, __, ___, ____) => const AsyncExamplePage(),
+      ),
+      PageDefinition(
+        title: 'Settings',
+        icon: Icons.settings,
+        primary: true,
+        scaffoldType: ScaffoldPageType.transparentCard,
+        builder: (context, _, __, ____) => SettingsPage(
+          backgroundColor: Colors.transparent,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/');
+              },
+              child: const Text('Login'),
+            ),
+          ],
         ),
-      ],
-    ),
+      ),
+      PageDefinition(
+        title: 'Page Five',
+        icon: FontAwesomeIcons.car,
+        debug: true,
+        primary: true,
+        builder: (_, __, ___, ____) =>
+            const PlaceholderPage(title: 'Page Five'),
+      ),
+    ],
   );
 
-  static final styles = Provider<AppStyles>(
-    name: 'AppOne Styles',
-    (ref) => GoRouterMenuApp.styles,
-  );
+  static final styles = GoRouterMenuApp.styles;
 }

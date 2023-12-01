@@ -1,5 +1,6 @@
 enum PageChangeSource {
   initial,
   buttonBar,
-  pageView;
+  pageView,
+  external;
 }

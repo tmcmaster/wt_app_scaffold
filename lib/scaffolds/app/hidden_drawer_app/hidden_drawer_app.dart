@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_widget.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_page_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/app/shared_app_config.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class HiddenDrawerApp extends ConsumerStatefulWidget {
   static final styles = SharedAppConfig.styles.copyWith(
     theme: SharedAppConfig.styles.theme.copyWith(),
   );
+
+  static final page =
+      StateNotifierProvider<HiddenDrawPageController, PageDefinition>(
+    name: 'HiddenDrawerApp.router',
+    (ref) => HiddenDrawPageController(ref),
+  );
+
+  static final router = page.notifier;
 
   final AppDefinition appDefinition;
   final bool debugMode;
@@ -46,6 +56,8 @@ class HiddenDrawerApp extends ConsumerStatefulWidget {
 }
 
 class _HiddenDrawerAppState extends ConsumerState<HiddenDrawerApp> {
+  static final log = logger(HiddenDrawerApp, level: Level.debug);
+
   late double xOffset;
   late double yOffset;
   late double scaleFactor;
@@ -82,14 +94,32 @@ class _HiddenDrawerAppState extends ConsumerState<HiddenDrawerApp> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      backgroundColor:
-          HSLColor.fromColor(colorScheme.primary).withLightness(0.1).toColor(),
-      body: Stack(
-        children: [
-          buildDrawer(context),
-          buildPage(),
-        ],
+    final newPage = ref.watch(HiddenDrawerApp.page);
+    final seedColor = widget.appDefinition.colorScheme == null
+        ? ref.watch(ApplicationSettings.colorScheme.value)
+        : widget.appDefinition.colorScheme!;
+    log.d('Seed Color: $seedColor');
+    final debugMode = ref.watch(ApplicationSettings.debugMode.value);
+    final appStyles = ref.read(AppScaffoldProviders.appStyles);
+
+    return MaterialApp(
+      theme: appStyles.theme.copyWith(
+        colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
+      ),
+      debugShowCheckedModeBanner: debugMode,
+      navigatorKey: ref.read(UserLog.navigatorKey),
+      scaffoldMessengerKey: ref.read(UserLog.snackBarKey),
+      home: Scaffold(
+        backgroundColor: HSLColor.fromColor(colorScheme.primary)
+            .withLightness(0.1)
+            .toColor(),
+        body: Stack(
+          children: [
+            buildDrawer(context),
+            buildPage(newPage),
+            // buildPage(page ?? widget.appDefinition.pages.first),
+          ],
+        ),
       ),
     );
   }
@@ -102,14 +132,15 @@ class _HiddenDrawerAppState extends ConsumerState<HiddenDrawerApp> {
         width: xOffset,
         onCloseDrawer: closeDrawer,
         onSelectedItem: (page) {
-          setState(() => this.page = page);
+          ref.read(HiddenDrawerApp.router).go(page.route);
+          // setState(() => this.page = page);
           closeDrawer();
         },
       ),
     );
   }
 
-  Widget buildPage() {
+  Widget buildPage(PageDefinition page) {
     return PopScope(
       canPop: isDrawerOpen,
       onPopInvoked: (didPop) {
@@ -151,7 +182,7 @@ class _HiddenDrawerAppState extends ConsumerState<HiddenDrawerApp> {
                   child: HiddenPageBuilder(
                     includeAppBar: widget.appDefinition.includeAppBar,
                     menuAction: widget.appDefinition.menuAction,
-                    pageDefinition: page ?? widget.appDefinition.pages.first,
+                    pageDefinition: page,
                   ),
                 ),
               ),
@@ -160,5 +191,24 @@ class _HiddenDrawerAppState extends ConsumerState<HiddenDrawerApp> {
         ),
       ),
     );
+  }
+}
+
+class HiddenDrawPageController extends StateNotifier<PageDefinition> {
+  static late Map<String, PageDefinition> _pageIndex;
+
+  HiddenDrawPageController(Ref ref)
+      : super(ref.read(AppScaffoldProviders.appDefinition).pages.first) {
+    _pageIndex = {
+      for (final page in ref.read(AppScaffoldProviders.appDefinition).pages)
+        page.route: page,
+    };
+  }
+
+  void go(String path) {
+    final newPage = _pageIndex[path];
+    if (newPage != null) {
+      state = newPage;
+    }
   }
 }

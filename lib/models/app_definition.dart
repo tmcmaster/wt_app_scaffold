@@ -19,7 +19,7 @@ class AppDefinition {
   final ApplicationType? applicationType;
   final ThemeMode? themeMode;
   final Color? colorScheme;
-  final List<LocalizationsDelegate>? intlDelegates;
+  final List<LocalizationsDelegate> intlDelegates;
   final Set<Locale>? inltLocales;
 
   const AppDefinition._({
@@ -37,7 +37,7 @@ class AppDefinition {
     this.themeMode,
     this.colorScheme,
     this.inltLocales,
-    this.intlDelegates,
+    this.intlDelegates = const <LocalizationsDelegate>[],
   });
 
   factory AppDefinition.from({
@@ -54,7 +54,7 @@ class AppDefinition {
     ApplicationType? applicationType,
     ThemeMode? themeMode,
     Color? colorScheme,
-    List<LocalizationsDelegate>? intlDelegates,
+    List<LocalizationsDelegate> intlDelegates = const <LocalizationsDelegate>[],
     Set<Locale>? inltLocales,
   }) {
     return AppDefinition._(
@@ -65,7 +65,8 @@ class AppDefinition {
           PageDefinition(
             title: 'Profile',
             icon: Icons.person,
-            builder: (_, __, ___) => const PlaceholderPage(title: 'Profile'),
+            builder: (_, __, ___, ____) =>
+                const PlaceholderPage(title: 'Profile'),
           ),
       pages: pages,
       swipeEnabled: swipeEnabled,
@@ -76,7 +77,7 @@ class AppDefinition {
       applicationType: applicationType,
       themeMode: themeMode,
       colorScheme: colorScheme,
-      inltLocales: inltLocales,
+      inltLocales: inltLocales ?? {const Locale('en', '')},
       intlDelegates: intlDelegates,
     );
   }

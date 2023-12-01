@@ -1,24 +1,24 @@
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold_examples/apps/app_three.dart';
+import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
+import 'package:wt_app_scaffold_examples/apps/app_one.dart';
 import 'package:wt_app_scaffold_examples/firebase_options.dart';
+import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 void main() async {
   runMyApp(
     withFirebase(
-      andLogin(
+      andFirebaseLogin(
         andAppScaffold(
-          appDetails: AppThree.details,
-          appDefinition: AppThree.definition,
-          appStyles: AppThree.styles,
+          appDetails: AppOne.details,
+          appDefinition: AppOne.definition,
+          appStyles: AppOne.styles,
+          // applicationType: ApplicationType.bottomNavBar,
         ),
-        loginSupport: const LoginSupport(
-          emailEnabled: true,
-          googleEnabled: true,
-        ),
+        emailEnabled: true,
       ),
       appName: 'wt-app-scaffold',
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+      database: true,
     ),
     includeObservers: [],
     includeOverrides: [],

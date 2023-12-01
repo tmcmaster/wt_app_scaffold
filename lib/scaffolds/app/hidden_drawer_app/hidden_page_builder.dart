@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 
-class HiddenPageBuilder extends StatelessWidget {
+class HiddenPageBuilder extends ConsumerWidget {
   final PageDefinition pageDefinition;
 
   final bool includeAppBar;
@@ -17,7 +18,7 @@ class HiddenPageBuilder extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return includeAppBar
@@ -28,9 +29,9 @@ class HiddenPageBuilder extends StatelessWidget {
               backgroundColor: colorScheme.primary,
               leading: _createIconButton(context),
             ),
-            body: pageDefinition.builder(context, pageDefinition, null),
+            body: pageDefinition.builder(context, ref, pageDefinition, null),
           )
-        : pageDefinition.builder(context, pageDefinition, null);
+        : pageDefinition.builder(context, ref, pageDefinition, null);
   }
 
   IconButton? _createIconButton(BuildContext context) {

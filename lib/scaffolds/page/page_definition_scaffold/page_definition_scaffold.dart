@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_spacing.dart';
@@ -7,7 +8,7 @@ import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/irregula
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/tab_menu.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/transparent_card.dart';
 
-class PageDefinitionScaffold extends StatefulWidget {
+class PageDefinitionScaffold extends ConsumerStatefulWidget {
   final PageDefinition pageDefinition;
   final GoRouterState? state;
   const PageDefinitionScaffold({
@@ -16,10 +17,11 @@ class PageDefinitionScaffold extends StatefulWidget {
   });
 
   @override
-  State<PageDefinitionScaffold> createState() => _PageDefinitionScaffoldState();
+  ConsumerState<PageDefinitionScaffold> createState() =>
+      _PageDefinitionScaffoldState();
 }
 
-class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
+class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
     with TickerProviderStateMixin {
   static const maxWidth = 800.0;
 
@@ -145,6 +147,7 @@ class _PageDefinitionScaffoldState extends State<PageDefinitionScaffold>
                                   .map(
                                     (page) => page.builder(
                                       context,
+                                      ref,
                                       page,
                                       widget.state,
                                     ),

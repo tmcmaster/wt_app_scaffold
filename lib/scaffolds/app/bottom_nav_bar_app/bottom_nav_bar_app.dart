@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_platform/widget/app_scaffold_material_app.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_menu.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_page_view.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_selected_page_notifier.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
+import 'package:wt_logging/wt_logging.dart';
 
-class BottomNavBarApp extends StatefulWidget {
+class BottomNavBarApp extends ConsumerStatefulWidget {
+  static final pageChangeEvent =
+      StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent>(
+    name: 'BottomNavBarApp.pageChangeEvent',
+    (ref) {
+      final pages = ref.watch(AppScaffoldProviders.appPages);
+      final initialPageIndex = ref.watch(
+        AppScaffoldProviders.appInitialPageIndex,
+      );
+      return BottomNavBarSelectedPageNotifier(
+        pages: pages,
+        initialPage: initialPageIndex,
+      );
+    },
+  );
+
+  static final router = pageChangeEvent.notifier;
+
+  static final navigatorKey = GlobalKey<NavigatorState>();
+
   final AppDefinition appDefinition;
   final bool debugMode;
 
@@ -26,42 +48,24 @@ class BottomNavBarApp extends StatefulWidget {
   }
 
   @override
-  State<BottomNavBarApp> createState() => _BottomNavBarAppState();
+  ConsumerState<BottomNavBarApp> createState() => _BottomNavBarAppState();
 }
 
-class _BottomNavBarAppState extends State<BottomNavBarApp> {
-  late StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent>
-      _selectedPageProvider;
-
-  @override
-  void initState() {
-    final initialIndex = widget.appDefinition.pages
-        .indexOf(widget.appDefinition.pages.firstWhere((page) => page.primary));
-
-    _selectedPageProvider = StateNotifierProvider<
-        BottomNavBarSelectedPageNotifier, PageChangeEvent>(
-      (ref) => BottomNavBarSelectedPageNotifier(initialIndex),
-    );
-
-    super.initState();
-  }
-
+class _BottomNavBarAppState extends ConsumerState<BottomNavBarApp> {
+  static final log = logger(BottomNavBarApp, level: Level.debug);
   @override
   Widget build(BuildContext context) {
-    final items = widget.appDefinition.pages.where((page) {
-      return widget.debugMode || !page.debug;
-    }).toList();
-
-    return Scaffold(
-      body: BottomNavBarPageView(
-        items: items,
-        debugMode: widget.debugMode,
-        swipeEnabled: widget.appDefinition.swipeEnabled,
-        provider: _selectedPageProvider,
-      ),
-      bottomNavigationBar: BottomNavBarMenu(
-        items: items,
-        provider: _selectedPageProvider,
+    log.d('Rebuilding');
+    return AppScaffoldMaterialApp.fromWidget(
+      Scaffold(
+        body: BottomNavBarPageView(
+          debugMode: widget.debugMode,
+          swipeEnabled: widget.appDefinition.swipeEnabled,
+          provider: BottomNavBarApp.pageChangeEvent,
+        ),
+        bottomNavigationBar: BottomNavBarMenu(
+          provider: BottomNavBarApp.pageChangeEvent,
+        ),
       ),
     );
   }

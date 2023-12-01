@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class CurvedNavBarController
@@ -14,25 +15,20 @@ class CurvedNavBarController
   Map<int, PageDefinition> indexPageDefinitionMap = {};
   Ref ref;
 
-  CurvedNavBarController(
-    this.ref, {
-    required AppDefinition appDefinition,
-  }) : super(GlobalKey<CurvedNavigationBarState>()) {
-    ref.listen(ApplicationSettings.debugMode.value, (_, debugMode) {
-      _calculateMaps(appDefinition, debugMode);
+  CurvedNavBarController(this.ref)
+      : super(GlobalKey<CurvedNavigationBarState>()) {
+    ref.listen(AppScaffoldProviders.appPrimaryPages, (previous, pages) {
+      _calculateMaps(pages);
+      state = GlobalKey<CurvedNavigationBarState>();
     });
-    final debugMode = ref.read(ApplicationSettings.debugMode.value);
-    _calculateMaps(appDefinition, debugMode);
+    _calculateMaps(ref.read(AppScaffoldProviders.appPrimaryPages));
+    state = GlobalKey<CurvedNavigationBarState>();
   }
 
   void _calculateMaps(
-    AppDefinition appDefinition,
-    bool debugMode,
+    List<PageDefinition> pages,
   ) {
     log.d('Building Curved Nav Bar App Routes');
-    final pages = appDefinition.pages.where(
-      (page) => debugMode || !page.debug,
-    );
     routeIndexMap = Map.fromEntries(
       pages.mapIndexed(
         (index, page) => MapEntry<String, int>(page.route, index),
@@ -48,7 +44,10 @@ class CurvedNavBarController
         (index, page) => MapEntry<int, PageDefinition>(index, page),
       ),
     );
-    state = GlobalKey<CurvedNavigationBarState>();
+  }
+
+  List<PageDefinition> getPages() {
+    return routePageDefinitionMap.values.toList();
   }
 
   PageDefinition? getPageByIndex(int index) {
@@ -59,14 +58,14 @@ class CurvedNavBarController
     return routeIndexMap[route];
   }
 
+  void changePageIndex(int newIndex) {
+    state.currentState?.setPage(newIndex);
+  }
+
   void changePage(String routeName) {
     final newIndex = routeIndexMap[routeName];
     if (newIndex != null) {
       state.currentState?.setPage(newIndex);
     }
-  }
-
-  List<PageDefinition> getPages() {
-    return routePageDefinitionMap.values.toList();
   }
 }

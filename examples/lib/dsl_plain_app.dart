@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
 
 void main() async {
   await runMyApp(
-    virtualSize: 800,
     asPlainApp(
       MaterialApp(
         initialRoute: '/',
@@ -33,5 +32,6 @@ void main() async {
         },
       ),
     ),
+    virtualSize: 800,
   );
 }
