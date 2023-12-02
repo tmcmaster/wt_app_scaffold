@@ -65,11 +65,11 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.7.1
 
-dependency_overrides:
-  wt_firepod:
-    path: ../../../libraries/wt_firepod
-  wt_logging:
-    path: ../../../libraries/wt_logging
+#dependency_overrides:
+#  wt_firepod:
+#    path: ../../../libraries/wt_firepod
+#  wt_logging:
+#    path: ../../../libraries/wt_logging
 
 flutter:
   uses-material-design: true

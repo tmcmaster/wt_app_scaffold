@@ -698,10 +698,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_web
-      sha256: "0559197eed1e733baf859ea255a9296b2981655249b91dddc2c16f01b9cc664f"
+      sha256: "794f5494a945d6dd2654c52f979594ecd2558e5c82ce8272295ba371c93015e6"
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.2"
+    version: "0.12.2+1"
   graphs:
     dependency: transitive
     description:

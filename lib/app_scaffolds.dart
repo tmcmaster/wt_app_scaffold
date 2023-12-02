@@ -1,3 +1,6 @@
+export 'app_platform/auth/app_scaffold_authentication_store.dart';
+export 'app_platform/auth/app_scaffold_user.dart';
+export 'app_platform/config/shared_app_config.dart';
 export 'app_platform/util/app_scaffold_features.dart';
 export 'models/app_definition.dart';
 export 'models/app_details.dart';

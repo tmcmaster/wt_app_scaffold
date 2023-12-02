@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication.dart';
+import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication_store.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_context_map.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
 import 'package:wt_app_scaffold/providers/go_router_store.dart';

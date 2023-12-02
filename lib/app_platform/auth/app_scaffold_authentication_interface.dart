@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/auth/scaffold_app_user.dart';
+import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_user.dart';
 
 abstract class AppScaffoldAuthenticationInterface
-    extends StateNotifier<ScaffoldAppUser> {
+    extends StateNotifier<AppScaffoldUser> {
   AppScaffoldAuthenticationInterface(super.state);
 
   Future<void> signInWithEmail(String email, String password);

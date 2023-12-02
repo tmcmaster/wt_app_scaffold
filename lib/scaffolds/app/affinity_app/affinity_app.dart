@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication.dart';
 import 'package:wt_app_scaffold/app_platform/widget/app_scaffold_material_app.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';

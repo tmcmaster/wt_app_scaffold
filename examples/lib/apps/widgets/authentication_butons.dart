@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication.dart';
+import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication_store.dart';
 
 class AuthenticationButtons extends ConsumerWidget {
   const AuthenticationButtons({
