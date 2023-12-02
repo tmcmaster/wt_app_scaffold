@@ -9,7 +9,7 @@ class PageDefinition extends ItemDefinition {
   final AppScaffoldPageBuilder builder;
   final DrawerBuilder? drawerBuilder;
   final List<PageDefinition> childPages;
-  final ScaffoldPageType scaffoldType;
+  final ScaffoldPageType? scaffoldType;
   final bool centerTitle;
   PageDefinition({
     this.name,
@@ -21,7 +21,7 @@ class PageDefinition extends ItemDefinition {
     this.drawerBuilder,
     this.landing = false,
     this.childPages = const [],
-    this.scaffoldType = ScaffoldPageType.plain,
+    this.scaffoldType,
     this.centerTitle = true,
   });
 

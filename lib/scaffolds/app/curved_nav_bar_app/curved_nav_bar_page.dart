@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_scaffold_page_context.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class CurvedNavBarPage extends ConsumerWidget {
@@ -18,6 +19,13 @@ class CurvedNavBarPage extends ConsumerWidget {
 
     return page == null
         ? const Scaffold()
-        : page!.builder(context, ref, page!, null);
+        : page!.builder(
+            AppScaffoldPageContext(
+              context: context,
+              ref: ref,
+              page: page!,
+              state: null,
+            ),
+          );
   }
 }

@@ -1,40 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:wt_app_scaffold/app_platform/util/app_scaffold_material_app_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_draw_controller.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class AppScaffoldRouter {
+mixin AppScaffoldRouter {
   static final log = logger(AppScaffoldRouter, level: Level.debug);
 
-  final Ref ref;
-  AppScaffoldRouter(this.ref);
+  static final provider = Provider<AppScaffoldRouter>(
+    name: 'AppScaffoldProviders.router',
+    (ref) {
+      final applicationType = ref.read(AppScaffoldProviders.applicationType);
+      log.d('Getting router for the ApplicationType($applicationType)');
+      switch (applicationType) {
+        case ApplicationType.goRouterMenu:
+          return ref.read(GoRouterMenuApp.router);
+        case ApplicationType.hiddenDrawer:
+          return ref.read(HiddenDrawPageController.router);
+        case ApplicationType.bottomNavBar:
+          return ref.read(BottomNavBarApp.router);
+        case ApplicationType.curvedNavBar:
+          return ref.read(CurvedNavBarApp.router);
+        case ApplicationType.affinityApp:
+          return ref.read(AppScaffoldMaterialAppRouter.router);
+      }
+    },
+  );
 
-  void go(String path, BuildContext context) {
-    final applicationType = ref.read(AppScaffoldProviders.applicationType);
-    log.d('Routing to $path in $applicationType app.');
-    switch (applicationType) {
-      case ApplicationType.goRouterMenu:
-        {
-          ref.read(GoRouterMenuApp.router).go(path);
-        }
-      case ApplicationType.hiddenDrawer:
-        {
-          ref.read(HiddenDrawerApp.router).go(path);
-        }
-      case ApplicationType.bottomNavBar:
-        {
-          ref.read(BottomNavBarApp.router).go(path);
-        }
-      case ApplicationType.curvedNavBar:
-        {
-          ref.read(CurvedNavBarApp.router).changePage(path);
-        }
-      case ApplicationType.affinityApp:
-        {
-          context.go(path);
-        }
-    }
-  }
+  void go(String path, {Object? extra});
 }

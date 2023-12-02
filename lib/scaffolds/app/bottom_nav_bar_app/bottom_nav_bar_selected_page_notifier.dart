@@ -1,11 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_source.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent> {
+class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent>
+    with AppScaffoldRouter {
   static final log =
       logger(BottomNavBarSelectedPageNotifier, level: Level.debug);
 
@@ -27,7 +29,8 @@ class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent> {
     );
   }
 
-  void go(String path) {
+  @override
+  void go(String path, {Object? extra}) {
     final index = pageIndex[path];
     log.d(
       'Setting page to Path($path) '

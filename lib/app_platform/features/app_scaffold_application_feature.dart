@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_context_map.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_override_definition.dart';
+import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
@@ -14,8 +15,7 @@ class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
     AppScaffoldFeatureDefinition? childFeature, {
     required AppDetails appDetails,
     required AppDefinition appDefinition,
-    required AppStyles appStyles,
-    ApplicationType? applicationType,
+    required ProviderBuilder<AppStyles> appStyles,
   }) : super(
           contextBuilder: (contextMap) async {
             await Future.delayed(const Duration(seconds: 1));
@@ -34,9 +34,8 @@ class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
               ),
               AppScaffoldProviders.appStyles: AppScaffoldOverrideDefinition(
                 value: appDefinition,
-                override: AppScaffoldProviders.appStyles.overrideWith(
-                  (ref) => appStyles,
-                ),
+                override:
+                    AppScaffoldProviders.appStyles.overrideWith(appStyles),
               ),
             };
             return childFeature == null
@@ -44,17 +43,7 @@ class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
                 : childFeature.contextBuilder(newContext);
           },
           widgetBuilder: (context, ref) {
-            // final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
-            // final settingsApplicationType =
-            //     ref.watch(ApplicationSettings.applicationType.value);
-            // final selectedApplicationType = applicationType ??
-            //     appDefinition.applicationType ??
-            //     settingsApplicationType;
-            // final debugMode = ref.watch(ApplicationSettings.debugMode.value);
-            // return selectedApplicationType.builder(appDefinition, debugMode);
-            return AppScaffoldApplicationContainer(
-              applicationType: applicationType,
-            );
+            return const AppScaffoldApplicationContainer();
           },
           childFeature: childFeature,
         );
@@ -64,32 +53,20 @@ class AppScaffoldApplicationContainer extends ConsumerWidget {
   static final log =
       logger(AppScaffoldApplicationContainer, level: Level.debug);
 
-  final ApplicationType? applicationType;
-
   const AppScaffoldApplicationContainer({
     super.key,
-    this.applicationType,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
-    final settingsApplicationType =
-        ref.watch(ApplicationSettings.applicationType.value);
-    log.d('App Application Type: $applicationType');
-    log.d('Definition Application Type: ${appDefinition.applicationType}');
-    log.d('Setting Application Type: $settingsApplicationType');
 
-    final selectedApplicationType = applicationType ??
-        appDefinition.applicationType ??
-        settingsApplicationType;
-
-    log.d('Selected Application Type: $selectedApplicationType');
+    final applicationType = ref.watch(AppScaffoldProviders.applicationType);
 
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
     log.d('Debug : $debugMode');
-    log.d('Selected Builder : ${selectedApplicationType.builder}');
+    log.d('Application Type: $applicationType');
 
-    return selectedApplicationType.builder(appDefinition, debugMode);
+    return applicationType.builder(appDefinition, debugMode);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class NavigationPage extends ConsumerWidget {
@@ -31,7 +31,7 @@ class NavigationPage extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                ref.read(AppScaffoldProviders.router).go('/settings', context);
+                ref.read(AppScaffoldRouter.provider).go('/settings');
               },
               child: const Text('Test Navigation'),
             ),

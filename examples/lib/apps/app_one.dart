@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_authentication.dart';
+import 'package:wt_app_scaffold/app_platform/config/shared_app_config.dart';
+import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
@@ -23,13 +27,12 @@ mixin AppOne {
     appName: 'appOne',
     swipeEnabled: true,
     includeAppBar: true,
-    // applicationType: ApplicationType.hiddenDrawer,
+    applicationType: ApplicationType.curvedNavBar,
     profilePage: PageDefinition(
       icon: Icons.person,
       title: 'Profile',
       primary: true,
-      builder: (context, _, __, ____) =>
-          const PlaceholderPage(title: 'Profile Screen'),
+      builder: (pageContext) => const PlaceholderPage(title: 'Profile Screen'),
     ),
     pages: [
       PageDefinition(
@@ -39,14 +42,14 @@ mixin AppOne {
         landing: true,
         debug: false,
         scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (context, _, __, ____) => const FirebasePage(),
+        builder: (pageContext) => const FirebasePage(),
       ),
       PageDefinition(
         title: 'Page One',
         primary: true,
         icon: FontAwesomeIcons.clipboard,
         debug: true,
-        builder: (context, ref, __, ____) => BottomDrawerPage(
+        builder: (pageContext) => BottomDrawerPage(
           title: 'Page One',
           mainWidget: const Center(
             child: Text('Page One'),
@@ -55,10 +58,10 @@ mixin AppOne {
             child: Text('Page One Controls'),
           ),
           includeAppBar: false,
-          action: ref.read(ActionOne.provider),
+          action: pageContext.ref.read(ActionOne.provider),
           actions: [
-            ref.read(ActionOne.provider),
-            ref.read(ActionTwo.provider),
+            pageContext.ref.read(ActionOne.provider),
+            pageContext.ref.read(ActionTwo.provider),
           ],
         ),
       ),
@@ -67,8 +70,9 @@ mixin AppOne {
         icon: FontAwesomeIcons.bagShopping,
         primary: false,
         debug: false,
-        builder: (_, ref, ___, ____) {
-          final user = ref.read(AppScaffoldAuthenticationStore.user);
+        builder: (pageContext) {
+          final user =
+              pageContext.ref.read(AppScaffoldAuthenticationStore.user);
 
           return PlaceholderPage(
             title: 'Page Two',
@@ -84,47 +88,44 @@ mixin AppOne {
         title: 'Page Three',
         icon: FontAwesomeIcons.boxesPacking,
         debug: true,
-        builder: (_, __, ___, ____) =>
-            const PlaceholderPage(title: 'Page Three'),
+        builder: (_) => const PlaceholderPage(title: 'Page Three'),
       ),
       PageDefinition(
         title: 'Page Four',
         icon: FontAwesomeIcons.tractor,
         debug: true,
-        builder: (_, __, ___, ____) =>
-            const PlaceholderPage(title: 'Page Four'),
+        builder: (_) => const PlaceholderPage(title: 'Page Four'),
       ),
       PageDefinition(
         title: 'Counter',
         icon: Icons.settings,
         scaffoldType: ScaffoldPageType.transparentCard,
         primary: true,
-        builder: (_, __, ___, ____) =>
-            const CounterAppPage(title: 'Counter App'),
+        builder: (_) => const CounterAppPage(title: 'Counter App'),
       ),
       PageDefinition(
         title: 'Database',
         icon: FontAwesomeIcons.database,
         primary: false,
-        builder: (_, __, ___, ____) => const DatabaseExamplePage(),
+        builder: (_) => const DatabaseExamplePage(),
       ),
       PageDefinition(
         title: 'Async',
         icon: FontAwesomeIcons.arrowsRotate,
         primary: false,
-        builder: (_, __, ___, ____) => const AsyncExamplePage(),
+        builder: (_) => const AsyncExamplePage(),
       ),
       PageDefinition(
         title: 'Settings',
         icon: Icons.settings,
         primary: true,
         scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (context, _, __, ____) => SettingsPage(
+        builder: (pageContext) => SettingsPage(
           backgroundColor: Colors.transparent,
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/');
+                pageContext.ref.read(AppScaffoldRouter.provider).go('/');
               },
               child: const Text('Login'),
             ),
@@ -136,11 +137,10 @@ mixin AppOne {
         icon: FontAwesomeIcons.car,
         debug: true,
         primary: true,
-        builder: (_, __, ___, ____) =>
-            const PlaceholderPage(title: 'Page Five'),
+        builder: (_) => const PlaceholderPage(title: 'Page Five'),
       ),
     ],
   );
 
-  static final styles = GoRouterMenuApp.styles;
+  static AppStyles styles(Ref ref) => SharedAppConfig.styles(ref);
 }

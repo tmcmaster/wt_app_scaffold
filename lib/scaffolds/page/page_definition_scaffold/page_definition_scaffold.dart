@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_scaffold_page_context.dart';
 import 'package:wt_app_scaffold/models/app_spacing.dart';
-import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/bottom_menu_bar.dart';
+import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/bottom_menu_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/irregular_header_painter.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/tab_menu.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/transparent_card.dart';
@@ -146,10 +147,12 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                               children: pages
                                   .map(
                                     (page) => page.builder(
-                                      context,
-                                      ref,
-                                      page,
-                                      widget.state,
+                                      AppScaffoldPageContext(
+                                        context: context,
+                                        ref: ref,
+                                        page: page,
+                                        state: widget.state,
+                                      ),
                                     ),
                                   )
                                   .toList(),

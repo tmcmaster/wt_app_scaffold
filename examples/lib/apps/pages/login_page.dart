@@ -10,41 +10,39 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                final auth = ref.read(FirebaseProviders.auth);
-                final user = auth.currentUser;
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () async {
+              final auth = ref.read(FirebaseProviders.auth);
+              final user = auth.currentUser;
 
-                if (user != null) {
-                  log.d('User is already logged in: $user');
-                } else {
-                  final credentials = await auth.signInAnonymously();
-                  log.d('User logged in anonymously: $credentials');
-                }
-              },
-              child: const Text('Login'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                final auth = ref.read(FirebaseProviders.auth);
-                final user = auth.currentUser;
-                if (user == null) {
-                  log.d('User is not currently logged in.');
-                } else {
-                  await ref.read(FirebaseProviders.auth).signOut();
-                  log.d('User has been logged out.');
-                }
-              },
-              child: const Text('Logout'),
-            ),
-          ],
-        ),
+              if (user != null) {
+                log.d('User is already logged in: $user');
+              } else {
+                final credentials = await auth.signInAnonymously();
+                log.d('User logged in anonymously: $credentials');
+              }
+            },
+            child: const Text('Login'),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () async {
+              final auth = ref.read(FirebaseProviders.auth);
+              final user = auth.currentUser;
+              if (user == null) {
+                log.d('User is not currently logged in.');
+              } else {
+                await ref.read(FirebaseProviders.auth).signOut();
+                log.d('User has been logged out.');
+              }
+            },
+            child: const Text('Logout'),
+          ),
+        ],
       ),
     );
   }

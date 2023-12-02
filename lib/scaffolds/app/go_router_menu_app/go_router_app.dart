@@ -4,44 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
+import 'package:wt_app_scaffold/app_platform/widget/app_scaffold_go_router_app.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/app_scaffold_page_context.dart';
 import 'package:wt_app_scaffold/models/page_builder.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
-import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/cross_fade_transition_builder.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_definition_scaffold.dart';
 import 'package:wt_logging/wt_logging.dart';
+
+class ScaffoldAppGoRouter with AppScaffoldRouter {
+  final Ref ref;
+  ScaffoldAppGoRouter(this.ref);
+
+  @override
+  void go(String path, {Object? extra}) {
+    ref.read(GoRouterMenuApp.goRouter).go(path, extra: extra);
+  }
+}
 
 class GoRouterMenuApp extends ConsumerStatefulWidget {
   static final log = logger(GoRouterMenuApp, level: Level.debug);
 
-  static final AppStyles styles = AppStyles(
-    theme: ThemeData(
-      // colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-      useMaterial3: true,
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          TargetPlatform.android: CrossFadeTransitionBuilder(),
-          TargetPlatform.iOS: CrossFadeTransitionBuilder(),
-          TargetPlatform.macOS: CrossFadeTransitionBuilder(),
-        },
-      ),
-      tabBarTheme: const TabBarTheme(
-        labelPadding: EdgeInsets.symmetric(
-          vertical: 8.0,
-          horizontal: 16.0,
-        ),
-      ),
-    ),
+  static final router = Provider<AppScaffoldRouter>(
+    name: 'GoRouter',
+    (ref) => ScaffoldAppGoRouter(ref),
   );
 
-  static final router = Provider<GoRouter>(
+  static final goRouter = Provider<GoRouter>(
     name: 'GoRouter',
     (ref) {
+      final navigatorKey = ref.watch(AppScaffoldProviders.navigatorKey);
       final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
       return GoRouter(
-        navigatorKey: ref.read(UserLog.navigatorKey),
+        navigatorKey: navigatorKey,
         initialLocation: _createInitialRoute(appDefinition),
         routes: appDefinition.pages.map(
           (page) {
@@ -52,6 +49,7 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
                 return _PageWrapper(
                   page: page,
                   state: state,
+                  scaffoldPageType: appDefinition.scaffoldPageType,
                 );
               },
             );
@@ -101,7 +99,11 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
 
   @override
   Widget build(BuildContext context) {
-    final goRouter = ref.read(GoRouterMenuApp.router);
+    return const AppScaffoldGoRouterApp();
+  }
+
+  Widget buildHold(BuildContext context) {
+    final goRouter = ref.read(GoRouterMenuApp.goRouter);
     final appStyles = ref.read(AppScaffoldProviders.appStyles);
     final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
@@ -115,10 +117,13 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
     final locale = ref.watch(LocaleStore.provider);
     final locales =
         appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
+
+    final snackBarKey = ref.watch(AppScaffoldProviders.snackBarKey);
+
     return MaterialApp.router(
       title: appDefinition.appTitle,
       debugShowCheckedModeBanner: debugMode,
-      scaffoldMessengerKey: ref.read(UserLog.snackBarKey),
+      scaffoldMessengerKey: snackBarKey,
       themeMode: themeMode,
       theme: appStyles.theme.copyWith(
         colorScheme: colorBlindness == ColorBlindnessType.none
@@ -146,17 +151,21 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
 
 class _PageWrapper extends ConsumerWidget {
   static final scaffoldBuilders = <ScaffoldPageType, AppScaffoldPageBuilder>{
-    ScaffoldPageType.plain: (context, ref, page, state) =>
-        page.builder(context, ref, page, null),
-    ScaffoldPageType.transparentCard: (context, ref, page, state) =>
-        PageDefinitionScaffold(pageDefinition: page, state: state),
+    ScaffoldPageType.plain: (pageContext) =>
+        pageContext.page.builder(pageContext),
+    ScaffoldPageType.transparentCard: (pageContext) => PageDefinitionScaffold(
+          pageDefinition: pageContext.page,
+          state: pageContext.state,
+        ),
   };
 
   final PageDefinition page;
   final GoRouterState state;
+  final ScaffoldPageType? scaffoldPageType;
   const _PageWrapper({
     required this.page,
     required this.state,
+    this.scaffoldPageType,
   });
 
   @override
@@ -164,15 +173,22 @@ class _PageWrapper extends ConsumerWidget {
     final MediaQueryData data = MediaQuery.of(context);
     final scaleFactor =
         ref.watch(ApplicationSettings.textScaleFactor.value).value;
+    final calculatedScaffoldPageType = page.scaffoldType ?? scaffoldPageType;
+    final AppScaffoldPageBuilder pageBuilder =
+        scaffoldBuilders[calculatedScaffoldPageType] ?? page.builder;
     return SafeArea(
       child: MediaQuery(
         data: data.copyWith(
           textScaler: TextScaler.linear(scaleFactor),
         ),
-        child: (scaffoldBuilders.containsKey(page.scaffoldType))
-            ? scaffoldBuilders[page.scaffoldType]!
-                .call(context, ref, page, state)
-            : page.builder(context, ref, page, state),
+        child: pageBuilder(
+          AppScaffoldPageContext(
+            context: context,
+            ref: ref,
+            page: page,
+            state: state,
+          ),
+        ),
       ),
     );
   }

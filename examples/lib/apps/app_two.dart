@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wt_app_scaffold/app_platform/config/shared_app_config.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/login_page.dart';
@@ -20,64 +24,65 @@ mixin AppTwo {
     appName: 'appTwp',
     swipeEnabled: true,
     includeAppBar: true,
-    applicationType: ApplicationType.curvedNavBar,
+    applicationType: ApplicationType.goRouterMenu,
+    scaffoldPageType: ScaffoldPageType.transparentCard,
     profilePage: PageDefinition(
       icon: Icons.person,
       title: 'Profile',
-      builder: (_, __, ___, ____) => const PlaceholderPage(
+      primary: true,
+      builder: (_) => const PlaceholderPage(
         title: 'Profile Page',
       ),
     ),
     pages: [
       PageDefinition(
         title: 'Plain Page',
-        icon: FontAwesomeIcons.clipboard,
+        icon: FontAwesomeIcons.anchor,
         primary: true,
         debug: false,
-        builder: (_, __, ___, ____) => const PlainPage(),
+        builder: (_) => const PlainPage(),
       ),
       PageDefinition(
         title: 'Firebase Page',
-        icon: FontAwesomeIcons.clipboard,
+        icon: FontAwesomeIcons.fire,
         primary: true,
         debug: false,
-        builder: (_, __, ___, ____) => const FirebasePage(),
+        builder: (_) => const FirebasePage(),
       ),
       PageDefinition(
         title: 'SnackBar Page',
-        icon: FontAwesomeIcons.clipboard,
+        icon: FontAwesomeIcons.noteSticky,
         primary: true,
-        landing: true,
         debug: false,
-        builder: (_, __, ___, ____) => const UserLogPage(),
+        builder: (_) => const UserLogPage(),
       ),
       PageDefinition(
         title: 'Navigation Page',
-        icon: FontAwesomeIcons.bars,
+        icon: Icons.navigation,
         primary: true,
         debug: false,
-        builder: (_, __, ___, ____) => const NavigationPage(
+        builder: (_) => const NavigationPage(
           routeTo: '/sign-in',
         ),
       ),
       PageDefinition(
         title: 'Login Page',
-        icon: FontAwesomeIcons.clipboard,
+        icon: Icons.login,
         primary: true,
         debug: false,
-        builder: (_, __, ___, ____) => const LoginPage(),
+        builder: (_) => const LoginPage(),
       ),
       PageDefinition(
         title: 'Settings',
         icon: Icons.settings,
         primary: true,
-        builder: (context, __, ___, ____) => VirtualSizeFittedBox(
+        builder: (pageContext) => VirtualSizeFittedBox(
           virtualSize: 1000,
           child: SettingsPage(
             children: [
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/');
+                  Navigator.of(pageContext.context).pushNamed('/');
                 },
                 child: const Text('Login'),
               ),
@@ -88,5 +93,5 @@ mixin AppTwo {
     ],
   );
 
-  static final styles = GoRouterMenuApp.styles;
+  static AppStyles styles(Ref ref) => SharedAppConfig.styles(ref);
 }

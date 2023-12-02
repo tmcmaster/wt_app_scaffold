@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wt_app_scaffold/app_platform/config/shared_app_config.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/landing_page.dart';
 import 'package:wt_app_scaffold_examples/apps/widgets/test_web_view.dart';
@@ -25,7 +28,7 @@ mixin ScaffoldTestApp {
         icon: FontAwesomeIcons.clipboard,
         primary: true,
         scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (context, _, __, ____) => const LandingPage(),
+        builder: (_) => const LandingPage(),
         drawerBuilder: (context) => Container(),
       ),
       PageDefinition(
@@ -33,10 +36,10 @@ mixin ScaffoldTestApp {
         icon: FontAwesomeIcons.clipboard,
         primary: true,
         scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (context, _, __, ____) => const TestWebView(),
+        builder: (_) => const TestWebView(),
       ),
     ],
   );
 
-  static final styles = GoRouterMenuApp.styles;
+  static AppStyles styles(Ref ref) => SharedAppConfig.styles(ref);
 }

@@ -698,10 +698,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_web
-      sha256: "6b08be471f82ff84058d528e1cb01f4f53084fa648b751310cdd1ac39b612d8e"
+      sha256: "0559197eed1e733baf859ea255a9296b2981655249b91dddc2c16f01b9cc664f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.1"
+    version: "0.12.2"
   graphs:
     dependency: transitive
     description:
@@ -962,10 +962,10 @@ packages:
     dependency: transitive
     description:
       name: petitparser
-      sha256: eeb2d1428ee7f4170e2bd498827296a18d4e7fc462b71727d111c0ac7707cfa6
+      sha256: c15605cd28af66339f8eb6fbe0e541bfe2d1b72d5825efc6598f3e0a31b9ad27
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.1"
+    version: "6.0.2"
   platform:
     dependency: transitive
     description:
@@ -1439,10 +1439,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "7c99c0e1e2fa190b48d25c81ca5e42036d5cac81430ef249027d97b0935c553f"
+      sha256: b0f37db61ba2f2e9b7a78a1caece0052564d1bc70668156cf3a29d676fe4e574
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.0"
+    version: "5.1.1"
   win32_registry:
     dependency: transitive
     description:

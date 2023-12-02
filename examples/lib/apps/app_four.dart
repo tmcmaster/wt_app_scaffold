@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wt_app_scaffold/app_platform/config/shared_app_config.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/navigation_page.dart';
@@ -28,7 +31,7 @@ mixin AppFour {
         icon: FontAwesomeIcons.faceSmile,
         primary: true,
         debug: false,
-        builder: (_, __, ___, ____) => const PlainPage(),
+        builder: (_) => const PlainPage(),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
@@ -37,7 +40,7 @@ mixin AppFour {
         primary: true,
         landing: true,
         debug: false,
-        builder: (_, __, ___, ____) => const UserLogPage(),
+        builder: (_) => const UserLogPage(),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
@@ -45,7 +48,7 @@ mixin AppFour {
         icon: FontAwesomeIcons.bars,
         primary: true,
         debug: false,
-        builder: (_, __, ___, ____) => const NavigationPage(
+        builder: (_) => const NavigationPage(
           routeTo: '/settings',
         ),
         scaffoldType: ScaffoldPageType.transparentCard,
@@ -55,14 +58,14 @@ mixin AppFour {
         icon: Icons.style,
         debug: true,
         primary: true,
-        builder: (_, __, ___, ____) => const ThemePreviewScreen(),
+        builder: (_) => const ThemePreviewScreen(),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         title: 'Settings',
         icon: Icons.settings,
         primary: true,
-        builder: (context, __, ___, ____) => Padding(
+        builder: (_) => Padding(
           padding: const EdgeInsets.all(12),
           child: SettingsPage(
             backgroundColor: Colors.transparent,
@@ -80,7 +83,7 @@ mixin AppFour {
         icon: FontAwesomeIcons.bug,
         debug: true,
         primary: true,
-        builder: (_, __, ___, ____) => const PlaceholderPage(
+        builder: (_) => const PlaceholderPage(
           title: 'Debug Mode Page',
           backgroundColor: Colors.transparent,
         ),
@@ -91,8 +94,7 @@ mixin AppFour {
         icon: FontAwesomeIcons.bug,
         debug: true,
         primary: false,
-        builder: (_, __, ___, ____) =>
-            const PlaceholderPage(title: 'Debug Mode Page 2'),
+        builder: (_) => const PlaceholderPage(title: 'Debug Mode Page 2'),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
@@ -100,8 +102,7 @@ mixin AppFour {
         icon: FontAwesomeIcons.bug,
         debug: true,
         primary: false,
-        builder: (_, __, ___, ____) =>
-            const PlaceholderPage(title: 'Debug Mode Page 3'),
+        builder: (_) => const PlaceholderPage(title: 'Debug Mode Page 3'),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
@@ -109,7 +110,7 @@ mixin AppFour {
         icon: FontAwesomeIcons.bug,
         debug: true,
         primary: false,
-        builder: (_, __, ___, ____) => const PlaceholderPage(
+        builder: (_) => const PlaceholderPage(
           title: 'Debug Mode Page 4',
           backgroundColor: Colors.transparent,
         ),
@@ -118,5 +119,5 @@ mixin AppFour {
     ],
   );
 
-  static final styles = HiddenDrawerApp.styles;
+  static AppStyles styles(Ref ref) => SharedAppConfig.styles(ref);
 }

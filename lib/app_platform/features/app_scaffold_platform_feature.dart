@@ -2,9 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
-import 'package:wt_app_scaffold/app_platform/model/app_scaffold_override_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/scaffolds/app/affinity_app/affinity_app.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 // global application settings like error handling, monitoring and logging levels
@@ -39,22 +37,8 @@ class AppScaffoldPlatformFeature extends AppScaffoldFeatureDefinition {
                 );
               };
             }
-            final snackBarKey = AffinityApp.snackBarKey;
-            final navigatorKey = AffinityApp.navigatorKey;
             final newContext = {
               ...contextMap,
-              UserLog.snackBarKey: AppScaffoldOverrideDefinition(
-                value: snackBarKey,
-                override: UserLog.snackBarKey.overrideWith(
-                  (ref) => snackBarKey,
-                ),
-              ),
-              UserLog.navigatorKey: AppScaffoldOverrideDefinition(
-                value: snackBarKey,
-                override: UserLog.navigatorKey.overrideWith(
-                  (ref) => navigatorKey,
-                ),
-              ),
             };
             return childFeature.contextBuilder(newContext);
           },

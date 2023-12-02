@@ -26,7 +26,7 @@ mixin FirstApp {
       profilePage: PageDefinition(
         icon: Icons.person,
         title: 'Profile',
-        builder: (context, _, __, ____) => const PlaceholderPage(
+        builder: (_) => const PlaceholderPage(
           title: 'Profile Screen',
         ),
       ),
@@ -36,21 +36,21 @@ mixin FirstApp {
           icon: Icons.home, // Replaced with Icons.home based on the title
           primary: true,
           debug: false,
-          builder: (_, __, ___, ____) => const HomePage(),
+          builder: (_) => const HomePage(),
         ),
         PageDefinition(
           title: 'Orders',
           icon: FontAwesomeIcons.bagShopping,
           primary: false,
           debug: true,
-          builder: (_, __, ___, ____) => const OrdersPage(),
+          builder: (_) => const OrdersPage(),
         ),
         PageDefinition(
           title: 'Products',
           icon: FontAwesomeIcons.cube,
           primary: false,
           debug: true,
-          builder: (_, __, ___, ____) => const ProductsPage(),
+          builder: (_) => const ProductsPage(),
         ),
         PageDefinition(
           title: 'Notifications',
@@ -58,14 +58,14 @@ mixin FirstApp {
               .bell, // Replaced with FontAwesomeIcons.bell based on the title
           primary: false,
           debug: true,
-          builder: (_, __, ___, ____) => const NotificationsPage(),
+          builder: (_) => const NotificationsPage(),
         ),
         PageDefinition(
           title: 'Settings',
           icon: FontAwesomeIcons.gear,
           primary: false,
           debug: false,
-          builder: (_, __, ___, ____) => const SettingsPage(),
+          builder: (_) => const SettingsPage(),
         ),
       ],
     ),

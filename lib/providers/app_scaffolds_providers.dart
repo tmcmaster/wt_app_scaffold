@@ -1,9 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 mixin AppScaffoldProviders {
+  static final log = logger(AppScaffoldProviders, level: Level.debug);
+
   static final appDefinition = Provider<AppDefinition>(
     name: 'AppScaffoldProviders.appAppDefinition',
     (ref) => throw Exception(
@@ -70,18 +74,31 @@ mixin AppScaffoldProviders {
   static final applicationType = Provider<ApplicationType>(
     name: 'AppScaffoldProviders.applicationType',
     (ref) {
-      final applicationDefinition =
-          ref.read(AppScaffoldProviders.appDefinition);
       final settingsApplicationType =
           ref.watch(ApplicationSettings.applicationType.value);
-      final staticApplicationType = applicationDefinition.applicationType;
+      final staticApplicationType =
+          ref.read(AppScaffoldProviders.appDefinition).applicationType;
       final applicationType = staticApplicationType ?? settingsApplicationType;
+      log.d('New Application Type: $applicationType');
       return applicationType;
     },
   );
 
-  static final router = Provider(
-    name: 'AppScaffoldProviders.router',
-    (ref) => AppScaffoldRouter(ref),
+  static final router = AppScaffoldRouter.provider;
+
+  static final navigatorKey = Provider<GlobalKey<NavigatorState>>(
+    name: 'AppScaffoldProviders.navigatorKey',
+    (ref) {
+      ref.watch(applicationType);
+      return ref.read(UserLogStore.navigatorKey.notifier).generateNewKey();
+    },
+  );
+
+  static final snackBarKey = Provider<GlobalKey<ScaffoldMessengerState>>(
+    name: 'AppScaffoldProviders.navigatorKey',
+    (ref) {
+      ref.watch(applicationType);
+      return ref.read(UserLogStore.snackBarKey.notifier).generateNewKey();
+    },
   );
 }

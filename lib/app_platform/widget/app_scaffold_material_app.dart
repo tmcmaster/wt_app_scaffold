@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
-import 'package:wt_app_scaffold/scaffolds/app/application_settings.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldMaterialApp extends ConsumerWidget {
@@ -56,15 +57,30 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
     final appStyles = ref.read(AppScaffoldProviders.appStyles);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
 
+    final snackBarKey = ref.watch(AppScaffoldProviders.snackBarKey);
+    final navigatorKey = ref.watch(AppScaffoldProviders.navigatorKey);
+
+    final themeMode =
+        appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
+    final locale = ref.watch(LocaleStore.provider);
+    final locales =
+        appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
+
     return MaterialApp(
       debugShowCheckedModeBanner: debugMode,
-      scaffoldMessengerKey: ref.read(UserLog.snackBarKey),
-      navigatorKey: ref.read(UserLog.navigatorKey),
-      theme: appStyles.theme.copyWith(
-        colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
-      ),
+      scaffoldMessengerKey: snackBarKey,
+      navigatorKey: navigatorKey,
+      themeMode: themeMode,
+      theme: appStyles.theme,
+      darkTheme: appStyles.darkTheme,
       initialRoute: initialRoute,
       routes: routes,
+      localizationsDelegates: [
+        ...appDefinition.intlDelegates,
+        ...GlobalMaterialLocalizations.delegates,
+      ],
+      supportedLocales: locales,
+      locale: locale ?? locales.first,
     );
   }
 }

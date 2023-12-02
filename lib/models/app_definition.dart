@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 
 class AppDefinition {
@@ -17,6 +18,7 @@ class AppDefinition {
   final void Function(BuildContext context)? menuAction;
   final List<LocalizationsDelegate>? localizationDelegates;
   final ApplicationType? applicationType;
+  final ScaffoldPageType? scaffoldPageType;
   final ThemeMode? themeMode;
   final Color? colorScheme;
   final List<LocalizationsDelegate> intlDelegates;
@@ -34,6 +36,7 @@ class AppDefinition {
     required this.menuAction,
     required this.localizationDelegates,
     this.applicationType,
+    this.scaffoldPageType,
     this.themeMode,
     this.colorScheme,
     this.inltLocales,
@@ -52,6 +55,7 @@ class AppDefinition {
     void Function(BuildContext context)? menuAction,
     List<LocalizationsDelegate>? localizationDelegates,
     ApplicationType? applicationType,
+    ScaffoldPageType? scaffoldPageType,
     ThemeMode? themeMode,
     Color? colorScheme,
     List<LocalizationsDelegate> intlDelegates = const <LocalizationsDelegate>[],
@@ -65,8 +69,7 @@ class AppDefinition {
           PageDefinition(
             title: 'Profile',
             icon: Icons.person,
-            builder: (_, __, ___, ____) =>
-                const PlaceholderPage(title: 'Profile'),
+            builder: (_) => const PlaceholderPage(title: 'Profile'),
           ),
       pages: pages,
       swipeEnabled: swipeEnabled,
@@ -75,6 +78,7 @@ class AppDefinition {
       menuAction: menuAction,
       localizationDelegates: localizationDelegates,
       applicationType: applicationType,
+      scaffoldPageType: scaffoldPageType,
       themeMode: themeMode,
       colorScheme: colorScheme,
       inltLocales: inltLocales ?? {const Locale('en', '')},

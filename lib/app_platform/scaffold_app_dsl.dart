@@ -69,18 +69,18 @@ Future<void> runMyApp(
 
 const andAppScaffold = withAppScaffold;
 
+typedef ProviderBuilder<T> = T Function(Ref ref);
+
 AppScaffoldFeatureDefinition withAppScaffold({
   required AppDetails appDetails,
   required AppDefinition appDefinition,
-  required AppStyles appStyles,
-  ApplicationType? applicationType,
+  required ProviderBuilder<AppStyles> appStyles,
 }) {
   return AppScaffoldApplicationFeature(
     null,
     appDetails: appDetails,
     appDefinition: appDefinition,
     appStyles: appStyles,
-    applicationType: applicationType,
   );
 }
 
