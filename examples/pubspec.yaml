@@ -45,7 +45,7 @@ dependencies:
   wt_action_button:
     git: https://github.com/tmcmaster/wt_action_button.git
   wt_app_scaffold:
-    path: ..
+    git: https://github.com/tmcmaster/wt_app_scaffold.git
   wt_firebase_listview:
     git: https://github.com/tmcmaster/wt_firebase_listview.git
   wt_firepod:
@@ -65,9 +65,11 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.7.1
 
-#dependency_overrides:
-#  wt_firepod:
-#    path: ../../../libraries/wt_firepod
+dependency_overrides:
+  wt_app_scaffold:
+    path: ..
+  wt_firepod:
+    path: ../../../libraries/wt_firepod
 #  wt_logging:
 #    path: ../../../libraries/wt_logging
 
