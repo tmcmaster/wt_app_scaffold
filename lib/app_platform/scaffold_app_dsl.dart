@@ -21,6 +21,7 @@ Future<void> runMyApp(
   void Function(BuildContext, WidgetRef)? onReady,
   List<ProviderObserver>? includeObservers,
   List<Override>? includeOverrides,
+  Widget? splashWidget,
 }) async {
   final platformDefinition = AppScaffoldPlatformFeature(
     featureDefinition,
@@ -49,15 +50,16 @@ Future<void> runMyApp(
             ],
             child: Consumer(
               builder: (context, ref, _) {
-                return featureDefinition.widgetBuilder(context, ref);
+                return platformDefinition.widgetBuilder(context, ref);
               },
             ),
           );
         } else {
-          return const MaterialApp(
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(
-                child: CircularProgressIndicator(),
+                child: splashWidget ?? const CircularProgressIndicator(),
               ),
             ),
           );
@@ -87,10 +89,12 @@ AppScaffoldFeatureDefinition withAppScaffold({
 const andAuthentication = withAuthentication;
 
 AppScaffoldFeatureDefinition withAuthentication(
-  AppScaffoldFeatureDefinition featureDefinition,
-) {
+  AppScaffoldFeatureDefinition featureDefinition, {
+  Widget? splashWidget,
+}) {
   return AppScaffoldLoginFeature(
     featureDefinition,
+    splashWidget: splashWidget,
   );
 }
 

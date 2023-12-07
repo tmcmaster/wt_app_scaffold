@@ -11,8 +11,12 @@ import 'package:wt_logging/wt_logging.dart';
 class AppScaffoldLoginFeature extends AppScaffoldFeatureDefinition {
   static final log = logger(AppScaffoldLoginFeature, level: Level.debug);
 
-  AppScaffoldLoginFeature(AppScaffoldFeatureDefinition childFeature)
-      : super(
+  final Widget? splashWidget;
+
+  AppScaffoldLoginFeature(
+    AppScaffoldFeatureDefinition childFeature, {
+    this.splashWidget,
+  }) : super(
           contextBuilder: (contextMap) {
             final AppScaffoldContextMap newContext = {
               ...contextMap,
@@ -31,6 +35,7 @@ class AppScaffoldLoginFeature extends AppScaffoldFeatureDefinition {
                   return childFeature.widgetBuilder(context, ref);
                 } else {
                   return MaterialApp.router(
+                    debugShowCheckedModeBanner: false,
                     routerConfig: GoRouter(
                       initialLocation: initialRoute,
                       routes: routes,
@@ -39,11 +44,13 @@ class AppScaffoldLoginFeature extends AppScaffoldFeatureDefinition {
                 }
               },
               error: (error, stacktrace) => const MaterialApp(
+                debugShowCheckedModeBanner: false,
                 home: PlaceholderPage(
                   title: 'An error occurred',
                 ),
               ),
               loading: () => const MaterialApp(
+                debugShowCheckedModeBanner: false,
                 home: Scaffold(
                   body: Center(
                     child: CircularProgressIndicator(

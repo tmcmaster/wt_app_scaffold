@@ -43,10 +43,14 @@ class AppScaffoldPlatformFeature extends AppScaffoldFeatureDefinition {
             return childFeature.contextBuilder(newContext);
           },
           widgetBuilder: (context, ref) {
-            try {
-              onReady?.call(context, ref);
-            } catch (error) {
-              rethrow;
+            log.d('Application has been configured and is ready to be built');
+            if (onReady != null) {
+              log.d('Running onReady function.');
+              try {
+                onReady.call(context, ref);
+              } catch (error) {
+                rethrow;
+              }
             }
             return _DevicePreviewWrapper(
               virtualSize: virtualSize,

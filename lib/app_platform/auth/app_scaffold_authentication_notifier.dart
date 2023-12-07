@@ -15,7 +15,7 @@ class AppScaffoldAuthenticationNotifier
   @override
   Future<void> signInWithEmail(String email, String password) async {
     log.d('Signing in user');
-    state = AppScaffoldUser(
+    state = const AppScaffoldUser(
       id: '',
       firstName: 'Dev',
       lastName: 'Five',
@@ -27,13 +27,7 @@ class AppScaffoldAuthenticationNotifier
   @override
   Future<void> signOut() async {
     log.d('Signing out user');
-    state = AppScaffoldUser(
-      id: '',
-      firstName: 'Dev',
-      lastName: 'Five',
-      authenticated: false,
-      email: '',
-    );
+    state = AppScaffoldUser.empty();
   }
 
   @override
