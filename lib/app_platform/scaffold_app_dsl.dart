@@ -22,6 +22,7 @@ Future<void> runMyApp(
   List<ProviderObserver>? includeObservers,
   List<Override>? includeOverrides,
   Widget? splashWidget,
+  List<AlwaysAliveProviderBase> preloadProviders = const [],
 }) async {
   final platformDefinition = AppScaffoldPlatformFeature(
     featureDefinition,
@@ -50,6 +51,9 @@ Future<void> runMyApp(
             ],
             child: Consumer(
               builder: (context, ref, _) {
+                for (final provider in preloadProviders) {
+                  ref.read(provider);
+                }
                 return platformDefinition.widgetBuilder(context, ref);
               },
             ),
