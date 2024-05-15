@@ -45,7 +45,7 @@ dependencies:
   intl: ^0.18.1
   json_annotation: ^4.8.1
   logger: ^1.4.0
-  package_info_plus: ^5.0.1
+  package_info_plus: ^8.0.0
   path_provider: ^2.1.1
   webview_flutter: ^4.4.2
   webview_flutter_android: ^3.12.1
@@ -70,5 +70,11 @@ dev_dependencies:
   json_serializable:
 
 #dependency_overrides:
+#  wt_action_button:
+#    path: ../wt_action_button
 #  wt_logging:
 #    path: ../wt_logging
+#  wt_models:
+#    path: ../wt_models
+#  wt_settings:
+#    path: ../wt_settings
