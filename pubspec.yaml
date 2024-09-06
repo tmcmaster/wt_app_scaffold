@@ -44,7 +44,7 @@ dependencies:
   grouped_list: ^5.1.2
   intl: ^0.18.1
   json_annotation: ^4.8.1
-  logger: ^1.4.0
+  logger: ^2.4.0
   package_info_plus: ^8.0.0
   path_provider: ^2.1.1
   webview_flutter: ^4.4.2

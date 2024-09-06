@@ -37,3 +37,5 @@ hold
 firebase_options.dart
 .flutter-plugins
 .flutter-plugins-dependencies
+
+pubspec.lock
