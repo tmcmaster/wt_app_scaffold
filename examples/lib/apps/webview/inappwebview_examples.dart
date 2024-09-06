@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
                 if (url.scheme.isEmpty) {
                   url = Uri.parse('https://www.google.com/search?q=$value');
                 }
-                webViewController?.loadUrl(urlRequest: URLRequest(url: url));
+                webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri.uri(url)));
               },
             ),
             Expanded(
@@ -98,7 +98,7 @@ class _MyAppState extends State<MyApp> {
                   InAppWebView(
                     key: webViewKey,
                     initialUrlRequest:
-                        URLRequest(url: Uri.parse('https://inappwebview.dev/')),
+                        URLRequest(url: WebUri.uri(Uri.parse('https://inappwebview.dev/'))),
                     initialOptions: options,
                     pullToRefreshController: pullToRefreshController,
                     onWebViewCreated: (controller) {

@@ -28,7 +28,7 @@ dependencies:
   firebase_ui_auth: ^1.6.0
   flutter:
     sdk: flutter
-  flutter_inappwebview: ^5.8.0
+  flutter_inappwebview: ^6.0.0
   flutter_riverpod: ^2.3.6
   font_awesome_flutter: ^10.5.0
   form_builder_validators: ^9.0.0

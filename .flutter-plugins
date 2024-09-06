@@ -1,6 +1,10 @@
 # This is a generated file; do not edit or check into version control.
 device_info_plus=/Users/timmcmaster/.pub-cache/hosted/pub.dev/device_info_plus-9.1.2/
-flutter_inappwebview=/Users/timmcmaster/.pub-cache/hosted/pub.dev/flutter_inappwebview-5.8.0/
+flutter_inappwebview=/Users/timmcmaster/.pub-cache/hosted/pub.dev/flutter_inappwebview-6.0.0/
+flutter_inappwebview_android=/Users/timmcmaster/.pub-cache/hosted/pub.dev/flutter_inappwebview_android-1.0.13/
+flutter_inappwebview_ios=/Users/timmcmaster/.pub-cache/hosted/pub.dev/flutter_inappwebview_ios-1.0.13/
+flutter_inappwebview_macos=/Users/timmcmaster/.pub-cache/hosted/pub.dev/flutter_inappwebview_macos-1.0.11/
+flutter_inappwebview_web=/Users/timmcmaster/.pub-cache/hosted/pub.dev/flutter_inappwebview_web-1.0.8/
 flutter_native_splash=/Users/timmcmaster/.pub-cache/hosted/pub.dev/flutter_native_splash-2.4.0/
 package_info_plus=/Users/timmcmaster/.pub-cache/hosted/pub.dev/package_info_plus-8.0.2/
 path_provider=/Users/timmcmaster/.pub-cache/hosted/pub.dev/path_provider-2.1.4/
