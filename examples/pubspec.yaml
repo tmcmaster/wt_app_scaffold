@@ -21,53 +21,51 @@ scripts:
       fix: (cd macos; rm Podfile.lock; pod install --repo-update)
 
 dependencies:
-  cupertino_icons: ^1.0.5
-  firebase_auth: ^5.2.0
-  firebase_core: ^3.4.0
-  firebase_database: ^11.1.1
-  firebase_ui_auth: ^1.15.0
+  cupertino_icons:
+  firebase_auth:
+  firebase_core:
+  firebase_database:
+  firebase_ui_auth:
   flutter:
     sdk: flutter
-  flutter_inappwebview: ^6.0.0
-  flutter_riverpod: ^2.5.1
-  font_awesome_flutter: ^10.7.0
-  form_builder_validators: ^11.0.0
-  freezed: ^2.5.7
-  freezed_annotation: ^2.4.4
+  flutter_inappwebview:
+  flutter_riverpod:
+  font_awesome_flutter:
+  form_builder_validators:
+  freezed:
+  freezed_annotation:
   go_router:
-  path_provider: ^2.1.4
-  url_launcher: ^6.2.1
-  webview_flutter: ^4.4.2
-  webview_flutter_android: ^3.12.1
-#  webview_flutter_platform_interface: ^2.6.0
-#  webview_flutter_web: ^0.2.2+3
-  webview_flutter_wkwebview: ^3.9.4
+  path_provider:
+  url_launcher:
+  webview_flutter:
+  webview_flutter_android:
+#  webview_flutter_platform_interface:
+#  webview_flutter_web:
+  webview_flutter_wkwebview:
   wt_action_button:
-    git: https://github.com/tmcmaster/wt_action_button.git
+    git: git@github.com:tmcmaster/wt_action_button.git
   wt_app_scaffold:
-    git: https://github.com/tmcmaster/wt_app_scaffold.git
-  wt_firebase_listview:
-    git: https://github.com/tmcmaster/wt_firebase_listview.git
+    git: git@github.com:tmcmaster/wt_app_scaffold.git
   wt_firepod:
-    git: https://github.com/tmcmaster/wt_firepod.git
+    git: git@github.com:tmcmaster/wt_firepod.git
   wt_logging:
-    git: https://github.com/tmcmaster/wt_logging.git
+    git: git@github.com:tmcmaster/wt_logging.git
   wt_models:
-    git: https://github.com/tmcmaster/wt_models.git
+    git: git@github.com:tmcmaster/wt_models.git
   wt_settings:
-    git: https://github.com/tmcmaster/wt_settings.git
+    git: git@github.com:tmcmaster/wt_settings.git
 
 dev_dependencies:
-  build_runner: ^2.4.6
-  flutter_launcher_icons: ^0.9.3
-  flutter_native_splash: ^2.2.4
+  build_runner:
+  flutter_launcher_icons:
+  flutter_native_splash:
   flutter_test:
     sdk: flutter
-  json_serializable: ^6.7.1
+  json_serializable:
 
-#dependency_overrides:
-#  wt_app_scaffold:
-#    path: ..
+dependency_overrides:
+  wt_app_scaffold:
+    path: ..
 #  wt_firepod:
 #    path: ../../../libraries/wt_firepod
 #  wt_logging:
