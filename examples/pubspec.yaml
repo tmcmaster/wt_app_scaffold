@@ -48,6 +48,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_app_scaffold.git
   wt_firepod:
     git: git@github.com:tmcmaster/wt_firepod.git
+  wt_firepod_list_view:
+    git: git@github.com:tmcmaster/wt_firepod_list_view.git
   wt_logging:
     git: git@github.com:tmcmaster/wt_logging.git
   wt_models:
