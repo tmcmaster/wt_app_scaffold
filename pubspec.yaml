@@ -28,7 +28,10 @@ dependencies:
   color_blindness: 
   curved_navigation_bar: 
   device_info_plus: 
-  device_preview: 
+  device_preview:
+    git:
+      url: git@github.com:tmcmaster/device_preview.git
+      path: device_preview
   draggable_bottom_sheet: 
   flutter:
     sdk: flutter
@@ -70,6 +73,8 @@ dev_dependencies:
   json_serializable:
 
 #dependency_overrides:
+#  device_preview:
+#    path: ../../fork/device_preview/device_preview
 #  wt_action_button:
 #    path: ../wt_action_button
 #  wt_logging:

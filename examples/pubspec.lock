@@ -479,6 +479,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
+  firebase_ui_database:
+    dependency: transitive
+    description:
+      name: firebase_ui_database
+      sha256: bbe6a6b03ecb89aed9ccd182c0258935e2d26440e3bfab1bb48e0bb404e91282
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.4"
   firebase_ui_localizations:
     dependency: transitive
     description:
@@ -1569,6 +1577,15 @@ packages:
       url: "git@github.com:tmcmaster/wt_firepod.git"
     source: git
     version: "1.0.0+1"
+  wt_firepod_list_view:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: a800e973296a39d858f64ea1216b60f0049de9ce
+      url: "git@github.com:tmcmaster/wt_firepod_list_view.git"
+    source: git
+    version: "0.0.1"
   wt_logging:
     dependency: "direct main"
     description:
