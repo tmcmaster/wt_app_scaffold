@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/landing_page.dart';
-import 'package:wt_app_scaffold_examples/apps/widgets/test_web_view.dart';
+// import 'package:wt_app_scaffold_examples/apps/widgets/test_web_view.dart';
 
 mixin ScaffoldTestApp {
   static final details = AppDetails(
@@ -30,13 +30,13 @@ mixin ScaffoldTestApp {
         builder: (_) => const LandingPage(),
         drawerBuilder: (context) => Container(),
       ),
-      PageDefinition(
-        title: 'Another Page',
-        icon: FontAwesomeIcons.clipboard,
-        primary: true,
-        scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (_) => const TestWebView(),
-      ),
+      // PageDefinition(
+      //   title: 'Another Page',
+      //   icon: FontAwesomeIcons.clipboard,
+      //   primary: true,
+      //   scaffoldType: ScaffoldPageType.transparentCard,
+      //   builder: (_) => const TestWebView(),
+      // ),
     ],
   );
 

@@ -35,7 +35,8 @@ dependencies:
   draggable_bottom_sheet: 
   flutter:
     sdk: flutter
-  flutter_inappwebview: 
+#  flutter_inappwebview: ^6.0.0
+#  flutter_inappwebview_macos: ^1.0.11
 #  flutter_localizations:
 #    sdk: flutter
   flutter_riverpod: 
@@ -50,10 +51,10 @@ dependencies:
   logger: 
   package_info_plus: 
   path_provider: 
-  webview_flutter: 
-  webview_flutter_android: 
-  webview_flutter_wkwebview: 
-  webview_universal: 
+#  webview_flutter:
+#  webview_flutter_android:
+#  webview_flutter_wkwebview:
+#  webview_universal:
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
   wt_logging:

@@ -1,7 +1,7 @@
 name: wt_app_scaffold_examples
 description: Show examples of using the wt_app_scaffold package.
 publish_to: none
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -28,7 +28,7 @@ dependencies:
   firebase_ui_auth:
   flutter:
     sdk: flutter
-  flutter_inappwebview:
+#  flutter_inappwebview:
   flutter_riverpod:
   font_awesome_flutter:
   form_builder_validators:
@@ -37,11 +37,11 @@ dependencies:
   go_router:
   path_provider:
   url_launcher:
-  webview_flutter:
-  webview_flutter_android:
+#  webview_flutter:
+#  webview_flutter_android:
 #  webview_flutter_platform_interface:
 #  webview_flutter_web:
-  webview_flutter_wkwebview:
+#  webview_flutter_wkwebview:
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
   wt_app_scaffold:
