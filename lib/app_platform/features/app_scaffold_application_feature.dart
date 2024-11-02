@@ -29,18 +29,14 @@ class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
               ),
               AppScaffoldProviders.appDetails: AppScaffoldOverrideDefinition(
                 value: appDetails,
-                override: AppScaffoldProviders.appDetails
-                    .overrideWith((ref) => appDetails),
+                override: AppScaffoldProviders.appDetails.overrideWith((ref) => appDetails),
               ),
               AppScaffoldProviders.appStyles: AppScaffoldOverrideDefinition(
                 value: appDefinition,
-                override:
-                    AppScaffoldProviders.appStyles.overrideWith(appStyles),
+                override: AppScaffoldProviders.appStyles.overrideWith(appStyles),
               ),
             };
-            return childFeature == null
-                ? Future.value(newContext)
-                : childFeature.contextBuilder(newContext);
+            return childFeature == null ? Future.value(newContext) : childFeature.contextBuilder(newContext);
           },
           widgetBuilder: (context, ref) {
             return const AppScaffoldApplicationContainer();
@@ -50,8 +46,7 @@ class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
 }
 
 class AppScaffoldApplicationContainer extends ConsumerWidget {
-  static final log =
-      logger(AppScaffoldApplicationContainer, level: Level.debug);
+  static final log = logger(AppScaffoldApplicationContainer, level: Level.warning);
 
   const AppScaffoldApplicationContainer({
     super.key,

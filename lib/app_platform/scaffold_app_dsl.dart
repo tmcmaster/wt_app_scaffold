@@ -14,6 +14,7 @@ import 'package:wt_app_scaffold/models/app_styles.dart';
 Future<void> runMyApp(
   AppScaffoldFeatureDefinition featureDefinition, {
   bool devicePreview = false,
+  double? devicePreviewMinimumWidth = 500,
   double? virtualSize,
   bool enableProviderMonitoring = false,
   bool enableErrorMonitoring = false,
@@ -27,6 +28,7 @@ Future<void> runMyApp(
   final platformDefinition = AppScaffoldPlatformFeature(
     featureDefinition,
     devicePreview: devicePreview,
+    devicePreviewMinimumWidth: devicePreviewMinimumWidth,
     onReady: onReady,
     enableErrorMonitoring: enableErrorMonitoring,
     setApplicationLogLevel: setApplicationLogLevel,
@@ -37,8 +39,7 @@ Future<void> runMyApp(
     FutureBuilder(
       future: platformDefinition.contextBuilder({}),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done &&
-            snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
           final contextMap = snapshot.data!;
           return ProviderScope(
             overrides: [

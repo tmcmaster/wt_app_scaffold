@@ -1,5 +1,5 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
@@ -7,11 +7,12 @@ import 'package:wt_logging/wt_logging.dart';
 
 // global application settings like error handling, monitoring and logging levels
 class AppScaffoldPlatformFeature extends AppScaffoldFeatureDefinition {
-  static final log = logger(AppScaffoldPlatformFeature, level: Level.debug);
+  static final log = logger(AppScaffoldPlatformFeature, level: Level.warning);
 
   AppScaffoldPlatformFeature(
     AppScaffoldFeatureDefinition childFeature, {
     required bool devicePreview,
+    double? devicePreviewMinimumWidth,
     void Function(BuildContext, WidgetRef)? onReady,
     double? virtualSize,
     required bool enableErrorMonitoring,
@@ -55,6 +56,7 @@ class AppScaffoldPlatformFeature extends AppScaffoldFeatureDefinition {
             return _DevicePreviewWrapper(
               virtualSize: virtualSize,
               devicePreview: devicePreview,
+              devicePreviewMinimumWidth: devicePreviewMinimumWidth,
               child: childFeature.widgetBuilder(context, ref),
             );
           },
@@ -66,8 +68,10 @@ class _DevicePreviewWrapper extends StatelessWidget {
   final Widget child;
   final bool devicePreview;
   final double? virtualSize;
+  final double? devicePreviewMinimumWidth;
   const _DevicePreviewWrapper({
     required this.devicePreview,
+    this.devicePreviewMinimumWidth,
     required this.virtualSize,
     required this.child,
   });
@@ -77,9 +81,10 @@ class _DevicePreviewWrapper extends StatelessWidget {
     return devicePreview
         ? LayoutBuilder(
             builder: (context, constraints) {
-              return constraints.maxWidth > 500
+              return devicePreviewMinimumWidth == null || constraints.maxWidth > devicePreviewMinimumWidth!
                   ? DevicePreview(
                       isToolbarVisible: false,
+                      backgroundColor: Colors.black,
                       builder: (_) => SafeArea(
                         child: _VirtualSizeWrapper(
                           virtualSize: virtualSize,

@@ -9,7 +9,7 @@ import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldLoginFeature extends AppScaffoldFeatureDefinition {
-  static final log = logger(AppScaffoldLoginFeature, level: Level.debug);
+  static final log = logger(AppScaffoldLoginFeature, level: Level.warning);
 
   final Widget? splashWidget;
 

@@ -6,7 +6,7 @@ import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldMaterialApp extends ConsumerWidget {
-  static final log = logger(AppScaffoldMaterialApp, level: Level.debug);
+  static final log = logger(AppScaffoldMaterialApp, level: Level.warning);
 
   final Map<String, WidgetBuilder> routes;
   final String initialRoute;
@@ -36,8 +36,7 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
     if (routes.isEmpty) {
       throw Exception('The route map needs to have at least 1 entry.');
     }
-    final calculatedInitialRoute =
-        initialRoute ?? (routes.containsKey('/') ? '/' : routes.keys.first);
+    final calculatedInitialRoute = initialRoute ?? (routes.containsKey('/') ? '/' : routes.keys.first);
     return AppScaffoldMaterialApp._(
       routes: routes,
       initialRoute: calculatedInitialRoute,
@@ -60,11 +59,9 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
     final snackBarKey = ref.watch(AppScaffoldProviders.snackBarKey);
     final navigatorKey = ref.watch(AppScaffoldProviders.navigatorKey);
 
-    final themeMode =
-        appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
+    final themeMode = appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
     final locale = ref.watch(LocaleStore.provider);
-    final locales =
-        appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
+    final locales = appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
 
     return MaterialApp(
       debugShowCheckedModeBanner: debugMode,
