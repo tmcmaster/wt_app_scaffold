@@ -1,6 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_application_feature.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_login_feature.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_plain_app_feature.dart';
@@ -9,6 +9,7 @@ import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definiti
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_provider_monitor.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 // handles the splash screen and provider scope
 Future<void> runMyApp(
@@ -25,6 +26,19 @@ Future<void> runMyApp(
   Widget? splashWidget,
   List<AlwaysAliveProviderBase> preloadProviders = const [],
 }) async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final log = logger('runMyApp', level: setApplicationLogLevel);
+
+  if (kReleaseMode) {
+    log.i('Logging to log to a file.');
+    await LogToFile.initialise();
+  } else if (kDebugMode) {
+    log.i('Logging to the console.');
+  } else if (kProfileMode) {
+    log.i('Logging to the console.');
+  }
+
   final platformDefinition = AppScaffoldPlatformFeature(
     featureDefinition,
     devicePreview: devicePreview,
