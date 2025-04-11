@@ -63,7 +63,9 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
     final locale = ref.watch(LocaleStore.provider);
     final locales = appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
 
+    log.d('===> ROUTES MaterialApp');
     return MaterialApp(
+      title: appDefinition.appTitle,
       debugShowCheckedModeBanner: debugMode,
       scaffoldMessengerKey: snackBarKey,
       navigatorKey: navigatorKey,

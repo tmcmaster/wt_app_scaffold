@@ -38,6 +38,11 @@ class AppScaffoldPlatformFeature extends AppScaffoldFeatureDefinition {
                 );
               };
             }
+
+            // if (enableLogToFile) {
+            //    This logging should only be the UserLog logs
+            // }
+
             final newContext = {
               ...contextMap,
             };

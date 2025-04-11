@@ -10,9 +10,7 @@ class UserLogPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final backgroundColor = AppScaffoldFeatures.isGoRouterMenuApp(context)
-        ? Colors.transparent
-        : null;
+    final backgroundColor = AppScaffoldFeatures.isGoRouterMenuApp(context) ? Colors.transparent : null;
 
     return Scaffold(
       backgroundColor: backgroundColor,

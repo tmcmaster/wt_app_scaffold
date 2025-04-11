@@ -9,7 +9,7 @@ import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldLoginFeature extends AppScaffoldFeatureDefinition {
-  static final log = logger(AppScaffoldLoginFeature, level: Level.warning);
+  static final log = logger(AppScaffoldLoginFeature, level: Level.debug);
 
   final Widget? splashWidget;
 
@@ -34,7 +34,9 @@ class AppScaffoldLoginFeature extends AppScaffoldFeatureDefinition {
                 if (user.authenticated) {
                   return childFeature.widgetBuilder(context, ref);
                 } else {
+                  log.d('===> AUTH DATA MaterialApp');
                   return MaterialApp.router(
+                    title: 'Login Feature',
                     debugShowCheckedModeBanner: false,
                     routerConfig: GoRouter(
                       initialLocation: initialRoute,
@@ -43,22 +45,30 @@ class AppScaffoldLoginFeature extends AppScaffoldFeatureDefinition {
                   );
                 }
               },
-              error: (error, stacktrace) => const MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: PlaceholderPage(
-                  title: 'An error occurred',
-                ),
-              ),
-              loading: () => const MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.green,
+              error: (error, stacktrace) {
+                log.d('===> AUTH ERROR MaterialApp');
+                return const MaterialApp(
+                  title: 'Login Feature Error',
+                  debugShowCheckedModeBanner: false,
+                  home: PlaceholderPage(
+                    title: 'An error occurred',
+                  ),
+                );
+              },
+              loading: () {
+                log.d('===> AUTH LOADING MaterialApp');
+                return const MaterialApp(
+                  title: 'Login Feature Loading',
+                  debugShowCheckedModeBanner: false,
+                  home: Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             );
           },
           childFeature: childFeature,

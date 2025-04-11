@@ -1,5 +1,4 @@
 import 'package:color_blindness/color_blindness.dart';
-import 'package:color_blindness/color_blindness_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -81,9 +80,8 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
   ConsumerState<GoRouterMenuApp> createState() => _GoRouterAppState();
 
   static String _createInitialRoute(AppDefinition appDefinition) {
-    final initialRoutePage =
-        appDefinition.pages.where((page) => page.landing).firstOrNull ??
-            appDefinition.pages.where((page) => page.primary).firstOrNull;
+    final initialRoutePage = appDefinition.pages.where((page) => page.landing).firstOrNull ??
+        appDefinition.pages.where((page) => page.primary).firstOrNull;
     if (initialRoutePage != null) {
       // return BottomMenuBar.createRouteName(initialRoutePage);
       return initialRoutePage.route;
@@ -111,15 +109,14 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
         ? ref.watch(ApplicationSettings.colorScheme.value)
         : widget.appDefinition.colorScheme!;
     log.d('Seed Color: $seedColor');
-    final themeMode = widget.appDefinition.themeMode ??
-        ref.watch(ApplicationSettings.theme.value);
+    final themeMode = widget.appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
     final colorBlindness = ref.watch(ApplicationSettings.colorBlindness.value);
     final locale = ref.watch(LocaleStore.provider);
-    final locales =
-        appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
+    final locales = appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
 
     final snackBarKey = ref.watch(AppScaffoldProviders.snackBarKey);
 
+    log.d('===> BUILD_HOLD MaterialApp');
     return MaterialApp.router(
       title: appDefinition.appTitle,
       debugShowCheckedModeBanner: debugMode,
@@ -151,8 +148,7 @@ class _GoRouterAppState extends ConsumerState<GoRouterMenuApp> {
 
 class _PageWrapper extends ConsumerWidget {
   static final scaffoldBuilders = <ScaffoldPageType, AppScaffoldPageBuilder>{
-    ScaffoldPageType.plain: (pageContext) =>
-        pageContext.page.builder(pageContext),
+    ScaffoldPageType.plain: (pageContext) => pageContext.page.builder(pageContext),
     ScaffoldPageType.transparentCard: (pageContext) => PageDefinitionScaffold(
           pageDefinition: pageContext.page,
           state: pageContext.state,
@@ -171,11 +167,9 @@ class _PageWrapper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final MediaQueryData data = MediaQuery.of(context);
-    final scaleFactor =
-        ref.watch(ApplicationSettings.textScaleFactor.value).value;
+    final scaleFactor = ref.watch(ApplicationSettings.textScaleFactor.value).value;
     final calculatedScaffoldPageType = page.scaffoldType ?? scaffoldPageType;
-    final AppScaffoldPageBuilder pageBuilder =
-        scaffoldBuilders[calculatedScaffoldPageType] ?? page.builder;
+    final AppScaffoldPageBuilder pageBuilder = scaffoldBuilders[calculatedScaffoldPageType] ?? page.builder;
     return SafeArea(
       child: MediaQuery(
         data: data.copyWith(

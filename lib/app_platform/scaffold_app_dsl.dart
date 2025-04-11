@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_application_feature.dart';
@@ -10,6 +9,8 @@ import 'package:wt_app_scaffold/app_platform/util/app_scaffold_provider_monitor.
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_logging/wt_logging.dart';
+
+bool _hasRun = false;
 
 // handles the splash screen and provider scope
 Future<void> runMyApp(
@@ -24,20 +25,29 @@ Future<void> runMyApp(
   List<ProviderObserver>? includeObservers,
   List<Override>? includeOverrides,
   Widget? splashWidget,
-  List<AlwaysAliveProviderBase> preloadProviders = const [],
+  List<ProviderBase> preloadProviders = const [],
 }) async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  final log = logger('runMyApp', level: setApplicationLogLevel);
-
-  if (kReleaseMode) {
-    log.i('Logging to log to a file.');
-    await LogToFile.initialise();
-  } else if (kDebugMode) {
-    log.i('Logging to the console.');
-  } else if (kProfileMode) {
-    log.i('Logging to the console.');
+  // ensure the app only run once.
+  if (_hasRun) {
+    debugPrint('!!!! Application has already been started !!!!');
+    return;
+  } else {
+    debugPrint('!!!! Starting the Application !!!!');
+    _hasRun = true;
   }
+
+  WidgetsFlutterBinding.ensureInitialized();
+  final log = logger('RunMyApp', level: Level.debug);
+
+  // if (kReleaseMode) {
+  //   await LogToFile.initialise();
+  //   LogToFile.log.i('Logging to file.');
+  // } else if (kDebugMode) {
+  //   log.i('Logging to the console.');
+  //   LogToFile.log.i('Logging to file.');
+  // } else if (kProfileMode) {
+  //   LogToFile.log.i('Logging to console.');
+  // }
 
   final platformDefinition = AppScaffoldPlatformFeature(
     featureDefinition,
@@ -74,7 +84,10 @@ Future<void> runMyApp(
             ),
           );
         } else {
+          log.d('===> PROGRESS MaterialApp');
+          final title = snapshot.data == null ? 'Progress Indicator' : snapshot.data!.runtimeType.toString();
           return MaterialApp(
+            title: 'Login Feature : $title',
             debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(
@@ -87,6 +100,16 @@ Future<void> runMyApp(
     ),
   );
 }
+
+// AppScaffoldApplicationFeature? findAppScaffoldApplicationFeature(AppScaffoldFeatureDefinition featureDefinition) {
+//   if (featureDefinition is AppScaffoldApplicationFeature) {
+//     return featureDefinition;
+//   } else if (featureDefinition.childFeature != null) {
+//     return findAppScaffoldApplicationFeature(featureDefinition.childFeature!);
+//   } else {
+//     return null;
+//   }
+// }
 
 const andAppScaffold = withAppScaffold;
 

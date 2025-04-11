@@ -1,5 +1,4 @@
 import 'package:color_blindness/color_blindness.dart';
-import 'package:color_blindness/color_blindness_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,15 +21,13 @@ class AppScaffoldGoRouterApp extends ConsumerWidget {
         ? ref.watch(ApplicationSettings.colorScheme.value)
         : appDefinition.colorScheme!;
     log.d('Seed Color: $seedColor');
-    final themeMode =
-        appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
+    final themeMode = appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
     final colorBlindness = ref.watch(ApplicationSettings.colorBlindness.value);
     final locale = ref.watch(LocaleStore.provider);
-    final locales =
-        appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
+    final locales = appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
 
     final snackBarKey = ref.watch(AppScaffoldProviders.snackBarKey);
-
+    log.d('===> BUILD MaterialApp');
     return MaterialApp.router(
       title: appDefinition.appTitle,
       debugShowCheckedModeBanner: debugMode,

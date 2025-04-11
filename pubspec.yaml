@@ -73,13 +73,13 @@ dev_dependencies:
   freezed:
   json_serializable:
 
-#dependency_overrides:
+dependency_overrides:
 #  device_preview:
 #    path: ../../fork/device_preview/device_preview
 #  wt_action_button:
 #    path: ../wt_action_button
-#  wt_logging:
-#    path: ../wt_logging
+  wt_logging:
+    path: ../wt_logging
 #  wt_models:
 #    path: ../wt_models
 #  wt_settings:
