@@ -4,21 +4,8 @@ publish_to: none
 version: 1.0.1+2
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-
-# Scripts to be run with rps
-scripts:
-  init: flutter pub get
-  clean: flutter clean
-  refresh: flutter clean; flutter pub get
-  test: flutter test
-  check: dart analyze
-  fix: dart fix --dry-run
-  freezed:
-    build: flutter pub run build_runner build --delete-conflicting-outputs
-  macos:
-    pod:
-      fix: (cd macos; rm Podfile.lock; pod install --repo-update)
+  sdk: '>=3.1.0 <4.0.0'
+  flutter: '>=3.29.2'
 
 dependencies:
   cupertino_icons:

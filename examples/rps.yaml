@@ -1,0 +1,14 @@
+scripts:
+  init: flutter pub get
+  clean: flutter clean
+  refresh: flutter clean; flutter pub get
+  update: flutter clean; rm pubspec.lock; flutter pub get; dart pub update
+  test: flutter test
+  check: dart analyze
+  fix: dart fix --dry-run
+  freezed:
+    build: flutter pub run build_runner build --delete-conflicting-outputs
+  macos:
+    refresh: (cd ..; rps refresh); rps macos fix; flutter run -d MacOS
+    fix: (cd macos; rm Podfile.lock; gem pristine ffi --version 1.15.5; pod install --repo-update)
+    xcode: open  macos/Runner.xcworkspace

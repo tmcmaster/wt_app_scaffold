@@ -12,7 +12,7 @@ part of 'app_scaffold_user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AppScaffoldUser _$AppScaffoldUserFromJson(Map<String, dynamic> json) {
   return _AppScaffoldUser.fromJson(json);
@@ -26,8 +26,12 @@ mixin _$AppScaffoldUser {
   String get email => throw _privateConstructorUsedError;
   bool get authenticated => throw _privateConstructorUsedError;
 
+  /// Serializes this AppScaffoldUser to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppScaffoldUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppScaffoldUserCopyWith<AppScaffoldUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$AppScaffoldUserCopyWithImpl<$Res, $Val extends AppScaffoldUser>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppScaffoldUser
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$AppScaffoldUserImplCopyWithImpl<$Res>
       _$AppScaffoldUserImpl _value, $Res Function(_$AppScaffoldUserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppScaffoldUser
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -179,7 +187,7 @@ class _$AppScaffoldUserImpl extends _AppScaffoldUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppScaffoldUserImpl &&
@@ -193,12 +201,14 @@ class _$AppScaffoldUserImpl extends _AppScaffoldUser {
                 other.authenticated == authenticated));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, firstName, lastName, email, authenticated);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppScaffoldUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppScaffoldUserImplCopyWith<_$AppScaffoldUserImpl> get copyWith =>
@@ -235,8 +245,11 @@ abstract class _AppScaffoldUser extends AppScaffoldUser {
   String get email;
   @override
   bool get authenticated;
+
+  /// Create a copy of AppScaffoldUser
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppScaffoldUserImplCopyWith<_$AppScaffoldUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
