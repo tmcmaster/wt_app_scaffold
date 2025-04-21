@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class AppScaffoldProviderMonitor
-    with ChangeNotifier
-    implements ProviderObserver {
+class AppScaffoldProviderMonitor with ChangeNotifier implements ProviderObserver {
   static final log = logger(AppScaffoldProviderMonitor, level: Logger.level);
 
   static final instance = AppScaffoldProviderMonitor._();
@@ -74,7 +72,7 @@ class AppScaffoldProviderMonitor
     Object? newValue,
     ProviderContainer container,
   ) {
-    log.v('ProviderDebugger : didUpdateProvider : ${provider.name}');
+    log.t('ProviderDebugger : didUpdateProvider : ${provider.name}');
     if (provider.name != null) {
       updates[provider.name!] = (updates[provider.name!] ?? 0) + 1;
       values[provider.name!] = newValue;

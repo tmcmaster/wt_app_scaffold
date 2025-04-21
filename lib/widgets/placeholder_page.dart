@@ -24,6 +24,14 @@ class PlaceholderPage extends StatelessWidget {
     this.children = const [],
   });
 
+  factory PlaceholderPage.transparent({
+    required String title,
+  }) =>
+      PlaceholderPage(
+        title: title,
+        backgroundColor: Colors.transparent,
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +40,7 @@ class PlaceholderPage extends StatelessWidget {
           ? AppBar(
               backgroundColor: Theme.of(context).primaryColor,
               elevation: 0,
-              leading: dismissAction == null && menuAction == null
-                  ? null
-                  : _createIconButton(context),
+              leading: dismissAction == null && menuAction == null ? null : _createIconButton(context),
               title: Text(title),
             )
           : null,

@@ -66,7 +66,7 @@ class HiddenDrawerMenu extends ConsumerWidget {
 
   Widget buildDrawerActions(ActionButtonDefinition logoutAction) => Container(
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.2),
+          color: Colors.white.withValues(alpha: 0.2),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),

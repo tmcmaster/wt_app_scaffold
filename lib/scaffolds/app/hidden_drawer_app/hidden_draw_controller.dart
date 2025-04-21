@@ -3,10 +3,8 @@ import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 
-class HiddenDrawPageController extends StateNotifier<PageDefinition>
-    with AppScaffoldRouter {
-  static final page =
-      StateNotifierProvider<HiddenDrawPageController, PageDefinition>(
+class HiddenDrawPageController extends StateNotifier<PageDefinition> with AppScaffoldRouter {
+  static final page = StateNotifierProvider<HiddenDrawPageController, PageDefinition>(
     name: 'HiddenDrawerApp.router',
     (ref) => HiddenDrawPageController(ref),
   );
@@ -15,12 +13,15 @@ class HiddenDrawPageController extends StateNotifier<PageDefinition>
 
   static late Map<String, PageDefinition> _pageIndex;
 
-  HiddenDrawPageController(Ref ref)
-      : super(ref.read(AppScaffoldProviders.appDefinition).pages.first) {
+  HiddenDrawPageController(Ref ref) : super(getLandingPage(ref)) {
     _pageIndex = {
-      for (final page in ref.read(AppScaffoldProviders.appDefinition).pages)
-        page.route: page,
+      for (final page in ref.read(AppScaffoldProviders.appDefinition).pages) page.route: page,
     };
+  }
+
+  static PageDefinition getLandingPage(Ref ref) {
+    final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
+    return appDefinition.pages.firstWhere((page) => page.landing, orElse: () => appDefinition.pages.first);
   }
 
   @override

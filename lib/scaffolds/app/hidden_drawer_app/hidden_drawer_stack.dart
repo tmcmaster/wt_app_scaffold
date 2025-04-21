@@ -42,8 +42,7 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
         .map((e) => e.length)
         .fold(0, (largest, size) => size > largest ? size : largest);
 
-    offsetWhenOpenX =
-        140.0 + HiddenDrawerConfig.menuFontSize * 0.55 * maxLength;
+    offsetWhenOpenX = 140.0 + HiddenDrawerConfig.menuFontSize * 0.55 * maxLength;
     offsetWhenOpenY = 150.0;
 
     closeDrawer();
@@ -73,8 +72,7 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
     final colorScheme = Theme.of(context).colorScheme;
     final newPage = ref.watch(HiddenDrawPageController.page);
     return Scaffold(
-      backgroundColor:
-          HSLColor.fromColor(colorScheme.primary).withLightness(0.1).toColor(),
+      backgroundColor: HSLColor.fromColor(colorScheme.primary).withLightness(0.1).toColor(),
       body: Stack(
         children: [
           buildHiddenDrawMenu(context),
@@ -104,16 +102,14 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
   Widget buildHiddenDrawerPage(PageDefinition page) {
     return PopScope(
       canPop: isDrawerOpen,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (didPop) {
           closeDrawer();
         }
       },
       child: GestureDetector(
         onTap: isDrawerOpen ? closeDrawer : null,
-        onHorizontalDragStart: widget.appDefinition.swipeEnabled
-            ? (details) => isDragging = true
-            : null,
+        onHorizontalDragStart: widget.appDefinition.swipeEnabled ? (details) => isDragging = true : null,
         onHorizontalDragUpdate: widget.appDefinition.swipeEnabled
             ? (details) {
                 if (!isDragging) return;
@@ -128,21 +124,19 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
             : null,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
-          transform: Matrix4.translationValues(xOffset, yOffset, 0)
-            ..scale(scaleFactor),
+          transform: Matrix4.translationValues(xOffset, yOffset, 0)..scale(scaleFactor),
           child: AbsorbPointer(
             absorbing: isDrawerOpen,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(isDrawerOpen ? 20 : 0),
               child: ColoredBox(
-                color: isDrawerOpen
-                    ? Colors.white12
-                    : Theme.of(context).primaryColor,
+                color: isDrawerOpen ? Colors.white12 : Theme.of(context).primaryColor,
                 child: HiddenDrawerOpener(
                   open: openDrawer,
                   child: HiddenPageBuilder(
                     includeAppBar: widget.appDefinition.includeAppBar,
                     menuAction: widget.appDefinition.menuAction,
+                    pageType: widget.appDefinition.scaffoldPageType,
                     pageDefinition: page,
                   ),
                 ),

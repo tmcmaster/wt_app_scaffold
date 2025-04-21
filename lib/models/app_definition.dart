@@ -7,7 +7,7 @@ import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 class AppDefinition {
   final String appTitle;
   final String appName;
-  final AlwaysAliveProviderBase<AppDetails>? appDetailsProvider;
+  final ProviderBase<AppDetails>? appDetailsProvider;
 
   final PageDefinition profilePage;
   final bool swipeEnabled;
@@ -46,7 +46,7 @@ class AppDefinition {
   factory AppDefinition.from({
     required String appTitle,
     required String appName,
-    AlwaysAliveProviderBase<AppDetails>? appDetailsProvider,
+    ProviderBase<AppDetails>? appDetailsProvider,
     PageDefinition? profilePage,
     required List<PageDefinition> pages,
     bool swipeEnabled = true,

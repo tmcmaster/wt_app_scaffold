@@ -12,20 +12,18 @@ import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/transpar
 class PageDefinitionScaffold extends ConsumerStatefulWidget {
   final PageDefinition pageDefinition;
   final GoRouterState? state;
+  final double maxCardWidth;
   const PageDefinitionScaffold({
     required this.pageDefinition,
     this.state,
+    this.maxCardWidth = 1200,
   });
 
   @override
-  ConsumerState<PageDefinitionScaffold> createState() =>
-      _PageDefinitionScaffoldState();
+  ConsumerState<PageDefinitionScaffold> createState() => _PageDefinitionScaffoldState();
 }
 
-class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
-    with TickerProviderStateMixin {
-  static const maxWidth = 800.0;
-
+class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold> with TickerProviderStateMixin {
   late TabController controller;
   int selected = 0;
 
@@ -64,114 +62,135 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(
-          centerTitle: widget.pageDefinition.centerTitle,
-          backgroundColor: primaryColor,
-          foregroundColor: onPrimaryColor,
-          titleTextStyle: TextStyle(
-            color: onPrimaryColor,
-            fontSize: 20,
-          ),
-          elevation: 0,
-          title: Text(widget.pageDefinition.title),
-          leading: widget.pageDefinition.drawerBuilder == null
-              ? null
-              : DrawerButton(
-                  style: ButtonStyle(
-                    iconColor: MaterialStateProperty.all(onPrimaryColor),
-                  ),
-                  onPressed: () {
-                    _scaffoldKey.currentState!.openDrawer();
-                  },
+        appBar: widget.pageDefinition.showAppBar
+            ? AppBar(
+                centerTitle: widget.pageDefinition.centerTitle,
+                backgroundColor: primaryColor,
+                foregroundColor: onPrimaryColor,
+                titleTextStyle: TextStyle(
+                  color: onPrimaryColor,
+                  fontSize: 20,
                 ),
-        ),
-        body: Column(
-          children: [
-            if (pages.length > 2)
-              ColoredBox(
-                color: primaryColor,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: TabMenu(
-                    titles: pages.map((p) => p.title).toList(),
-                    controller: controller,
-                  ),
-                ),
-              ),
-            Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final spacing = AppSpacing.of(context);
-                  final width = constraints.maxWidth;
-                  final height = constraints.maxHeight;
-                  final aspect = width / height;
-
-                  const cardTop = topMargin;
-                  final cardHeight =
-                      height - topMargin - tabsHeight - spacing.medium;
-
-                  final cardLeft = width < maxWidth * 1.05
-                      ? width * 0.05
-                      : (width - maxWidth) / 2;
-                  final cardWidth =
-                      width < maxWidth * 1.05 ? width * 0.9 : maxWidth;
-
-                  return Stack(
-                    clipBehavior: Clip.hardEdge,
-                    children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: AspectRatio(
-                          aspectRatio: _constrainAspectRation(aspect) * 3,
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: CustomPaint(
-                              painter: IrregularHeaderPainter(
-                                color: primaryColor,
-                              ),
-                              child: Container(),
-                            ),
-                          ),
+                elevation: 0,
+                title: Text(widget.pageDefinition.title),
+                leading: widget.pageDefinition.drawerBuilder == null
+                    ? null
+                    : DrawerButton(
+                        style: ButtonStyle(
+                          iconColor: WidgetStateProperty.all(onPrimaryColor),
                         ),
+                        onPressed: () {
+                          _scaffoldKey.currentState!.openDrawer();
+                        },
                       ),
-                      Positioned(
-                        top: cardTop,
-                        left: cardLeft,
+              )
+            : null,
+        body: LayoutBuilder(builder: (context, constraints) {
+          final spacing = AppSpacing.of(context);
+          final width = constraints.maxWidth;
+          final height = constraints.maxHeight;
+          final aspect = width / height;
+          final maxWidth = widget.maxCardWidth;
+
+          const cardTop = topMargin;
+          final cardHeight = height - topMargin - tabsHeight - spacing.large;
+
+          final cardLeft = width < maxWidth * 1.05 ? width * 0.05 : (width - maxWidth) / 2;
+          final cardWidth = width < maxWidth * 1.05 ? width * 0.9 : maxWidth;
+
+          return Column(
+            children: [
+              if (pages.length > 2)
+                ColoredBox(
+                  color: primaryColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
                         width: cardWidth,
-                        height: cardHeight,
-                        child: Scaffold(
-                          body: TransparentCard(
-                            child: TabBarView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              controller: controller,
-                              children: pages
-                                  .map(
-                                    (page) => page.builder(
-                                      AppScaffoldPageContext(
-                                        context: context,
-                                        ref: ref,
-                                        page: page,
-                                        state: widget.state,
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              color: Colors.transparent,
+                              width: cardWidth,
+                              child: TabMenu(
+                                titles: pages.map((p) => p.tabTitle).toList(),
+                                controller: controller,
+                              ),
                             ),
-                          ),
-                          backgroundColor: Colors.transparent,
+                          ],
                         ),
                       ),
                     ],
-                  );
-                },
+                  ),
+                ),
+              Expanded(
+                child: Stack(
+                  clipBehavior: Clip.hardEdge,
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: AspectRatio(
+                        aspectRatio: _constrainAspectRation(aspect) * 3,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: CustomPaint(
+                            painter: IrregularHeaderPainter(
+                              color: primaryColor,
+                            ),
+                            child: Container(),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: cardTop,
+                      left: cardLeft,
+                      width: cardWidth,
+                      height: cardHeight,
+                      child: Scaffold(
+                        body: TransparentCard(
+                          child: pages.length > 1
+                              ? TabBarView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  controller: controller,
+                                  children: pages
+                                      .map(
+                                        (page) => page.builder(
+                                          AppScaffoldPageContext(
+                                            context: context,
+                                            ref: ref,
+                                            page: page,
+                                            state: widget.state,
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                )
+                              : pages.first.builder(
+                                  AppScaffoldPageContext(
+                                    context: context,
+                                    ref: ref,
+                                    page: pages.first,
+                                    state: widget.state,
+                                  ),
+                                ),
+                        ),
+                        backgroundColor: Colors.transparent,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            BottomMenuBar(
-              // activeRoute: BottomMenuBar.createRouteName(widget.pageDefinition),
-              activeRoute: widget.pageDefinition.route,
-            ),
-          ],
-        ),
+              if (widget.pageDefinition.showBottomMenu)
+                BottomMenuBar(
+                  activeRoute: widget.pageDefinition.route,
+                ),
+            ],
+          );
+        }),
         drawer: widget.pageDefinition.drawerBuilder == null
             ? null
             : Drawer(
@@ -181,7 +200,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: onPrimaryColor.withOpacity(0.7),
+                    color: onPrimaryColor.withValues(alpha: 0.7),
                     borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(20),
                       bottomRight: Radius.circular(20),

@@ -11,9 +11,12 @@ class PageDefinition extends ItemDefinition {
   final List<PageDefinition> childPages;
   final ScaffoldPageType? scaffoldType;
   final bool centerTitle;
+  final bool showAppBar;
+  final bool showBottomMenu;
   PageDefinition({
     this.name,
     required super.title,
+    super.tabTitle,
     required super.icon,
     super.primary,
     super.debug,
@@ -23,6 +26,8 @@ class PageDefinition extends ItemDefinition {
     this.childPages = const [],
     this.scaffoldType,
     this.centerTitle = true,
+    this.showAppBar = false,
+    this.showBottomMenu = false,
   });
 
   String get route => '/${name ?? title.replaceAll(' ', '_').toLowerCase()}';

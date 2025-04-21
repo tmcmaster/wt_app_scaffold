@@ -65,17 +65,17 @@ class LandingPage extends StatelessWidget {
           Container(
             height: 300,
             width: 300,
-            color: Colors.blue.withOpacity(0.5),
+            color: Colors.blue.withValues(alpha: 0.5),
           ),
           Container(
             height: 300,
             width: 300,
-            color: Colors.yellow.withOpacity(0.5),
+            color: Colors.yellow.withValues(alpha: 0.5),
           ),
           Container(
             height: 300,
             width: 300,
-            color: Colors.orange.withOpacity(0.5),
+            color: Colors.orange.withValues(alpha: 0.5),
           ),
         ],
       ),

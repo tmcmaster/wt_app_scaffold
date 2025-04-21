@@ -39,15 +39,15 @@ class PreviewColorScheme extends StatelessWidget {
         colorScheme.onTertiaryContainer,
       ),
       'Background': ColorPair(
-        colorScheme.background,
-        colorScheme.onBackground,
+        colorScheme.surface,
+        colorScheme.onSurface,
       ),
       'Surface': ColorPair(
         colorScheme.surface,
         colorScheme.onSurface,
       ),
       'Surface Variant': ColorPair(
-        colorScheme.surfaceVariant,
+        colorScheme.surfaceContainerHighest,
         colorScheme.onSurfaceVariant,
       ),
       'InverseSurface': ColorPair(

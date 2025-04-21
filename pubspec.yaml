@@ -29,15 +29,15 @@ dependencies:
 #  flutter_inappwebview_macos: ^1.0.11
 #  flutter_localizations:
 #    sdk: flutter
-  flutter_riverpod: 
-  flutter_svg: 
-  font_awesome_flutter: 
+  flutter_riverpod:
+  flutter_svg:
+  font_awesome_flutter:
   form_builder_validators: 
   freezed_annotation: 
   go_router: 
   grouped_list: 
   intl: 
-  json_annotation: 
+  json_annotation:
   logger: 
   package_info_plus: 
   path_provider: 

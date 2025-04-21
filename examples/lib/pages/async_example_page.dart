@@ -47,7 +47,7 @@ class AsyncExamplePage extends ConsumerWidget {
   }
 }
 
-final futureCombined = FutureProvider<String>((ref) async {
+final futureCombined = FutureProvider<String>((ref) {
   AsyncExamplePage.log.d('Future Combined.');
   return WaitFor.threeFutures(
     ref.read(futureOne.future),

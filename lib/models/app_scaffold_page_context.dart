@@ -13,6 +13,6 @@ class AppScaffoldPageContext {
     required this.context,
     required this.ref,
     required this.page,
-    required this.state,
+    this.state,
   });
 }
