@@ -25,12 +25,16 @@ mixin AppOne {
     appName: 'appOne',
     swipeEnabled: true,
     includeAppBar: true,
-    applicationType: ApplicationType.curvedNavBar,
+    applicationType: ApplicationType.hiddenDrawer,
+    menuAction: (context) {
+      HiddenDrawerOpener.of(context)?.open();
+    },
     profilePage: PageDefinition(
       icon: Icons.person,
       title: 'Profile',
       primary: true,
       builder: (pageContext) => const PlaceholderPage(title: 'Profile Screen'),
+      showAppBar: true,
     ),
     pages: [
       PageDefinition(
@@ -41,6 +45,7 @@ mixin AppOne {
         debug: false,
         scaffoldType: ScaffoldPageType.transparentCard,
         builder: (pageContext) => const FirebasePage(),
+        showBottomMenu: false,
       ),
       PageDefinition(
         title: 'Page One',
@@ -68,11 +73,12 @@ mixin AppOne {
         icon: FontAwesomeIcons.bagShopping,
         primary: false,
         debug: false,
+        scaffoldType: ScaffoldPageType.transparentCard,
         builder: (pageContext) {
-          final user =
-              pageContext.ref.read(AppScaffoldAuthenticationStore.user);
+          final user = pageContext.ref.read(AppScaffoldAuthenticationStore.user);
 
           return PlaceholderPage(
+            backgroundColor: Colors.transparent,
             title: 'Page Two',
             children: [
               Text('Id: ${user.id}'),

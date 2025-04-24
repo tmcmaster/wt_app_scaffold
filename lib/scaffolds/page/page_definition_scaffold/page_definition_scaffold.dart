@@ -54,6 +54,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
     const topMargin = 0.0;
     final hasTabs = pages.length > 1;
     final tabsHeight = hasTabs ? 42.0 : 0.0;
+    final bottomBarHeight = widget.pageDefinition.showBottomMenu ? 50 : 0;
 
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
@@ -93,7 +94,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
           final maxWidth = widget.maxCardWidth;
 
           const cardTop = topMargin;
-          final cardHeight = height - topMargin - tabsHeight - spacing.large;
+          final cardHeight = height - topMargin - tabsHeight - spacing.large - bottomBarHeight;
 
           final cardLeft = width < maxWidth * 1.05 ? width * 0.05 : (width - maxWidth) / 2;
           final cardWidth = width < maxWidth * 1.05 ? width * 0.9 : maxWidth;
