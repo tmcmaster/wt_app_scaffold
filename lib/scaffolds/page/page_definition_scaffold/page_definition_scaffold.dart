@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_scaffold_page_context.dart';
 import 'package:wt_app_scaffold/models/app_spacing.dart';
@@ -188,6 +189,9 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
               if (widget.pageDefinition.showBottomMenu)
                 BottomMenuBar(
                   activeRoute: widget.pageDefinition.route,
+                  onChange: (routeName, context, ref) {
+                    ref.read(AppScaffoldRouter.provider).go(routeName);
+                  },
                 ),
             ],
           );

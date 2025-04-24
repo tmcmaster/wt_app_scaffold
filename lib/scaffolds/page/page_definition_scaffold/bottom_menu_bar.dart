@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/models/page_definition.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomMenuBar extends ConsumerWidget {
   static final log = logger(BottomMenuBar, level: Level.debug);
+
   final String activeRoute;
-  final void Function(int selected)? beforeTransition;
+  final void Function(int selected, String route)? beforeChange;
+  final void Function(String route, BuildContext context, WidgetRef ref) onChange;
 
   const BottomMenuBar({
     super.key,
     required this.activeRoute,
-    this.beforeTransition,
+    this.beforeChange,
+    required this.onChange,
   });
 
   @override
@@ -59,9 +61,9 @@ class BottomMenuBar extends ConsumerWidget {
       onTap: (selected) {
         // final routeName = createRouteName(pages[selected]);
         final routeName = pages[selected].route;
-        beforeTransition?.call(selected);
+        beforeChange?.call(selected, routeName);
         log.d('Using GoRouter to change page: $routeName');
-        context.go(routeName);
+        onChange(routeName, context, ref);
       },
     );
   }
@@ -70,8 +72,4 @@ class BottomMenuBar extends ConsumerWidget {
     final index = pages.map((p) => p.route).toList().indexOf(activeRoute);
     return index < 0 ? 0 : index;
   }
-
-  // static String createRouteName(PageDefinition page) {
-  //   return '/${page.title.toLowerCase().replaceAll(' ', '_')}';
-  // }
 }
