@@ -102,7 +102,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
 
           return Column(
             children: [
-              if (pages.length > 2)
+              if (pages.length > 1)
                 ColoredBox(
                   color: primaryColor,
                   child: Row(
