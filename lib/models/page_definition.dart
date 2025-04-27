@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:wt_app_scaffold/models/drawer_builder.dart';
 import 'package:wt_app_scaffold/models/item_definition.dart';
 import 'package:wt_app_scaffold/models/page_builder.dart';
@@ -31,4 +32,38 @@ class PageDefinition extends ItemDefinition {
   });
 
   String get route => '/${name ?? title.replaceAll(' ', '_').toLowerCase()}';
+
+  PageDefinition copyWith({
+    String? name,
+    String? title,
+    String? tabTitle,
+    IconData? icon,
+    bool? primary,
+    bool? debug,
+    bool? landing,
+    AppScaffoldPageBuilder? builder,
+    DrawerBuilder? drawerBuilder,
+    List<PageDefinition>? childPages,
+    ScaffoldPageType? scaffoldType,
+    bool? centerTitle,
+    bool? showAppBar,
+    bool? showBottomMenu,
+  }) {
+    return PageDefinition(
+      name: name ?? this.name,
+      title: title ?? this.title,
+      tabTitle: tabTitle ?? this.tabTitle,
+      icon: icon ?? this.icon,
+      primary: primary ?? this.primary,
+      debug: debug ?? this.debug,
+      landing: landing ?? this.landing,
+      builder: builder ?? this.builder,
+      drawerBuilder: drawerBuilder ?? this.drawerBuilder,
+      childPages: childPages ?? this.childPages,
+      scaffoldType: scaffoldType ?? this.scaffoldType,
+      centerTitle: centerTitle ?? this.centerTitle,
+      showAppBar: showAppBar ?? this.showAppBar,
+      showBottomMenu: showBottomMenu ?? this.showBottomMenu,
+    );
+  }
 }
