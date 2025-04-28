@@ -14,6 +14,7 @@ class PageDefinition extends ItemDefinition {
   final bool centerTitle;
   final bool showAppBar;
   final bool showBottomMenu;
+  final String? homeRoute;
   PageDefinition({
     this.name,
     required super.title,
@@ -29,6 +30,7 @@ class PageDefinition extends ItemDefinition {
     this.centerTitle = true,
     this.showAppBar = false,
     this.showBottomMenu = false,
+    this.homeRoute,
   });
 
   String get route => '/${name ?? title.replaceAll(' ', '_').toLowerCase()}';
@@ -48,6 +50,7 @@ class PageDefinition extends ItemDefinition {
     bool? centerTitle,
     bool? showAppBar,
     bool? showBottomMenu,
+    String? homeRoute,
   }) {
     return PageDefinition(
       name: name ?? this.name,
@@ -64,6 +67,7 @@ class PageDefinition extends ItemDefinition {
       centerTitle: centerTitle ?? this.centerTitle,
       showAppBar: showAppBar ?? this.showAppBar,
       showBottomMenu: showBottomMenu ?? this.showBottomMenu,
+      homeRoute: homeRoute ?? this.homeRoute,
     );
   }
 }

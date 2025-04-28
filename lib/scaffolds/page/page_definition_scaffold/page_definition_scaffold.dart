@@ -55,7 +55,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
     const topMargin = 0.0;
     final hasTabs = pages.length > 1;
     final tabsHeight = hasTabs ? 42.0 : 0.0;
-    final bottomBarHeight = widget.pageDefinition.showBottomMenu ? 50 : 0;
+    final bottomBarHeight = widget.pageDefinition.showBottomMenu ? 50 : 0.0;
 
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
@@ -85,6 +85,19 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                           _scaffoldKey.currentState!.openDrawer();
                         },
                       ),
+                actions: widget.pageDefinition.homeRoute == null
+                    ? null
+                    : [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30.0),
+                          child: IconButton(
+                            onPressed: () {
+                              ref.read(AppScaffoldRouter.provider).go('/${widget.pageDefinition.homeRoute!}');
+                            },
+                            icon: const Icon(Icons.chevron_left),
+                          ),
+                        ),
+                      ],
               )
             : null,
         body: LayoutBuilder(builder: (context, constraints) {
