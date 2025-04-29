@@ -7,7 +7,7 @@ abstract class ItemDefinition {
   final bool primary;
   final String? _tabTitle;
 
-  ItemDefinition({
+  const ItemDefinition({
     required this.title,
     required this.icon,
     this.debug = false,

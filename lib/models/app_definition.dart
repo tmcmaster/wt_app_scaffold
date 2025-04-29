@@ -75,7 +75,10 @@ class AppDefinition {
       swipeEnabled: swipeEnabled,
       includeAppBar: includeAppBar,
       dismissAction: dismissAction,
-      menuAction: menuAction,
+      menuAction: menuAction ??
+          (context) {
+            HiddenDrawerOpener.of(context)?.open();
+          },
       localizationDelegates: localizationDelegates,
       applicationType: applicationType,
       scaffoldPageType: scaffoldPageType,

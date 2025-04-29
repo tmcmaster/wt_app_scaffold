@@ -15,7 +15,7 @@ class PageDefinition extends ItemDefinition {
   final bool showAppBar;
   final bool showBottomMenu;
   final String? homeRoute;
-  PageDefinition({
+  const PageDefinition({
     this.name,
     required super.title,
     super.tabTitle,
