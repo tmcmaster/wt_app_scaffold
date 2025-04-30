@@ -53,6 +53,7 @@ class BottomMenuBar extends ConsumerWidget {
                 page.icon,
               ),
               label: page.title,
+              tooltip: page.title,
               backgroundColor: const Color(0xFF0D5257),
             ),
           )
