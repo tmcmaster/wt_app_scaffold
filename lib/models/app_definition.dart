@@ -22,7 +22,7 @@ class AppDefinition {
   final ThemeMode? themeMode;
   final Color? colorScheme;
   final List<LocalizationsDelegate> intlDelegates;
-  final Set<Locale>? inltLocales;
+  final Set<Locale>? intlLocales;
 
   const AppDefinition._({
     required this.appTitle,
@@ -39,7 +39,7 @@ class AppDefinition {
     this.scaffoldPageType,
     this.themeMode,
     this.colorScheme,
-    this.inltLocales,
+    this.intlLocales,
     this.intlDelegates = const <LocalizationsDelegate>[],
   });
 
@@ -59,7 +59,7 @@ class AppDefinition {
     ThemeMode? themeMode,
     Color? colorScheme,
     List<LocalizationsDelegate> intlDelegates = const <LocalizationsDelegate>[],
-    Set<Locale>? inltLocales,
+    Set<Locale>? intlLocales,
   }) {
     return AppDefinition._(
       appTitle: appTitle,
@@ -84,7 +84,7 @@ class AppDefinition {
       scaffoldPageType: scaffoldPageType,
       themeMode: themeMode,
       colorScheme: colorScheme,
-      inltLocales: inltLocales ?? {const Locale('en', '')},
+      intlLocales: intlLocales ?? {const Locale('en', '')},
       intlDelegates: intlDelegates,
     );
   }

@@ -61,7 +61,7 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
 
     final themeMode = appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
     final locale = ref.watch(LocaleStore.provider);
-    final locales = appDefinition.inltLocales ?? const <Locale>[Locale('en', 'US')];
+    final locales = appDefinition.intlLocales ?? const <Locale>[Locale('en', 'US')];
 
     log.d('===> ROUTES MaterialApp');
     return MaterialApp(

@@ -38,15 +38,29 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
           (page) {
             log.d('Creating Route(${page.route}) : ${page.title}');
             return GoRoute(
-              path: page.route,
-              builder: (context, state) {
-                return ScaffoldPageTypeWrapper(
-                  page: page,
-                  state: state,
-                  scaffoldPageType: appDefinition.scaffoldPageType,
-                );
-              },
-            );
+                path: page.route,
+                builder: (context, state) {
+                  return ScaffoldPageTypeWrapper(
+                    page: page,
+                    state: state,
+                    scaffoldPageType: page.scaffoldType,
+                  );
+                },
+                routes: !page.registerChildRoutes || page.childPages.isEmpty
+                    ? []
+                    : page.childPages.map((childPage) {
+                        log.d('Creating Child Route(${childPage.routeName}) : ${childPage.title}');
+                        return GoRoute(
+                          path: childPage.routeName,
+                          builder: (context, state) {
+                            return ScaffoldPageTypeWrapper(
+                              page: childPage,
+                              state: state,
+                              scaffoldPageType: childPage.scaffoldType,
+                            );
+                          },
+                        );
+                      }).toList());
           },
         ).toList(),
       );

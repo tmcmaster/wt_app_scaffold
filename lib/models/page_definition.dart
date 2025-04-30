@@ -15,6 +15,7 @@ class PageDefinition extends ItemDefinition {
   final bool centerTitle;
   final bool showAppBar;
   final bool showBottomMenu;
+  final bool registerChildRoutes;
   final String? homeRoute;
   const PageDefinition({
     this.name,
@@ -31,10 +32,12 @@ class PageDefinition extends ItemDefinition {
     this.centerTitle = true,
     this.showAppBar = false,
     this.showBottomMenu = false,
+    this.registerChildRoutes = false,
     this.homeRoute,
   });
 
-  String get route => '/${name ?? title.replaceAll(' ', '_').toLowerCase()}';
+  String get routeName => name ?? title.replaceAll(' ', '_').toLowerCase();
+  String get route => '/$routeName';
 
   PageDefinition copyWith({
     String? name,
