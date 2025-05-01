@@ -31,9 +31,16 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
     (ref) {
       final navigatorKey = ref.watch(AppScaffoldProviders.navigatorKey);
       final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
+      final initialRoute = _createInitialRoute(appDefinition);
       return GoRouter(
         navigatorKey: navigatorKey,
-        initialLocation: _createInitialRoute(appDefinition),
+        initialLocation: initialRoute,
+        redirect: (context, state) {
+          if (state.matchedLocation == '/') {
+            return initialRoute;
+          }
+          return null;
+        },
         routes: appDefinition.pages.map(
           (page) {
             log.d('Creating Route(${page.route}) : ${page.title}');
