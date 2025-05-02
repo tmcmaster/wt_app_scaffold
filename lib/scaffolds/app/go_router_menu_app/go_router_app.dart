@@ -32,15 +32,13 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
       final navigatorKey = ref.watch(AppScaffoldProviders.navigatorKey);
       final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
       final initialRoute = _createInitialRoute(appDefinition);
+      final redirectMap = _generateRedirectMap(appDefinition, {
+        '/': initialRoute,
+      });
       return GoRouter(
         navigatorKey: navigatorKey,
         initialLocation: initialRoute,
-        redirect: (context, state) {
-          if (state.matchedLocation == '/') {
-            return initialRoute;
-          }
-          return null;
-        },
+        redirect: (context, state) => redirectMap[state.matchedLocation],
         routes: appDefinition.pages.map(
           (page) {
             log.d('Creating Route(${page.route}) : ${page.title}');
@@ -102,6 +100,25 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
       return initialRoutePage.route;
     }
     throw Exception('Could not determine the initial route for the application');
+  }
+
+  static Map<String, String> _generateRedirectMap(AppDefinition appDefinition, Map<String, String> initialMap) {
+    final map = <String, String>{
+      ...initialMap,
+    };
+
+    void collect(PageDefinition parent) {
+      for (final child in parent.childPages) {
+        map[child.route] = parent.route;
+        collect(child); // Recurse into grandchildren
+      }
+    }
+
+    for (final page in appDefinition.pages) {
+      collect(page);
+    }
+
+    return map;
   }
 }
 
