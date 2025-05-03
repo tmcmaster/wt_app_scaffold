@@ -9,6 +9,7 @@ import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/bottom_m
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/irregular_header_painter.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/tab_menu.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/transparent_card.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 class PageDefinitionScaffold extends ConsumerStatefulWidget {
   final PageDefinition pageDefinition;
@@ -25,8 +26,10 @@ class PageDefinitionScaffold extends ConsumerStatefulWidget {
 }
 
 class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold> with TickerProviderStateMixin {
+  static final log = logger(PageDefinitionScaffold, level: Level.debug);
+
   late TabController controller;
-  int selected = 0;
+  // int selected = 0;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -36,7 +39,21 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
     controller = TabController(
       length: widget.pageDefinition.childPages.length + 1,
       vsync: this,
+      initialIndex: _calculateInitialTabIndex(widget.pageDefinition, widget.state),
     );
+  }
+
+  static int _calculateInitialTabIndex(PageDefinition pageDefinition, GoRouterState? state) {
+    if (state != null && state.extra != null && state.extra is int) {
+      final int initialTabIndex = state.extra! as int;
+      if (initialTabIndex < pageDefinition.childPages.length) {
+        return initialTabIndex;
+      } else {
+        log.w('The state is requesting tab index $initialTabIndex '
+            'but there are only ${pageDefinition.childPages.length} tabs.');
+      }
+    }
+    return 0;
   }
 
   @override
@@ -47,6 +64,10 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
 
   @override
   Widget build(BuildContext context) {
+    final tabIndex = Uri.parse(GoRouterState.of(context).uri.toString()).queryParameters['tabIndex'];
+    if (tabIndex != null) {
+      controller.animateTo(int.parse(tabIndex));
+    }
     final pages = [
       widget.pageDefinition,
       ...widget.pageDefinition.childPages,
@@ -168,21 +189,24 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                       child: Scaffold(
                         body: TransparentCard(
                           child: pages.length > 1
-                              ? TabBarView(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  controller: controller,
-                                  children: pages
-                                      .map(
-                                        (page) => page.builder(
-                                          AppScaffoldPageContext(
-                                            context: context,
-                                            ref: ref,
-                                            page: page,
-                                            state: widget.state,
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: TabBarView(
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    controller: controller,
+                                    children: pages
+                                        .map(
+                                          (page) => page.builder(
+                                            AppScaffoldPageContext(
+                                              context: context,
+                                              ref: ref,
+                                              page: page,
+                                              state: widget.state,
+                                            ),
                                           ),
-                                        ),
-                                      )
-                                      .toList(),
+                                        )
+                                        .toList(),
+                                  ),
                                 )
                               : pages.first.builder(
                                   AppScaffoldPageContext(

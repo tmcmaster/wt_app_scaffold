@@ -108,9 +108,10 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
     };
 
     void collect(PageDefinition parent) {
-      for (final child in parent.childPages) {
-        map[child.route] = parent.route;
-        collect(child); // Recurse into grandchildren
+      for (int c = 0; c < parent.childPages.length; c++) {
+        final child = parent.childPages[c];
+        map[child.route] = '${parent.route}?tabIndex=${c + 1}';
+        collect(child);
       }
     }
 
