@@ -11,8 +11,7 @@ class BottomNavBarMenu extends ConsumerWidget {
   static final log = logger(BottomNavBarMenu, level: Level.debug);
 
   // final List<PageDefinition> items;
-  final StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent>
-      provider;
+  final StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent> provider;
 
   const BottomNavBarMenu({
     // required this.items,
@@ -35,9 +34,8 @@ class BottomNavBarMenu extends ConsumerWidget {
 
     final primaryColor = Theme.of(context).primaryColor;
 
-    final currentSelected = pageChangeEvent.page < allItems.length
-        ? primaryItems.indexOf(allItems[pageChangeEvent.page])
-        : -1;
+    final currentSelected =
+        pageChangeEvent.page < allItems.length ? primaryItems.indexOf(allItems[pageChangeEvent.page]) : -1;
     log.d('Selected Primary: $currentSelected');
 
     return Row(
@@ -63,9 +61,9 @@ class BottomNavBarMenu extends ConsumerWidget {
                 .map(
                   (item) => BottomNavigationBarItem(
                     icon: Icon(
-                      item.icon,
+                      item.pageInfo.icon,
                     ),
-                    label: item.title,
+                    label: item.pageInfo.title,
                   ),
                 )
                 .toList(),
@@ -92,10 +90,10 @@ class BottomNavBarMenu extends ConsumerWidget {
                         style: const ButtonStyle(
                           alignment: Alignment.centerLeft,
                         ),
-                        icon: Icon(item.icon),
+                        icon: Icon(item.pageInfo.icon),
                         label: Padding(
                           padding: const EdgeInsets.only(left: 16.0),
-                          child: Text(item.title),
+                          child: Text(item.pageInfo.title),
                         ),
                         onPressed: () {
                           pageNav.setPage(

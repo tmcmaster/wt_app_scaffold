@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 
@@ -67,9 +68,12 @@ class AppDefinition {
       appDetailsProvider: appDetailsProvider,
       profilePage: profilePage ??
           PageDefinition(
-            title: 'Profile',
-            icon: Icons.person,
-            builder: (_) => const PlaceholderPage(title: 'Profile'),
+            pageInfo: const PageInfo(
+              title: 'Profile',
+              name: 'profile',
+              icon: Icons.person,
+            ),
+            pageBuilder: (_) => const PlaceholderPage(title: 'Profile'),
           ),
       pages: pages,
       swipeEnabled: swipeEnabled,

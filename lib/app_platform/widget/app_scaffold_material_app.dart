@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
@@ -76,7 +75,6 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
       routes: routes,
       localizationsDelegates: [
         ...appDefinition.intlDelegates,
-        ...GlobalMaterialLocalizations.delegates,
       ],
       supportedLocales: locales,
       locale: locale ?? locales.first,

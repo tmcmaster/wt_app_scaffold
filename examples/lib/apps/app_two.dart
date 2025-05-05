@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
@@ -26,56 +27,77 @@ mixin AppTwo {
     applicationType: ApplicationType.goRouterMenu,
     scaffoldPageType: ScaffoldPageType.transparentCard,
     profilePage: PageDefinition(
-      icon: Icons.person,
-      title: 'Profile',
+      pageInfo: const PageInfo(
+        name: 'profile',
+        title: 'Profile',
+        icon: Icons.person,
+      ),
       primary: true,
-      builder: (_) => const PlaceholderPage(
+      pageBuilder: (_) => const PlaceholderPage(
         title: 'Profile Page',
       ),
     ),
     pages: [
       PageDefinition(
-        title: 'Plain Page',
-        icon: FontAwesomeIcons.anchor,
+        pageInfo: const PageInfo(
+          name: 'plainPage',
+          title: 'Plain Page',
+          icon: FontAwesomeIcons.anchor,
+        ),
         primary: true,
         debug: false,
-        builder: (_) => const PlainPage(),
+        pageBuilder: (_) => const PlainPage(),
       ),
       PageDefinition(
-        title: 'Firebase Page',
-        icon: FontAwesomeIcons.fire,
+        pageInfo: const PageInfo(
+          name: 'firebasePage',
+          title: 'Firebase Page',
+          icon: FontAwesomeIcons.fire,
+        ),
         primary: true,
         debug: false,
-        builder: (_) => const FirebasePage(),
+        pageBuilder: (_) => const FirebasePage(),
       ),
       PageDefinition(
-        title: 'SnackBar Page',
-        icon: FontAwesomeIcons.noteSticky,
+        pageInfo: const PageInfo(
+          name: 'snackBarPage',
+          title: 'SnackBar Page',
+          icon: FontAwesomeIcons.noteSticky,
+        ),
         primary: true,
         debug: false,
-        builder: (_) => const UserLogPage(),
+        pageBuilder: (_) => const UserLogPage(),
       ),
       PageDefinition(
-        title: 'Navigation Page',
-        icon: Icons.navigation,
+        pageInfo: const PageInfo(
+          name: 'navigationPage',
+          title: 'Navigation Page',
+          icon: Icons.navigation,
+        ),
         primary: true,
         debug: false,
-        builder: (_) => const NavigationPage(
+        pageBuilder: (_) => const NavigationPage(
           routeTo: '/sign-in',
         ),
       ),
       PageDefinition(
-        title: 'Login Page',
-        icon: Icons.login,
+        pageInfo: const PageInfo(
+          name: 'loginPage',
+          title: 'Login Page',
+          icon: Icons.login,
+        ),
         primary: true,
         debug: false,
-        builder: (_) => const LoginPage(),
+        pageBuilder: (_) => const LoginPage(),
       ),
       PageDefinition(
-        title: 'Settings',
-        icon: Icons.settings,
+        pageInfo: const PageInfo(
+          name: 'settings',
+          title: 'Settings',
+          icon: Icons.settings,
+        ),
         primary: true,
-        builder: (pageContext) => VirtualSizeFittedBox(
+        pageBuilder: (pageContext) => VirtualSizeFittedBox(
           virtualSize: 1000,
           child: SettingsPage(
             children: [

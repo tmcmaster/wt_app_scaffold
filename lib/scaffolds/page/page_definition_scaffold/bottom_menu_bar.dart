@@ -50,10 +50,10 @@ class BottomMenuBar extends ConsumerWidget {
           .map(
             (page) => BottomNavigationBarItem(
               icon: Icon(
-                page.icon,
+                page.pageInfo.icon,
               ),
-              label: page.title,
-              tooltip: page.title,
+              label: page.pageInfo.title,
+              tooltip: page.pageInfo.title,
               backgroundColor: const Color(0xFF0D5257),
             ),
           )

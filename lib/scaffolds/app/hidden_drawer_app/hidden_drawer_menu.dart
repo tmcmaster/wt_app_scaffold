@@ -156,9 +156,9 @@ class _PageMenuItemButton extends StatelessWidget {
         borderRadius: borderRadius,
       ),
       contentPadding: padding,
-      leading: Icon(item.icon, color: Colors.white),
+      leading: Icon(item.pageInfo.icon, color: Colors.white),
       title: Text(
-        item.title,
+        item.pageInfo.title,
         style: const TextStyle(
           color: Colors.white,
           fontSize: HiddenDrawerConfig.menuFontSize,

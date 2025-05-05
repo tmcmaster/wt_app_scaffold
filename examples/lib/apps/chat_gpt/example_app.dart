@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/chat_gpt/example_pages.dart';
 
@@ -24,47 +25,65 @@ mixin ExampleApp {
       includeAppBar: true,
       appDetailsProvider: details,
       profilePage: PageDefinition(
-        icon: Icons.person,
-        title: 'Profile',
-        builder: (_) => const PlaceholderPage(
+        pageInfo: const PageInfo(
+          name: 'profile',
+          title: 'Profile',
+          icon: Icons.person,
+        ),
+        pageBuilder: (_) => const PlaceholderPage(
           title: 'Profile Screen',
         ),
       ),
       pages: [
         PageDefinition(
-          title: 'Home',
-          icon: Icons.home,
+          pageInfo: const PageInfo(
+            name: 'home',
+            title: 'Home',
+            icon: Icons.home,
+          ),
           primary: true,
           debug: false,
-          builder: (_) => const HomePage(),
+          pageBuilder: (_) => const HomePage(),
         ),
         PageDefinition(
-          title: 'Orders',
-          icon: FontAwesomeIcons.bagShopping,
+          pageInfo: const PageInfo(
+            name: 'orders',
+            title: 'Orders',
+            icon: FontAwesomeIcons.bagShopping,
+          ),
           primary: false,
           debug: true,
-          builder: (_) => const OrdersPage(),
+          pageBuilder: (_) => const OrdersPage(),
         ),
         PageDefinition(
-          title: 'Products',
-          icon: FontAwesomeIcons.cube,
+          pageInfo: const PageInfo(
+            name: 'products',
+            title: 'Products',
+            icon: FontAwesomeIcons.cube,
+          ),
           primary: false,
           debug: true,
-          builder: (_) => const ProductsPage(),
+          pageBuilder: (_) => const ProductsPage(),
         ),
         PageDefinition(
-          title: 'Notifications',
-          icon: FontAwesomeIcons.bell,
+          pageInfo: const PageInfo(
+            name: 'notifications',
+            title: 'Notifications',
+            icon: FontAwesomeIcons.bell,
+          ),
           primary: false,
           debug: true,
-          builder: (_) => const NotificationsPage(),
+          pageBuilder: (_) => const NotificationsPage(),
         ),
         PageDefinition(
-          title: 'Settings',
-          icon: FontAwesomeIcons.gear,
+          pageInfo: const PageInfo(
+            name: 'settings',
+            title: 'Settings',
+            icon: FontAwesomeIcons.gear,
+          ),
           primary: false,
           debug: false,
-          builder: (_) => const SettingsPage(),
+          pageBuilder: (_) => const SettingsPage(),
         ),
       ],
     ),

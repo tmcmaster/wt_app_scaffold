@@ -41,7 +41,7 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
         redirect: (context, state) => redirectMap[state.matchedLocation],
         routes: appDefinition.pages.map(
           (page) {
-            log.d('Creating Route(${page.route}) : ${page.title}');
+            log.d('Creating Route(${page.route}) : ${page.pageInfo.title}');
             return GoRoute(
                 path: page.route,
                 builder: (context, state) {
@@ -54,9 +54,9 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
                 routes: !page.registerChildRoutes || page.childPages.isEmpty
                     ? []
                     : page.childPages.map((childPage) {
-                        log.d('Creating Child Route(${childPage.routeName}) : ${childPage.title}');
+                        log.d('Creating Child Route(${childPage.route}) : ${childPage.pageInfo.title}');
                         return GoRoute(
-                          path: childPage.routeName,
+                          path: childPage.route,
                           builder: (context, state) {
                             return ScaffoldPageTypeWrapper(
                               page: childPage,

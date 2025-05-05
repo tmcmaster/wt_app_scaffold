@@ -22,6 +22,4 @@ export 'screens/theme_preview_screen.dart';
 export 'widgets/app_version.dart';
 export 'widgets/container_with_drawer.dart';
 export 'widgets/locale_selector.dart';
-// export 'widgets/restricted_web_view.dart';
-// export 'widgets/restricted_web_view/restricted_web_view_predicates.dart';
 export 'widgets/virtual_size_fitted_box.dart';

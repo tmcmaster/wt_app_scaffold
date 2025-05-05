@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_action_button/model/action_info.dart';
 import 'package:wt_action_button/wt_action_button.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -13,8 +14,11 @@ class ActionTwo extends ActionButtonDefinition {
 
   ActionTwo(super.ref)
       : super(
-          label: 'Action Two',
-          icon: Icons.menu,
+          actionInfo: ActionInfo(
+            label: 'Action Two',
+            tooltip: 'Action Two',
+            icon: Icons.menu,
+          ),
         );
 
   @override

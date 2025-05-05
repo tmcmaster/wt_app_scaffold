@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wt_action_button/model/action_info.dart';
 import 'package:wt_action_button/wt_action_button.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
@@ -14,8 +15,11 @@ class DatabaseAction extends ActionButtonDefinition {
 
   DatabaseAction(super.ref)
       : super(
-          label: 'Database Action',
-          icon: FontAwesomeIcons.database,
+          actionInfo: ActionInfo(
+            label: 'Database Action',
+            tooltip: 'Database Action',
+            icon: FontAwesomeIcons.database,
+          ),
         );
 
   @override

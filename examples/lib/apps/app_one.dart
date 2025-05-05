@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
@@ -30,29 +31,38 @@ mixin AppOne {
       HiddenDrawerOpener.of(context)?.open();
     },
     profilePage: PageDefinition(
-      icon: Icons.person,
-      title: 'Profile',
+      pageInfo: const PageInfo(
+        name: 'profile',
+        title: 'Profile',
+        icon: Icons.person,
+      ),
       primary: true,
-      builder: (pageContext) => const PlaceholderPage(title: 'Profile Screen'),
+      pageBuilder: (pageContext) => const PlaceholderPage(title: 'Profile Screen'),
       showAppBar: true,
     ),
     pages: [
       PageDefinition(
-        title: 'Landing Page',
-        icon: FontAwesomeIcons.clipboard,
+        pageInfo: const PageInfo(
+          name: 'landingPage',
+          title: 'Landing Page',
+          icon: FontAwesomeIcons.clipboard,
+        ),
         primary: true,
         landing: true,
         debug: false,
         scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (pageContext) => const FirebasePage(),
+        pageBuilder: (pageContext) => const FirebasePage(),
         showBottomMenu: false,
       ),
       PageDefinition(
-        title: 'Page One',
+        pageInfo: const PageInfo(
+          name: 'pageOne',
+          title: 'Page One',
+          icon: FontAwesomeIcons.clipboard,
+        ),
         primary: true,
-        icon: FontAwesomeIcons.clipboard,
         debug: true,
-        builder: (pageContext) => BottomDrawerPage(
+        pageBuilder: (pageContext) => BottomDrawerPage(
           title: 'Page One',
           mainWidget: const Center(
             child: Text('Page One'),
@@ -69,14 +79,16 @@ mixin AppOne {
         ),
       ),
       PageDefinition(
-        title: 'Page Two',
-        icon: FontAwesomeIcons.bagShopping,
+        pageInfo: const PageInfo(
+          name: 'pageTwo',
+          title: 'Page Two',
+          icon: FontAwesomeIcons.bagShopping,
+        ),
         primary: false,
         debug: false,
         scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (pageContext) {
+        pageBuilder: (pageContext) {
           final user = pageContext.ref.read(AppScaffoldAuthenticationStore.user);
-
           return PlaceholderPage(
             backgroundColor: Colors.transparent,
             title: 'Page Two',
@@ -89,42 +101,60 @@ mixin AppOne {
         },
       ),
       PageDefinition(
-        title: 'Page Three',
-        icon: FontAwesomeIcons.boxesPacking,
+        pageInfo: const PageInfo(
+          name: 'pageThree',
+          title: 'Page Three',
+          icon: FontAwesomeIcons.boxesPacking,
+        ),
         debug: true,
-        builder: (_) => const PlaceholderPage(title: 'Page Three'),
+        pageBuilder: (_) => const PlaceholderPage(title: 'Page Three'),
       ),
       PageDefinition(
-        title: 'Page Four',
-        icon: FontAwesomeIcons.tractor,
+        pageInfo: const PageInfo(
+          name: 'pageFour',
+          title: 'Page Four',
+          icon: FontAwesomeIcons.tractor,
+        ),
         debug: true,
-        builder: (_) => const PlaceholderPage(title: 'Page Four'),
+        pageBuilder: (_) => const PlaceholderPage(title: 'Page Four'),
       ),
       PageDefinition(
-        title: 'Counter',
-        icon: Icons.settings,
+        pageInfo: const PageInfo(
+          name: 'counter',
+          title: 'Counter',
+          icon: Icons.settings,
+        ),
         scaffoldType: ScaffoldPageType.transparentCard,
         primary: true,
-        builder: (_) => const CounterAppPage(title: 'Counter App'),
+        pageBuilder: (_) => const CounterAppPage(title: 'Counter App'),
       ),
       PageDefinition(
-        title: 'Database',
-        icon: FontAwesomeIcons.database,
+        pageInfo: const PageInfo(
+          name: 'database',
+          title: 'Database',
+          icon: FontAwesomeIcons.database,
+        ),
         primary: false,
-        builder: (_) => const DatabaseExamplePage(),
+        pageBuilder: (_) => const DatabaseExamplePage(),
       ),
       PageDefinition(
-        title: 'Async',
-        icon: FontAwesomeIcons.arrowsRotate,
+        pageInfo: const PageInfo(
+          name: 'async',
+          title: 'Async',
+          icon: FontAwesomeIcons.arrowsRotate,
+        ),
         primary: false,
-        builder: (_) => const AsyncExamplePage(),
+        pageBuilder: (_) => const AsyncExamplePage(),
       ),
       PageDefinition(
-        title: 'Settings',
-        icon: Icons.settings,
+        pageInfo: const PageInfo(
+          name: 'settings',
+          title: 'Settings',
+          icon: Icons.settings,
+        ),
         primary: true,
         scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (pageContext) => SettingsPage(
+        pageBuilder: (pageContext) => SettingsPage(
           backgroundColor: Colors.transparent,
           children: [
             ElevatedButton(
@@ -137,11 +167,14 @@ mixin AppOne {
         ),
       ),
       PageDefinition(
-        title: 'Page Five',
-        icon: FontAwesomeIcons.car,
+        pageInfo: const PageInfo(
+          name: 'pageFive',
+          title: 'Page Five',
+          icon: FontAwesomeIcons.car,
+        ),
         debug: true,
         primary: true,
-        builder: (_) => const PlaceholderPage(title: 'Page Five'),
+        pageBuilder: (_) => const PlaceholderPage(title: 'Page Five'),
       ),
     ],
   );

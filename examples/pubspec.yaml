@@ -53,14 +53,16 @@ dev_dependencies:
   json_serializable:
 
 dependency_overrides:
+  wt_action_button:
+    path: ../../../libraries/wt_action_button
   wt_app_scaffold:
     path: ..
-#  wt_firepod:
-#    path: ../../../libraries/wt_firepod
-#  wt_logging:
-#    path: ../../../libraries/wt_logging
-#  wt_settings:
-#    path: ../../../libraries/wt_settings
+  wt_firepod:
+    path: ../../../libraries/wt_firepod
+  wt_logging:
+    path: ../../../libraries/wt_logging
+  wt_settings:
+    path: ../../../libraries/wt_settings
 
 flutter:
   uses-material-design: true

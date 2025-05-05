@@ -1,19 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:wt_app_scaffold/models/page_info.dart';
 
 abstract class ItemDefinition {
-  final String title;
-  final IconData icon;
+  final PageInfo pageInfo;
   final bool debug;
   final bool primary;
-  final String? _tabTitle;
 
   const ItemDefinition({
-    required this.title,
-    required this.icon,
+    required this.pageInfo,
     this.debug = false,
     this.primary = false,
-    String? tabTitle,
-  }) : _tabTitle = tabTitle;
+  });
 
-  String get tabTitle => _tabTitle ?? title;
+  @Deprecated('Need to migrate to directly using the PageInfo')
+  String get title => pageInfo.title;
+  @Deprecated('Need to migrate to directly using the PageInfo')
+  String get tabTitle => pageInfo.tabTitle;
+  @Deprecated('Need to migrate to directly using the PageInfo')
+  String get name => pageInfo.name;
+  @Deprecated('Need to migrate to directly using the PageInfo')
+  IconData get icon => pageInfo.icon;
 }

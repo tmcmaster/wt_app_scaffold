@@ -28,7 +28,7 @@ class CurvedNavBar extends ConsumerWidget {
           (definition) => Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(
-              definition.icon,
+              definition.pageInfo.icon,
               size: 20,
             ),
           ),

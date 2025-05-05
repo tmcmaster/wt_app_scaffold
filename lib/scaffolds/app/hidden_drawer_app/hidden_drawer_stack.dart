@@ -38,7 +38,7 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
     super.initState();
 
     final maxLength = widget.appDefinition.pages
-        .map((p) => p.title.split(' '))
+        .map((p) => p.pageInfo.title.split(' '))
         .expand((e) => e)
         .map((e) => e.length)
         .fold(0, (largest, size) => size > largest ? size : largest);

@@ -1511,11 +1511,9 @@ packages:
   wt_action_button:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "4882cc8e831fb05808f518bf3dac2f5b75db0edc"
-      url: "git@github.com:tmcmaster/wt_action_button.git"
-    source: git
+      path: "../../wt_action_button"
+      relative: true
+    source: path
     version: "1.0.0+1"
   wt_app_scaffold:
     dependency: "direct main"
@@ -1527,11 +1525,9 @@ packages:
   wt_firepod:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "6436900ba8c4c34e547582cba5ade603ec214ec3"
-      url: "git@github.com:tmcmaster/wt_firepod.git"
-    source: git
+      path: "../../wt_firepod"
+      relative: true
+    source: path
     version: "1.0.0+1"
   wt_firepod_list_view:
     dependency: "direct main"
@@ -1545,11 +1541,9 @@ packages:
   wt_logging:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "7baa9bfe29bb264b0f2a35e133a146e11603c14f"
-      url: "git@github.com:tmcmaster/wt_logging.git"
-    source: git
+      path: "../../wt_logging"
+      relative: true
+    source: path
     version: "1.0.3+3"
   wt_models:
     dependency: "direct main"
@@ -1563,11 +1557,9 @@ packages:
   wt_settings:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "9d9ef5b064bdaab5cd455195dc92ab49dc08258e"
-      url: "git@github.com:tmcmaster/wt_settings.git"
-    source: git
+      path: "../../wt_settings"
+      relative: true
+    source: path
     version: "1.0.0+1"
   xdg_directories:
     dependency: transitive

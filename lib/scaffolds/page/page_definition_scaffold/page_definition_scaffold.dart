@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_scaffold_page_context.dart';
 import 'package:wt_app_scaffold/models/app_spacing.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/bottom_menu_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/irregular_header_painter.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/tab_menu.dart';
@@ -95,7 +95,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                   fontSize: 20,
                 ),
                 elevation: 0,
-                title: Text(widget.pageDefinition.title),
+                title: Text(widget.pageDefinition.pageInfo.title),
                 leading: widget.pageDefinition.drawerBuilder == null
                     ? null
                     : DrawerButton(
@@ -152,7 +152,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                               color: Colors.transparent,
                               width: cardWidth,
                               child: TabMenu(
-                                titles: pages.map((p) => p.tabTitle).toList(),
+                                titles: pages.map((p) => p.pageInfo.tabTitle).toList(),
                                 controller: controller,
                               ),
                             ),
@@ -196,26 +196,12 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                                     controller: controller,
                                     children: pages
                                         .map(
-                                          (page) => page.builder(
-                                            AppScaffoldPageContext(
-                                              context: context,
-                                              ref: ref,
-                                              page: page,
-                                              state: widget.state,
-                                            ),
-                                          ),
+                                          (page) => AppScaffoldPage(pageDefinition: page),
                                         )
                                         .toList(),
                                   ),
                                 )
-                              : pages.first.builder(
-                                  AppScaffoldPageContext(
-                                    context: context,
-                                    ref: ref,
-                                    page: pages.first,
-                                    state: widget.state,
-                                  ),
-                                ),
+                              : AppScaffoldPage(pageDefinition: pages.first),
                         ),
                         backgroundColor: Colors.transparent,
                       ),

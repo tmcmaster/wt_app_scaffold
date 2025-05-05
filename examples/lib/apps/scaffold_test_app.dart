@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/landing_page.dart';
 // import 'package:wt_app_scaffold_examples/apps/widgets/test_web_view.dart';
@@ -23,19 +24,26 @@ mixin ScaffoldTestApp {
     applicationType: ApplicationType.goRouterMenu,
     pages: [
       PageDefinition(
-        title: 'Landing Page',
-        icon: FontAwesomeIcons.clipboard,
+        pageInfo: const PageInfo(
+          name: 'landingPage',
+          title: 'Landing Page',
+          icon: FontAwesomeIcons.clipboard,
+        ),
         primary: true,
         scaffoldType: ScaffoldPageType.transparentCard,
-        builder: (_) => const LandingPage(),
+        pageBuilder: (_) => const LandingPage(),
         drawerBuilder: (context) => Container(),
       ),
+      // Example migration for the commented-out page:
       // PageDefinition(
-      //   title: 'Another Page',
-      //   icon: FontAwesomeIcons.clipboard,
+      //   pageInfo: const PageInfo(
+      //     name: 'anotherPage',
+      //     title: 'Another Page',
+      //     icon: FontAwesomeIcons.clipboard,
+      //   ),
       //   primary: true,
       //   scaffoldType: ScaffoldPageType.transparentCard,
-      //   builder: (_) => const TestWebView(),
+      //   pageBuilder: (_) => const TestWebView(),
       // ),
     ],
   );

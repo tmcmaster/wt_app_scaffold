@@ -31,7 +31,7 @@ class HiddenPageBuilder extends ConsumerWidget {
         ? Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              title: Text(pageDefinition.title),
+              title: Text(pageDefinition.pageInfo.title),
               backgroundColor: colorScheme.primary,
               leading: _createIconButton(context),
             ),

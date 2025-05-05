@@ -5,16 +5,26 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_scaffold_page_context.dart';
 import 'package:wt_app_scaffold/models/page_builder.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_definition_scaffold.dart';
 
 class ScaffoldPageTypeWrapper extends ConsumerWidget {
   static final scaffoldBuilders = <ScaffoldPageType, AppScaffoldPageBuilder>{
-    ScaffoldPageType.plain: (pageContext) => pageContext.page.builder(pageContext),
-    ScaffoldPageType.transparentCard: (pageContext) => PageDefinitionScaffold(
-          pageDefinition: pageContext.page,
-          state: pageContext.state,
-        ),
+    // ScaffoldPageType.plain: (pageContext) => pageContext.page.createPageContent(pageContext),
+    ScaffoldPageType.plain: _createPlainPage,
+    ScaffoldPageType.transparentCard: _createTransparentCard,
   };
+
+  static Widget _createPlainPage(AppScaffoldPageContext pageContext) {
+    return AppScaffoldPage(pageDefinition: pageContext.page);
+  }
+
+  static Widget _createTransparentCard(AppScaffoldPageContext pageContext) {
+    return PageDefinitionScaffold(
+      pageDefinition: pageContext.page,
+      state: pageContext.state,
+    );
+  }
 
   final PageDefinition page;
   final GoRouterState? state;
@@ -30,7 +40,7 @@ class ScaffoldPageTypeWrapper extends ConsumerWidget {
     final MediaQueryData data = MediaQuery.of(context);
     final scaleFactor = ref.watch(ApplicationSettings.textScaleFactor.value).value;
     final calculatedScaffoldPageType = page.scaffoldType ?? scaffoldPageType;
-    final AppScaffoldPageBuilder pageBuilder = scaffoldBuilders[calculatedScaffoldPageType] ?? page.builder;
+    final AppScaffoldPageBuilder pageBuilder = scaffoldBuilders[calculatedScaffoldPageType] ?? _createPlainPage;
     return SafeArea(
       child: MediaQuery(
         data: data.copyWith(
