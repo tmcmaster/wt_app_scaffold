@@ -16,11 +16,13 @@ import 'package:wt_logging/wt_logging.dart';
 class AppScaffoldPage extends ConsumerStatefulWidget {
   final PageDefinition pageDefinition;
   final GoRouterState? state;
+  final bool scrollable;
 
   const AppScaffoldPage({
     super.key,
     required this.pageDefinition,
     this.state,
+    this.scrollable = false,
   });
 
   @override
@@ -46,9 +48,11 @@ class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
     final pageContentBuilder = widget.pageDefinition.pageContentBuilder;
     final pageBuilder = widget.pageDefinition.pageBuilder;
     final homeRoute = widget.pageDefinition.homeRoute;
+    final hasSettings = settingsProviders.isNotEmpty;
 
     return pageBuilder?.call(pageContext) ??
         AppScaffoldPageContent(
+          scrollable: widget.scrollable,
           header: AppScaffoldPageHeader(
             icon: Icon(pageIcon),
             title: Text(
@@ -66,7 +70,7 @@ class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
             settingsProviders: settingsProviders,
           ),
           footerBuilder: (context) => AppScaffoldPageFooter(
-            controlsButton: const AppScaffoldPageDrawerButton(),
+            controlsButton: hasSettings ? const AppScaffoldPageDrawerButton() : null,
             actionsBar: AppScaffoldPageButtonBar(actionsProviders: actionsProviders),
             homeButton: AppScaffoldPageHomeButton(homeRoute: homeRoute),
           ),

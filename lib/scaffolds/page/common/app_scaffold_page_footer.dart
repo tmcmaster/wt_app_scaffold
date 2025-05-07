@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppScaffoldPageFooter extends StatelessWidget {
-  final Widget controlsButton;
+  final Widget? controlsButton;
   final Widget actionsBar;
   final Widget homeButton;
 
@@ -22,10 +22,18 @@ class AppScaffoldPageFooter extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            width: 50,
-            child: controlsButton,
-          ),
+          if (controlsButton != null)
+            SizedBox(
+              width: 50,
+              child: controlsButton,
+            ),
+          if (controlsButton != null)
+            Container(
+              color: Colors.grey.shade300,
+              width: 2,
+              height: 20,
+              margin: const EdgeInsets.only(right: 2),
+            ),
           Expanded(
             child: actionsBar,
           ),
