@@ -17,6 +17,7 @@ export 'scaffolds/app/hidden_drawer_app/hidden_drawer_app.dart';
 export 'scaffolds/app/hidden_drawer_app/hidden_drawer_opener.dart';
 export 'scaffolds/page/bottom_drawer_page/bottom_drawer_page.dart';
 export 'scaffolds/page/bottom_drawer_page/settings_page.dart';
+export 'scaffolds/page/common/app_scaffold_page_definition_list_extension.dart';
 export 'scaffolds/page/sliver_scaffold_page.dart';
 export 'screens/theme_preview_screen.dart';
 export 'widgets/app_version.dart';

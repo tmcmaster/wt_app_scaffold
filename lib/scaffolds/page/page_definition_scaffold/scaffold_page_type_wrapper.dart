@@ -10,7 +10,6 @@ import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_def
 
 class ScaffoldPageTypeWrapper extends ConsumerWidget {
   static final scaffoldBuilders = <ScaffoldPageType, AppScaffoldPageBuilder>{
-    // ScaffoldPageType.plain: (pageContext) => pageContext.page.createPageContent(pageContext),
     ScaffoldPageType.plain: _createPlainPage,
     ScaffoldPageType.transparentCard: _createTransparentCard,
   };

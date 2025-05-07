@@ -106,7 +106,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                           _scaffoldKey.currentState!.openDrawer();
                         },
                       ),
-                actions: widget.pageDefinition.homeRoute == null
+                actions: widget.pageDefinition.hideBackButton || widget.pageDefinition.homeRoute == null
                     ? null
                     : [
                         Padding(

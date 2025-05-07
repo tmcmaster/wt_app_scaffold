@@ -20,6 +20,7 @@ class PageDefinition extends ItemDefinition {
   final ScaffoldPageType? scaffoldType;
   final bool centerTitle;
   final bool showAppBar;
+  final bool hideBackButton;
   final bool showBottomMenu;
   final bool registerChildRoutes;
   final String? homeRoute;
@@ -45,6 +46,7 @@ class PageDefinition extends ItemDefinition {
     this.actionsProviders = const [],
     this.settingsProviders = const [],
     this.pageBodyBuilder,
+    this.hideBackButton = false,
   });
 
   String get route => '/${pageInfo.name}';
@@ -66,6 +68,7 @@ class PageDefinition extends ItemDefinition {
     bool? centerTitle,
     bool? showAppBar,
     bool? showBottomMenu,
+    bool? hideBackButton,
     String? homeRoute,
     List<ProviderBase<ActionButtonDefinition>>? actionsProviders,
     List<BaseSettingsProviders>? settingsProviders,
@@ -88,6 +91,7 @@ class PageDefinition extends ItemDefinition {
       scaffoldType: scaffoldType ?? this.scaffoldType,
       centerTitle: centerTitle ?? this.centerTitle,
       showAppBar: showAppBar ?? this.showAppBar,
+      hideBackButton: hideBackButton ?? this.hideBackButton,
       showBottomMenu: showBottomMenu ?? this.showBottomMenu,
       homeRoute: homeRoute ?? this.homeRoute,
       actionsProviders: actionsProviders ?? this.actionsProviders,

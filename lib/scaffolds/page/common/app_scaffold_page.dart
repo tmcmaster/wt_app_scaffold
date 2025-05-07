@@ -45,6 +45,7 @@ class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
     final pageIcon = widget.pageDefinition.pageInfo.icon;
     final pageContentBuilder = widget.pageDefinition.pageContentBuilder;
     final pageBuilder = widget.pageDefinition.pageBuilder;
+    final homeRoute = widget.pageDefinition.homeRoute;
 
     return pageBuilder?.call(pageContext) ??
         AppScaffoldPageContent(
@@ -67,7 +68,7 @@ class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
           footerBuilder: (context) => AppScaffoldPageFooter(
             controlsButton: const AppScaffoldPageDrawerButton(),
             actionsBar: AppScaffoldPageButtonBar(actionsProviders: actionsProviders),
-            homeButton: const AppScaffoldPageHomeButton(),
+            homeButton: AppScaffoldPageHomeButton(homeRoute: homeRoute),
           ),
         );
   }
