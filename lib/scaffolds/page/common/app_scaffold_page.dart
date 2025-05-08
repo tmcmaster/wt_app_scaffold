@@ -71,8 +71,14 @@ class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
           ),
           footerBuilder: (context) => AppScaffoldPageFooter(
             controlsButton: hasSettings ? const AppScaffoldPageDrawerButton() : null,
-            actionsBar: AppScaffoldPageButtonBar(actionsProviders: actionsProviders),
-            homeButton: AppScaffoldPageHomeButton(homeRoute: homeRoute),
+            actionsBar: AppScaffoldPageButtonBar(
+              actionsProviders: actionsProviders,
+            ),
+            homeButton: homeRoute == null
+                ? null
+                : AppScaffoldPageHomeButton(
+                    homeRoute: homeRoute,
+                  ),
           ),
         );
   }

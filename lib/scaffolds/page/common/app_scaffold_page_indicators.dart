@@ -12,7 +12,8 @@ class AppScaffoldPageIndicators extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
+    return Wrap(
+      alignment: WrapAlignment.end,
       children: actionsProviders
           .map(
             (provider) => ref.read(provider).statusIcon(),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppScaffoldPageFooter extends StatelessWidget {
   final Widget? controlsButton;
   final Widget actionsBar;
-  final Widget homeButton;
+  final Widget? homeButton;
 
   const AppScaffoldPageFooter({
     super.key,
@@ -37,10 +37,11 @@ class AppScaffoldPageFooter extends StatelessWidget {
           Expanded(
             child: actionsBar,
           ),
-          SizedBox(
-            width: 50,
-            child: homeButton,
-          ),
+          if (homeButton != null)
+            SizedBox(
+              width: 50,
+              child: homeButton,
+            ),
         ],
       ),
     );

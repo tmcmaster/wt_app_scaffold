@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_action_button/action_button_definition.dart';
+import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
 import 'package:wt_app_scaffold/models/drawer_builder.dart';
 import 'package:wt_app_scaffold/models/item_definition.dart';
 import 'package:wt_app_scaffold/models/page_builder.dart';
 import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_logging/wt_logging.dart';
-import 'package:wt_settings/wt_settings.dart';
 
 class PageDefinition extends ItemDefinition {
   static final log = logger(PageDefinition, level: Level.debug);
@@ -23,9 +21,9 @@ class PageDefinition extends ItemDefinition {
   final bool hideBackButton;
   final bool showBottomMenu;
   final bool registerChildRoutes;
-  final String? homeRoute;
-  final List<ProviderBase<ActionButtonDefinition>> actionsProviders;
-  final List<BaseSettingsProviders> settingsProviders;
+  final PageInfo? homeRoute;
+  final AppScaffoldActionProviders actionsProviders;
+  final AppScaffoldSettingsMapProviders settingsProviders;
   final Widget Function()? pageBodyBuilder;
 
   const PageDefinition({
@@ -44,7 +42,7 @@ class PageDefinition extends ItemDefinition {
     this.registerChildRoutes = false,
     this.homeRoute,
     this.actionsProviders = const [],
-    this.settingsProviders = const [],
+    this.settingsProviders = const {},
     this.pageBodyBuilder,
     this.hideBackButton = false,
   });
@@ -69,9 +67,9 @@ class PageDefinition extends ItemDefinition {
     bool? showAppBar,
     bool? showBottomMenu,
     bool? hideBackButton,
-    String? homeRoute,
-    List<ProviderBase<ActionButtonDefinition>>? actionsProviders,
-    List<BaseSettingsProviders>? settingsProviders,
+    PageInfo? homeRoute,
+    AppScaffoldActionProviders? actionsProviders,
+    AppScaffoldSettingsMapProviders? settingsProviders,
   }) {
     return PageDefinition(
       pageInfo: this.pageInfo.copyWith(

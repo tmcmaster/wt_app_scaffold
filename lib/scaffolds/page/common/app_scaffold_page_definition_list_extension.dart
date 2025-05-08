@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/page_info.dart';
 
 extension AppScaffoldPageDefinitionListExtension on List<PageDefinition> {
   List<PageDefinition> whereRouteIs(List<String> testRoutes) {
@@ -17,7 +18,7 @@ extension AppScaffoldPageDefinitionListExtension on List<PageDefinition> {
 
   List<PageDefinition> copyWith({
     bool? primary,
-    String? homeRoute,
+    PageInfo? homeRoute,
     bool? hideBackButton,
   }) {
     return map((p) => p.copyWith(

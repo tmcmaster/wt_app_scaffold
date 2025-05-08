@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class AppScaffoldPageContent extends ConsumerStatefulWidget {
   final Widget body;
@@ -37,28 +36,8 @@ class _AppScaffoldPageContentState extends ConsumerState<AppScaffoldPageContent>
           ),
         ],
       ),
-      drawer: Drawer(
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'Settings',
-              style: TextStyle(color: Colors.black),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  context.pop();
-                },
-                icon: const Icon(
-                  Icons.close,
-                  color: Colors.black,
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      // drawer: widget.drawer,
+      drawer: widget.drawer,
+      drawer: widget.drawer,
       bottomNavigationBar: widget.footerBuilder == null
           ? null
           : Builder(

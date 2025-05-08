@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_settings/wt_settings.dart';
+import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_controls_card.dart';
 
 class AppScaffoldPageControls extends StatelessWidget {
-  final List<BaseSettingsProviders<StateNotifier, dynamic>> settingsProviders;
+  final AppScaffoldSettingsMapProviders settingsProviders;
 
   const AppScaffoldPageControls({
     super.key,
@@ -12,10 +12,15 @@ class AppScaffoldPageControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: settingsProviders
+    return ListView(
+      children: settingsProviders.entries
           .map(
-            (provider) => provider.component,
+            (entry) => Center(
+              child: AppScaffoldPageControlsCard(
+                title: entry.key,
+                settingsProviders: entry.value,
+              ),
+            ),
           )
           .toList(),
     );

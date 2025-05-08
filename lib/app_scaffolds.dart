@@ -20,6 +20,7 @@ export 'scaffolds/page/bottom_drawer_page/settings_page.dart';
 export 'scaffolds/page/common/app_scaffold_page_definition_list_extension.dart';
 export 'scaffolds/page/sliver_scaffold_page.dart';
 export 'screens/theme_preview_screen.dart';
+export 'utils/utils.dart';
 export 'widgets/app_version.dart';
 export 'widgets/container_with_drawer.dart';
 export 'widgets/locale_selector.dart';
