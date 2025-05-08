@@ -37,7 +37,6 @@ class _AppScaffoldPageContentState extends ConsumerState<AppScaffoldPageContent>
         ],
       ),
       drawer: widget.drawer,
-      drawer: widget.drawer,
       bottomNavigationBar: widget.footerBuilder == null
           ? null
           : Builder(
