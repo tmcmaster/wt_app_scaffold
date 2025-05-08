@@ -11,7 +11,6 @@ import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_footer.d
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_header.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_home_button.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_indicators.dart';
-import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldPage extends ConsumerStatefulWidget {
   final PageDefinition pageDefinition;
@@ -30,8 +29,6 @@ class AppScaffoldPage extends ConsumerStatefulWidget {
 }
 
 class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
-  static final log = logger(AppScaffoldPage, level: Level.debug);
-
   @override
   Widget build(BuildContext context) {
     final pageContext = AppScaffoldPageContext(
