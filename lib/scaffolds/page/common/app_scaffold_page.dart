@@ -35,6 +35,7 @@ class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
       context: context,
       ref: ref,
       page: widget.pageDefinition,
+      state: widget.state,
     );
 
     final textTheme = Theme.of(context).textTheme;

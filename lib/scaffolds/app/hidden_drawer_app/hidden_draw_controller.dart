@@ -25,6 +25,11 @@ class HiddenDrawPageController extends StateNotifier<PageDefinition> with AppSca
   }
 
   @override
+  void push(String path, {Object? extra}) {
+    go(path, extra: extra);
+  }
+
+  @override
   void go(String path, {Object? extra}) {
     final newPage = _pageIndex[path];
     if (newPage != null) {

@@ -6,10 +6,8 @@ import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_eve
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_source.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent>
-    with AppScaffoldRouter {
-  static final log =
-      logger(BottomNavBarSelectedPageNotifier, level: Level.debug);
+class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent> with AppScaffoldRouter {
+  static final log = logger(BottomNavBarSelectedPageNotifier, level: Level.debug);
 
   late final Map<String, int> pageIndex;
 
@@ -27,6 +25,11 @@ class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent>
         (index, page) => MapEntry(page.route, index),
       ),
     );
+  }
+
+  @override
+  void push(String path, {Object? extra}) {
+    go(path, extra: extra);
   }
 
   @override

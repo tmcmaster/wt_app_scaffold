@@ -7,9 +7,7 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class CurvedNavBarController
-    extends StateNotifier<GlobalKey<CurvedNavigationBarState>>
-    with AppScaffoldRouter {
+class CurvedNavBarController extends StateNotifier<GlobalKey<CurvedNavigationBarState>> with AppScaffoldRouter {
   static final log = logger(CurvedNavBarController);
 
   Map<String, int> routeIndexMap = {};
@@ -17,8 +15,7 @@ class CurvedNavBarController
   Map<int, PageDefinition> indexPageDefinitionMap = {};
   Ref ref;
 
-  CurvedNavBarController(this.ref)
-      : super(GlobalKey<CurvedNavigationBarState>()) {
+  CurvedNavBarController(this.ref) : super(GlobalKey<CurvedNavigationBarState>()) {
     ref.listen(AppScaffoldProviders.appPrimaryPages, (previous, pages) {
       _calculateMaps(pages);
       state = GlobalKey<CurvedNavigationBarState>();
@@ -69,6 +66,11 @@ class CurvedNavBarController
     if (newIndex != null) {
       state.currentState?.setPage(newIndex);
     }
+  }
+
+  @override
+  void push(String path, {Object? extra}) {
+    go(path, extra: extra);
   }
 
   @override

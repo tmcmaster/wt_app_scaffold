@@ -196,12 +196,18 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                                     controller: controller,
                                     children: pages
                                         .map(
-                                          (page) => AppScaffoldPage(pageDefinition: page),
+                                          (page) => AppScaffoldPage(
+                                            pageDefinition: page,
+                                            state: widget.state,
+                                          ),
                                         )
                                         .toList(),
                                   ),
                                 )
-                              : AppScaffoldPage(pageDefinition: pages.first),
+                              : AppScaffoldPage(
+                                  pageDefinition: pages.first,
+                                  state: widget.state,
+                                ),
                         ),
                         backgroundColor: Colors.transparent,
                       ),

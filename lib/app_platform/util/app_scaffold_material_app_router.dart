@@ -12,6 +12,12 @@ class AppScaffoldMaterialAppRouter implements AppScaffoldRouter {
 
   @override
   void go(String path, {Object? extra}) {
+    // TODO: need to review if this should be a push replace
+    ref.read(UserLogStore.navigatorKey).currentState?.pushNamed(path);
+  }
+
+  @override
+  void push(String path, {Object? extra}) {
     ref.read(UserLogStore.navigatorKey).currentState?.pushNamed(path);
   }
 }

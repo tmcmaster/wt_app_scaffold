@@ -10,11 +10,17 @@ import 'package:wt_logging/wt_logging.dart';
 
 class ScaffoldAppGoRouter with AppScaffoldRouter {
   final Ref ref;
+
   ScaffoldAppGoRouter(this.ref);
 
   @override
   void go(String path, {Object? extra}) {
     ref.read(GoRouterMenuApp.goRouter).go(path, extra: extra);
+  }
+
+  @override
+  void push(String path, {Object? extra}) {
+    ref.read(GoRouterMenuApp.goRouter).push(path, extra: extra);
   }
 }
 

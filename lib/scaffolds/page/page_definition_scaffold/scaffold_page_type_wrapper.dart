@@ -15,7 +15,10 @@ class ScaffoldPageTypeWrapper extends ConsumerWidget {
   };
 
   static Widget _createPlainPage(AppScaffoldPageContext pageContext) {
-    return AppScaffoldPage(pageDefinition: pageContext.page);
+    return AppScaffoldPage(
+      pageDefinition: pageContext.page,
+      state: pageContext.state,
+    );
   }
 
   static Widget _createTransparentCard(AppScaffoldPageContext pageContext) {
