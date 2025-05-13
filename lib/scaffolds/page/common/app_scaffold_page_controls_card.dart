@@ -14,35 +14,24 @@ class AppScaffoldPageControlsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
-    return Column(
-      children: [
-        Text(
-          title,
-          style: textTheme.titleLarge,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 8),
-        Wrap(
-          runSpacing: 16,
-          spacing: 16,
-          children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
-                  width: 300,
-                  child: Column(
-                      children: settingsProviders
-                          .map(
-                            (setting) => setting.component,
-                          )
-                          .toList()),
-                ),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SizedBox(
+          //width: 300,
+          child: Column(
+            children: [
+              Text(
+                title,
+                style: textTheme.titleLarge,
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
-        )
-      ],
+              const SizedBox(height: 8),
+              ...settingsProviders.map((setting) => setting.component),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

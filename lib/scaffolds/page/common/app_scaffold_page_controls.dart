@@ -12,17 +12,21 @@ class AppScaffoldPageControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: settingsProviders.entries
-          .map(
-            (entry) => Center(
-              child: AppScaffoldPageControlsCard(
-                title: entry.key,
-                settingsProviders: entry.value,
+    return SingleChildScrollView(
+      child: Wrap(
+        runSpacing: 16,
+        spacing: 16,
+        children: settingsProviders.entries
+            .map(
+              (entry) => Container(
+                child: AppScaffoldPageControlsCard(
+                  title: entry.key,
+                  settingsProviders: entry.value,
+                ),
               ),
-            ),
-          )
-          .toList(),
+            )
+            .toList(),
+      ),
     );
   }
 }
