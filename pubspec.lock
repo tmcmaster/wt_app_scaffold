@@ -1071,30 +1071,38 @@ packages:
   wt_action_button:
     dependency: "direct main"
     description:
-      path: "../wt_action_button"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "703b4a2371b5cfaa97dec3253324103979edabdf"
+      url: "git@github.com:tmcmaster/wt_action_button.git"
+    source: git
     version: "1.0.0+1"
   wt_logging:
     dependency: "direct main"
     description:
-      path: "../wt_logging"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "5e6a7172529aaec58d1d1bf94f24e07ffb504187"
+      url: "git@github.com:tmcmaster/wt_logging.git"
+    source: git
     version: "1.0.3+3"
   wt_models:
     dependency: "direct main"
     description:
-      path: "../wt_models"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "43b2fe00b0671cc52c319060437862a3af724589"
+      url: "git@github.com:tmcmaster/wt_models.git"
+    source: git
     version: "1.0.0+1"
   wt_settings:
     dependency: "direct main"
     description:
-      path: "../wt_settings"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "026275e5ebad1364c7f3175fa6ad7ded4fa36a5a"
+      url: "git@github.com:tmcmaster/wt_settings.git"
+    source: git
     version: "1.0.0+1"
   xdg_directories:
     dependency: transitive

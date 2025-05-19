@@ -4,13 +4,33 @@ import 'package:wt_app_scaffold/app_platform/features/app_scaffold_application_f
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_login_feature.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_plain_app_feature.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_platform_feature.dart';
+import 'package:wt_app_scaffold/app_platform/model/app_scaffold_context_builder.dart';
+import 'package:wt_app_scaffold/app_platform/model/app_scaffold_context_map.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
+import 'package:wt_app_scaffold/app_platform/model/app_scaffold_widget_builder.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_provider_monitor.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 bool _hasRun = false;
+
+Future<AppScaffoldContextMap> waitThenBuildHold(
+  List<Future> waitFor,
+  AppScaffoldContextBuilder builder,
+) async {
+  await Future.wait(waitFor);
+  return builder({});
+}
+
+Future<Widget> waitThenBuild(
+  List<Provider<Future>> waitFor,
+  AppScaffoldWidgetBuilder builder,
+  WidgetRef ref,
+) async {
+  await Future.wait(waitFor.map((p) => ref.read(p)).toList());
+  return Builder(builder: (context) => builder(context, ref));
+}
 
 // handles the splash screen and provider scope
 Future<void> runMyApp(
@@ -26,13 +46,14 @@ Future<void> runMyApp(
   List<Override>? includeOverrides,
   Widget? splashWidget,
   List<ProviderBase> preloadProviders = const [],
+  List<Provider<Future>> waitFor = const [],
 }) async {
   // ensure the app only run once.
   if (_hasRun) {
-    debugPrint('!!!! Application has already been started !!!!');
+    debugPrint('‼️ Application has already been started  ‼️');
     return;
   } else {
-    debugPrint('!!!! Starting the Application !!!!');
+    debugPrint('✅ Starting the Application  ✅');
     _hasRun = true;
   }
 
@@ -79,7 +100,20 @@ Future<void> runMyApp(
                 for (final provider in preloadProviders) {
                   ref.read(provider);
                 }
-                return platformDefinition.widgetBuilder(context, ref);
+                return FutureBuilder(
+                    future: waitThenBuild(waitFor, platformDefinition.widgetBuilder, ref),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                        debugPrint('✅ All providers have been loaded  ✅');
+                        return snapshot.data!;
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.green,
+                          ),
+                        );
+                      }
+                    });
               },
             ),
           );
