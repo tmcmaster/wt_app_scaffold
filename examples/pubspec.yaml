@@ -19,8 +19,8 @@ dependencies:
   flutter_riverpod:
   font_awesome_flutter:
   form_builder_validators:
-  freezed:
-  freezed_annotation:
+  freezed_annotation: ^2.4.4
+  json_annotation: 4.9.0
   go_router:
   path_provider:
   url_launcher:
@@ -50,19 +50,20 @@ dev_dependencies:
   flutter_native_splash:
   flutter_test:
     sdk: flutter
+  freezed: ^2.4.1
   json_serializable:
 
 dependency_overrides:
   wt_action_button:
-    path: ../../../libraries/wt_action_button
+    path: ../../wt_action_button
   wt_app_scaffold:
     path: ..
   wt_firepod:
-    path: ../../../libraries/wt_firepod
+    path: ../../wt_firepod
   wt_logging:
-    path: ../../../libraries/wt_logging
+    path: ../../wt_logging
   wt_settings:
-    path: ../../../libraries/wt_settings
+    path: ../../wt_settings
 
 flutter:
   uses-material-design: true
