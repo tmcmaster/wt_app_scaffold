@@ -2,7 +2,8 @@ name: wt_app_scaffold
 description: A package to manage the structure and navigation of an app.
 version: 1.1.0+3
 publish_to: 'none'
-homepage: https://github.com/tmcmaster/et-app-scaffold
+repository: https://github.com/tmcmaster/wt_app_scaffold/tree/wix_admin
+homepage: https://github.com/tmcmaster/wt-app-scaffold
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
