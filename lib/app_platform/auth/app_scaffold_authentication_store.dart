@@ -7,7 +7,7 @@ import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_user.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 mixin AppScaffoldAuthenticationStore {
-  static final log = logger(AppScaffoldAuthenticationStore, level: Level.debug);
+  static final log = logger(AppScaffoldAuthenticationStore);
   static final user = StateNotifierProvider<AppScaffoldAuthenticationInterface,
       AppScaffoldUser>(
     name: 'ScaffoldAuthenticationStore.notifier',

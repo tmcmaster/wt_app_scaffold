@@ -15,6 +15,7 @@ class HiddenDrawerMenu extends ConsumerWidget {
   final ValueChanged<PageDefinition> onSelectedItem;
   final VoidCallback onCloseDrawer;
   final double width;
+  final bool hidden;
 
   const HiddenDrawerMenu({
     super.key,
@@ -23,6 +24,7 @@ class HiddenDrawerMenu extends ConsumerWidget {
     required this.onSelectedItem,
     required this.onCloseDrawer,
     required this.width,
+    required this.hidden,
   });
 
   @override
@@ -74,7 +76,7 @@ class HiddenDrawerMenu extends ConsumerWidget {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _PageMenuItemButton(
               item: appDefinition.profilePage,

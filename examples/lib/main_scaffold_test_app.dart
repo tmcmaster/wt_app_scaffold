@@ -1,4 +1,5 @@
 import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
+import 'package:wt_app_scaffold_examples/apps/example_provider_manager.dart';
 import 'package:wt_app_scaffold_examples/apps/scaffold_test_app.dart';
 import 'package:wt_logging/wt_logging.dart';
 
@@ -13,5 +14,6 @@ void main() {
     includeOverrides: [],
     setApplicationLogLevel: Level.debug,
     enableProviderMonitoring: false,
+    providerManager: ExampleProviderManager.provider,
   );
 }

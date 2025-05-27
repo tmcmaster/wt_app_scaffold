@@ -51,6 +51,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_logging.git
   wt_models:
     git: git@github.com:tmcmaster/wt_models.git
+  wt_provider_manager:
+    git: git@github.com:tmcmaster/wt_provider_manager.git
   wt_settings:
     git: git@github.com:tmcmaster/wt_settings.git
 
@@ -64,13 +66,15 @@ dev_dependencies:
   json_serializable:
 
 dependency_overrides:
-#  device_preview:
-#    path: ../../fork/device_preview/device_preview
-#  wt_action_button:
-#    path: ../wt_action_button
-#  wt_logging:
-#    path: ../wt_logging
-#  wt_models:
-#    path: ../wt_models
-#  wt_settings:
-#    path: ../wt_settings
+  device_preview:
+    path: ../../fork/device_preview/device_preview
+  wt_action_button:
+    path: ../wt_action_button
+  wt_logging:
+    path: ../wt_logging
+  wt_models:
+    path: ../wt_models
+  wt_provider_manager:
+    path: ../wt_provider_manager
+  wt_settings:
+    path: ../wt_settings

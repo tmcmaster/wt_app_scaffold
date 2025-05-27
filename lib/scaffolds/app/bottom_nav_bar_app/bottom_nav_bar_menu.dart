@@ -8,7 +8,7 @@ import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_sou
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomNavBarMenu extends ConsumerWidget {
-  static final log = logger(BottomNavBarMenu, level: Level.debug);
+  static final log = logger(BottomNavBarMenu);
 
   // final List<PageDefinition> items;
   final StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent> provider;

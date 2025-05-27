@@ -1,17 +1,22 @@
 import 'package:color_blindness/color_blindness.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
 import 'package:wt_app_scaffold/models/font_size_factor.dart';
 import 'package:wt_settings/wt_settings.dart';
 
 mixin ApplicationSettings {
-  static void init(Ref ref) {
-    ref.read(applicationType.value);
-    ref.read(theme.value);
-    ref.read(colorScheme.value);
-    ref.read(debugMode.value);
-  }
+  static final AppScaffoldSettingsMapProviders settingsProviders = {
+    'App Scaffold': [
+      theme,
+      colorScheme,
+      debugMode,
+      applicationType,
+      verifyEmail,
+      colorBlindness,
+      textScaleFactor,
+    ],
+  };
 
   static final theme = SettingsEnumProviders<ThemeMode>(
     key: '__THEME__',
@@ -23,11 +28,22 @@ mixin ApplicationSettings {
   static final colorScheme = SettingsColorProviders(
     key: '__COLOR_SCHEME__',
     values: [
-      Colors.green,
-      Colors.orange,
       Colors.red,
-      Colors.blue,
+      Colors.pink,
       Colors.purple,
+      Colors.deepPurple,
+      Colors.indigo,
+      Colors.blue,
+      Colors.lightBlue,
+      Colors.cyan,
+      Colors.teal,
+      Colors.green,
+      Colors.lightGreen,
+      Colors.lime,
+      Colors.yellow,
+      Colors.amber,
+      Colors.orange,
+      Colors.deepOrange,
     ],
     initialValue: Colors.blue,
     none: Colors.blue,

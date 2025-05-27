@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldPageDrawerButton extends StatelessWidget {
-  static final log = logger(AppScaffoldPageDrawerButton, level: Level.debug);
+  static final log = logger(AppScaffoldPageDrawerButton);
 
   const AppScaffoldPageDrawerButton({
     super.key,

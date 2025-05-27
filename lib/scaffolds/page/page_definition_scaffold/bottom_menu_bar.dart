@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomMenuBar extends ConsumerWidget {
-  static final log = logger(BottomMenuBar, level: Level.debug);
+  static final log = logger(BottomMenuBar);
 
   final String activeRoute;
   final void Function(int selected, String route)? beforeChange;

@@ -3,7 +3,7 @@ import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definiti
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldPlainAppFeature extends AppScaffoldFeatureDefinition {
-  static final log = logger(AppScaffoldPlainAppFeature, level: Level.debug);
+  static final log = logger(AppScaffoldPlainAppFeature);
 
   AppScaffoldPlainAppFeature(Widget child)
       : super(

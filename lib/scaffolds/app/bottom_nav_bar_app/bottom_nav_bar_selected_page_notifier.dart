@@ -7,7 +7,7 @@ import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_sou
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent> with AppScaffoldRouter {
-  static final log = logger(BottomNavBarSelectedPageNotifier, level: Level.debug);
+  static final log = logger(BottomNavBarSelectedPageNotifier);
 
   late final Map<String, int> pageIndex;
 

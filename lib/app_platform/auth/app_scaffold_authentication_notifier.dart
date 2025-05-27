@@ -5,7 +5,7 @@ import 'package:wt_logging/wt_logging.dart';
 class AppScaffoldAuthenticationNotifier
     extends AppScaffoldAuthenticationInterface {
   static final log =
-      logger(AppScaffoldAuthenticationNotifier, level: Level.debug);
+      logger(AppScaffoldAuthenticationNotifier);
 
   AppScaffoldAuthenticationNotifier()
       : super(

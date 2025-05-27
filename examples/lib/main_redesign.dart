@@ -1,5 +1,6 @@
 import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
 import 'package:wt_app_scaffold_examples/apps/app_two.dart';
+import 'package:wt_app_scaffold_examples/apps/example_provider_manager.dart';
 import 'package:wt_app_scaffold_examples/secrets/firebase_options.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
@@ -19,5 +20,6 @@ void main() {
       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
       database: true,
     ),
+    providerManager: ExampleProviderManager.provider,
   );
 }

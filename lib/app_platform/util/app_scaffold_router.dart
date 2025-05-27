@@ -6,7 +6,7 @@ import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_draw_cont
 import 'package:wt_logging/wt_logging.dart';
 
 mixin AppScaffoldRouter {
-  static final log = logger(AppScaffoldRouter, level: Level.debug);
+  static final log = logger(AppScaffoldRouter);
 
   static final provider = Provider<AppScaffoldRouter>(
     name: 'AppScaffoldProviders.router',

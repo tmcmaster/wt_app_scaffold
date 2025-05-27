@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
+import 'package:wt_app_scaffold_examples/apps/example_provider_manager.dart';
 import 'package:wt_app_scaffold_examples/secrets/firebase_options.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 import 'package:wt_logging/wt_logging.dart';
@@ -25,5 +26,6 @@ void main() {
         log.d('Application has loaded.');
       },
     ),
+    providerManager: ExampleProviderManager.provider,
   );
 }

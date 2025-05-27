@@ -8,7 +8,7 @@ import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class PageDefinition extends ItemDefinition {
-  static final log = logger(PageDefinition, level: Level.debug);
+  static final log = logger(PageDefinition);
 
   final bool landing;
   final AppScaffoldPageBuilder? pageBuilder;

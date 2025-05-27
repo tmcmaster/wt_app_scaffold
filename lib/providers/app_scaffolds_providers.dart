@@ -6,7 +6,7 @@ import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 mixin AppScaffoldProviders {
-  static final log = logger(AppScaffoldProviders, level: Level.debug);
+  static final log = logger(AppScaffoldProviders);
 
   static final appDefinition = Provider<AppDefinition>(
     name: 'AppScaffoldProviders.appAppDefinition',

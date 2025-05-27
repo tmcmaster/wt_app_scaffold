@@ -25,7 +25,7 @@ class ScaffoldAppGoRouter with AppScaffoldRouter {
 }
 
 class GoRouterMenuApp extends ConsumerStatefulWidget {
-  static final log = logger(GoRouterMenuApp, level: Level.debug);
+  static final log = logger(GoRouterMenuApp);
 
   static final router = Provider<AppScaffoldRouter>(
     name: 'GoRouter',

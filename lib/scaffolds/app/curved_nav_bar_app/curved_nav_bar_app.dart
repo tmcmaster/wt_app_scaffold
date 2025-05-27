@@ -43,7 +43,7 @@ class CurvedNavBarApp extends ConsumerStatefulWidget {
 }
 
 class _CurvedNavBarAppState extends ConsumerState<CurvedNavBarApp> {
-  static final log = logger(CurvedNavBarApp, level: Level.debug);
+  static final log = logger(CurvedNavBarApp);
 
   @override
   Widget build(BuildContext context) {

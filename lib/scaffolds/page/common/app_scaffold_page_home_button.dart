@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldPageHomeButton extends ConsumerWidget {
-  static final log = logger(AppScaffoldPageHomeButton, level: Level.debug);
+  static final log = logger(AppScaffoldPageHomeButton);
 
   final PageInfo homeRoute;
 

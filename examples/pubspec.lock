@@ -1554,6 +1554,13 @@ packages:
       url: "git@github.com:tmcmaster/wt_models.git"
     source: git
     version: "1.0.0+1"
+  wt_provider_manager:
+    dependency: "direct main"
+    description:
+      path: "../../wt_provider_manager"
+      relative: true
+    source: path
+    version: "0.0.1"
   wt_settings:
     dependency: "direct main"
     description:

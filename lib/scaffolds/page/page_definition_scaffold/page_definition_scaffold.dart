@@ -26,7 +26,7 @@ class PageDefinitionScaffold extends ConsumerStatefulWidget {
 }
 
 class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold> with TickerProviderStateMixin {
-  static final log = logger(PageDefinitionScaffold, level: Level.debug);
+  static final log = logger(PageDefinitionScaffold);
 
   late TabController controller;
   // int selected = 0;
@@ -64,10 +64,16 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
 
   @override
   Widget build(BuildContext context) {
-    final tabIndex = Uri.parse(GoRouterState.of(context).uri.toString()).queryParameters['tabIndex'];
-    if (tabIndex != null) {
-      controller.animateTo(int.parse(tabIndex));
+    if (widget.state != null) {
+      final uri = Uri.parse(GoRouterState.of(context).uri.toString());
+      if (uri.queryParameters.containsKey('tabIndex')) {
+        final tabIndex = uri.queryParameters['tabIndex'];
+        if (tabIndex != null) {
+          controller.animateTo(int.parse(tabIndex));
+        }
+      }
     }
+
     final pages = [
       widget.pageDefinition,
       ...widget.pageDefinition.childPages,

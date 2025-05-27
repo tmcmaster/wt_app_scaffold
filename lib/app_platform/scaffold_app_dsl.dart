@@ -12,8 +12,11 @@ import 'package:wt_app_scaffold/app_platform/util/app_scaffold_provider_monitor.
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
 import 'package:wt_logging/wt_logging.dart';
+import 'package:wt_provider_manager/wt_provider_manager.dart';
 
 bool _hasRun = false;
+
+typedef ProviderBuilder<T> = T Function(Ref ref);
 
 Future<AppScaffoldContextMap> waitThenBuildHold(
   List<Future> waitFor,
@@ -23,16 +26,6 @@ Future<AppScaffoldContextMap> waitThenBuildHold(
   return builder({});
 }
 
-Future<Widget> waitThenBuild(
-  List<Provider<Future>> waitFor,
-  AppScaffoldWidgetBuilder builder,
-  WidgetRef ref,
-) async {
-  await Future.wait(waitFor.map((p) => ref.read(p)).toList());
-  return Builder(builder: (context) => builder(context, ref));
-}
-
-// handles the splash screen and provider scope
 Future<void> runMyApp(
   AppScaffoldFeatureDefinition featureDefinition, {
   bool devicePreview = false,
@@ -41,34 +34,25 @@ Future<void> runMyApp(
   bool enableProviderMonitoring = false,
   bool enableErrorMonitoring = false,
   Level setApplicationLogLevel = Level.warning,
+  Map<Type, Level> setLogLevels = const {},
   void Function(BuildContext, WidgetRef)? onReady,
   List<ProviderObserver>? includeObservers,
   List<Override>? includeOverrides,
   Widget? splashWidget,
-  List<ProviderBase> preloadProviders = const [],
-  List<Provider<Future>> waitFor = const [],
+  Provider<ProviderManager>? providerManager,
 }) async {
-  // ensure the app only run once.
+  logLevelMap.addAll(setLogLevels);
+  final log = logger('RunMyApp', level: setApplicationLogLevel);
+
   if (_hasRun) {
-    debugPrint('‼️ Application has already been started  ‼️');
+    log.w('⚠️ Application has already been started ⚠️');
     return;
   } else {
-    debugPrint('✅ Starting the Application  ✅');
+    log.i('✅ Starting the Application  ✅');
     _hasRun = true;
   }
 
   WidgetsFlutterBinding.ensureInitialized();
-  final log = logger('RunMyApp', level: Level.debug);
-
-  // if (kReleaseMode) {
-  //   await LogToFile.initialise();
-  //   LogToFile.log.i('Logging to file.');
-  // } else if (kDebugMode) {
-  //   log.i('Logging to the console.');
-  //   LogToFile.log.i('Logging to file.');
-  // } else if (kProfileMode) {
-  //   LogToFile.log.i('Logging to console.');
-  // }
 
   final platformDefinition = AppScaffoldPlatformFeature(
     featureDefinition,
@@ -97,23 +81,33 @@ Future<void> runMyApp(
             ],
             child: Consumer(
               builder: (context, ref, _) {
-                for (final provider in preloadProviders) {
-                  ref.read(provider);
+                Future<Widget> waitThenBuild(
+                  ProviderBase<ProviderManager> providerManager,
+                  AppScaffoldWidgetBuilder builder,
+                ) async {
+                  final futureProvider = ProviderManager.createInitialisationProvider(providerManager);
+                  log.i('🐹Provider manager to complete: ${providerManager.name}');
+                  await ref.read(futureProvider);
+                  log.i('🐹Provider manager has completed: ${providerManager.name}');
+                  return Builder(builder: (context) => builder(context, ref));
                 }
-                return FutureBuilder(
-                    future: waitThenBuild(waitFor, platformDefinition.widgetBuilder, ref),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
-                        debugPrint('✅ All providers have been loaded  ✅');
-                        return snapshot.data!;
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.green,
-                          ),
-                        );
-                      }
-                    });
+
+                return providerManager == null
+                    ? platformDefinition.widgetBuilder(context, ref)
+                    : FutureBuilder(
+                        future: waitThenBuild(providerManager, platformDefinition.widgetBuilder),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                            log.i('✅ All providers have been loaded  ✅');
+                            return snapshot.data!;
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.green,
+                              ),
+                            );
+                          }
+                        });
               },
             ),
           );
@@ -135,19 +129,7 @@ Future<void> runMyApp(
   );
 }
 
-// AppScaffoldApplicationFeature? findAppScaffoldApplicationFeature(AppScaffoldFeatureDefinition featureDefinition) {
-//   if (featureDefinition is AppScaffoldApplicationFeature) {
-//     return featureDefinition;
-//   } else if (featureDefinition.childFeature != null) {
-//     return findAppScaffoldApplicationFeature(featureDefinition.childFeature!);
-//   } else {
-//     return null;
-//   }
-// }
-
 const andAppScaffold = withAppScaffold;
-
-typedef ProviderBuilder<T> = T Function(Ref ref);
 
 AppScaffoldFeatureDefinition withAppScaffold({
   required AppDetails appDetails,

@@ -89,12 +89,13 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
       child: HiddenDrawerMenu(
         appDefinition: widget.appDefinition,
         debugMode: widget.debugMode,
-        width: xOffset,
+        width: offsetWhenOpenX,
         onCloseDrawer: closeDrawer,
         onSelectedItem: (page) {
           ref.read(AppScaffoldRouter.provider).go(page.route);
           closeDrawer();
         },
+        hidden: !isDrawerOpen,
       ),
     );
   }

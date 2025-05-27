@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldMaterialApp extends ConsumerWidget {
-  static final log = logger(AppScaffoldMaterialApp, level: Level.warning);
+  static final log = logger(AppScaffoldMaterialApp);
 
   final Map<String, WidgetBuilder> routes;
   final String initialRoute;

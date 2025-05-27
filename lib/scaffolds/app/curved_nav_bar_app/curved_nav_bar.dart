@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class CurvedNavBar extends ConsumerWidget {
-  static final log = logger(CurvedNavBar, level: Level.debug);
+  static final log = logger(CurvedNavBar);
 
   final ValueChanged<int> onChange;
   final int index;

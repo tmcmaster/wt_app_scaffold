@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldProviderMonitor with ChangeNotifier implements ProviderObserver {
-  static final log = logger(AppScaffoldProviderMonitor, level: Logger.level);
+  static final log = logger(AppScaffoldProviderMonitor);
 
   static final instance = AppScaffoldProviderMonitor._();
 

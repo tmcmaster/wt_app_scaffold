@@ -6,7 +6,7 @@ import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/scaffold
 import 'package:wt_logging/wt_logging.dart';
 
 class HiddenPageBuilder extends ConsumerWidget {
-  static final log = logger(HiddenPageBuilder, level: Level.debug);
+  static final log = logger(HiddenPageBuilder);
 
   final PageDefinition pageDefinition;
   final ScaffoldPageType? pageType;

@@ -52,7 +52,7 @@ class BottomNavBarApp extends ConsumerStatefulWidget {
 }
 
 class _BottomNavBarAppState extends ConsumerState<BottomNavBarApp> {
-  static final log = logger(BottomNavBarApp, level: Level.debug);
+  static final log = logger(BottomNavBarApp);
   @override
   Widget build(BuildContext context) {
     log.d('Rebuilding');

@@ -7,7 +7,7 @@ import 'package:wt_logging/wt_logging.dart';
 
 // global application settings like error handling, monitoring and logging levels
 class AppScaffoldPlatformFeature extends AppScaffoldFeatureDefinition {
-  static final log = logger(AppScaffoldPlatformFeature, level: Level.debug);
+  static final log = logger(AppScaffoldPlatformFeature);
 
   AppScaffoldPlatformFeature(
     AppScaffoldFeatureDefinition childFeature, {

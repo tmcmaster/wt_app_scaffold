@@ -46,7 +46,7 @@ class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
 }
 
 class AppScaffoldApplicationContainer extends ConsumerWidget {
-  static final log = logger(AppScaffoldApplicationContainer, level: Level.warning);
+  static final log = logger(AppScaffoldApplicationContainer);
 
   const AppScaffoldApplicationContainer({
     super.key,

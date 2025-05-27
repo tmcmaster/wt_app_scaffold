@@ -41,6 +41,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_logging.git
   wt_models:
     git: git@github.com:tmcmaster/wt_models.git
+  wt_provider_manager:
+    git: git@github.com:tmcmaster/wt_provider_manager.git
   wt_settings:
     git: git@github.com:tmcmaster/wt_settings.git
 
@@ -54,15 +56,17 @@ dev_dependencies:
 
 dependency_overrides:
   wt_action_button:
-    path: ../../../libraries/wt_action_button
+    path: ../../wt_action_button
   wt_app_scaffold:
     path: ..
   wt_firepod:
-    path: ../../../libraries/wt_firepod
+    path: ../../wt_firepod
   wt_logging:
-    path: ../../../libraries/wt_logging
+    path: ../../wt_logging
+  wt_provider_manager:
+    path: ../../wt_provider_manager
   wt_settings:
-    path: ../../../libraries/wt_settings
+    path: ../../wt_settings
 
 flutter:
   uses-material-design: true
