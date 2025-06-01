@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/models/app_scaffold_page_context.dart';
-import 'package:wt_app_scaffold/models/page_definition.dart';
+import 'package:wt_app_scaffold/models/definition/page_definition.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_button_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_content.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_drawer.dart';
@@ -76,6 +76,7 @@ class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
                 ? null
                 : AppScaffoldPageHomeButton(
                     homeRoute: homeRoute,
+                    icon: Icons.home,
                   ),
           ),
         );

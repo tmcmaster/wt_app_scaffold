@@ -119,7 +119,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                           padding: const EdgeInsets.only(right: 30.0),
                           child: IconButton(
                             onPressed: () {
-                              ref.read(AppScaffoldRouter.provider).go('/${widget.pageDefinition.homeRoute!}');
+                              ref.read(AppScaffoldRouter.provider).go(widget.pageDefinition.homeRoute!.route);
                             },
                             icon: const Icon(Icons.chevron_left),
                           ),

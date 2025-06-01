@@ -12,7 +12,7 @@ class AppScaffoldPageButtonBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
+    return Wrap(
       children: actionsProviders
           .map(
             (provider) => ref.read(provider).component(

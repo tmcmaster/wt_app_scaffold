@@ -1,32 +1,34 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:wt_app_scaffold/models/item_info.dart';
 
-class PageInfo {
-  final String title;
-  final String tabTitle;
-  final String name;
-  final IconData icon;
-
+class PageInfo extends ItemInfo {
   const PageInfo({
-    required this.title,
-    required this.name,
-    required this.icon,
-    String? tabTitle,
-  }) : tabTitle = tabTitle ?? title;
+    required super.name,
+    required super.title,
+    super.tabTitle,
+    required super.icon,
+  });
 
-  String get route => '/$name';
-
+  @override
   PageInfo copyWith({
     String? title,
     String? tabTitle,
     String? name,
     IconData? icon,
-    PageInfo? pageInfo,
+    ItemInfo? itemInfo,
   }) {
+    final copied = super.copyWith(
+      title: title,
+      tabTitle: tabTitle,
+      name: name,
+      icon: icon,
+      itemInfo: itemInfo,
+    );
     return PageInfo(
-      title: title ?? pageInfo?.title ?? this.title,
-      name: name ?? pageInfo?.name ?? this.name,
-      icon: icon ?? pageInfo?.icon ?? this.icon,
-      tabTitle: tabTitle ?? pageInfo?.tabTitle ?? this.tabTitle,
+      title: copied.title,
+      name: copied.name,
+      icon: copied.icon,
+      tabTitle: copied.tabTitle,
     );
   }
 }

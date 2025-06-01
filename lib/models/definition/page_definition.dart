@@ -5,26 +5,29 @@ import 'package:wt_app_scaffold/models/item_definition.dart';
 import 'package:wt_app_scaffold/models/page_builder.dart';
 import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
+import 'package:wt_app_scaffold/widgets/item_control_panel.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class PageDefinition extends ItemDefinition {
   static final log = logger(PageDefinition);
 
   final bool landing;
-  final AppScaffoldPageBuilder? pageBuilder;
-  final AppScaffoldPageBuilder? pageContentBuilder;
-  final DrawerBuilder? drawerBuilder;
-  final List<PageDefinition> childPages;
-  final ScaffoldPageType? scaffoldType;
   final bool centerTitle;
   final bool showAppBar;
   final bool hideBackButton;
   final bool showBottomMenu;
   final bool registerChildRoutes;
+
+  final AppScaffoldPageBuilder? pageBuilder;
+  final AppScaffoldPageBuilder? pageContentBuilder;
+  final Widget Function()? pageBodyBuilder;
+  final DrawerBuilder? drawerBuilder;
+
+  final List<PageDefinition> childPages;
+  final ScaffoldPageType? scaffoldType;
   final PageInfo? homeRoute;
   final AppScaffoldActionProviders actionsProviders;
   final AppScaffoldSettingsMapProviders settingsProviders;
-  final Widget Function()? pageBodyBuilder;
 
   const PageDefinition({
     required super.pageInfo,
@@ -77,7 +80,7 @@ class PageDefinition extends ItemDefinition {
             title: title,
             tabTitle: tabTitle,
             icon: icon,
-            pageInfo: pageInfo,
+            itemInfo: pageInfo,
           ),
       primary: primary ?? this.primary,
       debug: debug ?? this.debug,
@@ -94,6 +97,19 @@ class PageDefinition extends ItemDefinition {
       homeRoute: homeRoute ?? this.homeRoute,
       actionsProviders: actionsProviders ?? this.actionsProviders,
       settingsProviders: settingsProviders ?? this.settingsProviders,
+    );
+  }
+
+  ItemControlPanel createControlPanel({
+    bool initiallyExpanded = false,
+    ItemControlPanelType type = ItemControlPanelType.expandableAll,
+  }) {
+    return ItemControlPanel.from(
+      itemInfo: pageInfo,
+      actionsProviders: actionsProviders,
+      settingsProviders: settingsProviders,
+      initiallyExpanded: initiallyExpanded,
+      type: type,
     );
   }
 }

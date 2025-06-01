@@ -12,24 +12,20 @@ class AppScaffoldPageControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Wrap(
-            runSpacing: 16,
-            spacing: 16,
-            children: settingsProviders.entries
-                .map(
-                  (entry) => Container(
-                    child: AppScaffoldPageControlsCard(
-                      title: entry.key,
-                      settingsProviders: entry.value,
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Wrap(
+          runSpacing: 16,
+          spacing: 16,
+          children: settingsProviders.entries
+              .map(
+                (entry) => AppScaffoldPageControlsCard(
+                  title: entry.key,
+                  settingsProviders: entry.value,
+                ),
+              )
+              .toList(),
         ),
       ),
     );
