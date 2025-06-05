@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
-import 'package:wt_app_scaffold/models/item_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/item_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_button_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_controls.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_indicators.dart';
@@ -18,7 +19,7 @@ enum ItemControlPanelType {
 }
 
 class ItemControlPanel extends ConsumerStatefulWidget {
-  final ItemInfo itemInfo;
+  final PageInfo pageInfo;
   final Widget? indicators;
   final Widget? actions;
   final Widget? summary;
@@ -31,7 +32,7 @@ class ItemControlPanel extends ConsumerStatefulWidget {
   final ItemControlPanelType childType;
 
   const ItemControlPanel({
-    required this.itemInfo,
+    required this.pageInfo,
     this.indicators,
     this.actions,
     this.summary,
@@ -60,7 +61,7 @@ class ItemControlPanel extends ConsumerStatefulWidget {
     ItemControlPanelType? childType = ItemControlPanelType.childrenOnly,
   }) {
     return ItemControlPanel(
-      itemInfo: itemInfo,
+      pageInfo: PageInfo.from(itemInfo),
       enableRoute: enableRoute,
       initiallyExpanded: initiallyExpanded,
       type: type,
@@ -153,11 +154,11 @@ class _ItemControlPanelState extends ConsumerState<ItemControlPanel> with Single
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(widget.itemInfo.icon),
+                              Icon(widget.pageInfo.icon),
                               const SizedBox(width: 16),
                               Expanded(
                                 child: Text(
-                                  widget.itemInfo.title,
+                                  widget.pageInfo.title,
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                               ),
@@ -244,8 +245,8 @@ class _ActionBar extends ConsumerWidget {
               if (widget.enableRoute)
                 IconButton(
                   onPressed: () {
-                    debugPrint('Navigate to route: ${widget.itemInfo.route}');
-                    ref.read(AppScaffoldRouter.provider).go(widget.itemInfo.route);
+                    debugPrint('Navigate to route: ${widget.pageInfo.route}');
+                    ref.read(AppScaffoldRouter.provider).go(widget.pageInfo.route);
                   },
                   icon: const Icon(Icons.chevron_right),
                 ),

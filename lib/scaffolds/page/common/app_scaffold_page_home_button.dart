@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
-import 'package:wt_app_scaffold/models/page_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldPageHomeButton extends ConsumerWidget {

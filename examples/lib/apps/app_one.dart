@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/models/page_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
@@ -31,7 +31,7 @@ mixin AppOne {
       HiddenDrawerOpener.of(context)?.open();
     },
     profilePage: PageDefinition(
-      pageInfo: const PageInfo(
+      pageInfo: PageInfo(
         name: 'profile',
         title: 'Profile',
         icon: Icons.person,
@@ -42,7 +42,7 @@ mixin AppOne {
     ),
     pages: [
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'landingPage',
           title: 'Landing Page',
           icon: FontAwesomeIcons.clipboard,
@@ -55,7 +55,7 @@ mixin AppOne {
         showBottomMenu: false,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'pageOne',
           title: 'Page One',
           icon: FontAwesomeIcons.clipboard,
@@ -79,7 +79,7 @@ mixin AppOne {
         ),
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'pageTwo',
           title: 'Page Two',
           icon: FontAwesomeIcons.bagShopping,
@@ -101,7 +101,7 @@ mixin AppOne {
         },
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'pageThree',
           title: 'Page Three',
           icon: FontAwesomeIcons.boxesPacking,
@@ -110,7 +110,7 @@ mixin AppOne {
         pageBuilder: (_) => const PlaceholderPage(title: 'Page Three'),
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'pageFour',
           title: 'Page Four',
           icon: FontAwesomeIcons.tractor,
@@ -119,7 +119,7 @@ mixin AppOne {
         pageBuilder: (_) => const PlaceholderPage(title: 'Page Four'),
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'counter',
           title: 'Counter',
           icon: Icons.settings,
@@ -129,7 +129,7 @@ mixin AppOne {
         pageBuilder: (_) => const CounterAppPage(title: 'Counter App'),
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'database',
           title: 'Database',
           icon: FontAwesomeIcons.database,
@@ -138,7 +138,7 @@ mixin AppOne {
         pageBuilder: (_) => const DatabaseExamplePage(),
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'async',
           title: 'Async',
           icon: FontAwesomeIcons.arrowsRotate,
@@ -147,7 +147,7 @@ mixin AppOne {
         pageBuilder: (_) => const AsyncExamplePage(),
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'settings',
           title: 'Settings',
           icon: Icons.settings,
@@ -167,7 +167,7 @@ mixin AppOne {
         ),
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'pageFive',
           title: 'Page Five',
           icon: FontAwesomeIcons.car,

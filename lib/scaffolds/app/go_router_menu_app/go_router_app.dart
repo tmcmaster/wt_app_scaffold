@@ -2,27 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
-import 'package:wt_app_scaffold/app_platform/widget/app_scaffold_go_router_app.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/app_scaffold_go_router_app.dart';
+import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/scaffold_app_go_router.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/scaffold_page_type_wrapper.dart';
 import 'package:wt_logging/wt_logging.dart';
-
-class ScaffoldAppGoRouter with AppScaffoldRouter {
-  final Ref ref;
-
-  ScaffoldAppGoRouter(this.ref);
-
-  @override
-  void go(String path, {Object? extra}) {
-    ref.read(GoRouterMenuApp.goRouter).go(path, extra: extra);
-  }
-
-  @override
-  void push(String path, {Object? extra}) {
-    ref.read(GoRouterMenuApp.goRouter).push(path, extra: extra);
-  }
-}
 
 class GoRouterMenuApp extends ConsumerStatefulWidget {
   static final log = logger(GoRouterMenuApp);
@@ -38,9 +23,8 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
       final navigatorKey = ref.watch(AppScaffoldProviders.navigatorKey);
       final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
       final initialRoute = _createInitialRoute(appDefinition);
-      final redirectMap = _generateRedirectMap(appDefinition, {
-        '/': initialRoute,
-      });
+      final redirectMap = _generateRedirectMap(appDefinition, {'/': initialRoute});
+
       return GoRouter(
         navigatorKey: navigatorKey,
         initialLocation: initialRoute,

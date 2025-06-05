@@ -19,13 +19,14 @@ class AppScaffoldGoRouterApp extends ConsumerWidget {
     final seedColor = appDefinition.colorScheme == null
         ? ref.watch(ApplicationSettings.colorScheme.value)
         : appDefinition.colorScheme!;
-    log.d('Seed Color: $seedColor');
+
     final themeMode = appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
     final colorBlindness = ref.watch(ApplicationSettings.colorBlindness.value);
     final locale = ref.watch(LocaleStore.provider);
     final locales = appDefinition.intlLocales ?? const <Locale>[Locale('en', 'US')];
 
     final snackBarKey = ref.watch(AppScaffoldProviders.snackBarKey);
+
     log.d('===> BUILD MaterialApp');
     return MaterialApp.router(
       title: appDefinition.appTitle,

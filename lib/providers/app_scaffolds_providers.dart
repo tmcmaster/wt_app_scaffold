@@ -15,6 +15,19 @@ mixin AppScaffoldProviders {
     ),
   );
 
+  static final allPages = Provider((ref) {
+    return ref.watch(appDefinition).pages;
+  });
+
+  static final primaryPages = Provider((ref) {
+    return ref.watch(appDefinition).primaryPages;
+  });
+
+  static final secondaryPages = Provider((ref) {
+    return ref.watch(appDefinition).secondaryPages;
+  });
+
+  @Deprecated('Need to migrate to using allPages')
   static final appPages = Provider(
     name: 'AppScaffoldProviders.appPages',
     (ref) {
@@ -34,14 +47,14 @@ mixin AppScaffoldProviders {
   static final appPrimaryPages = Provider(
     name: 'AppScaffoldProviders.appPrimaryPages',
     (ref) {
-      return ref.watch(appPages).where((page) => page.primary).toList();
+      return ref.watch(appPages).where((page) => page.primary && !page.isHidden).toList();
     },
   );
 
   static final appSecondaryPages = Provider(
     name: 'AppScaffoldProviders.appSecondaryPages',
     (ref) {
-      return ref.watch(appPages).where((page) => !page.primary).toList();
+      return ref.watch(appPages).where((page) => !page.primary && !page.isHidden).toList();
     },
   );
 
@@ -74,10 +87,8 @@ mixin AppScaffoldProviders {
   static final applicationType = Provider<ApplicationType>(
     name: 'AppScaffoldProviders.applicationType',
     (ref) {
-      final settingsApplicationType =
-          ref.watch(ApplicationSettings.applicationType.value);
-      final staticApplicationType =
-          ref.read(AppScaffoldProviders.appDefinition).applicationType;
+      final settingsApplicationType = ref.watch(ApplicationSettings.applicationType.value);
+      final staticApplicationType = ref.read(AppScaffoldProviders.appDefinition).applicationType;
       final applicationType = staticApplicationType ?? settingsApplicationType;
       log.d('New Application Type: $applicationType');
       return applicationType;

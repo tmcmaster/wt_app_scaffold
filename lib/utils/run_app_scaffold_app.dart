@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/models/page_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_provider_manager/wt_provider_manager.dart';
@@ -54,7 +54,7 @@ mixin AppScaffoldApp {
     final selectedApplicationType = applicationType ?? ApplicationType.goRouterMenu;
 
     final pageTemplate = PageDefinition(
-      pageInfo: const PageInfo(
+      pageInfo: PageInfo(
         name: 'template',
         title: 'Template',
         icon: Icons.abc,

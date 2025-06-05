@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/models/page_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/navigation_page.dart';
@@ -27,7 +27,7 @@ mixin AppThree {
     applicationType: ApplicationType.bottomNavBar,
     pages: [
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'plain',
           title: 'Plain',
           icon: FontAwesomeIcons.clipboard,
@@ -38,7 +38,7 @@ mixin AppThree {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'snackBar',
           title: 'SnackBar',
           icon: FontAwesomeIcons.clipboard,
@@ -50,7 +50,7 @@ mixin AppThree {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'navigation',
           title: 'Navigation',
           icon: FontAwesomeIcons.bars,
@@ -63,7 +63,7 @@ mixin AppThree {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'theme',
           title: 'Theme',
           icon: Icons.style,
@@ -74,7 +74,7 @@ mixin AppThree {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'settings',
           title: 'Settings',
           icon: Icons.settings,
@@ -93,7 +93,7 @@ mixin AppThree {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'debug',
           title: 'Debug',
           icon: FontAwesomeIcons.bug,
@@ -107,7 +107,7 @@ mixin AppThree {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'debug2',
           title: 'Debug 2',
           icon: FontAwesomeIcons.bug,
@@ -118,7 +118,7 @@ mixin AppThree {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'debug3',
           title: 'Debug 3',
           icon: FontAwesomeIcons.bug,
@@ -129,7 +129,7 @@ mixin AppThree {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'debug4',
           title: 'Debug 4',
           icon: FontAwesomeIcons.bug,

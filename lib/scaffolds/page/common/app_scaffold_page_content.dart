@@ -27,6 +27,7 @@ class _AppScaffoldPageContentState extends ConsumerState<AppScaffoldPageContent>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       key: _scaffoldKey,
       body: Column(
         children: [

@@ -77,9 +77,9 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
     final pages = [
       widget.pageDefinition,
       ...widget.pageDefinition.childPages,
-    ];
+    ].where((page) => !page.isHidden).toList();
 
-    const topMargin = 0.0;
+    const topMargin = 20.0;
     final hasTabs = pages.length > 1;
     final tabsHeight = hasTabs ? 42.0 : 0.0;
     final bottomBarHeight = widget.pageDefinition.showBottomMenu ? 50 : 0.0;
@@ -192,30 +192,33 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                       left: cardLeft,
                       width: cardWidth,
                       height: cardHeight,
-                      child: Scaffold(
-                        body: TransparentCard(
-                          child: pages.length > 1
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: TabBarView(
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    controller: controller,
-                                    children: pages
-                                        .map(
-                                          (page) => AppScaffoldPage(
-                                            pageDefinition: page,
-                                            state: widget.state,
-                                          ),
-                                        )
-                                        .toList(),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(Radius.circular(15)),
+                        child: Scaffold(
+                          body: TransparentCard(
+                            child: pages.length > 1
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: TabBarView(
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      controller: controller,
+                                      children: pages
+                                          .map(
+                                            (page) => AppScaffoldPage(
+                                              pageDefinition: page,
+                                              state: widget.state,
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  )
+                                : AppScaffoldPage(
+                                    pageDefinition: pages.first,
+                                    state: widget.state,
                                   ),
-                                )
-                              : AppScaffoldPage(
-                                  pageDefinition: pages.first,
-                                  state: widget.state,
-                                ),
+                          ),
+                          backgroundColor: Colors.transparent,
                         ),
-                        backgroundColor: Colors.transparent,
                       ),
                     ),
                   ],

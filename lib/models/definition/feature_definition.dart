@@ -1,15 +1,17 @@
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
-import 'package:wt_app_scaffold/models/item_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/feature_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
+import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/item_control_panel.dart';
 
 class FeatureDefinition {
-  final ItemInfo itemInfo;
+  final FeatureInfo featureInfo;
 
   final List<PageDefinition> pages;
 
   const FeatureDefinition({
-    required this.itemInfo,
+    required this.featureInfo,
     this.pages = const [],
   });
 
@@ -20,12 +22,46 @@ class FeatureDefinition {
         pages.map((page) => page.settingsProviders.entries).expand((e) => e),
       );
 
+  factory FeatureDefinition.combine(
+    FeatureInfo featureInfo, {
+    List<FeatureDefinition> features = const [],
+    FeatureDefinition? feature,
+    List<PageDefinition> pages = const [],
+    PageDefinition? page,
+  }) =>
+      FeatureDefinition(
+        featureInfo: featureInfo,
+        pages: [
+          ...features.map((feature) => feature.pages).expand((e) => e),
+          if (feature != null) ...feature.pages,
+          ...pages,
+          if (page != null) page,
+        ],
+      );
+
+  FeatureDefinition copyWith({
+    bool? showBottomMenu,
+    bool? primary,
+    bool? isHidden,
+    ScaffoldPageType? scaffoldType,
+  }) =>
+      FeatureDefinition(
+        featureInfo: featureInfo,
+        pages: pages
+            .map((page) => page.copyWith(
+                  showBottomMenu: showBottomMenu ?? page.showBottomMenu,
+                  primary: primary ?? page.primary,
+                  scaffoldType: scaffoldType ?? page.scaffoldType,
+                ))
+            .toList(),
+      );
+
   ItemControlPanel createControlPanel({
     bool initiallyExpanded = false,
     ItemControlPanelType type = ItemControlPanelType.expandableAll,
   }) {
     return ItemControlPanel.from(
-      itemInfo: itemInfo,
+      itemInfo: featureInfo,
       initiallyExpanded: initiallyExpanded,
       type: type,
       actionsProviders: actionProviders,
@@ -33,4 +69,41 @@ class FeatureDefinition {
       buildChildren: () => pages.map((page) => page.createControlPanel()).toList(),
     );
   }
+
+  bool get isPrimary => featureInfo.itemType == ItemType.primary;
+  bool get isSecondary => featureInfo.itemType == ItemType.secondary;
+  bool get isHidden => featureInfo.itemType == ItemType.hidden;
+}
+
+extension AppScaffoldFeatureDefinitionListExtension on List<FeatureDefinition> {
+  List<FeatureDefinition> copyWith({
+    bool? primary,
+    ScaffoldPageType? scaffoldType,
+    bool? showBottomMenu,
+    bool? isHidden,
+  }) {
+    return map(
+      (feature) => feature.copyWith(
+        primary: primary,
+        scaffoldType: scaffoldType,
+        showBottomMenu: showBottomMenu,
+        isHidden: isHidden,
+      ),
+    ).toList();
+  }
+
+  List<PageDefinition> getPages() => map((feature) => feature.pages).expand((m) => m).toList();
+
+  List<PageDefinition> getPrimaryPages() => where((feature) => feature.isPrimary)
+      .map((feature) => feature.pages.where((page) => page.isPrimary))
+      .expand((e) => e)
+      .toList();
+
+  List<PageDefinition> getSecondaryPages() => where((feature) => feature.isPrimary || feature.isSecondary)
+      .map((feature) => feature.pages.where((page) => page.isSecondary))
+      .expand((e) => e)
+      .toList();
+
+  List<PageDefinition> getHiddenPages() =>
+      map((feature) => feature.pages.where((page) => page.isHidden)).expand((e) => e).toList();
 }

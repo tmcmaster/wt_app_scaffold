@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/page_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/chat_gpt/example_pages.dart';
 
@@ -25,7 +25,7 @@ mixin ExampleApp {
       includeAppBar: true,
       appDetailsProvider: details,
       profilePage: PageDefinition(
-        pageInfo: const PageInfo(
+        pageInfo: PageInfo(
           name: 'profile',
           title: 'Profile',
           icon: Icons.person,
@@ -36,7 +36,7 @@ mixin ExampleApp {
       ),
       pages: [
         PageDefinition(
-          pageInfo: const PageInfo(
+          pageInfo: PageInfo(
             name: 'home',
             title: 'Home',
             icon: Icons.home,
@@ -46,7 +46,7 @@ mixin ExampleApp {
           pageBuilder: (_) => const HomePage(),
         ),
         PageDefinition(
-          pageInfo: const PageInfo(
+          pageInfo: PageInfo(
             name: 'orders',
             title: 'Orders',
             icon: FontAwesomeIcons.bagShopping,
@@ -56,7 +56,7 @@ mixin ExampleApp {
           pageBuilder: (_) => const OrdersPage(),
         ),
         PageDefinition(
-          pageInfo: const PageInfo(
+          pageInfo: PageInfo(
             name: 'products',
             title: 'Products',
             icon: FontAwesomeIcons.cube,
@@ -66,7 +66,7 @@ mixin ExampleApp {
           pageBuilder: (_) => const ProductsPage(),
         ),
         PageDefinition(
-          pageInfo: const PageInfo(
+          pageInfo: PageInfo(
             name: 'notifications',
             title: 'Notifications',
             icon: FontAwesomeIcons.bell,
@@ -76,7 +76,7 @@ mixin ExampleApp {
           pageBuilder: (_) => const NotificationsPage(),
         ),
         PageDefinition(
-          pageInfo: const PageInfo(
+          pageInfo: PageInfo(
             name: 'settings',
             title: 'Settings',
             icon: FontAwesomeIcons.gear,

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wt_app_scaffold/models/page_info.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 
 abstract class ItemDefinition {
   final PageInfo pageInfo;

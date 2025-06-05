@@ -3,9 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
 import 'package:wt_app_scaffold/models/definition/feature_definition.dart';
+import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/definition/module_definition.dart';
-import 'package:wt_app_scaffold/models/item_info.dart';
-import 'package:wt_app_scaffold/models/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/item_control_panel.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
@@ -17,8 +16,8 @@ class AppDefinition {
 
   final PageDefinition profilePage;
   final bool swipeEnabled;
-  final List<ModuleDefinition> modules;
-  final List<FeatureDefinition> features;
+  final List<ModuleDefinition> _modules;
+  final List<FeatureDefinition> _features;
   final List<PageDefinition> _pages;
 
   final bool includeAppBar;
@@ -32,14 +31,14 @@ class AppDefinition {
   final List<LocalizationsDelegate> intlDelegates;
   final Set<Locale>? intlLocales;
 
-  const AppDefinition._({
+  AppDefinition._({
     required this.appTitle,
     required this.appName,
     required this.appDetailsProvider,
     required this.profilePage,
     List<PageDefinition> pages = const [],
-    this.modules = const [],
-    this.features = const [],
+    List<FeatureDefinition> features = const [],
+    List<ModuleDefinition> modules = const [],
     required this.swipeEnabled,
     required this.includeAppBar,
     required this.dismissAction,
@@ -51,12 +50,44 @@ class AppDefinition {
     this.colorScheme,
     this.intlLocales,
     this.intlDelegates = const <LocalizationsDelegate>[],
-  }) : _pages = pages;
+  })  : _pages = pages.copyWith(
+          showBottomMenu: true,
+          primary: true,
+          scaffoldType: scaffoldPageType,
+        ),
+        _features = features.copyWith(
+          showBottomMenu: true,
+          primary: true,
+          scaffoldType: scaffoldPageType,
+        ),
+        _modules = modules.copyWith(
+          showBottomMenu: true,
+          primary: true,
+          scaffoldType: scaffoldPageType,
+        );
 
   List<PageDefinition> get pages => [
         ..._pages,
-        ...features.map((feature) => feature.pages).expand((m) => m),
-        ...modules.map((module) => module.pages).expand((m) => m),
+        ..._features.getPages(),
+        ..._modules.getPages(),
+      ];
+
+  List<PageDefinition> get primaryPages => [
+        ..._pages.getPrimaryPages(),
+        ..._features.getPrimaryPages(),
+        ..._modules.getPrimaryPages(),
+      ];
+
+  List<PageDefinition> get secondaryPages => [
+        ..._pages.getSecondaryPages(),
+        ..._features.getSecondaryPages(),
+        ..._modules.getSecondaryPages(),
+      ];
+
+  List<PageDefinition> get hiddenPages => [
+        ..._pages.getHiddenPages(),
+        ..._features.getHiddenPages(),
+        ..._modules.getHiddenPages(),
       ];
 
   factory AppDefinition.from({
@@ -85,7 +116,7 @@ class AppDefinition {
       appDetailsProvider: appDetailsProvider,
       profilePage: profilePage ??
           PageDefinition(
-            pageInfo: const PageInfo(
+            pageInfo: PageInfo(
               title: 'Profile',
               name: 'profile',
               icon: Icons.person,
@@ -124,14 +155,14 @@ class AppDefinition {
     ItemControlPanelType type = ItemControlPanelType.expandableAll,
   }) {
     return ItemControlPanel.from(
-      itemInfo: ItemInfo(name: appName, title: appTitle, icon: Icons.face),
+      itemInfo: PageInfo(name: appName, title: appTitle, icon: Icons.face),
       initiallyExpanded: initiallyExpanded,
       type: type,
       actionsProviders: actionProviders,
       settingsProviders: settingsProviders,
       buildChildren: () => [
-        ...modules.map((module) => module.createControlPanel()),
-        ...features.map((module) => module.createControlPanel()),
+        ..._modules.map((module) => module.createControlPanel()),
+        ..._features.map((module) => module.createControlPanel()),
         ..._pages.map((module) => module.createControlPanel()),
       ],
     );

@@ -20,52 +20,95 @@ class BottomMenuBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
-    final pages = appDefinition.pages.where((page) => page.primary).toList();
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      // backgroundColor: const Color(0xFF0D5257),
-      selectedItemColor: primaryColor,
-      unselectedItemColor: Colors.black,
-      iconSize: 16,
-      selectedFontSize: 12,
-      selectedIconTheme: const IconThemeData(
-        size: 16,
-      ),
-      unselectedIconTheme: const IconThemeData(
-        size: 24,
-      ),
-      unselectedFontSize: 12,
-      showSelectedLabels: true,
-      showUnselectedLabels: false,
-      useLegacyColorScheme: false,
-      enableFeedback: false,
-      selectedLabelStyle: const TextStyle(
-        height: 1.5,
-      ),
-      items: appDefinition.pages
-          .where((page) => page.primary)
-          .map(
-            (page) => BottomNavigationBarItem(
-              icon: Icon(
-                page.pageInfo.icon,
-              ),
-              label: page.pageInfo.title,
-              tooltip: page.pageInfo.title,
-              backgroundColor: const Color(0xFF0D5257),
+    final primaryPages = ref.watch(AppScaffoldProviders.primaryPages);
+    final secondaryPages = ref.watch(AppScaffoldProviders.secondaryPages);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Expanded(
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            // backgroundColor: const Color(0xFF0D5257),
+            selectedItemColor: primaryColor,
+            unselectedItemColor: Colors.black,
+            iconSize: 16,
+            selectedFontSize: 12,
+            selectedIconTheme: const IconThemeData(
+              size: 16,
             ),
-          )
-          .toList(),
-      currentIndex: findCurrentIndex(pages, activeRoute),
-      onTap: (selected) {
-        // final routeName = createRouteName(pages[selected]);
-        final routeName = pages[selected].route;
-        beforeChange?.call(selected, routeName);
-        log.d('Using GoRouter to change page: $routeName');
-        onChange(routeName, context, ref);
-      },
+            unselectedIconTheme: const IconThemeData(
+              size: 24,
+            ),
+            unselectedFontSize: 12,
+            showSelectedLabels: true,
+            showUnselectedLabels: false,
+            useLegacyColorScheme: false,
+            enableFeedback: false,
+            selectedLabelStyle: const TextStyle(
+              height: 1.5,
+            ),
+            items: primaryPages
+                .map(
+                  (page) => BottomNavigationBarItem(
+                    icon: Icon(
+                      page.pageInfo.icon,
+                    ),
+                    label: page.pageInfo.title,
+                    tooltip: page.pageInfo.title,
+                    // backgroundColor: const Color(0xFF0D5257),
+                  ),
+                )
+                .toList(),
+            currentIndex: findCurrentIndex(primaryPages, activeRoute),
+            onTap: (selected) {
+              // final routeName = createRouteName(pages[selected]);
+              final routeName = primaryPages[selected].route;
+              beforeChange?.call(selected, routeName);
+              log.d('Using GoRouter to change page: $routeName');
+              onChange(routeName, context, ref);
+            },
+          ),
+        ),
+        SizedBox(
+          height: 64.0,
+          child: Card(
+            elevation: 4,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+            child: PopupMenuButton<PageDefinition>(
+              // Callback that sets the selected popup menu item.
+              onSelected: (PageDefinition page) {},
+              itemBuilder: (BuildContext context) => secondaryPages
+                  .map(
+                    (item) => PopupMenuItem<PageDefinition>(
+                      value: item,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: TextButton.icon(
+                          style: const ButtonStyle(
+                            alignment: Alignment.centerLeft,
+                          ),
+                          icon: Icon(item.pageInfo.icon),
+                          label: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Text(item.pageInfo.title),
+                          ),
+                          onPressed: () {
+                            onChange(item.pageInfo.route, context, ref);
+                          },
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
