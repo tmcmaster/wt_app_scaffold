@@ -6,14 +6,18 @@ import 'package:wt_app_scaffold/models/definition/info/page_container.dart';
 class PageInfo extends ItemInfo {
   final String tabTitle;
   final String route;
+  final bool landing;
+  final bool debug;
 
   PageInfo({
     required super.icon,
     required super.title,
     super.name,
-    String? tabTitle,
     super.itemType,
+    String? tabTitle,
     String? route,
+    this.landing = false,
+    this.debug = false,
   })  : tabTitle = tabTitle ?? title,
         route = route ?? '/$name';
 
@@ -34,15 +38,15 @@ class PageInfo extends ItemInfo {
     String? name,
     IconData? icon,
     ItemType? itemType,
-    PageInfo? pageInfo,
+    PageInfo? info,
   }) {
     return PageInfo(
-      title: title ?? pageInfo?.title ?? this.title,
-      name: name ?? pageInfo?.name ?? this.name,
-      icon: icon ?? pageInfo?.icon ?? this.icon,
-      tabTitle: tabTitle ?? pageInfo?.tabTitle ?? this.tabTitle,
-      route: route ?? pageInfo?.route ?? pageInfo?.route ?? route,
-      itemType: itemType ?? pageInfo?.itemType ?? this.itemType,
+      title: title ?? info?.title ?? this.title,
+      name: name ?? info?.name ?? this.name,
+      icon: icon ?? info?.icon ?? this.icon,
+      tabTitle: tabTitle ?? info?.tabTitle ?? this.tabTitle,
+      route: route ?? info?.route ?? info?.route ?? route,
+      itemType: itemType ?? info?.itemType ?? this.itemType,
     );
   }
 }

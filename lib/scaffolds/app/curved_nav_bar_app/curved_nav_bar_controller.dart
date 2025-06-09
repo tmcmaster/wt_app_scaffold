@@ -30,12 +30,12 @@ class CurvedNavBarController extends StateNotifier<GlobalKey<CurvedNavigationBar
     log.d('Building Curved Nav Bar App Routes');
     routeIndexMap = Map.fromEntries(
       pages.mapIndexed(
-        (index, page) => MapEntry<String, int>(page.route, index),
+        (index, page) => MapEntry<String, int>(page.info.route, index),
       ),
     );
     routePageDefinitionMap = Map.fromEntries(
       pages.map(
-        (page) => MapEntry<String, PageDefinition>(page.route, page),
+        (page) => MapEntry<String, PageDefinition>(page.info.route, page),
       ),
     );
     indexPageDefinitionMap = Map.fromEntries(

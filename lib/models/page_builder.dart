@@ -6,6 +6,7 @@ typedef AppScaffoldPageBuilder = Widget Function(
   AppScaffoldPageContext pageContext,
 );
 
+@Deprecated('Should be using AppScaffoldPageBuilder')
 typedef AppScaffoldPageWidgetBuilder = Widget Function(
   BuildContext context,
   WidgetRef ref,

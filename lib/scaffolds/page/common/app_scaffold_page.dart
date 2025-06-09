@@ -41,8 +41,8 @@ class _AppScaffoldPageState extends ConsumerState<AppScaffoldPage> {
     final textTheme = Theme.of(context).textTheme;
     final actionsProviders = widget.pageDefinition.actionsProviders;
     final settingsProviders = widget.pageDefinition.settingsProviders;
-    final pageTitle = widget.pageDefinition.pageInfo.tabTitle;
-    final pageIcon = widget.pageDefinition.pageInfo.icon;
+    final pageTitle = widget.pageDefinition.info.tabTitle;
+    final pageIcon = widget.pageDefinition.info.icon;
     final pageContentBuilder = widget.pageDefinition.pageContentBuilder;
     final pageBuilder = widget.pageDefinition.pageBuilder;
     final homeRoute = widget.pageDefinition.homeRoute;

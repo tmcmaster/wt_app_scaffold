@@ -15,13 +15,13 @@ class HiddenDrawPageController extends StateNotifier<PageDefinition> with AppSca
 
   HiddenDrawPageController(Ref ref) : super(getLandingPage(ref)) {
     _pageIndex = {
-      for (final page in ref.read(AppScaffoldProviders.appDefinition).pages) page.route: page,
+      for (final page in ref.read(AppScaffoldProviders.appDefinition).pages) page.info.route: page,
     };
   }
 
   static PageDefinition getLandingPage(Ref ref) {
     final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
-    return appDefinition.pages.firstWhere((page) => page.landing, orElse: () => appDefinition.pages.first);
+    return appDefinition.pages.firstWhere((page) => page.isLanding, orElse: () => appDefinition.pages.first);
   }
 
   @override

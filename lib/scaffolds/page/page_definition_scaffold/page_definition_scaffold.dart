@@ -101,7 +101,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                   fontSize: 20,
                 ),
                 elevation: 0,
-                title: Text(widget.pageDefinition.pageInfo.title),
+                title: Text(widget.pageDefinition.info.title),
                 leading: widget.pageDefinition.drawerBuilder == null
                     ? null
                     : DrawerButton(
@@ -158,7 +158,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                               color: Colors.transparent,
                               width: cardWidth,
                               child: TabMenu(
-                                titles: pages.map((p) => p.pageInfo.tabTitle).toList(),
+                                titles: pages.map((p) => p.info.tabTitle).toList(),
                                 controller: controller,
                               ),
                             ),
@@ -226,7 +226,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
               ),
               if (widget.pageDefinition.showBottomMenu)
                 BottomMenuBar(
-                  activeRoute: widget.pageDefinition.route,
+                  activeRoute: widget.pageDefinition.info.route,
                   onChange: (routeName, context, ref) {
                     ref.read(AppScaffoldRouter.provider).go(routeName);
                   },

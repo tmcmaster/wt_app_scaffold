@@ -10,11 +10,10 @@ import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_eve
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomNavBarApp extends ConsumerStatefulWidget {
-  static final pageChangeEvent =
-      StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent>(
+  static final pageChangeEvent = StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent>(
     name: 'BottomNavBarApp.pageChangeEvent',
     (ref) {
-      final pages = ref.watch(AppScaffoldProviders.appPages);
+      final pages = ref.watch(AppScaffoldProviders.allPages);
       final initialPageIndex = ref.watch(
         AppScaffoldProviders.appInitialPageIndex,
       );

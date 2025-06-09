@@ -16,7 +16,9 @@ mixin AppScaffoldProviders {
   );
 
   static final allPages = Provider((ref) {
-    return ref.watch(appDefinition).pages;
+    final pages = ref.watch(appDefinition).pages;
+    final debugMode = ref.watch(ApplicationSettings.debugMode.value);
+    return pages.where((page) => debugMode || !page.debug).toList();
   });
 
   static final primaryPages = Provider((ref) {
@@ -27,42 +29,25 @@ mixin AppScaffoldProviders {
     return ref.watch(appDefinition).secondaryPages;
   });
 
-  @Deprecated('Need to migrate to using allPages')
-  static final appPages = Provider(
-    name: 'AppScaffoldProviders.appPages',
-    (ref) {
-      final pages = ref.read(appDefinition).pages;
-      final debugMode = ref.watch(ApplicationSettings.debugMode.value);
-      return pages.where((page) => debugMode || !page.debug).toList()
-        ..sort(
-          (a, b) => a.primary && !b.primary
-              ? -1
-              : b.primary && !a.primary
-                  ? 1
-                  : 0,
-        );
-    },
-  );
-
   static final appPrimaryPages = Provider(
     name: 'AppScaffoldProviders.appPrimaryPages',
     (ref) {
-      return ref.watch(appPages).where((page) => page.primary && !page.isHidden).toList();
+      return ref.watch(allPages).where((page) => page.isPrimary && !page.isHidden).toList();
     },
   );
 
   static final appSecondaryPages = Provider(
     name: 'AppScaffoldProviders.appSecondaryPages',
     (ref) {
-      return ref.watch(appPages).where((page) => !page.primary && !page.isHidden).toList();
+      return ref.watch(allPages).where((page) => !page.isPrimary && !page.isHidden).toList();
     },
   );
 
   static final appInitialPageIndex = Provider(
     name: 'AppScaffoldProviders.appInitialPageIndex',
     (ref) {
-      final pages = ref.watch(appPages);
-      final landingPages = pages.where((page) => page.landing);
+      final pages = ref.watch(allPages);
+      final landingPages = pages.where((page) => page.isLanding);
       final initialPage = [...landingPages, ...pages].first;
       landingPages.isEmpty ? pages.first : landingPages.first;
       final pageIndex = pages.indexOf(initialPage);

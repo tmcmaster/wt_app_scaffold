@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
 import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
@@ -27,76 +28,71 @@ mixin AppTwo {
     applicationType: ApplicationType.goRouterMenu,
     scaffoldPageType: ScaffoldPageType.transparentCard,
     profilePage: PageDefinition(
-      pageInfo: PageInfo(
+      info: PageInfo(
         name: 'profile',
         title: 'Profile',
         icon: Icons.person,
+        itemType: ItemType.primary,
       ),
-      primary: true,
       pageBuilder: (_) => const PlaceholderPage(
         title: 'Profile Page',
       ),
     ),
     pages: [
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'plainPage',
           title: 'Plain Page',
           icon: FontAwesomeIcons.anchor,
+          itemType: ItemType.primary,
         ),
-        primary: true,
-        debug: false,
         pageBuilder: (_) => const PlainPage(),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'firebasePage',
           title: 'Firebase Page',
           icon: FontAwesomeIcons.fire,
+          itemType: ItemType.primary,
         ),
-        primary: true,
-        debug: false,
         pageBuilder: (_) => const FirebasePage(),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'snackBarPage',
           title: 'SnackBar Page',
           icon: FontAwesomeIcons.noteSticky,
+          itemType: ItemType.primary,
         ),
-        primary: true,
-        debug: false,
         pageBuilder: (_) => const UserLogPage(),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'navigationPage',
           title: 'Navigation Page',
           icon: Icons.navigation,
+          itemType: ItemType.primary,
         ),
-        primary: true,
-        debug: false,
         pageBuilder: (_) => const NavigationPage(
           routeTo: '/sign-in',
         ),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'loginPage',
           title: 'Login Page',
           icon: Icons.login,
+          itemType: ItemType.primary,
         ),
-        primary: true,
-        debug: false,
         pageBuilder: (_) => const LoginPage(),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'settings',
           title: 'Settings',
           icon: Icons.settings,
+          itemType: ItemType.primary,
         ),
-        primary: true,
         pageBuilder: (pageContext) => VirtualSizeFittedBox(
           virtualSize: 1000,
           child: SettingsPage(

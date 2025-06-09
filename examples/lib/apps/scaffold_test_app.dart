@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
 import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
@@ -23,25 +24,25 @@ mixin ScaffoldTestApp {
     applicationType: ApplicationType.goRouterMenu,
     pages: [
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'landingPage',
           title: 'Landing Page',
           icon: FontAwesomeIcons.clipboard,
+          itemType: ItemType.primary,
         ),
-        primary: true,
         scaffoldType: ScaffoldPageType.transparentCard,
-        pageBuilder: (ctx) => PlaceholderPage(title: ctx.page.pageInfo.title),
+        pageBuilder: (ctx) => PlaceholderPage(title: ctx.page.info.title),
         drawerBuilder: (ctx) => Container(),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'anotherPage',
           title: 'Another Page',
           icon: FontAwesomeIcons.clipboard,
+          itemType: ItemType.primary,
         ),
-        primary: true,
         scaffoldType: ScaffoldPageType.transparentCard,
-        pageBuilder: (ctx) => PlaceholderPage(title: ctx.page.pageInfo.title),
+        pageBuilder: (ctx) => PlaceholderPage(title: ctx.page.info.title),
       ),
     ],
   );

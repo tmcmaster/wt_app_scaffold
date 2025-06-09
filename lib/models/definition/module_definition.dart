@@ -43,16 +43,15 @@ class ModuleDefinition {
 
   ModuleDefinition copyWith({
     bool? showBottomMenu,
-    bool? primary,
-    bool? isHidden,
     ScaffoldPageType? scaffoldType,
+    ItemType? type,
   }) =>
       ModuleDefinition(
         moduleInfo: moduleInfo,
         features: features
             .map((feature) => feature.copyWith(
+                  type: type,
                   showBottomMenu: showBottomMenu,
-                  primary: primary,
                   isHidden: isHidden,
                   scaffoldType: scaffoldType,
                 ))
@@ -80,17 +79,15 @@ class ModuleDefinition {
 
 extension AppScaffoldModuleDefinitionListExtension on List<ModuleDefinition> {
   List<ModuleDefinition> copyWith({
-    bool? primary,
     ScaffoldPageType? scaffoldType,
     bool? showBottomMenu,
-    bool? isHidden,
+    ItemType? type,
   }) {
     return map(
       (module) => module.copyWith(
-        primary: primary,
         scaffoldType: scaffoldType,
         showBottomMenu: showBottomMenu,
-        isHidden: isHidden,
+        type: type,
       ),
     ).toList();
   }

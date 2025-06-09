@@ -22,10 +22,7 @@ class BottomNavBarMenu extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pageChangeEvent = ref.watch(provider);
     final pageNav = ref.read(provider.notifier);
-    // final debugMode = ref.read(ApplicationSettings.debugMode.value);
-    // final primaryItems = items.where((item) => item.primary).toList();
-    // final otherItems = items.where((item) => !item.primary).toList();
-    final allItems = ref.watch(AppScaffoldProviders.appPages);
+    final allItems = ref.watch(AppScaffoldProviders.allPages);
     final primaryItems = ref.watch(AppScaffoldProviders.appPrimaryPages);
     final otherItems = ref.watch(AppScaffoldProviders.appSecondaryPages);
     log.d('Total Items: ${allItems.length}');
@@ -61,9 +58,9 @@ class BottomNavBarMenu extends ConsumerWidget {
                 .map(
                   (item) => BottomNavigationBarItem(
                     icon: Icon(
-                      item.pageInfo.icon,
+                      item.info.icon,
                     ),
-                    label: item.pageInfo.title,
+                    label: item.info.title,
                   ),
                 )
                 .toList(),
@@ -90,10 +87,10 @@ class BottomNavBarMenu extends ConsumerWidget {
                         style: const ButtonStyle(
                           alignment: Alignment.centerLeft,
                         ),
-                        icon: Icon(item.pageInfo.icon),
+                        icon: Icon(item.info.icon),
                         label: Padding(
                           padding: const EdgeInsets.only(left: 16.0),
-                          child: Text(item.pageInfo.title),
+                          child: Text(item.info.title),
                         ),
                         onPressed: () {
                           pageNav.setPage(

@@ -38,7 +38,7 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
     super.initState();
 
     final maxLength = widget.appDefinition.pages
-        .map((p) => p.pageInfo.title.split(' '))
+        .map((p) => p.info.title.split(' '))
         .expand((e) => e)
         .map((e) => e.length)
         .fold(0, (largest, size) => size > largest ? size : largest);
@@ -92,7 +92,7 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
         width: offsetWhenOpenX,
         onCloseDrawer: closeDrawer,
         onSelectedItem: (page) {
-          ref.read(AppScaffoldRouter.provider).go(page.route);
+          ref.read(AppScaffoldRouter.provider).go(page.info.route);
           closeDrawer();
         },
         hidden: !isDrawerOpen,

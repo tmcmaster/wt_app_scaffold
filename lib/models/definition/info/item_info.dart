@@ -12,6 +12,13 @@ abstract class ItemInfo {
     required this.title,
     required this.icon,
     String? name,
-    this.itemType = ItemType.secondary,
+    this.itemType = ItemType.primary,
   }) : name = name ?? title.toLowerCamelCase();
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is ItemInfo && runtimeType == other.runtimeType && name == other.name;
+
+  @override
+  int get hashCode => name.hashCode;
 }

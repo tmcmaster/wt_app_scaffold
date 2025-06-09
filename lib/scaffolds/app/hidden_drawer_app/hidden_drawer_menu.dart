@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_action_button/action_button_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/item_definition.dart';
+import 'package:wt_app_scaffold/models/definition/item_definition.dart';
 import 'package:wt_app_scaffold/providers/auth_providers.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_header.dart';
@@ -158,9 +158,9 @@ class _PageMenuItemButton extends StatelessWidget {
         borderRadius: borderRadius,
       ),
       contentPadding: padding,
-      leading: Icon(item.pageInfo.icon, color: Colors.white),
+      leading: Icon(item.info.icon, color: Colors.white),
       title: Text(
-        item.pageInfo.title,
+        item.info.title,
         style: const TextStyle(
           color: Colors.white,
           fontSize: HiddenDrawerConfig.menuFontSize,

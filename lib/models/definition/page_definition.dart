@@ -1,19 +1,20 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
 import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
 import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
+import 'package:wt_app_scaffold/models/definition/item_definition.dart';
 import 'package:wt_app_scaffold/models/drawer_builder.dart';
-import 'package:wt_app_scaffold/models/item_definition.dart';
 import 'package:wt_app_scaffold/models/page_builder.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/item_control_panel.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class PageDefinition extends ItemDefinition {
+class PageDefinition extends ItemDefinition<PageInfo> {
   static final log = logger(PageDefinition);
 
-  final bool landing;
+  final List<PageDefinition> childPages;
+
+  final PageInfo? homeRoute;
   final bool centerTitle;
   final bool showAppBar;
   final bool hideBackButton;
@@ -22,23 +23,17 @@ class PageDefinition extends ItemDefinition {
 
   final AppScaffoldPageBuilder? pageBuilder;
   final AppScaffoldPageBuilder? pageContentBuilder;
-  final Widget Function()? pageBodyBuilder;
   final DrawerBuilder? drawerBuilder;
   final ScaffoldPageType? scaffoldType;
-  final PageInfo? homeRoute;
 
-  final List<PageDefinition> childPages;
   final AppScaffoldActionProviders actionsProviders;
   final AppScaffoldSettingsMapProviders settingsProviders;
 
   const PageDefinition({
-    required super.pageInfo,
-    super.primary,
-    super.debug,
+    required super.info,
     this.pageBuilder,
     this.pageContentBuilder,
     this.drawerBuilder,
-    this.landing = false,
     this.childPages = const [],
     this.scaffoldType,
     this.centerTitle = true,
@@ -48,58 +43,17 @@ class PageDefinition extends ItemDefinition {
     this.homeRoute,
     this.actionsProviders = const [],
     this.settingsProviders = const {},
-    this.pageBodyBuilder,
     this.hideBackButton = false,
   });
 
-  String get route => '/${pageInfo.name}';
-
-  factory PageDefinition.combine(
-    PageInfo pageInfo, {
-    bool landing = false,
-    bool centerTitle = false,
-    bool showAppBar = false,
-    bool hideBackButton = true,
-    bool showBottomMenu = false,
-    bool registerChildRoutes = true,
-    AppScaffoldPageBuilder? pageBuilder,
-    AppScaffoldPageBuilder? pageContentBuilder,
-    Widget Function()? pageBodyBuilder,
-    DrawerBuilder? drawerBuilder,
-    ScaffoldPageType? scaffoldType,
-    PageInfo? homeRoute,
-    List<PageDefinition> pages = const [],
-  }) =>
-      PageDefinition(
-        pageInfo: pageInfo,
-        landing: landing,
-        centerTitle: centerTitle,
-        showAppBar: showAppBar,
-        hideBackButton: hideBackButton,
-        showBottomMenu: showBottomMenu,
-        registerChildRoutes: registerChildRoutes,
-        pageBuilder: pageBuilder,
-        pageContentBuilder: pageContentBuilder,
-        pageBodyBuilder: pageBodyBuilder,
-        drawerBuilder: drawerBuilder,
-        scaffoldType: scaffoldType,
-        homeRoute: homeRoute,
-        childPages: [...pages.map((page) => page.childPages).expand((e) => e)],
-        actionsProviders: [
-          ...pages.map((page) => page.actionsProviders).expand((e) => e),
-        ],
-        settingsProviders: Map.fromEntries([
-          ...pages.map((page) => page.settingsProviders.entries),
-        ].expand((e) => e)),
-      );
-
   PageDefinition copyWith({
-    PageInfo? pageInfo,
+    PageInfo? info,
     String? name,
     String? title,
+    String? route,
     String? tabTitle,
     IconData? icon,
-    bool? primary,
+    ItemType? itemType,
     bool? debug,
     bool? landing,
     AppScaffoldPageBuilder? pageBuilder,
@@ -116,16 +70,15 @@ class PageDefinition extends ItemDefinition {
     AppScaffoldSettingsMapProviders? settingsProviders,
   }) {
     return PageDefinition(
-      pageInfo: this.pageInfo.copyWith(
+      info: this.info.copyWith(
             name: name,
             title: title,
             tabTitle: tabTitle,
             icon: icon,
-            pageInfo: pageInfo,
+            route: route,
+            itemType: itemType,
+            info: info,
           ),
-      primary: primary ?? this.primary,
-      debug: debug ?? this.debug,
-      landing: landing ?? this.landing,
       pageBuilder: pageBuilder ?? this.pageBuilder,
       pageContentBuilder: pageContentBuilder ?? this.pageContentBuilder,
       drawerBuilder: drawerBuilder ?? this.drawerBuilder,
@@ -141,6 +94,48 @@ class PageDefinition extends ItemDefinition {
     );
   }
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is PageDefinition && runtimeType == other.runtimeType && info == other.info;
+
+  @override
+  int get hashCode => info.hashCode;
+
+  factory PageDefinition.combine(
+    PageInfo info, {
+    bool centerTitle = false,
+    bool showAppBar = false,
+    bool hideBackButton = true,
+    bool showBottomMenu = false,
+    bool registerChildRoutes = true,
+    AppScaffoldPageBuilder? pageBuilder,
+    AppScaffoldPageBuilder? pageContentBuilder,
+    DrawerBuilder? drawerBuilder,
+    ScaffoldPageType? scaffoldType,
+    PageInfo? homeRoute,
+    List<PageDefinition> pages = const [],
+  }) =>
+      PageDefinition(
+        info: info,
+        centerTitle: centerTitle,
+        showAppBar: showAppBar,
+        hideBackButton: hideBackButton,
+        showBottomMenu: showBottomMenu,
+        registerChildRoutes: registerChildRoutes,
+        pageBuilder: pageBuilder,
+        pageContentBuilder: pageContentBuilder,
+        drawerBuilder: drawerBuilder,
+        scaffoldType: scaffoldType,
+        homeRoute: homeRoute,
+        childPages: [...pages.map((page) => page.childPages).expand((e) => e)],
+        actionsProviders: [
+          ...pages.map((page) => page.actionsProviders).expand((e) => e),
+        ],
+        settingsProviders: Map.fromEntries([
+          ...pages.map((page) => page.settingsProviders.entries),
+        ].expand((e) => e)),
+      );
+
   ItemControlPanel createControlPanel({
     bool initiallyExpanded = false,
     ItemControlPanelType type = ItemControlPanelType.expandableAll,
@@ -151,7 +146,7 @@ class PageDefinition extends ItemDefinition {
     Widget Function()? summaryBuilder,
   }) {
     return ItemControlPanel.from(
-      itemInfo: pageInfo,
+      itemInfo: info,
       actionsProviders: actionsProviders,
       settingsProviders: settingsProviders,
       initiallyExpanded: initiallyExpanded,
@@ -164,39 +159,34 @@ class PageDefinition extends ItemDefinition {
     );
   }
 
-  bool get isPrimary => pageInfo.itemType == ItemType.primary;
-  bool get isSecondary => pageInfo.itemType == ItemType.secondary;
-  bool get isHidden => pageInfo.itemType == ItemType.hidden;
+  bool get isPrimary => info.itemType == ItemType.primary;
+  bool get isSecondary => info.itemType == ItemType.secondary;
+  bool get isHidden => info.itemType == ItemType.hidden;
+  bool get isLanding => info.landing;
+  bool get isDebug => info.debug;
 }
 
 extension AppScaffoldPageDefinitionListExtension on List<PageDefinition> {
-  List<PageDefinition> whereRouteIs(List<String> testRoutes) {
+  List<PageDefinition> whereRouteIs(List<String> requiredRoutes) {
     return where(
-      (p) => testRoutes.contains(p.route),
-    )
-        .map((p) => p.copyWith(primary: true))
-        .mapIndexed((i, p) => i == 0
-            ? p.copyWith(
-                landing: true,
-              )
-            : p)
-        .toList();
+      (p) => requiredRoutes.contains(p.info.route),
+    ).toList();
   }
 
   List<PageDefinition> copyWith({
-    bool? primary,
     PageInfo? homeRoute,
     bool? hideBackButton,
     ScaffoldPageType? scaffoldType,
     bool? showBottomMenu,
-    bool? isHidden,
+    bool? landing,
+    ItemType? itemType,
   }) {
     return map((p) => p.copyWith(
-          primary: primary ?? p.primary,
           homeRoute: homeRoute ?? p.homeRoute,
           hideBackButton: hideBackButton ?? p.hideBackButton,
           scaffoldType: scaffoldType ?? p.scaffoldType,
           showBottomMenu: showBottomMenu ?? p.showBottomMenu,
+          itemType: itemType ?? p.info.itemType,
         )).toList();
   }
 
@@ -204,5 +194,5 @@ extension AppScaffoldPageDefinitionListExtension on List<PageDefinition> {
   List<PageDefinition> getSecondaryPages() => byType(ItemType.secondary);
   List<PageDefinition> getHiddenPages() => byType(ItemType.hidden);
 
-  List<PageDefinition> byType(ItemType type) => where((page) => page.pageInfo.itemType == type).toList();
+  List<PageDefinition> byType(ItemType type) => where((page) => page.info.itemType == type).toList();
 }

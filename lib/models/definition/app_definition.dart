@@ -52,17 +52,14 @@ class AppDefinition {
     this.intlDelegates = const <LocalizationsDelegate>[],
   })  : _pages = pages.copyWith(
           showBottomMenu: true,
-          primary: true,
           scaffoldType: scaffoldPageType,
         ),
         _features = features.copyWith(
           showBottomMenu: true,
-          primary: true,
           scaffoldType: scaffoldPageType,
         ),
         _modules = modules.copyWith(
           showBottomMenu: true,
-          primary: true,
           scaffoldType: scaffoldPageType,
         );
 
@@ -116,7 +113,7 @@ class AppDefinition {
       appDetailsProvider: appDetailsProvider,
       profilePage: profilePage ??
           PageDefinition(
-            pageInfo: PageInfo(
+            info: PageInfo(
               title: 'Profile',
               name: 'profile',
               icon: Icons.person,
@@ -155,7 +152,11 @@ class AppDefinition {
     ItemControlPanelType type = ItemControlPanelType.expandableAll,
   }) {
     return ItemControlPanel.from(
-      itemInfo: PageInfo(name: appName, title: appTitle, icon: Icons.face),
+      itemInfo: PageInfo(
+        name: appName,
+        title: appTitle,
+        icon: Icons.face,
+      ),
       initiallyExpanded: initiallyExpanded,
       type: type,
       actionsProviders: actionProviders,

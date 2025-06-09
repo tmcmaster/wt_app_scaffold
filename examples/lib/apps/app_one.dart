@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
 import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
@@ -31,37 +32,36 @@ mixin AppOne {
       HiddenDrawerOpener.of(context)?.open();
     },
     profilePage: PageDefinition(
-      pageInfo: PageInfo(
+      info: PageInfo(
         name: 'profile',
         title: 'Profile',
         icon: Icons.person,
+        itemType: ItemType.primary,
       ),
-      primary: true,
       pageBuilder: (pageContext) => const PlaceholderPage(title: 'Profile Screen'),
       showAppBar: true,
     ),
     pages: [
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'landingPage',
           title: 'Landing Page',
           icon: FontAwesomeIcons.clipboard,
+          itemType: ItemType.primary,
+          landing: true,
         ),
-        primary: true,
-        landing: true,
-        debug: false,
         scaffoldType: ScaffoldPageType.transparentCard,
         pageBuilder: (pageContext) => const FirebasePage(),
         showBottomMenu: false,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'pageOne',
           title: 'Page One',
           icon: FontAwesomeIcons.clipboard,
+          itemType: ItemType.primary,
+          debug: true,
         ),
-        primary: true,
-        debug: true,
         pageBuilder: (pageContext) => BottomDrawerPage(
           title: 'Page One',
           mainWidget: const Center(
@@ -79,13 +79,12 @@ mixin AppOne {
         ),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'pageTwo',
           title: 'Page Two',
           icon: FontAwesomeIcons.bagShopping,
+          itemType: ItemType.secondary,
         ),
-        primary: false,
-        debug: false,
         scaffoldType: ScaffoldPageType.transparentCard,
         pageBuilder: (pageContext) {
           final user = pageContext.ref.read(AppScaffoldAuthenticationStore.user);
@@ -101,58 +100,59 @@ mixin AppOne {
         },
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'pageThree',
           title: 'Page Three',
           icon: FontAwesomeIcons.boxesPacking,
+          debug: true,
         ),
-        debug: true,
         pageBuilder: (_) => const PlaceholderPage(title: 'Page Three'),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'pageFour',
           title: 'Page Four',
           icon: FontAwesomeIcons.tractor,
+          itemType: ItemType.primary,
+          debug: true,
         ),
-        debug: true,
         pageBuilder: (_) => const PlaceholderPage(title: 'Page Four'),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'counter',
           title: 'Counter',
           icon: Icons.settings,
+          itemType: ItemType.primary,
         ),
         scaffoldType: ScaffoldPageType.transparentCard,
-        primary: true,
         pageBuilder: (_) => const CounterAppPage(title: 'Counter App'),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'database',
           title: 'Database',
           icon: FontAwesomeIcons.database,
+          itemType: ItemType.secondary,
         ),
-        primary: false,
         pageBuilder: (_) => const DatabaseExamplePage(),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'async',
           title: 'Async',
           icon: FontAwesomeIcons.arrowsRotate,
+          itemType: ItemType.secondary,
         ),
-        primary: false,
         pageBuilder: (_) => const AsyncExamplePage(),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'settings',
           title: 'Settings',
           icon: Icons.settings,
+          itemType: ItemType.primary,
         ),
-        primary: true,
         scaffoldType: ScaffoldPageType.transparentCard,
         pageBuilder: (pageContext) => SettingsPage(
           backgroundColor: Colors.transparent,
@@ -167,13 +167,13 @@ mixin AppOne {
         ),
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'pageFive',
           title: 'Page Five',
           icon: FontAwesomeIcons.car,
+          itemType: ItemType.primary,
+          debug: true,
         ),
-        debug: true,
-        primary: true,
         pageBuilder: (_) => const PlaceholderPage(title: 'Page Five'),
       ),
     ],

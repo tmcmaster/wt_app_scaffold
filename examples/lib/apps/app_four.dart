@@ -3,13 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
 import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
 import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/navigation_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/plain_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/user_log_page.dart';
-import 'package:wt_app_scaffold_examples/apps/widgets/authentication_butons.dart';
+import 'package:wt_app_scaffold_examples/apps/widgets/authentication_buttons.dart';
 import 'package:wt_firepod/wt_firepod.dart';
 
 mixin AppFour {
@@ -27,59 +28,56 @@ mixin AppFour {
     applicationType: ApplicationType.hiddenDrawer,
     pages: [
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'plain',
           title: 'Plain',
           icon: FontAwesomeIcons.faceSmile,
+          itemType: ItemType.primary,
         ),
-        primary: true,
-        debug: false,
         pageBuilder: (_) => const PlainPage(),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'userLog',
           title: 'UserLog',
           icon: FontAwesomeIcons.bowlFood,
+          itemType: ItemType.primary,
+          landing: true,
         ),
-        primary: true,
-        landing: true,
-        debug: false,
         pageBuilder: (_) => const UserLogPage(),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'navigation',
           title: 'Navigation',
           icon: FontAwesomeIcons.bars,
+          itemType: ItemType.primary,
         ),
-        primary: true,
-        debug: false,
         pageBuilder: (_) => const NavigationPage(
           routeTo: '/settings',
         ),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'theme',
           title: 'Theme',
           icon: Icons.style,
+          debug: true,
+          itemType: ItemType.primary,
         ),
-        debug: true,
-        primary: true,
         pageBuilder: (_) => const ThemePreviewScreen(),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'settings',
           title: 'Settings',
           icon: Icons.settings,
+          itemType: ItemType.primary,
         ),
-        primary: true,
         pageBuilder: (_) => Padding(
           padding: const EdgeInsets.all(12),
           child: SettingsPage(
@@ -93,13 +91,13 @@ mixin AppFour {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'debug',
           title: 'Debug',
           icon: FontAwesomeIcons.bug,
+          itemType: ItemType.primary,
+          debug: true,
         ),
-        debug: true,
-        primary: true,
         pageBuilder: (_) => const PlaceholderPage(
           title: 'Debug Mode Page',
           backgroundColor: Colors.transparent,
@@ -107,35 +105,35 @@ mixin AppFour {
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'debug2',
           title: 'Debug 2',
           icon: FontAwesomeIcons.bug,
+          itemType: ItemType.primary,
+          debug: true,
         ),
-        debug: true,
-        primary: false,
         pageBuilder: (_) => const PlaceholderPage(title: 'Debug Mode Page 2'),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'debug3',
           title: 'Debug 3',
           icon: FontAwesomeIcons.bug,
+          itemType: ItemType.primary,
+          debug: true,
         ),
-        debug: true,
-        primary: false,
         pageBuilder: (_) => const PlaceholderPage(title: 'Debug Mode Page 3'),
         scaffoldType: ScaffoldPageType.transparentCard,
       ),
       PageDefinition(
-        pageInfo: PageInfo(
+        info: PageInfo(
           name: 'debug4',
           title: 'Debug 4',
           icon: FontAwesomeIcons.bug,
+          itemType: ItemType.primary,
+          debug: true,
         ),
-        debug: true,
-        primary: false,
         pageBuilder: (_) => const PlaceholderPage(
           title: 'Debug Mode Page 4',
           backgroundColor: Colors.transparent,

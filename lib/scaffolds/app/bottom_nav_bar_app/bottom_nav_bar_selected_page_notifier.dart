@@ -22,7 +22,7 @@ class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent> wi
         ) {
     pageIndex = Map.fromEntries(
       pages.mapIndexed(
-        (index, page) => MapEntry(page.route, index),
+        (index, page) => MapEntry(page.info.route, index),
       ),
     );
   }

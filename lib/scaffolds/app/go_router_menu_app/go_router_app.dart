@@ -31,9 +31,9 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
         redirect: (context, state) => redirectMap[state.matchedLocation],
         routes: appDefinition.pages.map(
           (page) {
-            log.d('Creating Route(${page.route}) : ${page.pageInfo.title}');
+            log.d('Creating Route(${page.info.route}) : ${page.info.title}');
             return GoRoute(
-                path: page.route,
+                path: page.info.route,
                 builder: (context, state) {
                   return ScaffoldPageTypeWrapper(
                     page: page,
@@ -44,9 +44,9 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
                 routes: !page.registerChildRoutes || page.childPages.isEmpty
                     ? []
                     : page.childPages.map((childPage) {
-                        log.d('Creating Child Route(${childPage.route}) : ${childPage.pageInfo.title}');
+                        log.d('Creating Child Route(${childPage.info.route}) : ${childPage.info.title}');
                         return GoRoute(
-                          path: childPage.route,
+                          path: childPage.info.route,
                           builder: (context, state) {
                             return ScaffoldPageTypeWrapper(
                               page: childPage,
@@ -84,10 +84,10 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
   ConsumerState<GoRouterMenuApp> createState() => _GoRouterAppState();
 
   static String _createInitialRoute(AppDefinition appDefinition) {
-    final initialRoutePage = appDefinition.pages.where((page) => page.landing).firstOrNull ??
-        appDefinition.pages.where((page) => page.primary).firstOrNull;
+    final initialRoutePage = appDefinition.pages.where((page) => page.isLanding).firstOrNull ??
+        appDefinition.pages.where((page) => page.isPrimary).firstOrNull;
     if (initialRoutePage != null) {
-      return initialRoutePage.route;
+      return initialRoutePage.info.route;
     }
     throw Exception('Could not determine the initial route for the application');
   }
@@ -100,7 +100,7 @@ class GoRouterMenuApp extends ConsumerStatefulWidget {
     void collect(PageDefinition parent) {
       for (int c = 0; c < parent.childPages.length; c++) {
         final child = parent.childPages[c];
-        map[child.route] = '${parent.route}?tabIndex=${c + 1}';
+        map[child.info.route] = '${parent.info.route}?tabIndex=${c + 1}';
         collect(child);
       }
     }

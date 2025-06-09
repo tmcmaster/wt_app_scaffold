@@ -54,10 +54,10 @@ class BottomMenuBar extends ConsumerWidget {
                 .map(
                   (page) => BottomNavigationBarItem(
                     icon: Icon(
-                      page.pageInfo.icon,
+                      page.info.icon,
                     ),
-                    label: page.pageInfo.title,
-                    tooltip: page.pageInfo.title,
+                    label: page.info.title,
+                    tooltip: page.info.title,
                     // backgroundColor: const Color(0xFF0D5257),
                   ),
                 )
@@ -65,55 +65,56 @@ class BottomMenuBar extends ConsumerWidget {
             currentIndex: findCurrentIndex(primaryPages, activeRoute),
             onTap: (selected) {
               // final routeName = createRouteName(pages[selected]);
-              final routeName = primaryPages[selected].route;
+              final routeName = primaryPages[selected].info.route;
               beforeChange?.call(selected, routeName);
               log.d('Using GoRouter to change page: $routeName');
               onChange(routeName, context, ref);
             },
           ),
         ),
-        SizedBox(
-          height: 64.0,
-          child: Card(
-            elevation: 4,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.zero,
-            ),
-            child: PopupMenuButton<PageDefinition>(
-              // Callback that sets the selected popup menu item.
-              onSelected: (PageDefinition page) {},
-              itemBuilder: (BuildContext context) => secondaryPages
-                  .map(
-                    (item) => PopupMenuItem<PageDefinition>(
-                      value: item,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: TextButton.icon(
-                          style: const ButtonStyle(
-                            alignment: Alignment.centerLeft,
+        if (secondaryPages.isNotEmpty)
+          SizedBox(
+            height: 64.0,
+            child: Card(
+              elevation: 4,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+              child: PopupMenuButton<PageDefinition>(
+                // Callback that sets the selected popup menu item.
+                onSelected: (PageDefinition page) {},
+                itemBuilder: (BuildContext context) => secondaryPages
+                    .map(
+                      (item) => PopupMenuItem<PageDefinition>(
+                        value: item,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: TextButton.icon(
+                            style: const ButtonStyle(
+                              alignment: Alignment.centerLeft,
+                            ),
+                            icon: Icon(item.info.icon),
+                            label: Padding(
+                              padding: const EdgeInsets.only(left: 16.0),
+                              child: Text(item.info.title),
+                            ),
+                            onPressed: () {
+                              onChange(item.info.route, context, ref);
+                            },
                           ),
-                          icon: Icon(item.pageInfo.icon),
-                          label: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(item.pageInfo.title),
-                          ),
-                          onPressed: () {
-                            onChange(item.pageInfo.route, context, ref);
-                          },
                         ),
                       ),
-                    ),
-                  )
-                  .toList(),
+                    )
+                    .toList(),
+              ),
             ),
           ),
-        ),
       ],
     );
   }
 
   static int findCurrentIndex(List<PageDefinition> pages, String activeRoute) {
-    final index = pages.map((p) => p.route).toList().indexOf(activeRoute);
+    final index = pages.map((p) => p.info.route).toList().indexOf(activeRoute);
     return index < 0 ? 0 : index;
   }
 }

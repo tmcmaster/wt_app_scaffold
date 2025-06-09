@@ -54,13 +54,11 @@ mixin AppScaffoldApp {
     final selectedApplicationType = applicationType ?? ApplicationType.goRouterMenu;
 
     final pageTemplate = PageDefinition(
-      pageInfo: PageInfo(
+      info: PageInfo(
         name: 'template',
         title: 'Template',
         icon: Icons.abc,
       ),
-      // pageBuilder: placeholderScreenBuilder,
-      primary: false,
       scaffoldType: ScaffoldPageType.transparentCard,
       showAppBar: selectedApplicationType == ApplicationType.goRouterMenu,
       showBottomMenu: selectedApplicationType == ApplicationType.goRouterMenu,

@@ -41,16 +41,15 @@ class FeatureDefinition {
 
   FeatureDefinition copyWith({
     bool? showBottomMenu,
-    bool? primary,
     bool? isHidden,
     ScaffoldPageType? scaffoldType,
+    ItemType? type,
   }) =>
       FeatureDefinition(
         featureInfo: featureInfo,
         pages: pages
             .map((page) => page.copyWith(
                   showBottomMenu: showBottomMenu ?? page.showBottomMenu,
-                  primary: primary ?? page.primary,
                   scaffoldType: scaffoldType ?? page.scaffoldType,
                 ))
             .toList(),
@@ -77,14 +76,12 @@ class FeatureDefinition {
 
 extension AppScaffoldFeatureDefinitionListExtension on List<FeatureDefinition> {
   List<FeatureDefinition> copyWith({
-    bool? primary,
     ScaffoldPageType? scaffoldType,
     bool? showBottomMenu,
     bool? isHidden,
   }) {
     return map(
       (feature) => feature.copyWith(
-        primary: primary,
         scaffoldType: scaffoldType,
         showBottomMenu: showBottomMenu,
         isHidden: isHidden,

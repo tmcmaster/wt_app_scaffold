@@ -18,8 +18,7 @@ class _CurveNavBarScreenState extends ConsumerState<CurveNavBarScreen> {
   int index = 0;
   String? route;
 
-  late GlobalKey<CurvedNavigationBarState> navKey =
-      GlobalKey<CurvedNavigationBarState>();
+  late GlobalKey<CurvedNavigationBarState> navKey = GlobalKey<CurvedNavigationBarState>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +26,13 @@ class _CurveNavBarScreenState extends ConsumerState<CurveNavBarScreen> {
     final navigationKey = ref.watch(CurvedNavBarApp.controller);
 
     if (route != null) {
-      final expectedRoute = controller.getPageByIndex(index)?.route;
+      final expectedRoute = controller.getPageByIndex(index)?.info.route;
       if (expectedRoute != route) {
         final newIndex = controller.getIndexByRoute(route!);
         if (newIndex != null) {
           setState(() {
             index = newIndex;
-            route = controller.getPageByIndex(newIndex)?.route;
+            route = controller.getPageByIndex(newIndex)?.info.route;
           });
         }
       } else {}
@@ -55,7 +54,7 @@ class _CurveNavBarScreenState extends ConsumerState<CurveNavBarScreen> {
         onChange: (newIndex) {
           setState(() {
             index = newIndex;
-            route = controller.getPageByIndex(index)?.route;
+            route = controller.getPageByIndex(index)?.info.route;
           });
         },
       ),
