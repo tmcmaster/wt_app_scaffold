@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/widget/app_scaffold_material_app.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
+import 'package:wt_app_scaffold/scaffolds/common/widget/app_scaffold_material_app.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AffinityApp extends ConsumerWidget {
@@ -57,8 +58,7 @@ class AffinityApp extends ConsumerWidget {
                             onPressed: () {
                               ref
                                   .read(
-                                    AppScaffoldAuthenticationStore
-                                        .user.notifier,
+                                    AppScaffoldAuthenticationStore.user.notifier,
                                   )
                                   .signOut();
                             },
@@ -68,8 +68,7 @@ class AffinityApp extends ConsumerWidget {
                             onPressed: () {
                               ref
                                   .read(
-                                    AppScaffoldAuthenticationStore
-                                        .user.notifier,
+                                    AppScaffoldAuthenticationStore.user.notifier,
                                   )
                                   .signInWithEmail('', '');
                             },
@@ -105,7 +104,7 @@ class AffinityApp extends ConsumerWidget {
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () {
-                          ref.read(AppScaffoldProviders.router).go('/settings');
+                          ref.read(AppScaffoldStore.router).go('/settings');
                         },
                         child: const Text('Settings'),
                       ),
@@ -114,7 +113,7 @@ class AffinityApp extends ConsumerWidget {
                 ),
               ),
             ),
-        '/settings': (_) => const SettingsPage(
+        '/settings': (_) => const AppScaffoldSettingsPage(
               hideAppBar: false,
             ),
       },

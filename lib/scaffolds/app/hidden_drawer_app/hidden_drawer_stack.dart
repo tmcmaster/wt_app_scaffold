@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_draw_controller.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_menu.dart';
@@ -92,7 +93,7 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
         width: offsetWhenOpenX,
         onCloseDrawer: closeDrawer,
         onSelectedItem: (page) {
-          ref.read(AppScaffoldRouter.provider).go(page.info.route);
+          ref.read(AppScaffoldStore.router).go(page.info.route);
           closeDrawer();
         },
         hidden: !isDrawerOpen,

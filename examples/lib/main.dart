@@ -10,7 +10,6 @@ void main() {
     withFirebase(
       withFirebaseLogin(
         andAppScaffold(
-          appDetails: AppTwo.details,
           appDefinition: AppTwo.definition,
           appStyles: AppTwo.styles,
         ),

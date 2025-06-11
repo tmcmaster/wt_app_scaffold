@@ -2,9 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_definition/app_definition.dart';
+import 'package:wt_app_scaffold/scaffolds/common/types/app_scaffold_router.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class CurvedNavBarController extends StateNotifier<GlobalKey<CurvedNavigationBarState>> with AppScaffoldRouter {
@@ -16,11 +15,11 @@ class CurvedNavBarController extends StateNotifier<GlobalKey<CurvedNavigationBar
   Ref ref;
 
   CurvedNavBarController(this.ref) : super(GlobalKey<CurvedNavigationBarState>()) {
-    ref.listen(AppScaffoldProviders.appPrimaryPages, (previous, pages) {
-      _calculateMaps(pages);
+    ref.listen(AppDefinition.provider, (previous, appDefinition) {
+      _calculateMaps(appDefinition.primaryPages);
       state = GlobalKey<CurvedNavigationBarState>();
     });
-    _calculateMaps(ref.read(AppScaffoldProviders.appPrimaryPages));
+    _calculateMaps(ref.read(AppDefinition.provider).primaryPages);
     state = GlobalKey<CurvedNavigationBarState>();
   }
 

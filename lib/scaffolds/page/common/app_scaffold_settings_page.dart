@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/scaffolds/application_type.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class SettingsPage extends ConsumerWidget {
-  static final log = logger(SettingsPage);
+class AppScaffoldSettingsPage extends ConsumerWidget {
+  static final log = logger(AppScaffoldSettingsPage);
 
   static const routeName = '/settings';
 
@@ -13,7 +13,7 @@ class SettingsPage extends ConsumerWidget {
   final bool childrenBefore;
   final bool hideAppBar;
   final Color backgroundColor;
-  const SettingsPage({
+  const AppScaffoldSettingsPage({
     super.key,
     this.children = const [],
     this.childrenBefore = false,
@@ -23,10 +23,7 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
-
-    final isHiddenDraw = ref.read(ApplicationSettings.applicationType.value) ==
-        ApplicationType.hiddenDrawer;
+    final isHiddenDraw = ref.read(ApplicationSettings.applicationType.value) == ApplicationType.hiddenDrawer;
 
     final List<Widget> settingsComponents = [
       if (childrenBefore) ...children,
@@ -36,8 +33,7 @@ class SettingsPage extends ConsumerWidget {
       ),
       ApplicationSettings.theme.component,
       ApplicationSettings.colorScheme.component,
-      if (appDefinition.applicationType == null)
-        ApplicationSettings.applicationType.component,
+      ApplicationSettings.applicationType.component,
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

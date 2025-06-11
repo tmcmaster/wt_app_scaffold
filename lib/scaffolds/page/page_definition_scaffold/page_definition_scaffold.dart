@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_spacing.dart';
+import 'package:wt_app_definition/app_definition.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/bottom_menu_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/irregular_header_painter.dart';
@@ -119,7 +118,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                           padding: const EdgeInsets.only(right: 30.0),
                           child: IconButton(
                             onPressed: () {
-                              ref.read(AppScaffoldRouter.provider).go(widget.pageDefinition.homeRoute!.route);
+                              ref.read(AppScaffoldStore.router).go(widget.pageDefinition.homeRoute!.route);
                             },
                             icon: const Icon(Icons.chevron_left),
                           ),
@@ -228,7 +227,8 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                 BottomMenuBar(
                   activeRoute: widget.pageDefinition.info.route,
                   onChange: (routeName, context, ref) {
-                    ref.read(AppScaffoldRouter.provider).go(routeName);
+                    ref.read(AppScaffoldStore.router).go(routeName);
+                    // ref.read(GoRouterMenuApp.router).go(routeName);
                   },
                 ),
             ],

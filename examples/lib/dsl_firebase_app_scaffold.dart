@@ -9,7 +9,6 @@ void main() {
   runMyApp(
     andFirebase(
       withAppScaffold(
-        appDetails: AppTwo.details,
         appDefinition: AppTwo.definition,
         appStyles: AppTwo.styles,
       ),

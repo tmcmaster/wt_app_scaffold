@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
-import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
-import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
-import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/navigation_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/plain_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/user_log_page.dart';
@@ -14,18 +10,15 @@ import 'package:wt_app_scaffold_examples/apps/widgets/authentication_buttons.dar
 import 'package:wt_firepod/wt_firepod.dart';
 
 mixin AppThree {
-  static final details = AppDetails(
-    title: 'Application Two',
-    subTitle: 'Second application',
-    iconPath: 'assets/avocado.png',
-  );
-
   static final definition = AppDefinition.from(
-    appTitle: 'Application Three',
-    appName: 'appThree',
+    appDetails: AppDetails(
+      name: 'applicationTwo',
+      title: 'Application Two',
+      subTitle: 'Second application',
+      iconPath: 'assets/avocado.png',
+    ),
     swipeEnabled: true,
     includeAppBar: true,
-    applicationType: ApplicationType.bottomNavBar,
     pages: [
       PageDefinition(
         info: PageInfo(
@@ -80,7 +73,7 @@ mixin AppThree {
         ),
         pageBuilder: (pageContext) => Padding(
           padding: const EdgeInsets.all(12),
-          child: SettingsPage(
+          child: AppScaffoldSettingsPage(
             backgroundColor: Colors.transparent,
             children: [
               if (FirepodFeatures.isFirebaseAvailable()) const AuthenticationButtons(),

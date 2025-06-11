@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
-import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
-import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
-import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
 import 'package:wt_app_scaffold_examples/actions/action_two.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
@@ -16,18 +12,15 @@ import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
 
 mixin AppOne {
-  static final details = AppDetails(
-    title: 'Application One',
-    subTitle: 'First application',
-    iconPath: 'assets/avocado.png',
-  );
-
   static final definition = AppDefinition.from(
-    appTitle: 'Application One',
-    appName: 'appOne',
+    appDetails: AppDetails(
+      name: 'applicationOne',
+      title: 'Application One',
+      subTitle: 'First application',
+      iconPath: 'assets/avocado.png',
+    ),
     swipeEnabled: true,
     includeAppBar: true,
-    applicationType: ApplicationType.hiddenDrawer,
     menuAction: (context) {
       HiddenDrawerOpener.of(context)?.open();
     },
@@ -154,12 +147,12 @@ mixin AppOne {
           itemType: ItemType.primary,
         ),
         scaffoldType: ScaffoldPageType.transparentCard,
-        pageBuilder: (pageContext) => SettingsPage(
+        pageBuilder: (pageContext) => AppScaffoldSettingsPage(
           backgroundColor: Colors.transparent,
           children: [
             ElevatedButton(
               onPressed: () {
-                pageContext.ref.read(AppScaffoldRouter.provider).go('/');
+                pageContext.ref.read(AppScaffoldStore.router).go('/');
               },
               child: const Text('Login'),
             ),

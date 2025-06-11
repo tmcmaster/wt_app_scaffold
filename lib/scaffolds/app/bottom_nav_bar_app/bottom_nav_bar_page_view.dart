@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_definition/model/definition/app_definition.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_selected_page_notifier.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_source.dart';
@@ -47,7 +47,8 @@ class _PageViewState extends ConsumerState<BottomNavBarPageView> {
       }
     });
 
-    final items = ref.watch(AppScaffoldProviders.appPrimaryPages);
+    final appDefinition = ref.watch(AppDefinition.provider);
+    final items = appDefinition.primaryPages;
     final filterItems = widget.debugMode ? items : items.where((item) => !item.debug).toList();
 
     return PageView.builder(

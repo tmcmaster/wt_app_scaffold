@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_selected_page_notifier.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_source.dart';
@@ -22,9 +21,11 @@ class BottomNavBarMenu extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pageChangeEvent = ref.watch(provider);
     final pageNav = ref.read(provider.notifier);
-    final allItems = ref.watch(AppScaffoldProviders.allPages);
-    final primaryItems = ref.watch(AppScaffoldProviders.appPrimaryPages);
-    final otherItems = ref.watch(AppScaffoldProviders.appSecondaryPages);
+    final appDefinition = ref.watch(AppDefinition.provider);
+    final allItems = appDefinition.pages;
+    final primaryItems = appDefinition.primaryPages;
+    final otherItems = appDefinition.secondaryPages;
+
     log.d('Total Items: ${allItems.length}');
     log.d('Primary Items: ${primaryItems.length}');
     log.d('Other Items: ${otherItems.length}');

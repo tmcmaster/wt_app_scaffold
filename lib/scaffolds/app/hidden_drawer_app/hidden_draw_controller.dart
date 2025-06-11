@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_definition/app_definition.dart';
+import 'package:wt_app_scaffold/scaffolds/common/types/app_scaffold_router.dart';
 
 class HiddenDrawPageController extends StateNotifier<PageDefinition> with AppScaffoldRouter {
   static final page = StateNotifierProvider<HiddenDrawPageController, PageDefinition>(
@@ -15,12 +14,12 @@ class HiddenDrawPageController extends StateNotifier<PageDefinition> with AppSca
 
   HiddenDrawPageController(Ref ref) : super(getLandingPage(ref)) {
     _pageIndex = {
-      for (final page in ref.read(AppScaffoldProviders.appDefinition).pages) page.info.route: page,
+      for (final page in ref.read(AppDefinition.provider).pages) page.info.route: page,
     };
   }
 
   static PageDefinition getLandingPage(Ref ref) {
-    final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
+    final appDefinition = ref.read(AppDefinition.provider);
     return appDefinition.pages.firstWhere((page) => page.isLanding, orElse: () => appDefinition.pages.first);
   }
 

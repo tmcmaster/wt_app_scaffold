@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
+import 'package:wt_app_definition/app_definition.dart';
 
 class AppScaffoldPageControlsCard extends ConsumerWidget {
   final String title;

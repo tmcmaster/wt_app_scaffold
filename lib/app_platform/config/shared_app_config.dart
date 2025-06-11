@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_platform/config/cross_fade_transition_builder.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_sizing.dart';
-import 'package:wt_app_scaffold/models/app_spacing.dart';
-import 'package:wt_app_scaffold/models/app_styles.dart';
 
 mixin SharedAppConfig {
   static AppStyles styles(Ref ref) {

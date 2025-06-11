@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_application_feature.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_login_feature.dart';
 import 'package:wt_app_scaffold/app_platform/features/app_scaffold_plain_app_feature.dart';
@@ -9,10 +10,9 @@ import 'package:wt_app_scaffold/app_platform/model/app_scaffold_context_map.dart
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_widget_builder.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_provider_monitor.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_styles.dart';
+import 'package:wt_app_scaffold/scaffolds/application_type.dart';
 import 'package:wt_logging/wt_logging.dart';
-import 'package:wt_provider_manager/wt_provider_manager.dart';
+import 'package:wt_provider_manager/provider_manager.dart';
 
 bool _hasRun = false;
 
@@ -132,15 +132,15 @@ Future<void> runMyApp(
 const andAppScaffold = withAppScaffold;
 
 AppScaffoldFeatureDefinition withAppScaffold({
-  required AppDetails appDetails,
   required AppDefinition appDefinition,
   required ProviderBuilder<AppStyles> appStyles,
+  ApplicationType? applicationType,
 }) {
   return AppScaffoldApplicationFeature(
     null,
-    appDetails: appDetails,
     appDefinition: appDefinition,
     appStyles: appStyles,
+    applicationType: applicationType,
   );
 }
 

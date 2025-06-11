@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/definition/info/item_type.dart';
-import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
-import 'package:wt_app_scaffold/widgets/placeholder_page.dart';
 import 'package:wt_app_scaffold_examples/apps/chat_gpt/first_app/first_app_pages.dart';
 
 mixin FirstApp {
-  static final details = Provider<AppDetails>(
-    name: 'Example App Details',
-    (ref) => AppDetails(
-      title: 'Example App',
-      subTitle: 'created by ChatGPT',
-      iconPath: 'assets/avocado.png',
-    ),
-  );
-
   static final definition = Provider<AppDefinition>(
     name: 'Example App Definition',
     (ref) => AppDefinition.from(
-      appTitle: 'Example App',
-      appName: 'exampleApp',
+      appDetails: AppDetails(
+        name: 'exampleApp',
+        title: 'Example App',
+        subTitle: 'created by ChatGPT',
+        iconPath: 'assets/avocado.png',
+      ),
       swipeEnabled: true,
       includeAppBar: true,
-      appDetailsProvider: details,
       profilePage: PageDefinition(
         info: PageInfo(
           name: 'profile',
@@ -82,7 +74,7 @@ mixin FirstApp {
             icon: FontAwesomeIcons.gear,
             itemType: ItemType.secondary,
           ),
-          pageBuilder: (_) => const SettingsPage(),
+          pageBuilder: (_) => const AppScaffoldSettingsPage(),
         ),
       ],
     ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_action_button/action_button_definition.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/definition/item_definition.dart';
-import 'package:wt_app_scaffold/providers/auth_providers.dart';
+import 'package:wt_app_definition/app_definition.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_header.dart';
 
@@ -29,7 +28,7 @@ class HiddenDrawerMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final logoutAction = ref.read(AuthProviders.logoutAction);
+    final logoutAction = ref.read(AppScaffoldStore.logoutAction);
     final colorScheme = Theme.of(context).colorScheme;
     final backgroundColor = colorScheme.tertiary;
     return Container(

@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
-import 'package:wt_app_scaffold/models/app_scaffold_typedefs.dart';
-import 'package:wt_app_scaffold/models/definition/info/item_info.dart';
-import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
+import 'package:wt_app_definition/app_definition.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_button_bar.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_controls.dart';
 import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_indicators.dart';
-
-enum ItemControlPanelType {
-  all,
-  expandableAll,
-  expandableContent,
-  expandableChildren,
-  childrenOnly,
-  contentOnly,
-}
+import 'package:wt_app_scaffold/widgets/item_control_panel_type.dart';
 
 class ItemControlPanel extends ConsumerStatefulWidget {
   final PageInfo pageInfo;
@@ -84,6 +74,73 @@ class ItemControlPanel extends ConsumerStatefulWidget {
       buildChildren: buildChildren,
       childExpanded: childExpanded ?? initiallyExpanded,
       childType: childType ?? type,
+    );
+  }
+
+  factory ItemControlPanel.fromAppDefinition(
+    AppDefinition appDefinition, {
+    bool initiallyExpanded = true,
+    ItemControlPanelType type = ItemControlPanelType.expandableAll,
+  }) {
+    return ItemControlPanel.from(
+      itemInfo: PageInfo(
+        name: appDefinition.appDetails.name,
+        title: appDefinition.appDetails.title,
+        icon: Icons.face,
+      ),
+      initiallyExpanded: initiallyExpanded,
+      type: type,
+      actionsProviders: appDefinition.actionProviders,
+      settingsProviders: appDefinition.settingsProviders,
+      buildChildren: () => [
+        ...appDefinition.getModules().map((module) => ItemControlPanel.fromModule(module)),
+        ...appDefinition.getFeatures().map((feature) => ItemControlPanel.fromFeature(feature)),
+        ...appDefinition.getPages().map((page) => ItemControlPanel.fromPage(page)),
+      ],
+    );
+  }
+
+  factory ItemControlPanel.fromModule(
+    ModuleDefinition moduleDefinition, {
+    bool initiallyExpanded = false,
+    ItemControlPanelType type = ItemControlPanelType.expandableAll,
+  }) {
+    return ItemControlPanel.from(
+      itemInfo: moduleDefinition.moduleInfo,
+      initiallyExpanded: initiallyExpanded,
+      type: type,
+      actionsProviders: moduleDefinition.actionProviders,
+      settingsProviders: moduleDefinition.settingsProviders,
+      buildChildren: () => moduleDefinition.features.map((feature) => ItemControlPanel.fromFeature(feature)).toList(),
+    );
+  }
+
+  factory ItemControlPanel.fromFeature(
+    FeatureDefinition featureDefinition, {
+    bool initiallyExpanded = false,
+    ItemControlPanelType type = ItemControlPanelType.expandableAll,
+  }) {
+    return ItemControlPanel.from(
+      itemInfo: featureDefinition.featureInfo,
+      initiallyExpanded: initiallyExpanded,
+      type: type,
+      actionsProviders: featureDefinition.actionProviders,
+      settingsProviders: featureDefinition.settingsProviders,
+      buildChildren: () => featureDefinition.pages.map((page) => ItemControlPanel.fromPage(page)).toList(),
+    );
+  }
+
+  factory ItemControlPanel.fromPage(
+    PageDefinition pageDefinition, {
+    bool initiallyExpanded = false,
+    ItemControlPanelType type = ItemControlPanelType.expandableAll,
+  }) {
+    return ItemControlPanel.from(
+      itemInfo: pageDefinition.info,
+      initiallyExpanded: initiallyExpanded,
+      type: type,
+      actionsProviders: pageDefinition.actionsProviders,
+      settingsProviders: pageDefinition.settingsProviders,
     );
   }
 }
@@ -246,7 +303,7 @@ class _ActionBar extends ConsumerWidget {
                 IconButton(
                   onPressed: () {
                     debugPrint('Navigate to route: ${widget.pageInfo.route}');
-                    ref.read(AppScaffoldRouter.provider).go(widget.pageInfo.route);
+                    ref.read(AppScaffoldStore.router).go(widget.pageInfo.route);
                   },
                   icon: const Icon(Icons.chevron_right),
                 ),

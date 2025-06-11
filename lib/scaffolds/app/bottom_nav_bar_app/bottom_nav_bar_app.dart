@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/widget/app_scaffold_material_app.dart';
-import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_menu.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_page_view.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_selected_page_notifier.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
+import 'package:wt_app_scaffold/scaffolds/common/widget/app_scaffold_material_app.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomNavBarApp extends ConsumerStatefulWidget {
   static final pageChangeEvent = StateNotifierProvider<BottomNavBarSelectedPageNotifier, PageChangeEvent>(
     name: 'BottomNavBarApp.pageChangeEvent',
     (ref) {
-      final pages = ref.watch(AppScaffoldProviders.allPages);
-      final initialPageIndex = ref.watch(
-        AppScaffoldProviders.appInitialPageIndex,
-      );
+      final appDefinition = ref.watch(AppDefinition.provider);
+      final pages = appDefinition.pages;
+      final initialPageIndex = pages.indexOf(appDefinition.landingPage);
       return BottomNavBarSelectedPageNotifier(
         pages: pages,
         initialPage: initialPageIndex,

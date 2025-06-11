@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/models/definition/page_definition.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomMenuBar extends ConsumerWidget {
@@ -22,8 +21,9 @@ class BottomMenuBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
-    final primaryPages = ref.watch(AppScaffoldProviders.primaryPages);
-    final secondaryPages = ref.watch(AppScaffoldProviders.secondaryPages);
+    final appDefinition = ref.watch(AppDefinition.provider);
+    final primaryPages = appDefinition.primaryPages;
+    final secondaryPages = appDefinition.secondaryPages;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,

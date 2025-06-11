@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_app_scaffold/app_platform/util/app_scaffold_router.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
+import 'package:wt_app_scaffold/scaffolds/common/types/app_scaffold_router.dart';
 
 class ScaffoldAppGoRouter with AppScaffoldRouter {
   final Ref ref;

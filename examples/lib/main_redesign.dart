@@ -10,7 +10,6 @@ void main() {
       andFirebaseLogin(
         andAppScaffold(
           appStyles: AppTwo.styles,
-          appDetails: AppTwo.details,
           appDefinition: AppTwo.definition,
         ),
         emailEnabled: true,

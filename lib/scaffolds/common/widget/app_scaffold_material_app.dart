@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffolds_providers.dart';
+import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldMaterialApp extends ConsumerWidget {
@@ -44,7 +45,7 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appDefinition = ref.read(AppScaffoldProviders.appDefinition);
+    final appDefinition = ref.read(AppDefinition.provider);
     final seedColor = appDefinition.colorScheme == null
         ? ref.watch(ApplicationSettings.colorScheme.value)
         : appDefinition.colorScheme!;
@@ -52,11 +53,11 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
     log.d('Seed Color: $seedColor');
     log.d('Routes: $routes');
 
-    final appStyles = ref.read(AppScaffoldProviders.appStyles);
+    final appStyles = ref.read(AppScaffoldStore.appStyles);
     final debugMode = ref.watch(ApplicationSettings.debugMode.value);
 
-    final snackBarKey = ref.watch(AppScaffoldProviders.snackBarKey);
-    final navigatorKey = ref.watch(AppScaffoldProviders.navigatorKey);
+    final snackBarKey = ref.watch(AppScaffoldStore.snackBarKey);
+    final navigatorKey = ref.watch(AppScaffoldStore.navigatorKey);
 
     final themeMode = appDefinition.themeMode ?? ref.watch(ApplicationSettings.theme.value);
     final locale = ref.watch(LocaleStore.provider);
@@ -64,7 +65,7 @@ class AppScaffoldMaterialApp extends ConsumerWidget {
 
     log.d('===> ROUTES MaterialApp');
     return MaterialApp(
-      title: appDefinition.appTitle,
+      title: appDefinition.appDetails.title,
       debugShowCheckedModeBanner: debugMode,
       scaffoldMessengerKey: snackBarKey,
       navigatorKey: navigatorKey,

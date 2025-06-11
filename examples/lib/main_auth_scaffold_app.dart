@@ -7,7 +7,6 @@ void main() {
     withAuthentication(
       andAppScaffold(
         appStyles: AppFour.styles,
-        appDetails: AppFour.details,
         appDefinition: AppFour.definition,
       ),
     ),

@@ -6,7 +6,6 @@ import 'package:wt_logging/wt_logging.dart';
 void main() {
   runMyApp(
     withAppScaffold(
-      appDetails: ScaffoldTestApp.details,
       appDefinition: ScaffoldTestApp.definition,
       appStyles: ScaffoldTestApp.styles,
     ),

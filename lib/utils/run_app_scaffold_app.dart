@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/models/app_styles.dart';
-import 'package:wt_app_scaffold/models/definition/info/page_info.dart';
-import 'package:wt_app_scaffold/models/scaffold_page_type.dart';
 import 'package:wt_logging/wt_logging.dart';
-import 'package:wt_provider_manager/wt_provider_manager.dart';
+import 'package:wt_provider_manager/provider_manager.dart';
 
 mixin AppScaffoldApp {
   static void runAsPlainApp({
@@ -41,35 +39,19 @@ mixin AppScaffoldApp {
   }
 
   static void runAppScaffold({
-    required AppDefinition Function(ApplicationType, PageDefinition) appDefinitionBuilder,
-    required AppDetails appDetails,
+    required AppDefinition appDefinition,
     AppStyles Function(Ref ref) appStyles = SharedAppConfig.styles,
-    PageDefinition? templatePage,
     List<Override> includeOverrides = const [],
     Level setApplicationLogLevel = Level.warning,
     Map<Type, Level> setLogLevels = const {},
     Provider<ProviderManager>? providerManager,
     ApplicationType? applicationType,
   }) {
-    final selectedApplicationType = applicationType ?? ApplicationType.goRouterMenu;
-
-    final pageTemplate = PageDefinition(
-      info: PageInfo(
-        name: 'template',
-        title: 'Template',
-        icon: Icons.abc,
-      ),
-      scaffoldType: ScaffoldPageType.transparentCard,
-      showAppBar: selectedApplicationType == ApplicationType.goRouterMenu,
-      showBottomMenu: selectedApplicationType == ApplicationType.goRouterMenu,
-      registerChildRoutes: selectedApplicationType == ApplicationType.bottomNavBar,
-    );
-
     runMyApp(
       andAppScaffold(
-        appDefinition: appDefinitionBuilder(selectedApplicationType, pageTemplate),
-        appDetails: appDetails,
+        appDefinition: appDefinition,
         appStyles: appStyles,
+        applicationType: applicationType,
       ),
       setApplicationLogLevel: setApplicationLogLevel,
       setLogLevels: setLogLevels,

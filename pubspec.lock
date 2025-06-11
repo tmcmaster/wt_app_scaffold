@@ -1073,6 +1073,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  wt_app_definition:
+    dependency: "direct main"
+    description:
+      path: "../wt_app_definition"
+      relative: true
+    source: path
+    version: "0.0.1"
   wt_logging:
     dependency: "direct main"
     description:

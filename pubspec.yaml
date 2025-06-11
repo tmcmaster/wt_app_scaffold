@@ -47,6 +47,8 @@ dependencies:
 #  webview_universal:
   wt_action_button:
     git: git@github.com:tmcmaster/wt_action_button.git
+  wt_app_definition:
+    git: git@github.com:tmcmaster/wt_app_definition.git
   wt_logging:
     git: git@github.com:tmcmaster/wt_logging.git
   wt_models:
@@ -70,6 +72,8 @@ dependency_overrides:
     path: ../../fork/device_preview/device_preview
   wt_action_button:
     path: ../wt_action_button
+  wt_app_definition:
+    path: ../wt_app_definition
   wt_logging:
     path: ../wt_logging
   wt_models:
