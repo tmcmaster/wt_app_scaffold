@@ -3,10 +3,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_definition/app_definition.dart';
-import 'package:wt_app_scaffold/scaffolds/common/types/app_scaffold_router.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class CurvedNavBarController extends StateNotifier<GlobalKey<CurvedNavigationBarState>> with AppScaffoldRouter {
+class CurvedNavBarController extends StateNotifier<GlobalKey<CurvedNavigationBarState>> with AppDefinitionRouter {
   static final log = logger(CurvedNavBarController);
 
   Map<String, int> routeIndexMap = {};

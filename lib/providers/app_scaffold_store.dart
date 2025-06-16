@@ -5,10 +5,10 @@ import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_logout_action.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/scaffolds/app/affinity_app/affinity_app_router.dart';
+import 'package:wt_app_scaffold/scaffolds/app/go_router_menu_app/scaffold_app_go_router.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_draw_controller.dart';
-import 'package:wt_app_scaffold/scaffolds/application_type.dart';
-import 'package:wt_app_scaffold/scaffolds/common/types/app_scaffold_router.dart';
 import 'package:wt_logging/wt_logging.dart';
+import 'package:wt_workflow_tree/workflow_tree.dart';
 
 mixin AppScaffoldStore {
   static final logoutAction = Provider<ActionButtonDefinition>(
@@ -21,11 +21,11 @@ mixin AppScaffoldStore {
     (ref) => false,
   );
 
-  static final _routerProviders = <ApplicationType, ProviderListenable<AppScaffoldRouter>>{
+  static final _routerProviders = <ApplicationType, ProviderListenable<AppDefinitionRouter>>{
     ApplicationType.affinityApp: AffinityAppRouter.router,
     ApplicationType.bottomNavBar: BottomNavBarApp.router,
     ApplicationType.curvedNavBar: CurvedNavBarApp.router,
-    ApplicationType.goRouterMenu: GoRouterMenuApp.router,
+    ApplicationType.goRouterMenu: ScaffoldAppGoRouter.router,
     ApplicationType.hiddenDrawer: HiddenDrawPageController.router,
   };
 
@@ -39,7 +39,7 @@ mixin AppScaffoldStore {
     (ref) => ref.read(specifiedApplicationType) ?? ref.watch(ApplicationSettings.applicationType.value),
   );
 
-  static final router = Provider(name: 'AppScaffold Router Provider', (ref) {
+  static final router = Provider<AppDefinitionRouter>(name: 'AppScaffold Router Provider', (ref) {
     final ApplicationType type = ref.read(applicationType);
 
     if (_routerProviders.containsKey(type)) {
@@ -75,5 +75,13 @@ mixin AppScaffoldStore {
     (ref) => throw Exception(
       'AppScaffoldProviders.appStyles provider needs to be overridden.',
     ),
+  );
+
+  static final workflowProviders = Provider(
+    name: 'Workflow Providers',
+    (ref) {
+      final workflows = ref.read(AppDefinition.provider).workflows;
+      return workflows.map((workflow) => WorkflowProviders(ref, workflow)).toList();
+    },
   );
 }

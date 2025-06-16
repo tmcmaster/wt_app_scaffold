@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_definition/app_definition.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class CurvedNavBarPage extends ConsumerWidget {

@@ -1,8 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_definition/app_definition.dart';
-import 'package:wt_app_scaffold/scaffolds/common/types/app_scaffold_router.dart';
 
-class HiddenDrawPageController extends StateNotifier<PageDefinition> with AppScaffoldRouter {
+class HiddenDrawPageController extends StateNotifier<PageDefinition> with AppDefinitionRouter {
   static final page = StateNotifierProvider<HiddenDrawPageController, PageDefinition>(
     name: 'HiddenDrawerApp.router',
     (ref) => HiddenDrawPageController(ref),

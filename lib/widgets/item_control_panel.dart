@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_button_bar.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_controls.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_indicators.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_button_bar.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_controls.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_indicators.dart';
 import 'package:wt_app_scaffold/widgets/item_control_panel_type.dart';
 
 class ItemControlPanel extends ConsumerStatefulWidget {

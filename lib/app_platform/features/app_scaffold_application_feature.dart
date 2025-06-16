@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_context_map.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_override_definition.dart';
 import 'package:wt_app_scaffold/app_platform/scaffold_app_dsl.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_logging/wt_logging.dart';
+import 'package:wt_workflow_tree/workflow_tree.dart';
 
 // This layer builds the app with the ApplicationDefinition
 class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
@@ -19,12 +20,37 @@ class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
   }) : super(
           contextBuilder: (contextMap) async {
             await Future.delayed(const Duration(seconds: 1));
+            final adjustedAppDefinition = appDefinition.workflows.isEmpty
+                ? appDefinition
+                : appDefinition.copyWith(
+                    pages: [
+                      PageDefinition(
+                        info: PageInfo(
+                          icon: FontAwesomeIcons.tree,
+                          title: 'Workflow',
+                        ),
+                        pageBuilder: (_) => WorkflowTreePage(
+                          routerProvider: AppScaffoldStore.router,
+                        ),
+                        showAppBar: false,
+                        pageType: AppScaffoldPageType.transparentCard,
+                      ).copyWith(
+                        itemType: ItemType.primary,
+                        pageType: AppScaffoldPageType.transparentCard,
+                        landing: true,
+                        showBottomMenu: true,
+                      ),
+                      ...appDefinition.getPages(recursive: false),
+                    ],
+                  );
             final AppScaffoldContextMap newContext = {
               ...contextMap,
               AppDefinition.provider: AppScaffoldOverrideDefinition(
-                value: appDefinition,
+                value: adjustedAppDefinition,
                 override: AppDefinition.provider.overrideWith(
-                  (ref) => appDefinition,
+                  (ref) {
+                    return adjustedAppDefinition;
+                  },
                 ),
               ),
               AppScaffoldStore.specifiedApplicationType: AppScaffoldOverrideDefinition(
@@ -36,7 +62,7 @@ class AppScaffoldApplicationFeature extends AppScaffoldFeatureDefinition {
                 override: AppScaffoldStore.appDetails.overrideWith((ref) => appDefinition.appDetails),
               ),
               AppScaffoldStore.appStyles: AppScaffoldOverrideDefinition(
-                value: appDefinition,
+                value: appStyles,
                 override: AppScaffoldStore.appStyles.overrideWith(appStyles),
               ),
             };

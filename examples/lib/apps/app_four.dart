@@ -28,7 +28,7 @@ mixin AppFour {
           itemType: ItemType.primary,
         ),
         pageBuilder: (_) => const PlainPage(),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         info: PageInfo(
@@ -39,7 +39,7 @@ mixin AppFour {
           landing: true,
         ),
         pageBuilder: (_) => const UserLogPage(),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         info: PageInfo(
@@ -51,7 +51,7 @@ mixin AppFour {
         pageBuilder: (_) => const NavigationPage(
           routeTo: '/settings',
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         info: PageInfo(
@@ -62,7 +62,7 @@ mixin AppFour {
           itemType: ItemType.primary,
         ),
         pageBuilder: (_) => const ThemePreviewScreen(),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         info: PageInfo(
@@ -81,7 +81,7 @@ mixin AppFour {
             ],
           ),
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         info: PageInfo(
@@ -95,7 +95,7 @@ mixin AppFour {
           title: 'Debug Mode Page',
           backgroundColor: Colors.transparent,
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         info: PageInfo(
@@ -106,7 +106,7 @@ mixin AppFour {
           debug: true,
         ),
         pageBuilder: (_) => const PlaceholderPage(title: 'Debug Mode Page 2'),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         info: PageInfo(
@@ -117,7 +117,7 @@ mixin AppFour {
           debug: true,
         ),
         pageBuilder: (_) => const PlaceholderPage(title: 'Debug Mode Page 3'),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
       PageDefinition(
         info: PageInfo(
@@ -131,7 +131,7 @@ mixin AppFour {
           title: 'Debug Mode Page 4',
           backgroundColor: Colors.transparent,
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
       ),
     ],
   );

@@ -2,9 +2,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_definition/app_definition.dart';
+import 'package:wt_app_scaffold/scaffolds/app/common/app_scaffold_material_app.dart';
 import 'package:wt_app_scaffold/scaffolds/app/curved_nav_bar_app/curved_nav_bar_controller.dart';
 import 'package:wt_app_scaffold/scaffolds/app/curved_nav_bar_app/curved_nav_bar_screen.dart';
-import 'package:wt_app_scaffold/scaffolds/common/widget/app_scaffold_material_app.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class CurvedNavBarApp extends ConsumerStatefulWidget {

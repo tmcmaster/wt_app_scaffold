@@ -43,7 +43,7 @@ mixin AppOne {
           itemType: ItemType.primary,
           landing: true,
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
         pageBuilder: (pageContext) => const FirebasePage(),
         showBottomMenu: false,
       ),
@@ -78,7 +78,7 @@ mixin AppOne {
           icon: FontAwesomeIcons.bagShopping,
           itemType: ItemType.secondary,
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
         pageBuilder: (pageContext) {
           final user = pageContext.ref.read(AppScaffoldAuthenticationStore.user);
           return PlaceholderPage(
@@ -118,7 +118,7 @@ mixin AppOne {
           icon: Icons.settings,
           itemType: ItemType.primary,
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
         pageBuilder: (_) => const CounterAppPage(title: 'Counter App'),
       ),
       PageDefinition(
@@ -146,7 +146,7 @@ mixin AppOne {
           icon: Icons.settings,
           itemType: ItemType.primary,
         ),
-        scaffoldType: ScaffoldPageType.transparentCard,
+        pageType: AppScaffoldPageType.transparentCard,
         pageBuilder: (pageContext) => AppScaffoldSettingsPage(
           backgroundColor: Colors.transparent,
           children: [

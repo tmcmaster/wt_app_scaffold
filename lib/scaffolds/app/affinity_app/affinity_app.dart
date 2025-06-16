@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
-import 'package:wt_app_scaffold/scaffolds/common/widget/app_scaffold_material_app.dart';
+import 'package:wt_app_scaffold/scaffolds/app/common/app_scaffold_material_app.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AffinityApp extends ConsumerWidget {

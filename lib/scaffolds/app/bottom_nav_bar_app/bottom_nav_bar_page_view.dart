@@ -4,7 +4,7 @@ import 'package:wt_app_definition/model/definition/app_definition.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_selected_page_notifier.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_source.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page.dart';
 
 class BottomNavBarPageView extends ConsumerStatefulWidget {
   final bool swipeEnabled;

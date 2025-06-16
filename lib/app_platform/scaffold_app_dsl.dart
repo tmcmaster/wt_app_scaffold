@@ -10,7 +10,7 @@ import 'package:wt_app_scaffold/app_platform/model/app_scaffold_context_map.dart
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_feature_definition.dart';
 import 'package:wt_app_scaffold/app_platform/model/app_scaffold_widget_builder.dart';
 import 'package:wt_app_scaffold/app_platform/util/app_scaffold_provider_monitor.dart';
-import 'package:wt_app_scaffold/scaffolds/application_type.dart';
+import 'package:wt_app_scaffold/scaffolds/types/application_type.dart';
 import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_provider_manager/provider_manager.dart';
 

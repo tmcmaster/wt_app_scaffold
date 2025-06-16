@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/transparent_card.dart';
+import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/decorated_container/transparent_card.dart';
 
 class PreviewTextStyles extends StatelessWidget {
   const PreviewTextStyles({

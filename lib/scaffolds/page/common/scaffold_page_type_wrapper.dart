@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/page_definition_scaffold.dart';
 
 class ScaffoldPageTypeWrapper extends ConsumerWidget {
-  static final scaffoldBuilders = <ScaffoldPageType, AppScaffoldPageBuilder>{
-    ScaffoldPageType.plain: _createPlainPage,
-    ScaffoldPageType.transparentCard: _createTransparentCard,
+  static final scaffoldBuilders = <AppScaffoldPageType, AppScaffoldPageBuilder>{
+    AppScaffoldPageType.plain: _createPlainPage,
+    AppScaffoldPageType.transparentCard: _createTransparentCard,
   };
 
   static Widget _createPlainPage(AppScaffoldPageContext pageContext) {
@@ -28,7 +28,7 @@ class ScaffoldPageTypeWrapper extends ConsumerWidget {
 
   final PageDefinition page;
   final GoRouterState? state;
-  final ScaffoldPageType? scaffoldPageType;
+  final AppDefinitionPageType? scaffoldPageType;
   const ScaffoldPageTypeWrapper({
     required this.page,
     this.state,
@@ -39,7 +39,7 @@ class ScaffoldPageTypeWrapper extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final MediaQueryData data = MediaQuery.of(context);
     final scaleFactor = ref.watch(ApplicationSettings.textScaleFactor.value).value;
-    final calculatedScaffoldPageType = page.scaffoldType ?? scaffoldPageType;
+    final calculatedScaffoldPageType = page.pageType ?? scaffoldPageType;
     final AppScaffoldPageBuilder pageBuilder = scaffoldBuilders[calculatedScaffoldPageType] ?? _createPlainPage;
     return SafeArea(
       child: MediaQuery(

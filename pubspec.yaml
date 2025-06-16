@@ -57,6 +57,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_provider_manager.git
   wt_settings:
     git: git@github.com:tmcmaster/wt_settings.git
+  wt_workflow_tree:
+    git: git@github.com:tmcmaster/wt_workflow_tree.git
 
 dev_dependencies:
   build_runner: 
@@ -82,3 +84,5 @@ dependency_overrides:
     path: ../wt_provider_manager
   wt_settings:
     path: ../wt_settings
+  wt_workflow_tree:
+    path: ../wt_workflow_tree

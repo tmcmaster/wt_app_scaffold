@@ -138,7 +138,7 @@ class _HiddenDrawStackState extends ConsumerState<HiddenDrawStack> {
                   child: HiddenPageBuilder(
                     includeAppBar: widget.appDefinition.includeAppBar,
                     menuAction: widget.appDefinition.menuAction,
-                    pageType: widget.appDefinition.scaffoldPageType,
+                    pageType: widget.appDefinition.pageType,
                     pageDefinition: page,
                   ),
                 ),

@@ -33,7 +33,12 @@ class _AppScaffoldPageContentState extends ConsumerState<AppScaffoldPageContent>
         children: [
           if (widget.header != null) widget.header!,
           Expanded(
-            child: widget.scrollable ? SingleChildScrollView(child: widget.body) : widget.body,
+            child: widget.scrollable
+                ? ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                    child: SingleChildScrollView(child: widget.body),
+                  )
+                : widget.body,
           ),
         ],
       ),

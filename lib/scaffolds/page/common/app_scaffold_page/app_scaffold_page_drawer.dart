@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_definition/app_definition.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_controls.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_controls.dart';
 
 class AppScaffoldPageDrawer extends StatelessWidget {
   final AppScaffoldSettingsMapProviders settingsProviders;

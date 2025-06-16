@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_definition/app_definition.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_button_bar.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_content.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_drawer.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_drawer_button.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_footer.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_header.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_home_button.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_indicators.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_button_bar.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_content.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_drawer.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_drawer_button.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_footer.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_header.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_home_button.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_indicators.dart';
 
 class AppScaffoldPage extends ConsumerStatefulWidget {
   final PageDefinition pageDefinition;

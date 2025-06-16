@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_page_view.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/bottom_nav_bar_selected_page_notifier.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
-import 'package:wt_app_scaffold/scaffolds/common/widget/app_scaffold_material_app.dart';
+import 'package:wt_app_scaffold/scaffolds/app/common/app_scaffold_material_app.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class BottomNavBarApp extends ConsumerStatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:color_blindness/color_blindness.dart';
 import 'package:flutter/material.dart';
 import 'package:wt_app_definition/app_definition.dart';
-import 'package:wt_app_scaffold/scaffolds/application_type.dart';
+import 'package:wt_app_scaffold/scaffolds/types/application_type.dart';
 import 'package:wt_settings/wt_settings.dart';
 
 mixin ApplicationSettings {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wt_app_definition/app_definition.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page_controls_card.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page_controls_card.dart';
 
 class AppScaffoldPageControls extends StatelessWidget {
   final AppScaffoldSettingsMapProviders settingsProviders;

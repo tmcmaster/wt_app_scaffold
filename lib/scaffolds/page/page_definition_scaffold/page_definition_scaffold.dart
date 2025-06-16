@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
-import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page.dart';
+import 'package:wt_app_scaffold/scaffolds/page/common/app_scaffold_page/app_scaffold_page.dart';
 import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/bottom_menu_bar.dart';
-import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/irregular_header_painter.dart';
-import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/tab_menu.dart';
-import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/transparent_card.dart';
+import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/decorated_container/decorated_container.dart';
+import 'package:wt_app_scaffold/scaffolds/page/page_definition_scaffold/decorated_container/irregular_header_painter.dart';
+import 'package:wt_app_scaffold/widgets/app_scaffold_tab_panel.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class PageDefinitionScaffold extends ConsumerStatefulWidget {
@@ -78,10 +78,10 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
       ...widget.pageDefinition.childPages,
     ].where((page) => !page.isHidden).toList();
 
-    const topMargin = 20.0;
-    final hasTabs = pages.length > 1;
-    final tabsHeight = hasTabs ? 42.0 : 0.0;
-    final bottomBarHeight = widget.pageDefinition.showBottomMenu ? 50 : 0.0;
+    final spacing = AppSpacing.of(context);
+
+    final topMargin = spacing.large;
+    final bottomMargin = spacing.medium;
 
     final colorScheme = Theme.of(context).colorScheme;
     final primaryColor = colorScheme.primary;
@@ -126,114 +126,42 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                       ],
               )
             : null,
-        body: LayoutBuilder(builder: (context, constraints) {
-          final spacing = AppSpacing.of(context);
-          final width = constraints.maxWidth;
-          final height = constraints.maxHeight;
-          final aspect = width / height;
-          final maxWidth = widget.maxCardWidth;
-
-          const cardTop = topMargin;
-          final cardHeight = height - topMargin - tabsHeight - spacing.large - bottomBarHeight;
-
-          final cardLeft = width < maxWidth * 1.05 ? width * 0.05 : (width - maxWidth) / 2;
-          final cardWidth = width < maxWidth * 1.05 ? width * 0.9 : maxWidth;
-
-          return Column(
-            children: [
-              if (pages.length > 1)
-                ColoredBox(
+        body: Column(
+          children: [
+            Expanded(
+              child: DecoratedContainer(
+                painter: IrregularHeaderPainter(
                   color: primaryColor,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: cardWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              color: Colors.transparent,
-                              width: cardWidth,
-                              child: TabMenu(
-                                titles: pages.map((p) => p.info.tabTitle).toList(),
-                                controller: controller,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-              Expanded(
-                child: Stack(
-                  clipBehavior: Clip.hardEdge,
-                  children: [
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: AspectRatio(
-                        aspectRatio: _constrainAspectRation(aspect) * 3,
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: CustomPaint(
-                            painter: IrregularHeaderPainter(
-                              color: primaryColor,
-                            ),
-                            child: Container(),
-                          ),
+                padding: EdgeInsets.only(
+                  top: topMargin,
+                  bottom: bottomMargin,
+                  left: spacing.medium,
+                  right: spacing.medium,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: pages.length > 1
+                      ? AppScaffoldTabPanel(
+                          pageDefinitions: pages,
+                          state: widget.state,
+                        )
+                      : AppScaffoldPage(
+                          pageDefinition: pages.first,
+                          state: widget.state,
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      top: cardTop,
-                      left: cardLeft,
-                      width: cardWidth,
-                      height: cardHeight,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(15)),
-                        child: Scaffold(
-                          body: TransparentCard(
-                            child: pages.length > 1
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: TabBarView(
-                                      physics: const NeverScrollableScrollPhysics(),
-                                      controller: controller,
-                                      children: pages
-                                          .map(
-                                            (page) => AppScaffoldPage(
-                                              pageDefinition: page,
-                                              state: widget.state,
-                                            ),
-                                          )
-                                          .toList(),
-                                    ),
-                                  )
-                                : AppScaffoldPage(
-                                    pageDefinition: pages.first,
-                                    state: widget.state,
-                                  ),
-                          ),
-                          backgroundColor: Colors.transparent,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ),
-              if (widget.pageDefinition.showBottomMenu)
-                BottomMenuBar(
-                  activeRoute: widget.pageDefinition.info.route,
-                  onChange: (routeName, context, ref) {
-                    ref.read(AppScaffoldStore.router).go(routeName);
-                    // ref.read(GoRouterMenuApp.router).go(routeName);
-                  },
-                ),
-            ],
-          );
-        }),
+            ),
+            if (widget.pageDefinition.showBottomMenu)
+              BottomMenuBar(
+                activeRoute: widget.pageDefinition.info.route,
+                onChange: (routeName, context, ref) {
+                  ref.read(AppScaffoldStore.router).go(routeName);
+                },
+              ),
+          ],
+        ),
         drawer: widget.pageDefinition.drawerBuilder == null
             ? null
             : Drawer(
@@ -254,17 +182,5 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
               ),
       ),
     );
-  }
-
-  double _constrainAspectRation(
-    double aspect, {
-    double min = 0.25,
-    double max = 2.5,
-  }) {
-    return (aspect < min
-        ? min
-        : aspect > max
-            ? max
-            : aspect);
   }
 }

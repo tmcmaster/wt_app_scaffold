@@ -19,7 +19,7 @@ mixin AppTwo {
     ),
     swipeEnabled: true,
     includeAppBar: true,
-    scaffoldPageType: ScaffoldPageType.transparentCard,
+    pageType: AppScaffoldPageType.transparentCard,
     profilePage: PageDefinition(
       info: PageInfo(
         name: 'profile',

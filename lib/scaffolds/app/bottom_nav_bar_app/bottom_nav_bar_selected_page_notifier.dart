@@ -3,10 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_event.dart';
 import 'package:wt_app_scaffold/scaffolds/app/bottom_nav_bar_app/page_change_source.dart';
-import 'package:wt_app_scaffold/scaffolds/common/types/app_scaffold_router.dart';
 import 'package:wt_logging/wt_logging.dart';
 
-class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent> with AppScaffoldRouter {
+class BottomNavBarSelectedPageNotifier extends StateNotifier<PageChangeEvent> with AppDefinitionRouter {
   static final log = logger(BottomNavBarSelectedPageNotifier);
 
   late final Map<String, int> pageIndex;

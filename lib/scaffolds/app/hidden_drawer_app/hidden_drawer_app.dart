@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wt_app_definition/app_definition.dart';
+import 'package:wt_app_scaffold/scaffolds/app/common/app_scaffold_material_app.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_stack.dart';
-import 'package:wt_app_scaffold/scaffolds/common/widget/app_scaffold_material_app.dart';
 
 class HiddenDrawerApp extends StatelessWidget {
   final AppDefinition appDefinition;

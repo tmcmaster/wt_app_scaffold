@@ -1,11 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-class TabMenu extends StatefulWidget implements PreferredSizeWidget {
+class AppScaffoldTabPanelTabs extends StatefulWidget implements PreferredSizeWidget {
   final List<String> titles;
   final TabController controller;
   final bool indicatorBackground;
-  const TabMenu({
+  const AppScaffoldTabPanelTabs({
     super.key,
     required this.titles,
     required this.controller,
@@ -13,14 +13,14 @@ class TabMenu extends StatefulWidget implements PreferredSizeWidget {
   });
 
   @override
-  State<TabMenu> createState() => _TabMenuState();
+  State<AppScaffoldTabPanelTabs> createState() => _AppScaffoldTabPanelTabsState();
 
   @override
   // TODO: implement preferredSize
   Size get preferredSize => const Size(double.infinity, 20);
 }
 
-class _TabMenuState extends State<TabMenu> with TickerProviderStateMixin {
+class _AppScaffoldTabPanelTabsState extends State<AppScaffoldTabPanelTabs> with TickerProviderStateMixin {
   int selected = 0;
 
   @override

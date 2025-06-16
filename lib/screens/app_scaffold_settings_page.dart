@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/scaffolds/application_type.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class AppScaffoldSettingsPage extends ConsumerWidget {
