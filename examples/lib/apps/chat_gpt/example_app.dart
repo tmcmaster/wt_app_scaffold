@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
 import 'package:wt_app_scaffold_examples/apps/chat_gpt/example_pages.dart';
+import 'package:wt_prototyping/prototyping.dart';
 
 mixin ExampleApp {
   static final definition = Provider<AppDefinition>(

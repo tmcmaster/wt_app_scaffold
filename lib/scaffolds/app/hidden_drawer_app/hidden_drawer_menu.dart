@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_action_button/action_button_definition.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_app_scaffold/scaffolds/app/hidden_drawer_app/hidden_drawer_config.dart';
@@ -65,7 +64,7 @@ class HiddenDrawerMenu extends ConsumerWidget {
     );
   }
 
-  Widget buildDrawerActions(ActionButtonDefinition logoutAction) => Container(
+  Widget buildDrawerActions(ActionDefinition logoutAction) => Container(
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.2),
           borderRadius: const BorderRadius.only(
@@ -77,13 +76,14 @@ class HiddenDrawerMenu extends ConsumerWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _PageMenuItemButton(
-              item: appDefinition.profilePage,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(25),
+            if (appDefinition.profilePage != null)
+              _PageMenuItemButton(
+                item: appDefinition.profilePage!,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                ),
+                onTap: () => onSelectedItem(appDefinition.profilePage!),
               ),
-              onTap: () => onSelectedItem(appDefinition.profilePage),
-            ),
             ListTile(
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(

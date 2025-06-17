@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_action_button/action_button_definition.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_platform/auth/app_scaffold_logout_action.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
@@ -11,7 +10,7 @@ import 'package:wt_logging/wt_logging.dart';
 import 'package:wt_workflow_tree/workflow_tree.dart';
 
 mixin AppScaffoldStore {
-  static final logoutAction = Provider<ActionButtonDefinition>(
+  static final logoutAction = Provider<ActionDefinition>(
     name: 'AppScaffoldLogoutAction.provider',
     (ref) => AppScaffoldLogoutAction(ref),
   );

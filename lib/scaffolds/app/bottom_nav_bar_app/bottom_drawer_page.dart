@@ -1,6 +1,6 @@
 import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:wt_action_button/action_button_definition.dart';
+import 'package:wt_action_button/action_button.dart';
 
 class BottomDrawerPage extends StatelessWidget {
   final String title;
@@ -120,8 +120,7 @@ class BottomDrawerPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      ...actions
-                          .map((action) => action.component(noLabel: true)),
+                      ...actions.map((action) => action.component(noLabel: true)),
                       const SizedBox(
                         width: 50,
                       ),

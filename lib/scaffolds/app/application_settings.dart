@@ -5,7 +5,7 @@ import 'package:wt_app_scaffold/scaffolds/types/application_type.dart';
 import 'package:wt_settings/wt_settings.dart';
 
 mixin ApplicationSettings {
-  static final AppScaffoldSettingsMapProviders settingsProviders = {
+  static final SettingsProvidersMap settingsProviders = {
     'App Scaffold': [
       theme,
       colorScheme,

@@ -43,6 +43,8 @@ dependencies:
     git: git@github.com:tmcmaster/wt_logging.git
   wt_models:
     git: git@github.com:tmcmaster/wt_models.git
+  wt_prototyping:
+    git: git@github.com:tmcmaster/wt_prototyping.git
   wt_provider_manager:
     git: git@github.com:tmcmaster/wt_provider_manager.git
   wt_settings:
@@ -67,6 +69,8 @@ dependency_overrides:
     path: ../../wt_firepod
   wt_logging:
     path: ../../wt_logging
+  wt_prototyping:
+    path: ../../wt_prototyping
   wt_provider_manager:
     path: ../../wt_provider_manager
   wt_settings:

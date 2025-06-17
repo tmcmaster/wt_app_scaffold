@@ -8,6 +8,7 @@ import 'package:wt_app_scaffold_examples/apps/pages/login_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/navigation_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/plain_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/user_log_page.dart';
+import 'package:wt_prototyping/prototyping.dart';
 
 mixin AppTwo {
   static final definition = AppDefinition.from(

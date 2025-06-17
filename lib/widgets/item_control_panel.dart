@@ -40,8 +40,8 @@ class ItemControlPanel extends ConsumerStatefulWidget {
 
   factory ItemControlPanel.from({
     required ItemInfo itemInfo,
-    required AppScaffoldActionProviders actionsProviders,
-    required AppScaffoldSettingsMapProviders settingsProviders,
+    required ActionDefinitionProviders actionsProviders,
+    required SettingsProvidersMap settingsProviders,
     Widget Function()? summaryBuilder,
     List<ItemControlPanel> Function()? buildChildren,
     bool initiallyExpanded = false,

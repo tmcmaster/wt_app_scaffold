@@ -8,6 +8,7 @@ import 'package:wt_app_scaffold_examples/apps/pages/plain_page.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/user_log_page.dart';
 import 'package:wt_app_scaffold_examples/apps/widgets/authentication_buttons.dart';
 import 'package:wt_firepod/wt_firepod.dart';
+import 'package:wt_prototyping/prototyping.dart';
 
 mixin AppThree {
   static final definition = AppDefinition.from(

@@ -4,7 +4,7 @@ import 'package:wt_app_definition/app_definition.dart';
 
 class AppScaffoldPageControlsCard extends ConsumerWidget {
   final String title;
-  final AppScaffoldSettingsProviders settingsProviders;
+  final SettingsProviders settingsProviders;
   const AppScaffoldPageControlsCard({
     super.key,
     required this.title,

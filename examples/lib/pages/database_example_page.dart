@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_action_button/action_process_indicator.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold_examples/actions/database_action.dart';
 import 'package:wt_app_scaffold_examples/models/definitions/product_definition.dart';
 import 'package:wt_app_scaffold_examples/models/product.dart';
@@ -26,7 +26,7 @@ class DatabaseExamplePage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               databaseAction.component(label: 'Read from Database'),
-              databaseAction.indicator(type: IndicatorType.linear),
+              databaseAction.indicator(type: ActionIndicatorType.linear),
               FirepodModelView(
                 query: database.ref('v1/product/003'),
                 snapshotToModel: Product.from.snapshot,

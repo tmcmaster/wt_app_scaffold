@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wt_action_button/model/action_info.dart';
-import 'package:wt_action_button/wt_action_button.dart';
+import 'package:wt_action_button/action_button.dart';
+import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_logging/wt_logging.dart';
 
 class ActionOne extends ActionButtonDefinition {
@@ -14,20 +14,16 @@ class ActionOne extends ActionButtonDefinition {
 
   ActionOne(super.ref)
       : super(
-          actionInfo: ActionInfo(
-            label: 'Action One',
-            tooltip: 'Action One',
-            icon: Icons.menu,
-          ),
-        );
-
-  @override
-  Future<void> execute() async {
-    final notifier = ref.read(progress.notifier);
-    notifier.start(total: 1);
-    log.d('Doing Action......');
-    await Future.delayed(const Duration(seconds: 5));
-    log.d('Action Completed.');
-    notifier.finished();
-  }
+            actionInfo: ActionInfo(
+              label: 'Action One',
+              tooltip: 'Action One',
+              icon: Icons.menu,
+            ),
+            execute: (ref, notifier, _) async {
+              notifier.start(total: 1);
+              log.d('Doing Action......');
+              await Future.delayed(const Duration(seconds: 5));
+              log.d('Action Completed.');
+              notifier.finished();
+            });
 }

@@ -1094,6 +1094,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  wt_prototyping:
+    dependency: "direct main"
+    description:
+      path: "../wt_prototyping"
+      relative: true
+    source: path
+    version: "0.0.1"
   wt_provider_manager:
     dependency: "direct main"
     description:

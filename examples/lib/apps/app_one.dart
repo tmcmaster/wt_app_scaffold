@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wt_app_definition/app_definition.dart';
 import 'package:wt_app_scaffold/app_scaffolds.dart';
-import 'package:wt_app_scaffold/providers/app_scaffold_store.dart';
 import 'package:wt_app_scaffold_examples/actions/action_one.dart';
 import 'package:wt_app_scaffold_examples/actions/action_two.dart';
 import 'package:wt_app_scaffold_examples/apps/pages/firebase_page.dart';
 import 'package:wt_app_scaffold_examples/pages/async_example_page.dart';
 import 'package:wt_app_scaffold_examples/pages/counter_app_page.dart';
 import 'package:wt_app_scaffold_examples/pages/database_example_page.dart';
+import 'package:wt_prototyping/prototyping.dart';
 
 mixin AppOne {
   static final definition = AppDefinition.from(
