@@ -143,6 +143,7 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                   borderRadius: BorderRadius.circular(15),
                   child: pages.length > 1
                       ? AppScaffoldTabPanel(
+                          key: ValueKey(widget.pageDefinition.info.name),
                           pageDefinitions: pages,
                           state: widget.state,
                         )
