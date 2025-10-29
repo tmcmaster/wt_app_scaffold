@@ -112,7 +112,7 @@ class HiddenDrawerMenu extends ConsumerWidget {
 
   Widget buildDrawerItems(BuildContext context) {
     return Column(
-      children: appDefinition.pages
+      children: appDefinition.tertiaryPages
           .where((page) {
             return debugMode || !page.debug;
           })

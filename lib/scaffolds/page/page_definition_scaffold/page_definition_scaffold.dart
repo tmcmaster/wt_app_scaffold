@@ -141,16 +141,18 @@ class _PageDefinitionScaffoldState extends ConsumerState<PageDefinitionScaffold>
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: pages.length > 1
-                      ? AppScaffoldTabPanel(
-                          key: ValueKey(widget.pageDefinition.info.name),
-                          pageDefinitions: pages,
-                          state: widget.state,
-                        )
-                      : AppScaffoldPage(
-                          pageDefinition: pages.first,
-                          state: widget.state,
-                        ),
+                  child: pages.isEmpty
+                      ? const Center(child: Text('Page is hidden'))
+                      : pages.length > 1
+                          ? AppScaffoldTabPanel(
+                              key: ValueKey(widget.pageDefinition.info.name),
+                              pageDefinitions: pages,
+                              state: widget.state,
+                            )
+                          : AppScaffoldPage(
+                              pageDefinition: pages.first,
+                              state: widget.state,
+                            ),
                 ),
               ),
             ),

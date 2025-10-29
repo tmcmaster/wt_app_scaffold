@@ -24,6 +24,12 @@ class BottomMenuBar extends ConsumerWidget {
     final appDefinition = ref.watch(AppDefinition.provider);
     final primaryPages = appDefinition.primaryPages;
     final secondaryPages = appDefinition.secondaryPages;
+    final tertiaryPages = appDefinition.tertiaryPages;
+
+    final popupMenuPages = [
+      ...secondaryPages,
+      ...tertiaryPages,
+    ];
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -72,7 +78,7 @@ class BottomMenuBar extends ConsumerWidget {
             },
           ),
         ),
-        if (secondaryPages.isNotEmpty)
+        if (popupMenuPages.isNotEmpty)
           SizedBox(
             height: 64.0,
             child: Card(
@@ -83,7 +89,7 @@ class BottomMenuBar extends ConsumerWidget {
               child: PopupMenuButton<PageDefinition>(
                 // Callback that sets the selected popup menu item.
                 onSelected: (PageDefinition page) {},
-                itemBuilder: (BuildContext context) => secondaryPages
+                itemBuilder: (BuildContext context) => popupMenuPages
                     .map(
                       (item) => PopupMenuItem<PageDefinition>(
                         value: item,
@@ -100,6 +106,7 @@ class BottomMenuBar extends ConsumerWidget {
                             ),
                             onPressed: () {
                               onChange(item.info.route, context, ref);
+                              Navigator.pop(context);
                             },
                           ),
                         ),
